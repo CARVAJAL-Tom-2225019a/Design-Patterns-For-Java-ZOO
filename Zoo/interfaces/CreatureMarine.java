@@ -1,4 +1,4 @@
-package insterfaces;
+package interfaces;
 
 public interface CreatureMarine {
 	

@@ -4,7 +4,7 @@ import java.time.*;
 
 import base.*;
 import enums.*;
-import insterfaces.*;
+import interfaces.*;
 
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	
@@ -12,6 +12,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 
     /**
      * Constructeur de la classe Lycanthrope.
+     * Protected afin que la création se fasse essentiellement depuis le factory
      * 
      * @param nomEspece       L'espèce du lycanthrope.
      * @param sexe            Le sexe du lycanthrope.
@@ -20,7 +21,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @param bruit           Le bruit que fait le lycanthrope.
      * @param dureeGestation  La durée de gestation spécifique pour les lycanthrope.
      */
-    public Lycanthrope(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
+    protected Lycanthrope(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeGestation = dureeGestation;
     }
@@ -39,5 +40,15 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public String Courrir() {
         // TODO: Implémentez la logique spécifique de course du lycanthrope
         return "Le lycanthrope court";
+    }
+    
+    
+    /**
+     * Méthode pour mettre bas une nouvelle créature
+     * 
+     * @return Une instance de la classe Creature qui né.
+     */
+    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	return super.MettreBas(sexe, poids, taille, dureeGestation);
     }
 }

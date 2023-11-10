@@ -9,27 +9,41 @@ public class Oeuf {
     private Enum_Especes espece;
     private LocalDate dateNaissance;
     private Duration dureeIncubation;
-    private String bruit;
     private boolean isOpen;
+
+    
+    /**
+     * Getters
+     */
+    public Enum_Especes getEspece() {
+		return espece;
+	}
+	public LocalDate getDateNaissance() {
+		return dateNaissance;
+	}
+	public Duration getDureeIncubation() {
+		return dureeIncubation;
+	}
+	public boolean isOpen() {
+		return isOpen;
+	}
 
     
     /**
      * Constructeur de la classe Oeuf.
      * 
      * @param espece          L'espèce de l'œuf.
-     * @param bruit           Le bruit que fait l'œuf.
      * @param dureeIncubation La durée d'incubation spécifique de l'espèce.
      */
-    public Oeuf(Enum_Especes espece, String bruit, Duration dureeIncubation) {
+    public Oeuf(Enum_Especes espece, Duration dureeIncubation) {
         this.espece = espece;
-        this.bruit = bruit;
         this.dateNaissance = LocalDate.now();
         this.dureeIncubation = dureeIncubation;
         isOpen = false;
     }
 
-    
-    /**
+
+	/**
      * Méthode pour faire éclore l'œuf.
      * 
      * @param sexe   Le sexe de la créature qui éclore.
@@ -49,8 +63,7 @@ public class Oeuf {
                 isOpen = true;
 
                 // Création de la créature
-                CreateCreature fabriqueCreature = new CreateCreature();
-                return fabriqueCreature.createCreature(espece, sexe, poids, taille, bruit, dureeIncubation);
+                return FactoryCreature.newCreature(espece, sexe, poids, taille);
             } else {
                 throw new Exception("Durée d'incubation non terminée");
             }

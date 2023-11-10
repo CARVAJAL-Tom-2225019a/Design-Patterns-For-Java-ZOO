@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import base.*;
 import enums.*;
-import insterfaces.*;
+import interfaces.*;
 
 public class Megalodon extends Ovipare implements CreatureMarine {
 	
@@ -12,6 +12,7 @@ public class Megalodon extends Ovipare implements CreatureMarine {
 
     /**
      * Constructeur de la classe Megalodon.
+     * Protected afin que la création se fasse essentiellement depuis le factory
      * 
      * @param nomEspece        L'espèce du Megalodon.
      * @param sexe             Le sexe du Megalodon.
@@ -20,7 +21,7 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      * @param bruit            Le bruit que fait le Megalodon.
      * @param dureeIncubation  La durée d'incubation spécifique pour les megalodons.
      */
-    public Megalodon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
+    protected Megalodon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeIncubation = dureeIncubation;
     }
@@ -37,5 +38,16 @@ public class Megalodon extends Ovipare implements CreatureMarine {
     public String Nager() {
         // TODO: Implémentez la logique spécifique de nage du Megalodon
         return "Le Megalodon nage";
+    }
+    
+    
+    /**
+     * Méthode pour pondre un œuf.
+     * 
+     * @param dateNaissance     La date de naissance de l'œuf.
+     * @return Une instance de la classe Oeuf pondue par l'ovipare.
+     */
+    public Oeuf PondreOeuf(Creature papa) throws Exception {
+    	return super.PondreOeuf(papa, dureeIncubation);
     }
 }

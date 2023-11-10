@@ -2,23 +2,27 @@ package Test1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.Duration;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import CreaturesImplemente.Dragon;
-import CreaturesImplemente.Phenix;
-import enums.Enum_Especes;
-import enums.Enum_Sexe;
-import base.CONSTANTES;
+import CreaturesImplemente.*;
+import enums.*;
+import base.*;
 
 class TestCreature1 {
 
     CONSTANTES constantes = new CONSTANTES();
+    FactoryCreature factory = new FactoryCreature();
+    
 
-    Dragon Krokmou = new Dragon(Enum_Especes.Dragon, Enum_Sexe.Femelle, 20, 50, "Grrrr", Duration.parse("P0DT0H0M0.20S"));
-    Phenix Pepito = new Phenix(Enum_Especes.Phenix, Enum_Sexe.Male, 3, 10, "Aaii", Duration.parse("P0DT0H0M0.60S"));
+    Dragon Krokmou;
+    Phenix Pepito;
 
+    @BeforeEach
+    void construction() throws Exception {
+    	Krokmou = FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 20, 50);
+    	Pepito = FactoryCreature.newCreature(Enum_Especes.Phenix, Enum_Sexe.Male, 3, 10);
+    }
     
     /**
      * Teste la méthode PerdreSante() de la classe Phenix.
@@ -88,7 +92,6 @@ class TestCreature1 {
     @Test
     void testMourrir() throws Exception {
     	Krokmou.Mourir();
-    	assertEquals(constantes.MAX_INDICATEUR, Pepito.getIndicateurFaim());
     	Exception thrown = assertThrows(
                 Exception.class,
                 () -> Krokmou.Nager(),

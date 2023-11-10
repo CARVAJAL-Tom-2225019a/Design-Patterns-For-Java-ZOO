@@ -4,7 +4,7 @@ import java.time.Duration;
 
 import base.*;
 import enums.*;
-import insterfaces.*;
+import interfaces.*;
 
 public class Sirene extends Vivipare implements CreatureMarine {
 	
@@ -12,6 +12,7 @@ public class Sirene extends Vivipare implements CreatureMarine {
 
     /**
      * Constructeur de la classe Sirene.
+     * Protected afin que la création se fasse essentiellement depuis le factory
      * 
      * @param nomEspece       L'espèce de la sirène.
      * @param sexe            Le sexe de la sirène.
@@ -20,7 +21,7 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * @param bruit           Le bruit que fait la sirène.
      * @param dureeGestation  La durée de gestation spécifique pour les sirènes.
      */
-    public Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
+    protected Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeGestation = dureeGestation;
     }
@@ -37,5 +38,15 @@ public class Sirene extends Vivipare implements CreatureMarine {
     public String Nager() {
         // TODO: Implémentez la logique spécifique de nage de la sirène
         return "La sirène nage";
+    }
+    
+    
+    /**
+     * Méthode pour mettre bas une nouvelle créature
+     * 
+     * @return Une instance de la classe Creature qui né.
+     */
+    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	return super.MettreBas(sexe, poids, taille, dureeGestation);
     }
 }

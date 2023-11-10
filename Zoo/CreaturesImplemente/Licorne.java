@@ -4,7 +4,7 @@ import java.time.*;
 
 import base.*;
 import enums.*;
-import insterfaces.*;
+import interfaces.*;
 
 public class Licorne extends Vivipare implements CreatureTerrestre {
 	
@@ -12,6 +12,7 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
 
     /**
      * Constructeur de la classe Licorne.
+     * Protected afin que la création se fasse essentiellement depuis le factory
      * 
      * @param nomEspece       L'espèce de la licorne.
      * @param sexe            Le sexe de la licorne.
@@ -20,7 +21,7 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * @param bruit           Le bruit que fait la licorne.
      * @param dureeGestation  La durée de gestation spécifique pour les licornes.
      */
-    public Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
+    protected Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeGestation = dureeGestation;
     }
@@ -37,5 +38,16 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
     public String Courrir() {
         // TODO: Implémentez la logique spécifique de course de la licorne
         return "La licorne court";
+    }
+    
+    
+    
+    /**
+     * Méthode pour mettre bas une nouvelle créature
+     * 
+     * @return Une instance de la classe Creature qui né.
+     */
+    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	return super.MettreBas(sexe, poids, taille, dureeGestation);
     }
 }

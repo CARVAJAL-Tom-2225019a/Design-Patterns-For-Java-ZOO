@@ -4,7 +4,7 @@ import java.time.*;
 
 import base.*;
 import enums.*;
-import insterfaces.*;
+import interfaces.*;
 
 public class Nymphe extends Vivipare implements CreatureImmortel {
 	
@@ -12,6 +12,7 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
 
     /**
      * Constructeur de la classe Nymphe.
+     * Protected afin que la création se fasse essentiellement depuis le factory
      * 
      * @param nomEspece       L'espèce de la Nymphe.
      * @param sexe            Le sexe de la Nymphe.
@@ -20,7 +21,7 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      * @param bruit           Le bruit que fait la Nymphe.
      * @param dureeGestation  La durée de gestation spécifique pour les nymphes.
      */
-    public Nymphe(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
+    protected Nymphe(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeGestation = dureeGestation;
     }
@@ -33,5 +34,15 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
     @Override
     public void Renaitre() {
         // TODO: Implémentez la logique de renaissance de la Nymphe
+    }
+    
+    
+    /**
+     * Méthode pour mettre bas une nouvelle créature
+     * 
+     * @return Une instance de la classe Creature qui né.
+     */
+    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	return super.MettreBas(sexe, poids, taille, dureeGestation);
     }
 }
