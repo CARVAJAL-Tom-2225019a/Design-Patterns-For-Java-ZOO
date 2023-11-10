@@ -1,11 +1,11 @@
 package base;
 
+import java.util.Map;
+
 import enums.*;
 
 public abstract class Creature {
-	// Constantes
-	int MAX_INDICATEUR = 10;
-	int MAX_AGE = 5;
+	CONSTANTES constantes = new CONSTANTES();
 	
 	// Attributs
 	private Enum_Especes nomEspece;
@@ -31,9 +31,9 @@ public abstract class Creature {
 		this.poids = poids;
 		this.taille = taille;
 		this.age = 0;
-		this.indicateurFaim = MAX_INDICATEUR;
-		this.indicateurSommeil = MAX_INDICATEUR;
-		this.indicateurSante = MAX_INDICATEUR;
+		this.indicateurFaim = constantes.MAX_INDICATEUR;
+		this.indicateurSommeil = constantes.MAX_INDICATEUR;
+		this.indicateurSante = constantes.MAX_INDICATEUR;
 		this.estEnTrainDeDormir = false;
 		this.estVivant = true;
 		this.bruit = bruit;
@@ -82,6 +82,9 @@ public abstract class Creature {
 	public void Manger(int num) throws Exception {
 		if (estVivant && !estEnTrainDeDormir)
 			indicateurFaim+=num;
+			// Verification pas de dépassement
+			if (indicateurFaim > constantes.MAX_INDICATEUR)
+				indicateurFaim = constantes.MAX_INDICATEUR;
 		else 
 			throw new Exception ("Etat de la creture invalide");
 			
@@ -99,13 +102,16 @@ public abstract class Creature {
 	public void Soigner (int num) throws Exception {
 		if (estVivant)
 			indicateurSante+=num;
+			// Verification pas de dépassement
+			if (indicateurSante > constantes.MAX_INDICATEUR)
+				indicateurSante = constantes.MAX_INDICATEUR;
 		else
 			throw new Exception ("Etat de la creature invalide");
 	}
 	
 	
 	public void Dormir () throws Exception {
-		if (estVivant && !estEnTrainDeDormir && indicateurSommeil<MAX_INDICATEUR)
+		if (estVivant && !estEnTrainDeDormir && indicateurSommeil<constantes.MAX_INDICATEUR)
 			estEnTrainDeDormir = true;
 		else
 			throw new Exception ("Etat de la creature invalide");
@@ -115,7 +121,7 @@ public abstract class Creature {
 	public void SeReveiller () throws Exception {
 		if (estVivant && estEnTrainDeDormir) {
 			estEnTrainDeDormir = true;
-			indicateurSommeil = MAX_INDICATEUR;
+			indicateurSommeil = constantes.MAX_INDICATEUR;
 		}
 		else
 			throw new Exception ("Etat de la creature invalide");
@@ -123,7 +129,7 @@ public abstract class Creature {
 	
 	
 	public void Vieillir () throws Exception {
-		if (estVivant && age < MAX_AGE)
+		if (estVivant && age < constantes.MAX_AGE)
 			age++;
 		else
 			Mourrir();
@@ -133,4 +139,39 @@ public abstract class Creature {
 	public void Mourrir() {
 		estVivant = false;
 	}
+	
+	
+	public void PerdreSommeil () throws Exception {
+		// verfication etat creature
+		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
+			indicateurSommeil -= constantes.VALEUR_PERTE_INDICATEUR;
+		else
+			throw new Exception ("Creature pas en etat de realiser action");
+		// verification valeur positive
+		if (indicateurSommeil < 0)
+			indicateurSommeil = 0;
+	}
+	
+	public void PerdreNourriture () throws Exception {
+		// verfication etat creature
+		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
+			indicateurFaim -= constantes.VALEUR_PERTE_INDICATEUR;
+		else
+			throw new Exception ("Creature pas en etat de realiser action");
+		// verification valeur positive
+		if (indicateurFaim < 0)
+			indicateurFaim = 0;
+	}
+	
+	public void PerdreSante () throws Exception {
+		// verfication etat creature
+		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
+			indicateurSante -= constantes.VALEUR_PERTE_INDICATEUR;
+		else
+			throw new Exception ("Creature pas en etat de realiser action");
+		// verification valeur positive
+		if (indicateurSante < 0)
+			indicateurSante = 0;
+	}
+	
 }
