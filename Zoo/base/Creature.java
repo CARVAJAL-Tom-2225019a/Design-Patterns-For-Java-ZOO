@@ -1,177 +1,234 @@
 package base;
 
-import java.util.Map;
-
 import enums.*;
 
 public abstract class Creature {
-	CONSTANTES constantes = new CONSTANTES();
-	
-	// Attributs
-	private Enum_Especes nomEspece;
-	private Enum_Sexe sexe;
-	private double poids;
-	private double taille;
-	private int age;
-	
-	private int indicateurFaim; // indice de satiété
-	private int indicateurSommeil; // si 0, gros dodo
-	private int indicateurSante;
-	
-	private boolean estEnTrainDeDormir;
-	private boolean estVivant;
-	
-	private String bruit;
-	
-	
-	// Constructeur
-	public Creature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
-		this.nomEspece = nomEspece;
-		this.sexe = sexe;
-		this.poids = poids;
-		this.taille = taille;
-		this.age = 0;
-		this.indicateurFaim = constantes.MAX_INDICATEUR;
-		this.indicateurSommeil = constantes.MAX_INDICATEUR;
-		this.indicateurSante = constantes.MAX_INDICATEUR;
-		this.estEnTrainDeDormir = false;
-		this.estVivant = true;
-		this.bruit = bruit;
-	}
-	
-	
-	// Getter
-	public Enum_Especes getNomEspece() {
-		return nomEspece;
-	}
-	public Enum_Sexe getSexe() {
-		return sexe;
-	}
-	public double getPoids() {
-		return poids;
-	}
-	public double getTaille() {
-		return taille;
-	}
-	public int getAge() {
-		return age;
-	}
-	public int getIndicateurFaim() {
-		return indicateurFaim;
-	}
-	public int getIndicateurSommeil() {
-		return indicateurSommeil;
-	}
-	public int getIndicateurSante() {
-		return indicateurSante;
-	}
-	public boolean isEstEnTrainDeDormir() {
-		return estEnTrainDeDormir;
-	}
-	public boolean isEstVivant() {
-		return estVivant;
-	}
-	public String getBruit() {
-		return bruit;
-	}
+    CONSTANTES constantes = new CONSTANTES();
+
+    private Enum_Especes nomEspece;
+    private Enum_Sexe sexe;
+    private double poids;
+    private double taille;
+    private int age;
+
+    private int indicateurFaim; // Indice de satiété
+    private int indicateurSommeil;
+    private int indicateurSante;
+
+    private boolean enTrainDeDormir;
+    private boolean vivant;
+
+    private String bruit;
 
 
-	// Methodes
-	
-	
-	public void Manger(int num) throws Exception {
-		if (estVivant && !estEnTrainDeDormir)
-			indicateurFaim+=num;
-			// Verification pas de dépassement
-			if (indicateurFaim > constantes.MAX_INDICATEUR)
-				indicateurFaim = constantes.MAX_INDICATEUR;
-		else 
-			throw new Exception ("Etat de la creture invalide");
-			
-	}
-	
-	
-	public String FaireBruit() throws Exception {
-		if (estVivant)
-			return bruit;
-		else
-			throw new Exception ("Etat de la creature invalide");
-	}
-	
-	
-	public void Soigner (int num) throws Exception {
-		if (estVivant)
-			indicateurSante+=num;
-			// Verification pas de dépassement
-			if (indicateurSante > constantes.MAX_INDICATEUR)
-				indicateurSante = constantes.MAX_INDICATEUR;
-		else
-			throw new Exception ("Etat de la creature invalide");
-	}
-	
-	
-	public void Dormir () throws Exception {
-		if (estVivant && !estEnTrainDeDormir && indicateurSommeil<constantes.MAX_INDICATEUR)
-			estEnTrainDeDormir = true;
-		else
-			throw new Exception ("Etat de la creature invalide");
-	}
-	
-	
-	public void SeReveiller () throws Exception {
-		if (estVivant && estEnTrainDeDormir) {
-			estEnTrainDeDormir = true;
-			indicateurSommeil = constantes.MAX_INDICATEUR;
-		}
-		else
-			throw new Exception ("Etat de la creature invalide");
-	}
-	
-	
-	public void Vieillir () throws Exception {
-		if (estVivant && age < constantes.MAX_AGE)
-			age++;
-		else
-			Mourrir();
-	}
-	
-	
-	public void Mourrir() {
-		estVivant = false;
-	}
-	
-	
-	public void PerdreSommeil () throws Exception {
-		// verfication etat creature
-		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
-			indicateurSommeil -= constantes.VALEUR_PERTE_INDICATEUR;
-		else
-			throw new Exception ("Creature pas en etat de realiser action");
-		// verification valeur positive
-		if (indicateurSommeil < 0)
-			indicateurSommeil = 0;
-	}
-	
-	public void PerdreNourriture () throws Exception {
-		// verfication etat creature
-		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
-			indicateurFaim -= constantes.VALEUR_PERTE_INDICATEUR;
-		else
-			throw new Exception ("Creature pas en etat de realiser action");
-		// verification valeur positive
-		if (indicateurFaim < 0)
-			indicateurFaim = 0;
-	}
-	
-	public void PerdreSante () throws Exception {
-		// verfication etat creature
-		if (estVivant && indicateurSante>0 && indicateurFaim>0 && indicateurSommeil>0)
-			indicateurSante -= constantes.VALEUR_PERTE_INDICATEUR;
-		else
-			throw new Exception ("Creature pas en etat de realiser action");
-		// verification valeur positive
-		if (indicateurSante < 0)
-			indicateurSante = 0;
-	}
-	
+    /**
+     * Constructeur de la classe Creature.
+     * 
+     * @param nomEspece L'espèce de la créature.
+     * @param sexe      Le sexe de la créature.
+     * @param poids     Le poids de la créature.
+     * @param taille    La taille de la créature.
+     * @param bruit     Le bruit que fait la créature.
+     */
+    public Creature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
+        this.nomEspece = nomEspece;
+        this.sexe = sexe;
+        this.poids = poids;
+        this.taille = taille;
+        this.age = 0;
+        this.indicateurFaim = constantes.MAX_INDICATEUR;
+        this.indicateurSommeil = constantes.MAX_INDICATEUR;
+        this.indicateurSante = constantes.MAX_INDICATEUR;
+        this.enTrainDeDormir = false;
+        this.vivant = true;
+        this.bruit = bruit;
+    }
+
+    
+    /**
+     * Getter pour accéder aux différentes propriétés de la créature.
+     * 
+     */
+    public Enum_Especes getNomEspece() {
+        return nomEspece;
+    }
+    public Enum_Sexe getSexe() {
+        return sexe;
+    }
+    public double getPoids() {
+        return poids;
+    }
+    public double getTaille() {
+        return taille;
+    }
+    public int getAge() {
+        return age;
+    }
+    public int getIndicateurFaim() {
+        return indicateurFaim;
+    }
+    public int getIndicateurSommeil() {
+        return indicateurSommeil;
+    }
+    public int getIndicateurSante() {
+        return indicateurSante;
+    }
+    public boolean isEnTrainDeDormir() {
+        return enTrainDeDormir;
+    }
+    public boolean isVivant() {
+        return vivant;
+    }
+    public String getBruit() {
+        return bruit;
+    }
+
+
+    /**
+     * Méthode pour que la créature mange.
+     * 
+     * @param num Le nombre de points de faim que la créature gagne en mangeant.
+     * @throws Exception Si la créature n'est pas vivante ou est en train de dormir.
+     */
+    public void Manger(int num) throws Exception {
+        if (vivant && !enTrainDeDormir) {
+            indicateurFaim += num;
+            // Vérification pas de dépassement
+            if (indicateurFaim > constantes.MAX_INDICATEUR)
+                indicateurFaim = constantes.MAX_INDICATEUR;
+        } else {
+            throw new Exception("Etat de la créature invalide, impossible de manger");
+        }
+    }
+
+    
+    /**
+     * Méthode pour que la créature fasse du bruit.
+     * 
+     * @return Le bruit de la créature.
+     * @throws Exception Si la créature n'est pas vivante.
+     */
+    public String FaireBruit() throws Exception {
+        if (vivant)
+            return bruit;
+        else
+            throw new Exception("Etat de la créature invalide, impossible de faire un bruit");
+    }
+
+    
+    /**
+     * Méthode pour soigner la créature.
+     * 
+     * @param num Le nombre de points de santé que la créature gagne en se soignant.
+     * @throws Exception Si la créature n'est pas vivante.
+     */
+    public void Soigner(int num) throws Exception {
+        if (vivant) {
+            indicateurSante += num;
+            // Vérification pas de dépassement
+            if (indicateurSante > constantes.MAX_INDICATEUR)
+                indicateurSante = constantes.MAX_INDICATEUR;
+        } else {
+            throw new Exception("La creature n'est plus vivante, impossible de la soigner");
+        }
+    }
+
+    
+    /**
+     * Méthode pour que la créature dorme.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou est déjà en train de dormir.
+     */
+    public void Dormir() throws Exception {
+        if (vivant && !enTrainDeDormir && indicateurSommeil < constantes.MAX_INDICATEUR)
+            enTrainDeDormir = true;
+        else
+            throw new Exception("État de la créature invalide, impossible de dormir");
+    }
+
+    /**
+     * Méthode pour que la créature se réveille.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou n'est pas en train de dormir.
+     */
+    public void SeReveiller() throws Exception {
+        if (vivant && enTrainDeDormir) {
+            enTrainDeDormir = false;
+            indicateurSommeil = constantes.MAX_INDICATEUR;
+        } else {
+            throw new Exception("Etat de la créature invalide, impossible de se reveiller");
+        }
+    }
+
+    
+    /**
+     * Méthode pour faire vieillir la créature d'un an.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou a atteint l'âge maximum.
+     */
+    public void Vieillir() throws Exception {
+        if (vivant && age < constantes.MAX_AGE)
+            age++;
+        else
+            Mourir();
+    }
+
+    
+    /**
+     * Méthode pour faire mourir la créature.
+     */
+    public void Mourir() {
+        vivant = false;
+    }
+
+    
+    /**
+     * Méthode pour que la créature perde du sommeil.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
+     */
+    public void PerdreSommeil() throws Exception {
+        // Vérification de l'état de la créature
+        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+            indicateurSommeil -= constantes.VALEUR_PERTE_INDICATEUR;
+        else
+            throw new Exception("Creature pas en etat de realiser action");
+        // Vérification que la valeur reste positive
+        if (indicateurSommeil < 0)
+            indicateurSommeil = 0;
+    }
+
+    
+    /**
+     * Méthode pour que la créature perde de la nourriture.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
+     */
+    public void PerdreNourriture() throws Exception {
+        // Vérification de l'état de la créature
+        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+            indicateurFaim -= constantes.VALEUR_PERTE_INDICATEUR;
+        else
+            throw new Exception("Creature pas en etat de realiser action");
+        // Vérification que la valeur reste positive
+        if (indicateurFaim < 0)
+            indicateurFaim = 0;
+    }
+
+    
+    /**
+     * Méthode pour que la créature perde de la santé.
+     * 
+     * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
+     */
+    public void PerdreSante() throws Exception {
+        // Vérification de l'état de la créature
+        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+            indicateurSante -= constantes.VALEUR_PERTE_INDICATEUR;
+        else
+            throw new Exception("Creature pas en etat de realiser action");
+        // Vérification que la valeur reste positive
+        if (indicateurSante < 0)
+            indicateurSante = 0;
+    }
 }

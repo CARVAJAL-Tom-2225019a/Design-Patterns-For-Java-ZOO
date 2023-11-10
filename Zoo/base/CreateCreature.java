@@ -1,10 +1,9 @@
 package base;
 
 import java.time.Duration;
-import java.util.Map;
 
+import CreaturesImplemente.*;
 import enums.*;
-import impl.*;
 
 public class CreateCreature {
 	// Méthode statique pour créer une instance en fonction du type d'espèce et des paramètres

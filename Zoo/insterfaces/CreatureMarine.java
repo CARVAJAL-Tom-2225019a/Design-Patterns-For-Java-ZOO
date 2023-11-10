@@ -2,6 +2,6 @@ package insterfaces;
 
 public interface CreatureMarine {
 	
-	public String Nager();
+	public String Nager() throws Exception;
 	
 }

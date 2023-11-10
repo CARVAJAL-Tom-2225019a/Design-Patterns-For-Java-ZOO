@@ -1,5 +1,5 @@
 package insterfaces;
 
 public interface CreatureVolante {
-	public String Voler ();
+	public String Voler () throws Exception;
 }

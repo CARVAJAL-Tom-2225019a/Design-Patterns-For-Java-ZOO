@@ -1,5 +1,5 @@
 package insterfaces;
 
 public interface CreatureTerrestre {
-	public String Courrir () ;
+	public String Courrir () throws Exception ;
 }

@@ -1,23 +1,39 @@
 package base;
 
 import java.time.Duration;
-
+import CreaturesImplemente.*;
 import enums.*;
-import impl.*;
 
 public abstract class Ovipare extends Creature {
 
-	public Ovipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
-		super(nomEspece, sexe, poids, taille, bruit);
-	}
-	
-	public Oeuf PondreOeuf (String dateNaissance, String bruit ,Duration dureeIncubation) throws Exception {
-		if (super.isEstVivant() && super.getSexe() == Enum_Sexe.Femelle) {
-			return new Oeuf(super.getNomEspece(), bruit, dureeIncubation);
-		}
-		else {
-			throw new Exception ("Statut creature invalide");
-		}
-	}
+    /**
+     * Constructeur de la classe Ovipare.
+     * 
+     * @param nomEspece L'espèce de la créature.
+     * @param sexe      Le sexe de la créature.
+     * @param poids     Le poids de la créature.
+     * @param taille    La taille de la créature.
+     * @param bruit     Le bruit que fait la créature.
+     */
+    public Ovipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
+        super(nomEspece, sexe, poids, taille, bruit);
+    }
 
+    
+    /**
+     * Méthode pour pondre un œuf.
+     * 
+     * @param dateNaissance     La date de naissance de l'œuf.
+     * @param bruit             Le bruit que fait la créature qui naiytra.
+     * @param dureeIncubation   La durée d'incubation spécifique.
+     * @return Une instance de la classe Oeuf pondue par l'ovipare.
+     * @throws Exception Si la créature n'est pas vivante ou si elle n'est pas de sexe femelle.
+     */
+    public Oeuf PondreOeuf(String dateNaissance, String bruit, Duration dureeIncubation) throws Exception {
+        if (super.isVivant() && super.getSexe() == Enum_Sexe.Femelle) {
+            return new Oeuf(super.getNomEspece(), bruit, dureeIncubation);
+        } else {
+            throw new Exception("Statut du créature invalide");
+        }
+    }
 }
