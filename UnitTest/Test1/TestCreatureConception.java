@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-import CreaturesImplemente.*;
-import base.*;
-import enums.*;
+import creaturesImplemente.*;
+import references.*;
 
 class TestCreatureConception {
 	
