@@ -40,12 +40,14 @@ public class ControllerPrincipal {
         // Pour chaque enclos
         for (Enclos enclos : zoo.GetListeEnclos()) {
             // Pour chaque créature
-            for (Creature creature : enclos.getListeCreatures()) {
+            for (Creature creature : enclos.getListeCreatures().values()) {
                 // Passage d'une année
                 creature.Vieillir();
             }
             // Ajoute les informations sur les créatures mortes à la chaîne
             chaine.append(enclos.creaturesMortes());
+            // Mise a jour clés des creatures
+            enclos.reorganiserCles();
         }
         return chaine.toString();
     }
@@ -180,5 +182,9 @@ public class ControllerPrincipal {
 				s.Vieillir();
 		}
 		zoo.AddEnclos(enclosSirene);
+		
+		//Enclos vide
+		Enclos enclosVide = new Enclos("OtherLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS);
+		zoo.AddEnclos(enclosVide);
 	}
 }

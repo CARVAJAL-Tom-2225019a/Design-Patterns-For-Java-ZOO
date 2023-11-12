@@ -28,12 +28,12 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
 
     
     /**
-     * Méthode de l'interface CreatureImmortel : Renaitre.
+     * Méthode de l'interface CreatureImmortel : Mourrir.
      * Implémente la logique de renaissance de la Nymphe.
      */
     @Override
-    public void Renaitre() {
-        // TODO: Implémentez la logique de renaissance de la Nymphe
+    public void Mourrir() {
+        	ReinitialiserCreature();
     }
     
     

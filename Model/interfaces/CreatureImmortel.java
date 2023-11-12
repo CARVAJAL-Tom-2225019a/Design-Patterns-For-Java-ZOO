@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface CreatureImmortel {
-	public void Renaitre();
+	public void Mourrir();
 }

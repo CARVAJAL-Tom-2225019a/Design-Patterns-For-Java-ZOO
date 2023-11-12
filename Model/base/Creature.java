@@ -248,4 +248,16 @@ public abstract class Creature {
     				+"\n   sante : "+indicateurSante+"/"+constantes.MAX_INDICATEUR
     				+"\n\n";
     }
+    
+    /**
+     * Methode pour remettre a 0 les proprietes d'une creature
+     */
+    public void ReinitialiserCreature() {
+        age = 1;
+        this.indicateurFaim = constantes.MAX_INDICATEUR;
+        this.indicateurSommeil = constantes.MAX_INDICATEUR;
+        this.indicateurSante = constantes.MAX_INDICATEUR;
+        this.enTrainDeDormir = false;
+        this.vivant = true;
+    }
 }

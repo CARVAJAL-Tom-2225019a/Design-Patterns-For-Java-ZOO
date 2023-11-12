@@ -3,6 +3,11 @@ package application;
 import ControllerApplication.ControllerPrincipal;
 import zoo.ZooFantastique;
 
+	//TODO : voir en cas d'erreur d'entree pour chaque
+	//TODO : ajout de fonctionnalités (enfant, creation enclos...)
+	//TODO : gestion automatique
+
+
 public class Run {
     // Le contrôleur principal de l'application
     static ControllerPrincipal control = new ControllerPrincipal();

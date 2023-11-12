@@ -14,7 +14,7 @@ public class Enclos {
 	private double superficie;
 	private int nbMaxCreatures;
 	private int nbCreatures;
-	private Set<Creature> listeCreatures;
+	private Map<Integer, Creature> listeCreatures;
 	private Enum_DegrePropreteEnclos degreProprete;
 	
 	
@@ -24,7 +24,7 @@ public class Enclos {
 		this.superficie = superficie;
 		this.nbMaxCreatures = nbMaxCreatures;
 		this.nbCreatures = 0;
-		this.listeCreatures = new HashSet<>();
+		this.listeCreatures = new HashMap<>();
 		this.degreProprete = Enum_DegrePropreteEnclos.bon;
 	}
 
@@ -46,7 +46,7 @@ public class Enclos {
 	public int getNbCreatures() {
 		return nbCreatures;
 	}
-	public Set<Creature> getListeCreatures() {
+	public Map<Integer, Creature> getListeCreatures() {
 		return listeCreatures;
 	}
 	public Enum_DegrePropreteEnclos getDegreProprete() {
@@ -63,9 +63,10 @@ public class Enclos {
 	public String toString() {
 		String chaine = "Enclos "+nom+" de superficie "+superficie+" pouvant contenir au "
 				+ "plus "+nbMaxCreatures+".\n Il y a actuellement "+nbCreatures+" creatures :\n";
-		for (Creature creature : listeCreatures) {
+		for (Creature creature : listeCreatures.values()) {
 			// si la creature est vivante
 			if (creature.isVivant())
+				chaine+="Index : "+ trouverCleParCreature(creature)+"\n";
 				chaine+= creature.toString();
 		}
 		return chaine;
@@ -78,22 +79,19 @@ public class Enclos {
 	 * @return la chaine de caractère contenant les informations
 	 */
 	public String creaturesMortes() {
-	    String chaine = "Les creatures mortes dans " + nom + " :\n";
-	    // Utiliser itérateur explicite pour éviter ConcurrentModificationException
-	    Iterator<Creature> iterator = listeCreatures.iterator();
-	    while (iterator.hasNext()) {
-	        Creature creature = iterator.next();
-	        // si la creature est morte
-	        if (!creature.isVivant()) {
-	            chaine += creature.toString();
-	            nbCreatures--;
-	            iterator.remove();
-	        }
-	    }
-	    return chaine;
-	}
-
-	
+        String chaine = "Les creatures mortes dans " + nom + " :\n";
+        Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Creature> entry = iterator.next();
+            Creature creature = entry.getValue();
+            // Si la créature est morte
+            if (!creature.isVivant()) {
+                chaine += creature.toString();
+                iterator.remove();
+            }
+        }
+        return chaine;
+    }	
 	
 	/**
 	 * Methode pour ajouter une creature dans l'enclos
@@ -108,8 +106,9 @@ public class Enclos {
 			nomEspece = creature.getNomEspece();
 		// Verification qu'il reste de la place, et que meme espece
 		if (nbCreatures < nbMaxCreatures && nomEspece==creature.getNomEspece()) {
-			listeCreatures.add(creature);
 			nbCreatures++;
+			listeCreatures.put(nbCreatures, creature);
+			
 		}
 		else 
 			throw new Exception ("Ajout impossible si enclos plein ou si une autre espece est presente");
@@ -125,8 +124,8 @@ public class Enclos {
 	 */
 	public void SupprimerCreature (Creature creature) throws Exception {
 		// Vérification de la présence de la creature
-        if (listeCreatures.contains(creature)) {
-        	listeCreatures.remove(creature);
+        if (listeCreatures.containsValue(creature)) {
+        	listeCreatures.remove(trouverCleParCreature(creature));
         	nbCreatures--;
         	
         	// si enclos vide
@@ -143,7 +142,7 @@ public class Enclos {
 	 * 
 	 */
 	public void NourrirCreatures () throws Exception {
-		for (Creature creature : listeCreatures) {
+		for (Creature creature : listeCreatures.values()) {
 			creature.Manger(constantes.MAX_INDICATEUR);
 		}
 	}
@@ -169,5 +168,30 @@ public class Enclos {
 		else 
 			throw new Exception ("Enclos n'a pas besoin d etre nettoye");
 	}
+	
+	
+	
+	public int trouverCleParCreature(Creature creature) {
+        for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+            if (entry.getValue().equals(creature)) {
+                return entry.getKey(); // Clé trouvée
+            }
+        }
+        return -1; // Aucune clé trouvée pour la créature spécifiée
+    }
+	
+	
+	public void reorganiserCles() {
+        Map<Integer, Creature> nouvelleMap = new HashMap<>();
+        int nouvelleCle = 1;
+
+        for (Creature creature : listeCreatures.values()) {
+            nouvelleMap.put(nouvelleCle, creature);
+            nouvelleCle++;
+        }
+
+        listeCreatures = nouvelleMap;
+        nbCreatures = nouvelleCle-1; // Mettre à jour la prochaine clé disponible
+    }
 	
 }

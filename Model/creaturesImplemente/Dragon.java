@@ -87,8 +87,8 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * Implémente la logique de renaissance du dragon.
      */
     @Override
-    public void Renaitre() {
-        // TODO: Implémentez la logique de renaissance du dragon
+    public void Mourrir() {
+        ReinitialiserCreature();
     }
     
     

@@ -42,13 +42,13 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
 
     
     /**
-     * Méthode de l'interface CreatureImmortel : Renaitre.
+     * Méthode de l'interface CreatureImmortel : Mourrir.
      * Implémente la logique de renaissance du phénix.
      * 
      */
     @Override
-    public void Renaitre() {
-        // TODO: Implémentez la logique de renaissance du phénix
+    public void Mourrir() {
+        ReinitialiserCreature();
     }
     
     

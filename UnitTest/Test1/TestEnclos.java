@@ -9,10 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import ControllerApplication.ControllerPrincipal;
 import application.*;
+import base.Creature;
 import creaturesImplemente.*;
 import enclosImplemente.Aquarium;
 import enclosImplemente.Enclos;
 import enclosImplemente.Voliere;
+import maitreZoo.MaitreZoo;
 import references.*;
 import zoo.ZooFantastique;
 
@@ -22,8 +24,10 @@ class TestEnclos {
 	Random random = new Random();
 	CONSTANTES constantes = new CONSTANTES();
 	ZooFantastique zoo = ZooFantastique.getInstance();
+	MaitreZoo maitre = MaitreZoo.getInstance("Pepito", Enum_Sexe.Male, 20);
 	FactoryCreature factory = new FactoryCreature();
 	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 5, 100);
+	Enclos enclosVide = new Enclos("EnclosVide", 20, 5);
 	
 	Enum_Sexe sexe;
 	double poids;
@@ -61,12 +65,33 @@ class TestEnclos {
 			
 		}
 		zoo.AddEnclos(enclosKraken);
+		
+		zoo.AddEnclos(enclosVide);
     }
 
 	@Test
 	void testTrouverCreature() {
 		Enclos enclos = zoo.trouverEnclosParNom("KrakenLand");
 		assertNotNull(enclos);
+	}
+	
+	@Test
+	void testTransfertCreature() throws Exception {
+		String nomE = "KrakenLand";
+		Enclos enclosSource = zoo.trouverEnclosParNom(nomE);
+		nomE = "EnclosVide";
+		Enclos enclosDest = zoo.trouverEnclosParNom(nomE);
+		String indexCreatureString = "1";
+    	int indexCreature = Integer.parseInt(indexCreatureString);
+    	
+		for (int i=0; i<2; i++ ) {
+	    	Creature creature = enclosSource.getListeCreatures().get(indexCreature);
+	    	maitre.TransfererCreature(creature, enclosSource, enclosDest);
+	    	enclosSource.reorganiserCles();
+	    	enclosDest.reorganiserCles();
+		}
+    	
+    	assertEquals(2, enclosDest.getNbCreatures());
 	}
 
 }

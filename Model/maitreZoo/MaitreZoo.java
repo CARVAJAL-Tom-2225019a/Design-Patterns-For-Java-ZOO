@@ -41,7 +41,7 @@ public class MaitreZoo {
     }
     public static synchronized MaitreZoo getInstance() {
     	if (instance == null) {
-            return null;
+    		return null;
         }
         return instance;
     }
@@ -94,13 +94,17 @@ public class MaitreZoo {
     public void TransfererCreature (Creature creature, Enclos enclosSource, Enclos enclosDest) throws Exception {
     	// verification place dans enclos destination
     	if (enclosDest.getNbCreatures() < enclosDest.getNbMaxCreatures()) {
-    		enclosSource.SupprimerCreature(creature);
-        	enclosDest.AjouterCreature(creature);
+    		// Verification creature existe
+    		if (enclosSource.getListeCreatures().containsValue(creature)) {
+    			enclosSource.SupprimerCreature(creature);
+            	enclosDest.AjouterCreature(creature);
+    		}
+    		else
+        		throw new Exception ("Creature introuvable");
     	}
     	else
     		throw new Exception ("Enclos de destination est plein");
     	
     }
-
 }
 
