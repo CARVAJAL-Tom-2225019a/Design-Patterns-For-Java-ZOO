@@ -1,0 +1,72 @@
+package Test1;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Random;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import ControllerApplication.ControllerPrincipal;
+import application.*;
+import creaturesImplemente.*;
+import enclosImplemente.Aquarium;
+import enclosImplemente.Enclos;
+import enclosImplemente.Voliere;
+import references.*;
+import zoo.ZooFantastique;
+
+class TestEnclos {
+	VuePrincipale begin = new VuePrincipale();
+	ControllerPrincipal control = new ControllerPrincipal();
+	Random random = new Random();
+	CONSTANTES constantes = new CONSTANTES();
+	ZooFantastique zoo = ZooFantastique.getInstance();
+	FactoryCreature factory = new FactoryCreature();
+	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 5, 100);
+	
+	Enum_Sexe sexe;
+	double poids;
+	double taille;
+	int age;
+	
+	@BeforeEach
+    void construction() throws Exception {
+		// Dragons
+		Voliere enclosDragons = new Voliere("DragonLand", 20, 5, 100);
+		for (int i=0; i<5; i++) {
+			sexe = ControllerPrincipal.SexeAleatoire();
+			poids = 1 + (random.nextDouble() * 49);
+			taille = 1 + (random.nextDouble() * 49);
+			Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
+			enclosDragons.AjouterCreature(d);
+			// age aleatoire
+			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			for (int y=0; y<age; y++)
+				d.Vieillir();
+		}
+		zoo.AddEnclos(enclosDragons);
+
+		// Kraken
+		for (int i=0; i<5; i++) {
+			sexe = ControllerPrincipal.SexeAleatoire();
+			poids = 1 + (random.nextDouble() * 49);
+			taille = 1 + (random.nextDouble() * 49);
+			Kraken k = FactoryCreature.newCreature(Enum_Especes.Kraken, sexe, poids, taille);
+			enclosKraken.AjouterCreature(k);
+			// age aleatoire
+			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			for (int y=0; y<age; y++)
+				k.Vieillir();
+			
+		}
+		zoo.AddEnclos(enclosKraken);
+    }
+
+	@Test
+	void testTrouverCreature() {
+		Enclos enclos = zoo.trouverEnclosParNom("KrakenLand");
+		assertNotNull(enclos);
+	}
+
+}
