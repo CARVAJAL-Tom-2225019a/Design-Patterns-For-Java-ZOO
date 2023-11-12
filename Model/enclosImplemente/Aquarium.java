@@ -24,11 +24,11 @@ public class Aquarium extends Enclos {
      * @param profondeurBassin La profondeur du bassin de l'aquarium.
      * @param saliniteEau     La salinité initiale de l'eau dans l'aquarium.
      */
-    public Aquarium(String nom, double superficie, int nbMaxCreatures, double profondeurBassin, double saliniteEau) {
+    public Aquarium(String nom, double superficie, int nbMaxCreatures, double profondeurBassin) {
         super(nom, superficie, nbMaxCreatures);
         this.profondeurBassin = profondeurBassin;
         niveauEau = profondeurBassin;
-        this.saliniteEau = saliniteEau;
+        this.saliniteEau = 5;
     }
 
     /**
@@ -69,4 +69,20 @@ public class Aquarium extends Enclos {
             saliniteEau = constantes.SALINITE_CORRECT;
         }
     }
+    
+    
+    /**
+	 * Methode permettant d'afficher les caracteristiques de l'enclos 
+	 * et les creatures qu'il contient
+	 * 
+	 * @return la chaine de caractère contenant les informations
+	 */
+	public String toString() {
+		String chaine = "Aquarium "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
+				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures :\n";
+		for (Creature creature : super.getListeCreatures()) {
+			chaine+= creature.toString();
+		}
+		return chaine;
+	}
 }

@@ -22,7 +22,7 @@ public class Voliere extends Enclos {
      * @param nbMaxCreatures  Le nombre maximum de créatures que la volière peut accueillir.
      * @param hauteur         La hauteur de la volière.
      */
-    public Voliere(Enum_Especes nomEspece, String nom, double superficie, int nbMaxCreatures, double hauteur) {
+    public Voliere(String nom, double superficie, int nbMaxCreatures, double hauteur) {
         super(nom, superficie, nbMaxCreatures);
         this.hauteur = hauteur;
         etatToit = Enum_DegrePropreteEnclos.bon;
@@ -61,4 +61,20 @@ public class Voliere extends Enclos {
         // Entretien classique de l'enclos
         super.EntretenirEnclos();
     }
+    
+    
+    /**
+	 * Methode permettant d'afficher les caracteristiques de l'enclos 
+	 * et les creatures qu'il contient
+	 * 
+	 * @return la chaine de caractère contenant les informations
+	 */
+	public String toString() {
+		String chaine = "Voliere "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
+				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures :\n";
+		for (Creature creature : super.getListeCreatures()) {
+			chaine+= creature.toString();
+		}
+		return chaine;
+	}
 }

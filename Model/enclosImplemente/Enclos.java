@@ -64,10 +64,35 @@ public class Enclos {
 		String chaine = "Enclos "+nom+" de superficie "+superficie+" pouvant contenir au "
 				+ "plus "+nbMaxCreatures+".\n Il y a actuellement "+nbCreatures+" creatures :\n";
 		for (Creature creature : listeCreatures) {
-			chaine+= creature.toString();
+			// si la creature est vivante
+			if (creature.isVivant())
+				chaine+= creature.toString();
 		}
 		return chaine;
 	}
+	
+	/**
+	 * Methode permettant d'afficher les creatures qui ne sont plus en vie
+	 * et de les supprimer de l'enclos
+	 * 
+	 * @return la chaine de caractère contenant les informations
+	 */
+	public String creaturesMortes() {
+	    String chaine = "Les creatures mortes dans " + nom + " :\n";
+	    // Utiliser itérateur explicite pour éviter ConcurrentModificationException
+	    Iterator<Creature> iterator = listeCreatures.iterator();
+	    while (iterator.hasNext()) {
+	        Creature creature = iterator.next();
+	        // si la creature est morte
+	        if (!creature.isVivant()) {
+	            chaine += creature.toString();
+	            nbCreatures--;
+	            iterator.remove();
+	        }
+	    }
+	    return chaine;
+	}
+
 	
 	
 	/**

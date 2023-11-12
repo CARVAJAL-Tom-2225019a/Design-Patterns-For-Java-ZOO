@@ -35,7 +35,7 @@ public abstract class Creature {
         this.sexe = sexe;
         this.poids = poids;
         this.taille = taille;
-        this.age = 0;
+        this.age = 1;
         this.indicateurFaim = constantes.MAX_INDICATEUR;
         this.indicateurSommeil = constantes.MAX_INDICATEUR;
         this.indicateurSante = constantes.MAX_INDICATEUR;
@@ -163,13 +163,12 @@ public abstract class Creature {
     
     /**
      * Méthode pour faire vieillir la créature d'un an.
-     * 
-     * @throws Exception Si la créature n'est pas vivante ou a atteint l'âge maximum.
+     *
      */
     public void Vieillir() throws Exception {
         if (vivant && age < constantes.MAX_AGE)
             age++;
-        else
+        else if (vivant && age == constantes.MAX_AGE)
             Mourir();
     }
 
@@ -239,10 +238,14 @@ public abstract class Creature {
      * @return la chaine de caractere contenant les informations
      */
     public String toString() {
-    	return " - Creature de type "+nomEspece+" ="
-    				+"\n  sexe :"+sexe
-    				+"\n  age :"+age
-    				+"\n  vivant :"+vivant
-    				+"\n";
+    	return "-- Creature de type "+nomEspece+" ="
+    				+"\n   sexe : "+sexe
+    				+"\n   age : "+age
+    				+"\n   vivant : "+vivant
+    				+"\n   dort : "+enTrainDeDormir
+    				+"\n   faim : "+indicateurFaim+"/"+constantes.MAX_INDICATEUR
+    				+"\n   fatigue : "+indicateurSommeil+"/"+constantes.MAX_INDICATEUR
+    				+"\n   sante : "+indicateurSante+"/"+constantes.MAX_INDICATEUR
+    				+"\n\n";
     }
 }

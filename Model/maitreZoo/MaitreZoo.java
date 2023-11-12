@@ -18,6 +18,15 @@ public class MaitreZoo {
         this.sexe = sexe;
         this.age = age;
     }
+    
+    /**
+     * Methode pour afficher les informations du maitre zoo
+     * 
+     * @return une chaine de caractere avec les informations
+     */
+    public String toString() {
+    	return "Maitre "+nom+" a "+age+" an(s) et est "+sexe+"\n";
+    }
 
     /**
      * Méthode statique pour obtenir l'instance unique de la classe MaitreZoo.
@@ -30,6 +39,12 @@ public class MaitreZoo {
         }
         return instance;
     }
+    public static synchronized MaitreZoo getInstance() {
+    	if (instance == null) {
+            return null;
+        }
+        return instance;
+    }
     
     
     /**
@@ -37,9 +52,13 @@ public class MaitreZoo {
      * 
      * @param enclos	Enclos a examiner
      * @return La chaine de caractere contenant les informations de l'enclos
+     * @throws Exception 
      */
-    public String ExaminerEnclos (Enclos enclos) {
-    	return enclos.toString();
+    public String ExaminerEnclos (Enclos enclos) throws Exception {
+    	if (enclos != null)
+    		return enclos.toString();
+    	else
+    		throw new Exception ("Erreur enclos");
     }
     
     
