@@ -62,7 +62,8 @@ public class Enclos {
 	 */
 	public String toString() {
 		String chaine = "Enclos "+nom+" de superficie "+superficie+" pouvant contenir au "
-				+ "plus "+nbMaxCreatures+".\n Il y a actuellement "+nbCreatures+" creatures :\n";
+				+ "plus "+nbMaxCreatures+".\n Il y a actuellement "+nbCreatures+" creatures.\n"
+				+ "Degre de proprete : "+degreProprete+"\n";
 		for (Creature creature : listeCreatures.values()) {
 			// si la creature est vivante
 			if (creature.isVivant())
@@ -193,5 +194,13 @@ public class Enclos {
         listeCreatures = nouvelleMap;
         nbCreatures = nouvelleCle-1; // Mettre à jour la prochaine clé disponible
     }
+	
+	
+	public void DegradationDegreProprete() {
+		if (degreProprete == Enum_DegrePropreteEnclos.bon)
+			degreProprete = Enum_DegrePropreteEnclos.correct;
+		else if (degreProprete == Enum_DegrePropreteEnclos.correct)
+			degreProprete = Enum_DegrePropreteEnclos.mauvais;
+	}
 	
 }

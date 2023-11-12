@@ -28,7 +28,7 @@ public class Aquarium extends Enclos {
         super(nom, superficie, nbMaxCreatures);
         this.profondeurBassin = profondeurBassin;
         niveauEau = profondeurBassin;
-        this.saliniteEau = 5;
+        this.saliniteEau = constantes.SALINITE_CORRECT;
     }
 
     /**
@@ -79,11 +79,28 @@ public class Aquarium extends Enclos {
 	 */
 	public String toString() {
 		String chaine = "Aquarium "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
-				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures :\n";
+				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures.\n"
+				+ "Salinite eau : "+niveauEau+"//"+constantes.SALINITE_CORRECT+"\n"
+				+ "Niveau eau : "+niveauEau+"//"+profondeurBassin+"\n";
 		for (Creature creature : super.getListeCreatures().values()) {
 			chaine+="Index : "+ trouverCleParCreature(creature)+"\n";
 			chaine+= creature.toString();
 		}
 		return chaine;
+	}
+	
+	
+	public void DegradationNiveauEau () {
+		double perte = profondeurBassin/10;
+		niveauEau -= perte;
+		if (niveauEau>= 0)
+			niveauEau=1;
+	}
+	
+	
+	public void DegradationSaliniteEau () {
+		saliniteEau--;
+		if (saliniteEau<=0)
+			saliniteEau=1;
 	}
 }

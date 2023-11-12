@@ -6,6 +6,7 @@ import zoo.ZooFantastique;
 	//TODO : voir en cas d'erreur d'entree pour chaque
 	//TODO : ajout de fonctionnalités (enfant, creation enclos...)
 	//TODO : gestion automatique
+	//TODO : mort si etat enclos plus adapte ou etat cretaure
 
 
 public class Run {

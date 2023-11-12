@@ -71,11 +71,21 @@ public class Voliere extends Enclos {
 	 */
 	public String toString() {
 		String chaine = "Voliere "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
-				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures :\n";
+				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures\n"
+				+ "Degre de proprete : "+super.getDegreProprete()+"\n"
+				+ "Etat toit : "+etatToit+"\n";
 		for (Creature creature : super.getListeCreatures().values()) {
 			chaine+="Index : "+ trouverCleParCreature(creature)+"\n";
 			chaine+= creature.toString();
 		}
 		return chaine;
+	}
+	
+	
+	public void DegradationEtatToit() {
+		if (etatToit == Enum_DegrePropreteEnclos.bon)
+			etatToit = Enum_DegrePropreteEnclos.correct;
+		else if (etatToit == Enum_DegrePropreteEnclos.correct)
+			etatToit = Enum_DegrePropreteEnclos.mauvais;
 	}
 }

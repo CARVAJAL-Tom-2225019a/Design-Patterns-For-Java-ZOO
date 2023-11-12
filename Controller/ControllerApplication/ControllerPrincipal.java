@@ -64,8 +64,8 @@ public class ControllerPrincipal {
 		
 		
 		// Dragons
-		Voliere enclosDragons = new Voliere("DragonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS, constantes.TAILLE_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Voliere enclosDragons = new Voliere("DragonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -79,8 +79,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosDragons);
 
 		// Kraken
-		Aquarium enclosKraken = new Aquarium("KrakenLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS, constantes.TAILLE_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Aquarium enclosKraken = new Aquarium("KrakenLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -94,8 +94,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosKraken);
 		
 		// Licorne
-		Enclos enclosLicorne = new Enclos("LicorneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Enclos enclosLicorne = new Enclos("LicorneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -109,8 +109,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosLicorne);
 		
 		// Lycanthrope
-		Enclos enclosLycanthrope = new Enclos("LycanthropeLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Enclos enclosLycanthrope = new Enclos("LycanthropeLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -124,8 +124,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosLycanthrope);
 		
 		// Megalodon
-		Aquarium enclosMegalodon = new Aquarium("MegalodonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS, constantes.TAILLE_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Aquarium enclosMegalodon = new Aquarium("MegalodonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -139,8 +139,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosMegalodon);
 		
 		// Nymphe
-		Enclos enclosNymphe = new Enclos("NympheLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Enclos enclosNymphe = new Enclos("NympheLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -154,8 +154,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosNymphe);
 		
 		// Phenix
-		Voliere enclosPhenix = new Voliere("PhenixLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS, constantes.TAILLE_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Voliere enclosPhenix = new Voliere("PhenixLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -169,8 +169,8 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosPhenix);
 		
 		//Sirene
-		Aquarium enclosSirene = new Aquarium("SireneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS, constantes.TAILLE_ENCLOS);
-		for (int i=0; i<5; i++) {
+		Aquarium enclosSirene = new Aquarium("SireneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+		for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
 			sexe = SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -184,7 +184,7 @@ public class ControllerPrincipal {
 		zoo.AddEnclos(enclosSirene);
 		
 		//Enclos vide
-		Enclos enclosVide = new Enclos("OtherLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS);
+		Enclos enclosVide = new Enclos("OtherLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
 		zoo.AddEnclos(enclosVide);
 	}
 }

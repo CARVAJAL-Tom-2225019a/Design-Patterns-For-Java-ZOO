@@ -56,7 +56,7 @@ public class ControllerMaitreZoo {
 
             // Voir nombre total de créatures
             case 2:
-            	vue.Afficher("\n ---- Vous avez choisi de voir le nombre de créatures totales ---- ");
+            	vue.Afficher("\n ---- Vous avez choisi de voir le nombre de creatures totales ---- ");
             	vue.Afficher("Il y a " + zoo.getNbCreaturesTotales() + " créatures.");
                 return true;
 
@@ -79,7 +79,7 @@ public class ControllerMaitreZoo {
 
             // Nourrir les créatures d'un enclos
             case 5:
-            	vue.Afficher("\n ---- Vous avez choisi de nourrir les créatures d'un enclos ---- ");
+            	vue.Afficher("\n ---- Vous avez choisi de nourrir les creatures d'un enclos ---- ");
                 nomEnclos = vue.DemandeUtilisateur("Nom de l'enclos : ");
                 enclos = zoo.trouverEnclosParNom(nomEnclos);
                 maitreZoo.NourrirCreaturesEnclos(enclos);
@@ -88,7 +88,7 @@ public class ControllerMaitreZoo {
 
             // Transférer une créature
             case 6:
-            	vue.Afficher("\n ---- Vous avez choisi de transférer une créature ---- ");
+            	vue.Afficher("\n ---- Vous avez choisi de transferer une creature ---- ");
             	String nomE = vue.DemandeUtilisateur("Nom enclos source : ");
             	Enclos enclosSource = zoo.trouverEnclosParNom(nomE);
             	vue.Afficher(enclosSource.toString());
@@ -141,6 +141,7 @@ public class ControllerMaitreZoo {
                 annee++;
                 nbAction = 0;
                 vue.PassageAnnee();
+                zoo.ModificationEtatAleatoire();
             }
         }
     }

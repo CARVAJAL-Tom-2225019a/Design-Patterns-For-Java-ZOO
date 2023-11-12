@@ -22,12 +22,38 @@ public class VuePrincipale {
 
 		// Saisie des informations du joueur
 		String nom = DemandeUtilisateur("Votre nom : ");
-		String s = DemandeUtilisateur("Votre sexe (M ou F) : ");
-		Enum_Sexe sexe = (s.equals("M")) ? Enum_Sexe.Male : Enum_Sexe.Femelle;
-		int age = Integer.parseInt(DemandeUtilisateur("Votre age : "));
-
+		// Recuperation sexe
+		Enum_Sexe sexe = null;
+		while (sexe == null) {
+		    try {
+		        String input = DemandeUtilisateur("Votre sexe (F ou M) : ");
+		        if (input.equalsIgnoreCase("F")) {
+		            sexe = Enum_Sexe.Femelle;
+		        } else if (input.equalsIgnoreCase("M")) {
+		            sexe = Enum_Sexe.Male;
+		        } else {
+		            System.out.println("Veuillez entrer F ou M.");
+		        }
+		    } catch (Exception e) {
+		        // Gérer l'exception si nécessaire
+		        System.out.println("Erreur lors de la saisie");
+		    }
+		}
+		// Recuperation age
+		int age = 0;
+		while (true) {
+		    try {
+		        String input = DemandeUtilisateur("Votre age : ");
+		        age = Integer.parseInt(input);
+		        // Si la conversion en entier réussit, sortir de la boucle
+		        break;
+		    } catch (NumberFormatException e) {
+		        // Si la conversion échoue, afficher un message d'erreur et continuer la boucle
+		        System.out.println("Veuillez entrer un nombre entier valide");
+		    }
+		}
 		// Message de bienvenue
-		System.out.println("Vous etes desormais maître de votre zoo. \nJe suis sur que"
+		System.out.println("Vous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! Bonne chance " + nom);
 		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + constantes.MAX_AGE);
 		// Initialisation du gestionnaire du zoo
@@ -49,14 +75,17 @@ public class VuePrincipale {
 	 */
 	public void proposerAction(int annee, int actionRestante) {
 		System.out.println(
-				"\nLES ACTIONS DISPONIBLES (annee " + annee + "):" + "\n  0 : Pas d'action" + "\n  1 : Voir les enclos"
+				"\nLES ACTIONS DISPONIBLES (annee " + annee + "):" 
+						+ "\n  0 : Pas d'action" 
+						+ "\n  1 : Voir les enclos"
 						+ "\n  2 : Voir le nombre de creatures totales" 
 						+ "\n  3 : Examiner un enclos"
 						+ "\n  4 : Nettoyer un enclos" 
-						+ "\n  5 : Nourrir les créatures d'un enclos"
-						+ "\n  6 : Transférer une créature" 
-						+ "\n  99 : Exit" + "\n\n Il vous reste " + actionRestante
-						+ " action(s) a effectuer avant de changer d'annee" + "\n\n Votre choix = ");
+						+ "\n  5 : Nourrir les creatures d'un enclos"
+						+ "\n  6 : Transferer une creature" 
+						+ "\n  99 : Exit" 
+						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
+						+ "\n\n Votre choix = ");
 	}
 
 	/**

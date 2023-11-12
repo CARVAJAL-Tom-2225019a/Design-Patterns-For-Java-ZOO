@@ -6,5 +6,6 @@ public class CONSTANTES {
 	public int VALEUR_PERTE_INDICATEUR = 2;
 	public int SALINITE_CORRECT = 5;
 	public int NB_CREATURE_PAR_ENCLOS = 10;
+	public int NB_CREATURE_PAR_ENCLOS_MAX = 15;
 	public int TAILLE_ENCLOS = 100;
 }

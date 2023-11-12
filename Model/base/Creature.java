@@ -190,8 +190,6 @@ public abstract class Creature {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurSommeil -= constantes.VALEUR_PERTE_INDICATEUR;
-        else
-            throw new Exception("Creature pas en etat de realiser action");
         // Vérification que la valeur reste positive
         if (indicateurSommeil < 0)
             indicateurSommeil = 0;
@@ -207,8 +205,6 @@ public abstract class Creature {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurFaim -= constantes.VALEUR_PERTE_INDICATEUR;
-        else
-            throw new Exception("Creature pas en etat de realiser action");
         // Vérification que la valeur reste positive
         if (indicateurFaim < 0)
             indicateurFaim = 0;
@@ -224,8 +220,6 @@ public abstract class Creature {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurSante -= constantes.VALEUR_PERTE_INDICATEUR;
-        else
-            throw new Exception("Creature pas en etat de realiser action");
         // Vérification que la valeur reste positive
         if (indicateurSante < 0)
             indicateurSante = 0;
