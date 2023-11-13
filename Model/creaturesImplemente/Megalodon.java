@@ -1,14 +1,10 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Megalodon extends Ovipare implements CreatureMarine {
-	
-    private Duration dureeIncubation;
 
     /**
      * Constructeur de la classe Megalodon.
@@ -21,9 +17,8 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      * @param bruit            Le bruit que fait le Megalodon.
      * @param dureeIncubation  La durée d'incubation spécifique pour les megalodons.
      */
-    protected Megalodon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeIncubation = dureeIncubation;
+    protected Megalodon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
+        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
     }
 
     
@@ -48,6 +43,6 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      */
     public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, dureeIncubation);
+    	return super.PondreOeuf(papa, super.getDureePourEnfant());
     }
 }

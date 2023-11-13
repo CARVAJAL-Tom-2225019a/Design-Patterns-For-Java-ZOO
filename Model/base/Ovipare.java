@@ -1,7 +1,5 @@
 package base;
 
-import java.time.Duration;
-
 import creaturesImplemente.*;
 import references.*;
 
@@ -16,8 +14,8 @@ public abstract class Ovipare extends Creature {
      * @param taille    La taille de la créature.
      * @param bruit     Le bruit que fait la créature.
      */
-    public Ovipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
-        super(nomEspece, sexe, poids, taille, bruit);
+    public Ovipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int duree) {
+        super(nomEspece, sexe, poids, taille, bruit, duree);
     }
     
     

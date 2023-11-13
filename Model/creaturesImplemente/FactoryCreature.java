@@ -1,7 +1,5 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.Creature;
 import references.*;
 
@@ -23,7 +21,7 @@ public class FactoryCreature {
             case Nymphe:
             	return (T) new Nymphe(nomEspece, sexe, poids, taille, "Laalaaalaaa", 5);
             case Phenix :
-            	return (T) new Phenix(nomEspece, sexe, poids, taille, "Craaaack-flaaaame", 2));
+            	return (T) new Phenix(nomEspece, sexe, poids, taille, "Craaaack-flaaaame", 2);
             case Sirene :
             	return (T) new Sirene(nomEspece, sexe, poids, taille, "Aaaahh-ooohh", 1);
             default:

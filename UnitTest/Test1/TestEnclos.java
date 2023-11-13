@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import ControllerApplication.ControllerPrincipal;
 import application.*;
 import base.Creature;
+import base.Ovipare;
 import creaturesImplemente.*;
 import enclosImplemente.Aquarium;
 import enclosImplemente.Enclos;
@@ -26,8 +27,10 @@ class TestEnclos {
 	ZooFantastique zoo = ZooFantastique.getInstance();
 	MaitreZoo maitre = MaitreZoo.getInstance("Pepito", Enum_Sexe.Male, 20);
 	FactoryCreature factory = new FactoryCreature();
-	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 5, 100);
-	Enclos enclosVide = new Enclos("EnclosVide", 20, 5);
+	Voliere enclosDragons = new Voliere("DragonLand", 20, 15, 100);
+	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 15, 100);
+	Enclos enclosSirene = new Enclos("SireneLand", 20, 15);
+	Enclos enclosVide = new Enclos("EnclosVide", 20, 15);
 	
 	Enum_Sexe sexe;
 	double poids;
@@ -37,8 +40,7 @@ class TestEnclos {
 	@BeforeEach
     void construction() throws Exception {
 		// Dragons
-		Voliere enclosDragons = new Voliere("DragonLand", 20, 5, 100);
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<10; i++) {
 			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -52,7 +54,7 @@ class TestEnclos {
 		zoo.AddEnclos(enclosDragons);
 
 		// Kraken
-		for (int i=0; i<5; i++) {
+		for (int i=0; i<10; i++) {
 			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
@@ -66,6 +68,21 @@ class TestEnclos {
 		}
 		zoo.AddEnclos(enclosKraken);
 		
+		// Sirene
+		for (int i=0; i<10; i++) {
+			sexe = Creature.SexeAleatoire();
+			poids = 1 + (random.nextDouble() * 49);
+			taille = 1 + (random.nextDouble() * 49);
+			Sirene s = FactoryCreature.newCreature(Enum_Especes.Sirene, sexe, poids, taille);
+			enclosSirene.AjouterCreature(s);
+			// age aleatoire
+			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			for (int y=0; y<age; y++)
+				s.Vieillir();
+			
+		}
+		zoo.AddEnclos(enclosSirene);
+		
 		zoo.AddEnclos(enclosVide);
     }
 
@@ -77,7 +94,6 @@ class TestEnclos {
 	
 	@Test
 	void testChoixCreatureAleatoire() throws Exception {
-		// Dragons
 		Enclos enclos = new Enclos("Enclos", 20, 5);
 		for (int i=0; i<5; i++) {
 			sexe = Creature.SexeAleatoire();
@@ -91,16 +107,15 @@ class TestEnclos {
 				d.Vieillir();
 		}
 		Creature femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
-		assertNotNull(femelle);
+		assertEquals(Enum_Sexe.Femelle, femelle.getSexe());
 	}
 	
 	@Test
-	void testEnfantsAleatoires() throws Exception {
-		int nbCreatureDebut = zoo.getNbCreaturesTotales();
-		for (int i=0; i<3; i++)
-			control.CreerEnfantAleatoirement();
-		int nbCreatureFin = zoo.getNbCreaturesTotales();
-		assertTrue (nbCreatureFin > nbCreatureDebut);
+	void testPondreOeuf() throws Exception {
+		Creature femelle = FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 10, 10);
+		Creature male = FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Male, 10, 10);
+		Oeuf oeuf = ((Ovipare)femelle).PondreOeuf(male, femelle.getDureePourEnfant());
+		assertNotNull(oeuf);
 	}
 	
 	@Test

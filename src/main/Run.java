@@ -1,7 +1,9 @@
 package main;
 
 import ControllerApplication.ControllerPrincipal;
-import application.VueAutomatique;
+import ControllerApplication.ControllerUserInterface;
+import ControllerApplication.ControllerZoo;
+import application.VueUtilisateur;
 import zoo.ZooFantastique;
 
 	//TODO : voir en cas d'erreur d'entree pour chaque
@@ -12,9 +14,11 @@ import zoo.ZooFantastique;
 
 public class Run {
     // Le contrôleur principal de l'application
-    static ControllerPrincipal control = new ControllerPrincipal();
-    
-    static VueAutomatique vueAutomatique = new VueAutomatique();
+	static VueUtilisateur vue = new VueUtilisateur();
+    static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
+
+    ControllerZoo zooController = new ControllerZoo();
+    ControllerUserInterface userInterfaceController = new ControllerUserInterface();
 
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
     static ZooFantastique zoo = ZooFantastique.getInstance();
@@ -27,12 +31,13 @@ public class Run {
         // TODO : gestion manuel ou automatique
 
         // Crée les données de jeu nécessaires à la simulation
-        control.creerDonneesJeu();
+    	controllerPrincipal.creerDonneesJeu();
         
         if (UtilisateurChoisi == true)
 	        // Passe le contrôle de l'application à l'utilisateur
 	        zoo.PasserLaMainUtilisateur();
         else
-        	vueAutomatique.run();
+        	//TODO : gestion auto
+        	return;
     }
 }

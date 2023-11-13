@@ -1,14 +1,10 @@
 package creaturesImplemente;
 
-import java.time.*;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Licorne extends Vivipare implements CreatureTerrestre {
-	
-    private Duration dureeGestation;
 
     /**
      * Constructeur de la classe Licorne.
@@ -21,9 +17,8 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * @param bruit           Le bruit que fait la licorne.
      * @param dureeGestation  La durée de gestation spécifique pour les licornes.
      */
-    protected Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeGestation = dureeGestation;
+    protected Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
+        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
     }
 
     
@@ -48,6 +43,6 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * @return Une instance de la classe Creature qui né.
      */
     public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return super.MettreBas(sexe, poids, taille, dureeGestation);
+    	return super.MettreBas(sexe, poids, taille);
     }
 }

@@ -41,7 +41,7 @@ public class MaitreZoo {
     }
     public static synchronized MaitreZoo getInstance() {
     	if (instance == null) {
-    		return null;
+    		instance = new MaitreZoo("nom", Enum_Sexe.Male, 20);
         }
         return instance;
     }

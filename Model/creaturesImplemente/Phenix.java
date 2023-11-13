@@ -1,15 +1,11 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel {
 	
-    private Duration dureeIncubation;
-
     /**
      * Constructeur de la classe Phenix.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -21,10 +17,10 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * @param bruit            Le bruit que fait le phénix.
      * @param dureeIncubation  La durée d'incubation spécifique pour les pehnixs.
      */
-    protected Phenix(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeIncubation = dureeIncubation;
+    protected Phenix(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
+        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
     }
+
 
     
     /**
@@ -59,6 +55,6 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      */
     public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, dureeIncubation);
+    	return super.PondreOeuf(papa, super.getDureePourEnfant());
     }
 }

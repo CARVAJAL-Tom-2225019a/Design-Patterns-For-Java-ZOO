@@ -1,14 +1,10 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Kraken extends Ovipare implements CreatureMarine {
-	
-    private int dureeIncubation;
 
     /**
      * Constructeur de la classe Kraken.
@@ -22,8 +18,7 @@ public class Kraken extends Ovipare implements CreatureMarine {
      * @param dureeIncubation  La durée d'incubation spécifique du Kraken.
      */
     protected Kraken(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeIncubation = dureeIncubation;
+        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
     }
     
 
@@ -48,6 +43,6 @@ public class Kraken extends Ovipare implements CreatureMarine {
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      */
     public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, dureeIncubation);
+    	return super.PondreOeuf(papa, super.getDureePourEnfant());
     }
 }

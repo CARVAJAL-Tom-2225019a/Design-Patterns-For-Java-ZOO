@@ -230,5 +230,21 @@ public class Enclos {
             return null;
         }
     }
+    
+    
+    /**
+     * Methode pour recuperer la liste des vivipares de l'enclos
+     */
+    public Map<Integer, Creature> getListeVivipare () {
+    	int i=1;
+    	Map<Integer, Creature> listeVivipare = new HashMap<>();
+    	for (Creature creature : listeCreatures.values()) {
+    		if (creature instanceof Vivipare) {
+    			listeVivipare.put(i, creature);
+    			i++;
+    		}
+    	}
+    	return listeVivipare;
+    }
 	
 }

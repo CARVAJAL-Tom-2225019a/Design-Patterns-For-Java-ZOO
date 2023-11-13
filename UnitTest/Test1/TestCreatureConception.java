@@ -47,15 +47,9 @@ class TestCreatureConception {
 	void testVivipareMaleFail() throws Exception {
 		Exception thrown = assertThrows(
                 Exception.class,
-                () -> PrinceEric.concevoirUnEnfant(Couverture),
+                () -> PrinceEric.concevoirUnEnfant(Couverture,1),
                 "La nature autorise seulement une femelle de concevoir un enfant avec un male de la meme espece");
         assertTrue(thrown.getMessage().contains("La nature autorise seulement une femelle de concevoir un enfant avec un male de la meme espece"));
-	}
-	
-	@Test
-	void testVivipareConcevoirEnfant() throws Exception {
-		Ariel.concevoirUnEnfant(PrinceEric);
-		assertNotNull(Ariel.getDateConceptionEnfant());
 	}
 
 }

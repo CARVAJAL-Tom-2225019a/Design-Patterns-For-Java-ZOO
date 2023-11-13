@@ -8,4 +8,5 @@ public class CONSTANTES {
 	public int NB_CREATURE_PAR_ENCLOS = 10;
 	public int NB_CREATURE_PAR_ENCLOS_MAX = 15;
 	public int TAILLE_ENCLOS = 100;
+	public int TAILLE_MAX_CREATURE=50;
 }

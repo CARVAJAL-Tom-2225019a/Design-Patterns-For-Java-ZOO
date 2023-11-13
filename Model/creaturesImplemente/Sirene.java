@@ -1,14 +1,10 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Sirene extends Vivipare implements CreatureMarine {
-	
-    private Duration dureeGestation;
 
     /**
      * Constructeur de la classe Sirene.
@@ -21,10 +17,10 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * @param bruit           Le bruit que fait la sirène.
      * @param dureeGestation  La durée de gestation spécifique pour les sirènes.
      */
-    protected Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeGestation = dureeGestation;
+    protected Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
+        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
     }
+
 
     
     /**
@@ -47,6 +43,6 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * @return Une instance de la classe Creature qui né.
      */
     public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return super.MettreBas(sexe, poids, taille, dureeGestation);
+    	return super.MettreBas(sexe, poids, taille);
     }
 }

@@ -1,14 +1,10 @@
 package creaturesImplemente;
 
-import java.time.Duration;
-
 import base.*;
 import interfaces.*;
 import references.*;
 
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
-
-	private int dureeIncubation;
 
     /**
      * Constructeur de la classe Dragon.
@@ -20,10 +16,8 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @param taille           La taille du dragon.
      */
     protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit);
-        this.dureeIncubation = dureeIncubation;
+        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
     }
-
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.
@@ -99,6 +93,6 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      */
     public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, dureeIncubation);
+    	return super.PondreOeuf(papa, super.getDureePourEnfant());
     }
 }

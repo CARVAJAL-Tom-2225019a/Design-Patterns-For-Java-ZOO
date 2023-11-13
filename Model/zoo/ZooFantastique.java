@@ -1,18 +1,15 @@
 package zoo;
 
-import java.time.Duration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import ControllerApplication.ControllerMaitreZoo;
+import ControllerApplication.ControllerUserInterface;
 import base.*;
 import enclosImplemente.*;
-import creaturesImplemente.Oeuf;
 import maitreZoo.MaitreZoo;
-import references.*;
 
 public class ZooFantastique {
 
@@ -105,8 +102,8 @@ public class ZooFantastique {
      * Méthode pour passer la main à l'utilisateur via le contrôleur MaitreZoo
      */
     public void PasserLaMainUtilisateur() throws Exception {
-        ControllerMaitreZoo menuUtilisateur = new ControllerMaitreZoo();
-        menuUtilisateur.runUserMenu(this);
+    	ControllerUserInterface menuUtilisateur = new ControllerUserInterface();
+        menuUtilisateur.runUserMenu();
     }
 
     /**

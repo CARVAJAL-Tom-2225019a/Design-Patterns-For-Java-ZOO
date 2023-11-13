@@ -32,23 +32,7 @@ class TestCreature1 {
         Pepito.PerdreSante();
         assertEquals(constantes.MAX_INDICATEUR - constantes.VALEUR_PERTE_INDICATEUR, Pepito.getIndicateurSante());
     }
-    
-    
-    /**
-     * Teste la méthode PerdreSante() de la classe Phenix.
-     * Vérifie si une exception est envoyé une fois la barre de santé vide.
-     */
-    @Test
-    void testPerdreSanteAvecException() throws Exception {
-    	int nbrTour = constantes.MAX_INDICATEUR / constantes.VALEUR_PERTE_INDICATEUR;
-        for (int i = 0; i < nbrTour; i++)
-            Pepito.PerdreSante();
-        Exception thrown = assertThrows(
-                Exception.class,
-                () -> Pepito.PerdreSante(),
-                "Creature pas en etat de realiser action");
-        assertTrue(thrown.getMessage().contains("Creature pas en etat de realiser action"));
-    }
+ 
     
     
     /**

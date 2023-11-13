@@ -9,7 +9,7 @@ public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
 	// Instance de CONSTANTES pour les références constantes
-	private CONSTANTES constantes = new CONSTANTES();
+	private static final CONSTANTES constantes = new CONSTANTES();
 	// Instance du contrôleur principal
 	private static ControllerPrincipal control = new ControllerPrincipal();
 
@@ -83,7 +83,6 @@ public class VueUtilisateur {
 						+ "\n  4 : Nettoyer un enclos" 
 						+ "\n  5 : Nourrir les creatures d'un enclos"
 						+ "\n  6 : Transferer une creature"
-						+ "\n  7 : Concevoir des enfants aleatoirement" 
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");
@@ -119,4 +118,5 @@ public class VueUtilisateur {
 	public void Afficher(String texte) {
 		System.out.println(texte);
 	}
+
 }

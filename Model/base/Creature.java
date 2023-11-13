@@ -22,6 +22,8 @@ public abstract class Creature {
     private boolean vivant;
 
     private String bruit;
+    
+    private int dureePourEnfant;
 
 
     /**
@@ -33,7 +35,7 @@ public abstract class Creature {
      * @param taille    La taille de la créature.
      * @param bruit     Le bruit que fait la créature.
      */
-    public Creature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
+    public Creature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureePourEnfant) {
         this.nomEspece = nomEspece;
         this.sexe = sexe;
         this.poids = poids;
@@ -45,13 +47,15 @@ public abstract class Creature {
         this.enTrainDeDormir = false;
         this.vivant = true;
         this.bruit = bruit;
+        this.dureePourEnfant = dureePourEnfant;
     }
-
     
     /**
-     * Getter pour accéder aux différentes propriétés de la créature.
-     * 
+     * Getters
      */
+    public int getDureePourEnfant() {
+    	return dureePourEnfant;
+    }
     public Enum_Especes getNomEspece() {
         return nomEspece;
     }
@@ -269,5 +273,6 @@ public abstract class Creature {
         else
             return Enum_Sexe.Femelle;
     }
+      
 
 }
