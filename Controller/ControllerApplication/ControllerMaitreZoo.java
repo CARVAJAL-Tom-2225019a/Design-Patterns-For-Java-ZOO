@@ -1,6 +1,6 @@
 package ControllerApplication;
 
-import application.VuePrincipale;
+import application.VueUtilisateur;
 import base.Creature;
 import enclosImplemente.Enclos;
 import maitreZoo.MaitreZoo;
@@ -11,7 +11,8 @@ public class ControllerMaitreZoo {
     // Instance de CONSTANTES pour les références constantes
     CONSTANTES constantes = new CONSTANTES();
     // Instance de VuePrincipale pour l'interaction avec l'utilisateur
-    VuePrincipale vue = new VuePrincipale();
+    VueUtilisateur vue = new VueUtilisateur();
+    ControllerPrincipal controler = new ControllerPrincipal();
     // Instance du gestionnaire du zoo (Singleton)
     MaitreZoo maitreZoo;
     // Instance du zoo fantastique (Singleton)
@@ -101,7 +102,13 @@ public class ControllerMaitreZoo {
             	enclosSource.reorganiserCles();
             	enclosDest.reorganiserCles();
                 return true;
-
+            
+            // Conception d'enfants
+            case 7 :
+            	vue.Afficher("\\n ---- Vous avez choisi de faire naitre des enfants ---- ");
+            	controler.CreerEnfantAleatoirement();
+            	return true;
+            	
             // Exit
             case 99:
                 return false;

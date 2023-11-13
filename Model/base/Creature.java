@@ -1,9 +1,12 @@
 package base;
 
+import java.util.Random;
+
 import references.*;
 
 public abstract class Creature {
     CONSTANTES constantes = new CONSTANTES();
+    static Random random = new Random(System.currentTimeMillis());
 
     private Enum_Especes nomEspece;
     private Enum_Sexe sexe;
@@ -254,4 +257,17 @@ public abstract class Creature {
         this.enTrainDeDormir = false;
         this.vivant = true;
     }
+    
+    
+    /**
+     * Méthode pour générer un sexe aléatoire
+     */
+    public static Enum_Sexe SexeAleatoire() {
+        int r = random.nextInt(2) + 1;
+        if (r == 1)
+            return Enum_Sexe.Male;
+        else
+            return Enum_Sexe.Femelle;
+    }
+
 }

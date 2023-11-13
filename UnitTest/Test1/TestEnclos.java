@@ -19,7 +19,7 @@ import references.*;
 import zoo.ZooFantastique;
 
 class TestEnclos {
-	VuePrincipale begin = new VuePrincipale();
+	VueUtilisateur begin = new VueUtilisateur();
 	ControllerPrincipal control = new ControllerPrincipal();
 	Random random = new Random();
 	CONSTANTES constantes = new CONSTANTES();
@@ -39,7 +39,7 @@ class TestEnclos {
 		// Dragons
 		Voliere enclosDragons = new Voliere("DragonLand", 20, 5, 100);
 		for (int i=0; i<5; i++) {
-			sexe = ControllerPrincipal.SexeAleatoire();
+			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
 			Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
@@ -53,7 +53,7 @@ class TestEnclos {
 
 		// Kraken
 		for (int i=0; i<5; i++) {
-			sexe = ControllerPrincipal.SexeAleatoire();
+			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
 			Kraken k = FactoryCreature.newCreature(Enum_Especes.Kraken, sexe, poids, taille);
@@ -73,6 +73,34 @@ class TestEnclos {
 	void testTrouverCreature() {
 		Enclos enclos = zoo.trouverEnclosParNom("KrakenLand");
 		assertNotNull(enclos);
+	}
+	
+	@Test
+	void testChoixCreatureAleatoire() throws Exception {
+		// Dragons
+		Enclos enclos = new Enclos("Enclos", 20, 5);
+		for (int i=0; i<5; i++) {
+			sexe = Creature.SexeAleatoire();
+			poids = 1 + (random.nextDouble() * 49);
+			taille = 1 + (random.nextDouble() * 49);
+			Phenix d = FactoryCreature.newCreature(Enum_Especes.Phenix, sexe, poids, taille);
+			enclos.AjouterCreature(d);
+			// age aleatoire
+			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			for (int y=0; y<age; y++)
+				d.Vieillir();
+		}
+		Creature femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
+		assertNotNull(femelle);
+	}
+	
+	@Test
+	void testEnfantsAleatoires() throws Exception {
+		int nbCreatureDebut = zoo.getNbCreaturesTotales();
+		for (int i=0; i<3; i++)
+			control.CreerEnfantAleatoirement();
+		int nbCreatureFin = zoo.getNbCreaturesTotales();
+		assertTrue (nbCreatureFin > nbCreatureDebut);
 	}
 	
 	@Test

@@ -1,10 +1,8 @@
-/ControllerApplication/
-/Test1/
+/main/
 /application/
-/base/
-/creaturesImplemente/
-/enclosImplemente/
-/interfaces/
-/maitreZoo/
+/ControllerApplication/
 /zoo/
-/references/
+/enclosImplemente/
+/base/
+/Test1/
+/creaturesImplemente/

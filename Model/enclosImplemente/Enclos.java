@@ -203,4 +203,32 @@ public class Enclos {
 			degreProprete = Enum_DegrePropreteEnclos.mauvais;
 	}
 	
+	
+	/**
+     * Méthode pour sélectionner aléatoirement une créature en fonction du sexe.
+     * 
+     * @param sexe Le sexe de la créature souhaitée
+     * @return La créature sélectionnée aléatoirement
+     */
+    public Creature selectionnerCreatureAleatoireParSexe(Enum_Sexe sexe) {
+        // Créer une liste pour stocker les créatures correspondant au sexe spécifié
+        List<Creature> creaturesDuSexe = new ArrayList<>();
+        // Filtrer les créatures par sexe
+        for (Creature creature : listeCreatures.values()) {
+            if (creature.getSexe() == sexe) {
+                creaturesDuSexe.add(creature);
+            }
+        }
+        // Vérifier s'il y a des créatures du sexe spécifié
+        if (!creaturesDuSexe.isEmpty()) {
+            // Sélectionner aléatoirement une créature
+            Random random = new Random();
+            int indexAleatoire = random.nextInt(creaturesDuSexe.size());
+            return creaturesDuSexe.get(indexAleatoire);
+        } else {
+            // Aucune créature du sexe spécifié trouvée
+            return null;
+        }
+    }
+	
 }

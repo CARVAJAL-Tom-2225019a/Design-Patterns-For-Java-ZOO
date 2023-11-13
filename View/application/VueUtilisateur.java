@@ -5,7 +5,7 @@ import ControllerApplication.ControllerPrincipal;
 import maitreZoo.MaitreZoo;
 import references.*;
 
-public class VuePrincipale {
+public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
 	// Instance de CONSTANTES pour les références constantes
@@ -82,7 +82,8 @@ public class VuePrincipale {
 						+ "\n  3 : Examiner un enclos"
 						+ "\n  4 : Nettoyer un enclos" 
 						+ "\n  5 : Nourrir les creatures d'un enclos"
-						+ "\n  6 : Transferer une creature" 
+						+ "\n  6 : Transferer une creature"
+						+ "\n  7 : Concevoir des enfants aleatoirement" 
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");

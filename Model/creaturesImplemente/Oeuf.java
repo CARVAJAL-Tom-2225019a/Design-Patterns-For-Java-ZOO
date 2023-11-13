@@ -1,32 +1,14 @@
 package creaturesImplemente;
 
-import java.time.*;
 import base.*;
 import references.*;
 
 public class Oeuf {
 	
     private Enum_Especes espece;
-    private LocalDate dateNaissance;
-    private Duration dureeIncubation;
+    private int dureeIncubation;
+    private int dureeIncubationRestante;
     private boolean isOpen;
-
-    
-    /**
-     * Getters
-     */
-    public Enum_Especes getEspece() {
-		return espece;
-	}
-	public LocalDate getDateNaissance() {
-		return dateNaissance;
-	}
-	public Duration getDureeIncubation() {
-		return dureeIncubation;
-	}
-	public boolean isOpen() {
-		return isOpen;
-	}
 
     
     /**
@@ -35,12 +17,38 @@ public class Oeuf {
      * @param espece          L'espèce de l'œuf.
      * @param dureeIncubation La durée d'incubation spécifique de l'espèce.
      */
-    public Oeuf(Enum_Especes espece, Duration dureeIncubation) {
+    public Oeuf(Enum_Especes espece, int dureeIncubation) {
         this.espece = espece;
-        this.dateNaissance = LocalDate.now();
         this.dureeIncubation = dureeIncubation;
+        this.dureeIncubationRestante = dureeIncubation;
         isOpen = false;
     }
+    
+    /**
+     * Getters
+     */
+    public Enum_Especes getEspece() {
+		return espece;
+	}
+	public int getDureeIncubation() {
+		return dureeIncubation;
+	}
+	public int getDureeIncubationRestante() {
+		return dureeIncubationRestante;
+	}
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	
+	/**
+	 * Methode permettant de decrementer la duree d'incubation restante
+	 */
+	public void DecrementerDureeIncubationRestante() {
+		dureeIncubationRestante--;
+		if (dureeIncubationRestante<0)
+			dureeIncubationRestante=0;
+	}
 
 
 	/**
@@ -54,11 +62,8 @@ public class Oeuf {
      */
     public Creature Eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
         if (!isOpen) {
-            // Récupération du temps entre la date de ponte et aujourd'hui
-            Duration tempsPasse = Duration.between(dateNaissance, LocalDate.now());
-
             // Vérification si la durée d'incubation est dépassée
-            if (tempsPasse.compareTo(dureeIncubation) > 0) {
+            if (dureeIncubationRestante == 0 ) {
                 // Changement d'état de l'oeuf
                 isOpen = true;
 

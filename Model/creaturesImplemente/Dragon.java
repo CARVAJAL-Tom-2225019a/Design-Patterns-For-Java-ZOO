@@ -8,7 +8,7 @@ import references.*;
 
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
 
-	private Duration dureeIncubation;
+	private int dureeIncubation;
 
     /**
      * Constructeur de la classe Dragon.
@@ -19,7 +19,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @param poids            Le poids du dragon.
      * @param taille           La taille du dragon.
      */
-    protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
+    protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeIncubation = dureeIncubation;
     }

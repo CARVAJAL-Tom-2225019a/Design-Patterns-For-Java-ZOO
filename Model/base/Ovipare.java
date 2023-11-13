@@ -29,9 +29,9 @@ public abstract class Ovipare extends Creature {
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      * @throws Exception Si la créature n'est pas vivante ou si elle n'est pas de sexe femelle.
      */
-    protected Oeuf PondreOeuf(Creature papa, Duration dureeIncubation) throws Exception {
+    public Oeuf PondreOeuf(Creature papa, int duree) throws Exception {
         if (super.isVivant() && super.getSexe() == Enum_Sexe.Femelle && papa.isVivant() && papa.getSexe() == Enum_Sexe.Male && super.getNomEspece()==papa.getNomEspece()) {
-            return new Oeuf(super.getNomEspece(), dureeIncubation);
+            return new Oeuf(super.getNomEspece(), duree);
         } else {
             throw new Exception("Statut creature invalide");
         }

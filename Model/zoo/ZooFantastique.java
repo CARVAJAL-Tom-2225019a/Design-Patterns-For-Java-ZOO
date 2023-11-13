@@ -1,5 +1,6 @@
 package zoo;
 
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -7,12 +8,11 @@ import java.util.Random;
 import java.util.Set;
 
 import ControllerApplication.ControllerMaitreZoo;
-import base.Creature;
-import enclosImplemente.Aquarium;
-import enclosImplemente.Enclos;
-import enclosImplemente.Voliere;
+import base.*;
+import enclosImplemente.*;
+import creaturesImplemente.Oeuf;
 import maitreZoo.MaitreZoo;
-import references.Enum_DegrePropreteEnclos;
+import references.*;
 
 public class ZooFantastique {
 
@@ -157,7 +157,6 @@ public class ZooFantastique {
                     case 2:
                         creature.PerdreNourriture();
                         break;
-                    // Ajoutez d'autres cas selon vos besoins
                 }
             }
         }
@@ -169,9 +168,13 @@ public class ZooFantastique {
      */
     private void ModifAleatoireEtatEnclos() {
         Random random = new Random();
-
-        // Parcourir la liste des enclos
-        for (Enclos enclos : listeEnclos) {
+        // Nombre aléatoire d'enclos à modifier
+        int nombreEnclosAModifier = random.nextInt(listeEnclos.size()-3) + 2;
+        // Parcourir un nombre aléatoire d'enclos
+        for (int i = 0; i < nombreEnclosAModifier; i++) {
+            // Sélectionner un enclos au hasard
+            int randomIndexEnclos = random.nextInt(listeEnclos.size());
+            Enclos enclos = (Enclos) listeEnclos.toArray()[randomIndexEnclos];
             if (enclos instanceof Aquarium) {
                 // Si c'est un Aquarium, modifier NiveauEau et SaliniteEau
                 Aquarium aquarium = (Aquarium) enclos;

@@ -8,7 +8,7 @@ import references.*;
 
 public class Kraken extends Ovipare implements CreatureMarine {
 	
-    private Duration dureeIncubation;
+    private int dureeIncubation;
 
     /**
      * Constructeur de la classe Kraken.
@@ -21,7 +21,7 @@ public class Kraken extends Ovipare implements CreatureMarine {
      * @param bruit            Le bruit que fait le kraken.
      * @param dureeIncubation  La durée d'incubation spécifique du Kraken.
      */
-    protected Kraken(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, Duration dureeIncubation) {
+    protected Kraken(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
         super(nomEspece, sexe, poids, taille, bruit);
         this.dureeIncubation = dureeIncubation;
     }

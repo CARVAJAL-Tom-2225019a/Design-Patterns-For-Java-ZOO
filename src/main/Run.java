@@ -1,6 +1,7 @@
-package application;
+package main;
 
 import ControllerApplication.ControllerPrincipal;
+import application.VueAutomatique;
 import zoo.ZooFantastique;
 
 	//TODO : voir en cas d'erreur d'entree pour chaque
@@ -12,9 +13,13 @@ import zoo.ZooFantastique;
 public class Run {
     // Le contrôleur principal de l'application
     static ControllerPrincipal control = new ControllerPrincipal();
+    
+    static VueAutomatique vueAutomatique = new VueAutomatique();
 
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
     static ZooFantastique zoo = ZooFantastique.getInstance();
+    
+    static boolean UtilisateurChoisi = true;
 
     public static void main(String[] args) throws Exception {
         // Point d'entrée de la simulation
@@ -23,8 +28,11 @@ public class Run {
 
         // Crée les données de jeu nécessaires à la simulation
         control.creerDonneesJeu();
-
-        // Passe le contrôle de l'application à l'utilisateur
-        zoo.PasserLaMainUtilisateur();
+        
+        if (UtilisateurChoisi == true)
+	        // Passe le contrôle de l'application à l'utilisateur
+	        zoo.PasserLaMainUtilisateur();
+        else
+        	vueAutomatique.run();
     }
 }

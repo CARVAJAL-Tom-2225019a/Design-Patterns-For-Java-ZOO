@@ -1,12 +1,10 @@
 package base;
 
-import java.time.*;
-
 import creaturesImplemente.FactoryCreature;
 import references.*;
 
 public abstract class Vivipare extends Creature {
-	LocalDate dateConceptionEnfant;
+	private int nbJourConceptionRestant;
 	
 
     /**
@@ -20,15 +18,31 @@ public abstract class Vivipare extends Creature {
      */
     public Vivipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit) {
         super(nomEspece, sexe, poids, taille, bruit);
-        dateConceptionEnfant = null;
+        nbJourConceptionRestant = 0;
     }
     
     /**
      * Getters
      */
-    public LocalDate getDateConceptionEnfant() {
-		return dateConceptionEnfant;
+    public int getNbJourConceptionRestant() {
+		return nbJourConceptionRestant;
 	}
+    
+    
+    /**
+     * Methode pour decrementer le nombre de jour restant
+     * @throws Exception 
+     */
+    public Creature DecrementerNombreJourRestantAvantNaissance (Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	if (nbJourConceptionRestant > 0) {
+    		nbJourConceptionRestant--;
+    		if (nbJourConceptionRestant == 0)
+    			return MettreBas(sexe, poids, taille);
+    		return null;
+    	}
+    	else
+    		throw new Exception ("Pas de bebe");
+    }
     
 
     
@@ -40,15 +54,14 @@ public abstract class Vivipare extends Creature {
      * 
      */
     // TODO : gestion sauvegarde généalogie
-    public String concevoirUnEnfant (Creature papa) throws Exception {
+    public void concevoirUnEnfant (Creature papa, int duree) throws Exception {
     	// Verification du statut des creatures
     	if (super.isVivant() && !super.isEnTrainDeDormir() && papa.isVivant() && !papa.isEnTrainDeDormir()) {
     		// Verification femelle et male, et meme espece
     		if (super.getSexe() == Enum_Sexe.Femelle  &&  papa.getSexe() == Enum_Sexe.Male  && super.getNomEspece()==papa.getNomEspece()) {
         		// Verification qu'un enfant n'est pas deja en cours
-    			if (dateConceptionEnfant==null) {
-    				dateConceptionEnfant = LocalDate.now();
-    				return "un enfant a ete conçu";
+    			if (nbJourConceptionRestant==0) {
+    				nbJourConceptionRestant = duree;
     			}
     			else
     				throw new Exception ("Un ou plusieurs enfants sont deja en construction");
@@ -72,19 +85,7 @@ public abstract class Vivipare extends Creature {
      * @return Une instance de la classe Creature qui né.
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
-    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille, Duration dureeGestation) throws Exception {
-        if (super.isVivant() && super.getSexe() == Enum_Sexe.Femelle) {
-        	// si temps de gestation passé
-        	Duration tempsPasse = Duration.between(dateConceptionEnfant, LocalDate.now());
-        	if (tempsPasse.compareTo(dureeGestation) > 0) {
-        		// Création de la nouvelle créature
-        		dateConceptionEnfant = null;
-                return FactoryCreature.newCreature(super.getNomEspece(), sexe, poids, taille);
-        	}
-        	else 
-        		throw new Exception ("Le bebe n'est pas pret");
-        } else {
-            throw new Exception("Statut du vivipare invalide");
-        }
+    private Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    	return FactoryCreature.newCreature(super.getNomEspece(), sexe, poids, taille);
     }
 }
