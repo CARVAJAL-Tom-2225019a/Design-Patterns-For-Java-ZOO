@@ -96,15 +96,7 @@ public class ZooFantastique {
         }
         return null; // Aucun enclos trouvé avec le nom spécifié
     }
-
     
-    /**
-     * Méthode pour passer la main à l'utilisateur via le contrôleur MaitreZoo
-     */
-    public void PasserLaMainUtilisateur() throws Exception {
-    	ControllerUserInterface menuUtilisateur = new ControllerUserInterface();
-        menuUtilisateur.runUserMenu();
-    }
 
     /**
      * Methode pour modification aleatoire a intervalles

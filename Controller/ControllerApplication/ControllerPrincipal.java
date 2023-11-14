@@ -43,7 +43,7 @@ public class ControllerPrincipal {
      * Methode pour remplir un enclos
      * @throws Exception 
      */
-    public void remplirEnclos(Enclos enclos) throws Exception {
+    public void remplirEnclos(Enclos enclos, Enum_Especes espece) throws Exception {
     	Enum_Sexe sexe;
 		double poids;
 		double taille;
@@ -52,7 +52,7 @@ public class ControllerPrincipal {
 			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
 			taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
-			Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
+			Creature d = FactoryCreature.newCreature(espece, sexe, poids, taille);
 			enclos.AjouterCreature(d);
 			// age aleatoire
 			age = 1 + (random.nextInt() * MaxAgeAleatoire);
@@ -68,47 +68,56 @@ public class ControllerPrincipal {
 	public void creerDonneesJeu() throws Exception {
 		// Dragons
 		Voliere enclosDragons = new Voliere("DragonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
-		remplirEnclos(enclosDragons);
+		remplirEnclos(enclosDragons, Enum_Especes.Dragon);
 		zoo.AddEnclos(enclosDragons);
 
 		// Kraken
 		Aquarium enclosKraken = new Aquarium("KrakenLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
-		remplirEnclos(enclosKraken);
+		remplirEnclos(enclosKraken, Enum_Especes.Kraken);
 		zoo.AddEnclos(enclosKraken);
 		
 		// Licorne
 		Enclos enclosLicorne = new Enclos("LicorneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
-		remplirEnclos(enclosLicorne);
+		remplirEnclos(enclosLicorne, Enum_Especes.Licorne);
 		zoo.AddEnclos(enclosLicorne);
 		
 		// Lycanthrope
 		Enclos enclosLycanthrope = new Enclos("LycanthropeLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
-		remplirEnclos(enclosLycanthrope);
+		remplirEnclos(enclosLycanthrope, Enum_Especes.Lycanthrope);
 		zoo.AddEnclos(enclosLycanthrope);
 		
 		// Megalodon
 		Aquarium enclosMegalodon = new Aquarium("MegalodonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
-		remplirEnclos(enclosMegalodon);
+		remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 		zoo.AddEnclos(enclosMegalodon);
 		
 		// Nymphe
 		Enclos enclosNymphe = new Enclos("NympheLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
-		remplirEnclos(enclosNymphe);
+		remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
 		zoo.AddEnclos(enclosNymphe);
 		
 		// Phenix
 		Voliere enclosPhenix = new Voliere("PhenixLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
-		remplirEnclos(enclosPhenix);
+		remplirEnclos(enclosPhenix, Enum_Especes.Phenix);
 		zoo.AddEnclos(enclosPhenix);
 		
 		//Sirene
 		Aquarium enclosSirene = new Aquarium("SireneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
-		remplirEnclos(enclosSirene);
+		remplirEnclos(enclosSirene, Enum_Especes.Sirene);
 		zoo.AddEnclos(enclosSirene);
 		
 		//Enclos vide
 		Enclos enclosVide = new Enclos("OtherLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
 		zoo.AddEnclos(enclosVide);
 	}
+	
+	
+	/**
+     * Méthode pour passer la main à l'utilisateur via le contrôleur MaitreZoo
+     */
+    public void PasserLaMainUtilisateur() throws Exception {
+    	ControllerUserInterface menuUtilisateur = new ControllerUserInterface();
+        menuUtilisateur.runUserMenu();
+    }
 
 }

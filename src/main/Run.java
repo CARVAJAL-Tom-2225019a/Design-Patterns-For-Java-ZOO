@@ -35,7 +35,7 @@ public class Run {
         
         if (UtilisateurChoisi == true)
 	        // Passe le contrôle de l'application à l'utilisateur
-	        zoo.PasserLaMainUtilisateur();
+        	controllerPrincipal.PasserLaMainUtilisateur();
         else
         	//TODO : gestion auto
         	return;
