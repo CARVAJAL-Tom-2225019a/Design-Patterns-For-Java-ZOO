@@ -1,6 +1,6 @@
-package ControllerApplication;
+package controllerApplication;
 
-import application.VueUtilisateur;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 public class ControllerUserInterface {

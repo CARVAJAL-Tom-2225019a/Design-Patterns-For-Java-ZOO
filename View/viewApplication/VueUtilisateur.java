@@ -1,7 +1,8 @@
-package application;
+package viewApplication;
 
 import java.util.Scanner;
-import ControllerApplication.ControllerPrincipal;
+
+import controllerApplication.ControllerPrincipal;
 import maitreZoo.MaitreZoo;
 import references.*;
 
@@ -83,6 +84,7 @@ public class VueUtilisateur {
 						+ "\n  4 : Nettoyer un enclos" 
 						+ "\n  5 : Nourrir les creatures d'un enclos"
 						+ "\n  6 : Transferer une creature"
+						+ "\n  7 : Concevoir un enfant"
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");

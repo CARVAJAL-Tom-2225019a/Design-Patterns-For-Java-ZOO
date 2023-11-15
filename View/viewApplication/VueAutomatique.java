@@ -1,6 +1,6 @@
-package application;
+package viewApplication;
 
-import ControllerApplication.ControllerPrincipal;
+import controllerApplication.ControllerPrincipal;
 import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
 import references.Enum_Sexe;

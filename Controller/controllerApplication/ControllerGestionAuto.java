@@ -1,4 +1,4 @@
-package ControllerApplication;
+package controllerApplication;
 
 import zoo.ZooFantastique;
 

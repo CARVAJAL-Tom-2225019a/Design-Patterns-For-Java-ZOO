@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import ControllerApplication.ControllerUserInterface;
 import base.*;
+import controllerApplication.ControllerUserInterface;
+import creaturesImplemente.Oeuf;
 import enclosImplemente.*;
 import maitreZoo.MaitreZoo;
 
@@ -23,6 +24,9 @@ public class ZooFantastique {
     private int nbMaxEnclos;
     // Liste des enclos dans le zoo
     private Set<Enclos> listeEnclos;
+    //Liste Oeuf et Enfant à naitre
+    private Set<Oeuf> listeOeufs;
+    private Set<Creature> listeFemelleEnceinte;
 
     // Constructeur privé pour empêcher l'instanciation directe
     private ZooFantastique() {
@@ -30,6 +34,8 @@ public class ZooFantastique {
         this.maitreZoo = null;
         this.nbMaxEnclos = 10;
         this.listeEnclos = new HashSet<>();
+        listeOeufs = new HashSet<>();
+        listeFemelleEnceinte = new HashSet<>();
     }
     // Méthode pour obtenir l'instance unique du zoo fantastique (Singleton)
     public static ZooFantastique getInstance() {
@@ -46,6 +52,12 @@ public class ZooFantastique {
     public Set<Enclos> GetListeEnclos() {
         return listeEnclos;
     }
+    public Set<Oeuf> GetlLsteOeufs() {
+        return listeOeufs;
+    }
+    public Set<Creature> GetListeFemelleEnceinte() {
+        return listeFemelleEnceinte;
+    }
 
     
     /**
@@ -55,6 +67,28 @@ public class ZooFantastique {
         if (listeEnclos.size() < nbMaxEnclos) {
             listeEnclos.add(enclos);
         }
+    }
+    
+    
+    /**
+     * Methodes pour ajouter un enfant dans la liste
+     */
+    public void AddFemelleEnceinte(Creature c) {
+    	listeFemelleEnceinte.add(c);
+    }
+    public void AddOeuf(Oeuf o) {
+    	listeOeufs.add(o);
+    }
+    
+    
+    /**
+     * Methodes pour supprimer oeuf ou enfant apres sa naissance
+     */
+    public void RemoveFemelleEnceinte (Creature c) {
+    	listeFemelleEnceinte.remove(c);
+    }
+    public void RemoveOeuf (Oeuf o) {
+    	listeOeufs.remove(o);
     }
 
     

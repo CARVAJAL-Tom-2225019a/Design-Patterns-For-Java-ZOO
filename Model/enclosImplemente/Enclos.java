@@ -3,6 +3,7 @@ package enclosImplemente;
 import java.util.*;
 
 import base.*;
+import creaturesImplemente.Oeuf;
 import references.*;
 
 public class Enclos {
@@ -233,18 +234,20 @@ public class Enclos {
     
     
     /**
-     * Methode pour recuperer la liste des vivipares de l'enclos
+     * Methode permettant de concevoir un enfant selon le type de creature
+     * @throws Exception 
      */
-    public Map<Integer, Creature> getListeVivipare () {
-    	int i=1;
-    	Map<Integer, Creature> listeVivipare = new HashMap<>();
-    	for (Creature creature : listeCreatures.values()) {
-    		if (creature instanceof Vivipare) {
-    			listeVivipare.put(i, creature);
-    			i++;
-    		}
+    public int ConcevoirEnfant(Creature femelle, Creature male) throws Exception {
+    	if (femelle.isVivant() && femelle instanceof Vivipare) {
+    		((Vivipare)femelle).concevoirUnEnfant(male, femelle.getDureePourEnfant());
+    		return 1;
     	}
-    	return listeVivipare;
+    	else if (femelle.isVivant() && femelle instanceof Ovipare) {
+    		
+    		// TODO : eclore
+    		return 2;
+    	}
+    	return -1;
     }
 	
 }

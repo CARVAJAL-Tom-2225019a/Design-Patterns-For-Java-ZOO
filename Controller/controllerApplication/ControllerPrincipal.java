@@ -1,14 +1,17 @@
-package ControllerApplication;
+package controllerApplication;
 
 import java.util.Random;
 
 import base.Creature;
+import base.Vivipare;
 import creaturesImplemente.*;
 import enclosImplemente.*;
 import references.*;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 public class ControllerPrincipal {
+	VueUtilisateur vue = new VueUtilisateur();
     // Instance du zoo fantastique (Singleton)
     private static ZooFantastique zoo = ZooFantastique.getInstance();
     // Instance de Random pour la génération aléatoire
@@ -34,11 +37,69 @@ public class ControllerPrincipal {
             chaine.append(enclos.creaturesMortes());
             // Mise a jour clés des creatures
             enclos.reorganiserCles();
+            // Verification pour naissances
+            VerificationNaissances();
         }
         return chaine.toString();
     }
     
+    /**
+     * Methode permettant de verifier les enfants qui doivent naitre
+     * @throws Exception 
+     */
+    public void VerificationNaissances () throws Exception {
+    	vue.Afficher("VERIFICATION DES NAISSANCES : ");
+    	VerificationOeufs();
+    	VerificationEnfants();
+    	
+    }
+    public void VerificationOeufs() throws Exception {
+    	for (Oeuf o : zoo.GetlLsteOeufs()) {
+    		if (o.getDureeIncubationRestante() == 0) {
+    			double poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+    			double taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+    			Creature enfant = o.Eclore(Creature.SexeAleatoire(), poids, taille);
+    			vue.Afficher("NAISSANCE D'UN "+enfant.getNomEspece());
+    			rangerCreature(enfant);
+    		}
+    	}
+    }
+    public void VerificationEnfants() throws Exception {
+    	int nbJour;
+    	for (Creature c : zoo.GetListeFemelleEnceinte()) {
+    		nbJour = ((Vivipare)c).DecrementerNombreJourRestantAvantNaissance();
+    		if (nbJour == 1) {
+    			double poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+    			double taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+    			Creature enfant = ((Vivipare)c).MettreBas(Creature.SexeAleatoire(), poids, taille);
+    			vue.Afficher("NAISSANCE D'UN "+enfant.getNomEspece());
+    			rangerCreature(enfant);
+    		}
+    		
+    	}
+    }
     
+    /** 
+     * Methode permettant de mettre la nouvelle creature dans enclos
+     * @throws Exception 
+     */
+    public void rangerCreature (Creature c) throws Exception {
+    	//S'il y a de la place dans un enclos
+    	for (Enclos e : zoo.GetListeEnclos()) {
+    		if (e.getNbCreatures()<e.getNbMaxCreatures() && e.getNomEspece()==c.getNomEspece()) {
+    			e.AjouterCreature(c);
+    			return;
+    		}
+    	}
+    	// Si aucun enclos pret a acceuiller
+    	// Nouvel enclos
+    	String nom = vue.DemandeUtilisateur("Nom pour nouvel enclos :");
+    	Enclos newEnclos = new Enclos (nom, constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+    	zoo.AddEnclos(newEnclos);
+    	newEnclos.AjouterCreature(c);
+    }
+    
+
     /**
      * Methode pour remplir un enclos
      * @throws Exception 

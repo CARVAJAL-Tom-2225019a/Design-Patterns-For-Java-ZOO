@@ -1,12 +1,15 @@
-package ControllerApplication;
+package controllerApplication;
 
-import application.VueUtilisateur;
 import base.Creature;
+import base.Ovipare;
+import creaturesImplemente.Oeuf;
 import enclosImplemente.Enclos;
 import maitreZoo.MaitreZoo;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 public class ControllerZoo {
+	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
 	// Instance de VuePrincipale pour l'interaction avec l'utilisateur
     private static VueUtilisateur vue;
     // Instance du gestionnaire du zoo (Singleton)
@@ -70,7 +73,13 @@ public class ControllerZoo {
      */
     public boolean effectuerAction(int choix) throws Exception {
         String nomEnclos;
+        String indexCreatureString;
+        int indexCreature;
         Enclos enclos;
+        Enclos enclosDest;
+        Creature creature;
+        Creature creature2;
+        
 
         switch (choix) {
         // Ne pas effectuer d'action
@@ -119,18 +128,44 @@ public class ControllerZoo {
         // Transférer une créature
         case 6:
         	vue.Afficher("\n ---- Vous avez choisi de transferer une creature ---- ");
-        	String nomE = vue.DemandeUtilisateur("Nom enclos source : ");
-        	Enclos enclosSource = zoo.trouverEnclosParNom(nomE);
-        	vue.Afficher(enclosSource.toString());
-        	String indexCreatureString = vue.DemandeUtilisateur("Index creature : ");
-        	int indexCreature = Integer.parseInt(indexCreatureString);
-        	Creature creature = enclosSource.getListeCreatures().get(indexCreature);
-        	nomE = vue.DemandeUtilisateur("Nom enclos destination : ");
-        	Enclos enclosDest = zoo.trouverEnclosParNom(nomE);
-        	maitreZoo.TransfererCreature(creature, enclosSource, enclosDest);
-        	enclosSource.reorganiserCles();
+        	nomEnclos = vue.DemandeUtilisateur("Nom enclos source : ");
+        	enclos = zoo.trouverEnclosParNom(nomEnclos);
+        	vue.Afficher(enclos.toString());
+        	indexCreatureString = vue.DemandeUtilisateur("Index creature : ");
+        	indexCreature = Integer.parseInt(indexCreatureString);
+        	creature = enclos.getListeCreatures().get(indexCreature);
+        	nomEnclos = vue.DemandeUtilisateur("Nom enclos destination : ");
+        	enclosDest = zoo.trouverEnclosParNom(nomEnclos);
+        	maitreZoo.TransfererCreature(creature, enclos, enclosDest);
+        	enclos.reorganiserCles();
         	enclosDest.reorganiserCles();
             return true;
+            
+       // Concervoir un enfant
+        case 7 :
+        	vue.Afficher("\n ---- Vous avez choisi de concevoir un enfant ---- ");
+        	nomEnclos = vue.DemandeUtilisateur("Nom enclos : ");
+        	enclos = zoo.trouverEnclosParNom(nomEnclos);
+        	vue.Afficher(enclos.toString());
+        	// Femelle
+        	indexCreatureString = vue.DemandeUtilisateur("Index creature femelle : ");
+        	indexCreature = Integer.parseInt(indexCreatureString);
+        	creature = enclos.getListeCreatures().get(indexCreature);
+        	// Femelle
+        	indexCreatureString = vue.DemandeUtilisateur("Index creature male : ");
+        	indexCreature = Integer.parseInt(indexCreatureString);
+        	creature2 = enclos.getListeCreatures().get(indexCreature);
+        	//Conception
+        	int naitre = enclos.ConcevoirEnfant(creature, creature2);
+        	if (naitre==1)
+        		zoo.AddFemelleEnceinte(creature);
+        	else if (naitre==2) {
+        		Oeuf o = ((Ovipare)creature).PondreOeuf(creature2, creature.getDureePourEnfant());
+        		zoo.AddOeuf(o);
+        	}
+        	else if (naitre==-1)
+        		vue.Afficher("Impossible de concevoir");
+        	return true;
         	
         // Exit
         case 99:
@@ -150,6 +185,7 @@ public class ControllerZoo {
      */
     public void PassageAnnee() throws Exception {
         vue.PassageAnnee();
+        controlPrincipal.VerificationNaissances();
         zoo.ModificationEtatAleatoire();
     }
 

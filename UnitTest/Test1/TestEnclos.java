@@ -7,16 +7,16 @@ import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ControllerApplication.ControllerPrincipal;
-import application.*;
 import base.Creature;
 import base.Ovipare;
+import controllerApplication.ControllerPrincipal;
 import creaturesImplemente.*;
 import enclosImplemente.Aquarium;
 import enclosImplemente.Enclos;
 import enclosImplemente.Voliere;
 import maitreZoo.MaitreZoo;
 import references.*;
+import viewApplication.*;
 import zoo.ZooFantastique;
 
 class TestEnclos {

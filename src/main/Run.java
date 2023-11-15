@@ -1,9 +1,9 @@
 package main;
 
-import ControllerApplication.ControllerPrincipal;
-import ControllerApplication.ControllerUserInterface;
-import ControllerApplication.ControllerZoo;
-import application.VueUtilisateur;
+import controllerApplication.ControllerPrincipal;
+import controllerApplication.ControllerUserInterface;
+import controllerApplication.ControllerZoo;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 	//TODO : voir en cas d'erreur d'entree pour chaque
