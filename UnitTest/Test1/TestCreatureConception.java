@@ -71,7 +71,11 @@ class TestCreatureConception {
     	Creature male = enclos.getListeCreatures().get(indexCreature);
     	//Conception
     	int naitre = enclos.ConcevoirEnfant(femelle, male);
-    	assertEquals(2, naitre);
+    	if (naitre==2) {
+    		Oeuf o = ((Ovipare)femelle).PondreOeuf(male, femelle.getDureePourEnfant());
+    		zoo.AddOeuf(o);
+    	}
+    	assertEquals(1, zoo.GetlLsteOeufs().size());
 	}
 	
 	@Test
@@ -89,7 +93,9 @@ class TestCreatureConception {
     	Creature male = enclos.getListeCreatures().get(indexCreature);
     	//Conception
     	int naitre = enclos.ConcevoirEnfant(femelle, male);
-    	assertEquals(1, naitre);
+    	if (naitre==1)
+    		zoo.AddFemelleEnceinte(femelle);
+    	assertEquals(1, zoo.GetListeFemelleEnceinte().size());
 	}
 
 }

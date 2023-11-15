@@ -76,4 +76,12 @@ public class Oeuf {
             throw new Exception("Oeuf déjà éclos");
         }
     }
+    
+    
+    /**
+     * Methode pour afficher les informations sur l'oeuf
+     */
+    public String toString() {
+    	return "Oeuf contenant un(e) "+ espece + " qui va eclore dans "+dureeIncubationRestante+" ans\n";
+    }
 }

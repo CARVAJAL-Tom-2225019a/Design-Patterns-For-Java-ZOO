@@ -9,17 +9,17 @@ public class FactoryCreature {
 	public static <T extends Creature> T newCreature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille) throws Exception {
         switch (nomEspece) {
             case Dragon:
-            	return (T) new Dragon(nomEspece, sexe, poids, taille, "Grrroooaaarrr", 5);
+            	return (T) new Dragon(nomEspece, sexe, poids, taille, "Grrroooaaarrr", 2);
             case Kraken:
-            	return (T) new Kraken(nomEspece, sexe, poids, taille, "Glooouuuglooouuu", 4);
+            	return (T) new Kraken(nomEspece, sexe, poids, taille, "Glooouuuglooouuu", 3);
             case Licorne :
             	return (T) new Licorne(nomEspece, sexe, poids, taille, "Hiiihiiiinnn", 1);
             case Lycanthrope :
             	return (T) new Lycanthrope(nomEspece, sexe, poids, taille, "Aaahooouu", 2);
             case Megalodon :
-            	return (T) new Megalodon(nomEspece, sexe, poids, taille, "Grrruuulll", 4);
+            	return (T) new Megalodon(nomEspece, sexe, poids, taille, "Grrruuulll", 3);
             case Nymphe:
-            	return (T) new Nymphe(nomEspece, sexe, poids, taille, "Laalaaalaaa", 5);
+            	return (T) new Nymphe(nomEspece, sexe, poids, taille, "Laalaaalaaa", 3);
             case Phenix :
             	return (T) new Phenix(nomEspece, sexe, poids, taille, "Craaaack-flaaaame", 2);
             case Sirene :

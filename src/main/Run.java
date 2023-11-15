@@ -3,6 +3,7 @@ package main;
 import controllerApplication.ControllerPrincipal;
 import controllerApplication.ControllerUserInterface;
 import controllerApplication.ControllerZoo;
+import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
@@ -14,7 +15,8 @@ import zoo.ZooFantastique;
 
 public class Run {
     // Le contrôleur principal de l'application
-	static VueUtilisateur vue = new VueUtilisateur();
+	static VueUtilisateur vueUtilisateur = new VueUtilisateur();
+	static VueGlobale vueGlobale = new VueGlobale();
     static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
 
     ControllerZoo zooController = new ControllerZoo();
@@ -23,7 +25,7 @@ public class Run {
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
     static ZooFantastique zoo = ZooFantastique.getInstance();
     
-    static boolean UtilisateurChoisi = true;
+    public static boolean UtilisateurControle;
 
     public static void main(String[] args) throws Exception {
         // Point d'entrée de la simulation
@@ -32,12 +34,33 @@ public class Run {
 
         // Crée les données de jeu nécessaires à la simulation
     	controllerPrincipal.creerDonneesJeu();
-        
-        if (UtilisateurChoisi == true)
+    	
+    	//Choix du mode de simulation
+    	int choix = 0;
+		while (true) {
+		    try {
+		        String input = vueUtilisateur.DemandeUtilisateur("CHOIX MODE SIMULATION\n 1 : Automatique\n"
+		    			+ " 2 : Manuel\n");
+		        choix = Integer.parseInt(input);
+		        // Si la conversion en entier réussit, sortir de la boucle
+		        if (choix==1) {
+		        	UtilisateurControle=false;
+		    		break;
+		        }
+		    	else if (choix==2) {
+		    		UtilisateurControle=true;
+		    		break;
+		    	}     
+		    } catch (NumberFormatException e) {
+		        // Si la conversion échoue, afficher un message d'erreur et continuer la boucle
+		        System.out.println("Veuillez entrer 1 ou 2");
+		    }
+		}
+        if (UtilisateurControle)
 	        // Passe le contrôle de l'application à l'utilisateur
         	controllerPrincipal.PasserLaMainUtilisateur();
         else
-        	//TODO : gestion auto
+        	controllerPrincipal.GestionAuto();
         	return;
     }
 }

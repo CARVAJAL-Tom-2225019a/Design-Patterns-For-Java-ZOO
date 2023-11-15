@@ -1,5 +1,7 @@
 package base;
 
+import java.util.Random;
+
 import creaturesImplemente.FactoryCreature;
 import references.*;
 
@@ -63,6 +65,7 @@ public abstract class Vivipare extends Creature {
     }
     
     public Creature VerificationEnfantEnConception() throws Exception {
+    	Random random = new Random(System.currentTimeMillis());
     	double poids = 1 + (random.nextDouble() * 49);
 		double taille = 1 + (random.nextDouble() * 49);
     	if (DecrementerNombreJourRestantAvantNaissance() == 0)

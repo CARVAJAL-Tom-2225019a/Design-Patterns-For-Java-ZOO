@@ -2,7 +2,6 @@ package viewApplication;
 
 import java.util.Scanner;
 
-import controllerApplication.ControllerPrincipal;
 import maitreZoo.MaitreZoo;
 import references.*;
 
@@ -11,12 +10,10 @@ public class VueUtilisateur {
 	private Scanner scanner = new Scanner(System.in);
 	// Instance de CONSTANTES pour les références constantes
 	private static final CONSTANTES constantes = new CONSTANTES();
-	// Instance du contrôleur principal
-	private static ControllerPrincipal control = new ControllerPrincipal();
 
 	/**
 	 * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
-	 * du zoo
+	 * du zoo lorsque l'utilisateur a le controle
 	 */
 	public MaitreZoo Bienvenue() {
 		System.out.println("======  BIENVENUE DANS VOTRE ZOO FANTASTIQUE  ======");
@@ -61,15 +58,6 @@ public class VueUtilisateur {
 		return MaitreZoo.getInstance(nom, sexe, age);
 	}
 
-	/**
-	 * Méthode pour afficher le message de passage à la nouvelle année et apeller le
-	 * controlleur qui effectuera les actions
-	 */
-	public void PassageAnnee() throws Exception {
-		System.out.println("\n ====== FIN ANNEE ====== \n");
-		System.out.println(control.NouvelleAnnee());
-		System.out.println("\n ====== NOUVELLE ANNEE ====== \n");
-	}
 
 	/**
 	 * Méthode pour afficher les actions disponibles à l'utilisateur
@@ -85,6 +73,7 @@ public class VueUtilisateur {
 						+ "\n  5 : Nourrir les creatures d'un enclos"
 						+ "\n  6 : Transferer une creature"
 						+ "\n  7 : Concevoir un enfant"
+						+ "\n  8 : Voir la liste des creatures qui vont bientot naitre"
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");
@@ -112,13 +101,6 @@ public class VueUtilisateur {
 	public String DemandeUtilisateur(String chaine) {
 		System.out.println(chaine);
 		return scanner.nextLine();
-	}
-
-	/**
-	 * Méthode pour afficher un texte a utilisateur
-	 */
-	public void Afficher(String texte) {
-		System.out.println(texte);
 	}
 
 }

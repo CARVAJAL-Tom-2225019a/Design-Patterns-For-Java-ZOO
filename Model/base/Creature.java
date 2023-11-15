@@ -6,7 +6,6 @@ import references.*;
 
 public abstract class Creature {
     CONSTANTES constantes = new CONSTANTES();
-    static Random random = new Random(System.currentTimeMillis());
 
     private Enum_Especes nomEspece;
     private Enum_Sexe sexe;
@@ -267,6 +266,7 @@ public abstract class Creature {
      * Méthode pour générer un sexe aléatoire
      */
     public static Enum_Sexe SexeAleatoire() {
+    	Random random = new Random(System.currentTimeMillis());
         int r = random.nextInt(2) + 1;
         if (r == 1)
             return Enum_Sexe.Male;

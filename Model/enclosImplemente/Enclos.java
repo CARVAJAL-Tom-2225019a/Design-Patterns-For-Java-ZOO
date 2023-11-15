@@ -3,7 +3,6 @@ package enclosImplemente;
 import java.util.*;
 
 import base.*;
-import creaturesImplemente.Oeuf;
 import references.*;
 
 public class Enclos {
@@ -19,6 +18,12 @@ public class Enclos {
 	private Enum_DegrePropreteEnclos degreProprete;
 	
 	
+	/**
+	 * CONSTRUCTEUR
+	 * @param nom
+	 * @param superficie
+	 * @param nbMaxCreatures
+	 */
 	public Enclos(String nom, double superficie, int nbMaxCreatures) {
 		this.nomEspece = null;
 		this.nom = nom;

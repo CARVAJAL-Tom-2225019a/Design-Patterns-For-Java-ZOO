@@ -7,10 +7,8 @@ import java.util.Random;
 import java.util.Set;
 
 import base.*;
-import controllerApplication.ControllerUserInterface;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.*;
-import maitreZoo.MaitreZoo;
 
 public class ZooFantastique {
 
@@ -18,8 +16,6 @@ public class ZooFantastique {
     private static ZooFantastique instance;
     // Nom du zoo
     private String nom;
-    // Gestionnaire du zoo (MaitreZoo)
-    private MaitreZoo maitreZoo;
     // Nombre maximal d'enclos dans le zoo
     private int nbMaxEnclos;
     // Liste des enclos dans le zoo
@@ -31,7 +27,6 @@ public class ZooFantastique {
     // Constructeur privé pour empêcher l'instanciation directe
     private ZooFantastique() {
         this.nom = "Le Zoo Fantastique";
-        this.maitreZoo = null;
         this.nbMaxEnclos = 10;
         this.listeEnclos = new HashSet<>();
         listeOeufs = new HashSet<>();
@@ -115,6 +110,29 @@ public class ZooFantastique {
         }
         return chaine.toString();
     }
+    
+    
+    /**
+     * Methode pour afficher la liste des femelles qui attendent un bebe
+     */
+    public String AfficherFemellesEnceinte() {
+    	String chaine = "LES FEMELLES ENCEINTE :\n";
+    	for (Creature c : listeFemelleEnceinte) {
+    		chaine += c.toString();
+    	}
+    	return chaine;
+    }
+    
+    /**
+     * Methode pour afficher la liste des oeufs
+     */
+    public String AfficherOeufs() {
+    	String chaine = "LES OEUFS :\n";
+    	for (Oeuf o : listeOeufs) {
+    		chaine += o.toString();
+    	}
+    	return chaine;
+    }
 
     
     /**
@@ -149,7 +167,7 @@ public class ZooFantastique {
      * @throws Exception 
      */
     public void ModifAleatoireStatutCreature() throws Exception {
-        Random random = new Random();
+    	Random random = new Random(System.currentTimeMillis());
         // Nombre aléatoire d'enclos à modifier
         int nombreEnclosAModifier = random.nextInt(listeEnclos.size()-3) + 2;
         // Parcourir un nombre aléatoire d'enclos
@@ -190,7 +208,7 @@ public class ZooFantastique {
      * Méthode pour effectuer des modifications aléatoires sur l'état des enclos
      */
     private void ModifAleatoireEtatEnclos() {
-        Random random = new Random();
+    	Random random = new Random(System.currentTimeMillis());
         // Nombre aléatoire d'enclos à modifier
         int nombreEnclosAModifier = random.nextInt(listeEnclos.size()-3) + 2;
         // Parcourir un nombre aléatoire d'enclos

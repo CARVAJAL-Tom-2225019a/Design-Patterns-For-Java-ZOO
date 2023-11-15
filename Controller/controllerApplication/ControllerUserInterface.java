@@ -1,41 +1,62 @@
 package controllerApplication;
 
+import base.Creature;
+import enclosImplemente.Enclos;
+import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 public class ControllerUserInterface {
 	private ZooFantastique zoo = ZooFantastique.getInstance();
-    private final VueUtilisateur vue;
+    private final VueGlobale VueGlobale;
+    private final VueUtilisateur VueUtilisateur;
     private final ControllerZoo zooController;
 
     /**
      * Constructeur
      */
     public ControllerUserInterface() {
-        this.vue = new VueUtilisateur();
+        this.VueGlobale = new VueGlobale();
+        this.VueUtilisateur = new VueUtilisateur();
         this.zooController = new ControllerZoo();
     }
 
     
     /**
      * Methode permeyttant de generer le menu utilisateur et de gerer l'application
-     * @throws Exception
      */
-    public void runUserMenu() throws Exception {
+    public void runUserMenu() {
         int choix;
         boolean run = true;
-        zooController.init();
-        while (run) {
-            vue.proposerAction(zooController.getAnnee(), zooController.getActionRestante());
-            choix = vue.RecupererChoixAction();
-            run = zooController.effectuerAction(choix);
-            // Appel de la méthode run pour gérer le passage d'année
-            zooController.runYear();
-            // Si plus de creature
-            if (zoo.getNbCreaturesTotales() == 0)
-            	run = false;
+        try {
+        	zooController.init();
+            while (run) {
+            	VueUtilisateur.proposerAction(zooController.getAnnee(), zooController.getActionRestante());
+                choix = VueUtilisateur.RecupererChoixAction();
+                run = zooController.effectuerAction(choix);
+                // Appel de la méthode run pour gérer le passage d'année
+                zooController.runYear();
+                // Si plus de creature
+                if (zoo.getNbCreaturesTotales() == 0)
+                	run = false;
+            }
+            VueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
         }
-        vue.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
+        catch (Exception e) {
+    		VueGlobale.Afficher(e.getMessage());
+    	}
+    }
+    
+    /**
+     * Methode permettant de selectionner une creature dans un enclos
+     */
+    public Creature SelectionCreatureDansEnclos(Enclos enclos) {
+    	String indexCreatureString;
+    	int indexCreature;
+    	VueGlobale.Afficher(enclos.toString());
+    	indexCreatureString = VueUtilisateur.DemandeUtilisateur("Index creature : ");
+    	indexCreature = Integer.parseInt(indexCreatureString);
+    	return enclos.getListeCreatures().get(indexCreature);
     }
 
 
