@@ -23,4 +23,9 @@ public class CONSTANTES {
 	
 	
 	public static int NUM_CHOIX_MAX = 9;
+	
+	// Pour lycanthrope
+	public static int MAX_FORCE = 100;
+	public static int MAX_RANG_DOMINATION = 5;
+	public static int MAX_FACTEUR_IMPETUOSITE=5;
 }
