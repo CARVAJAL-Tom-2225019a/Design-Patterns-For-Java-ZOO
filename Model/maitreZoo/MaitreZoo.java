@@ -98,6 +98,8 @@ public class MaitreZoo {
     		if (enclosSource.getListeCreatures().containsValue(creature)) {
     			enclosSource.SupprimerCreature(creature);
             	enclosDest.AjouterCreature(creature);
+            	enclosSource.reorganiserCles();
+            	enclosDest.reorganiserCles();
     		}
     		else
         		throw new Exception ("Creature introuvable");

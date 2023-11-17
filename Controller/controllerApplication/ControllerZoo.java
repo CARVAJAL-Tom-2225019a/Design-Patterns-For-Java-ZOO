@@ -6,6 +6,7 @@ import creaturesImplemente.*;
 import enclosImplemente.Enclos;
 import main.Run;
 import maitreZoo.MaitreZoo;
+import references.CONSTANTES;
 import viewApplication.*;
 import zoo.ZooFantastique;
 
@@ -59,7 +60,7 @@ public class ControllerZoo {
      */
     public void init() {
         // Initialisation des variables
-    	NB_ACTION_MAX = 6;
+    	NB_ACTION_MAX = CONSTANTES.NB_ACTION_MAX_USER;
         nbAction = 0;
         annee = 1;
         try {
@@ -158,6 +159,9 @@ public class ControllerZoo {
     		VueGlobale.PassageAnnee();
             controlPrincipal.VerificationNaissances();
             zoo.ModificationEtatAleatoire();
+            // Tri des clés
+            for (Enclos e : zoo.GetListeEnclos())
+            	e.reorganiserCles();
             VueGlobale.Afficher("\n ====== NOUVELLE ANNEE ====== \n");
     	}
     	catch (Exception e) {
@@ -279,8 +283,6 @@ public class ControllerZoo {
         		creature = FactoryCreature.newCreature(null, null, 0, 0);
         	}
         	maitreZoo.TransfererCreature(creature, enclos, enclosDest);
-        	enclos.reorganiserCles();
-        	enclosDest.reorganiserCles();
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());

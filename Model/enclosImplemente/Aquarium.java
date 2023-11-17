@@ -9,7 +9,6 @@ import references.*;
  * destinée à accueillir des créatures marines.
  */
 public class Aquarium extends Enclos {
-    CONSTANTES constantes = new CONSTANTES(); // Instance de la classe CONSTANTES pour les constantes du programme.
 
     private double profondeurBassin; // Profondeur de l'aquarium.
     private double niveauEau; // Niveau actuel de l'eau dans l'aquarium.
@@ -28,7 +27,7 @@ public class Aquarium extends Enclos {
         super(nom, superficie, nbMaxCreatures);
         this.profondeurBassin = profondeurBassin;
         niveauEau = profondeurBassin;
-        this.saliniteEau = constantes.SALINITE_CORRECT;
+        this.saliniteEau = CONSTANTES.SALINITE_CORRECT;
     }
 
     /**
@@ -63,10 +62,10 @@ public class Aquarium extends Enclos {
             niveauEau = profondeurBassin;
 
         // Vérification de la salinité de l'eau
-        double diff = saliniteEau - constantes.SALINITE_CORRECT;
+        double diff = saliniteEau - CONSTANTES.SALINITE_CORRECT;
         if (diff > 1 || diff < -1) {
             // Rééquilibrage de la salinité de l'eau pour atteindre le niveau correct
-            saliniteEau = constantes.SALINITE_CORRECT;
+            saliniteEau = CONSTANTES.SALINITE_CORRECT;
         }
     }
     
@@ -80,7 +79,7 @@ public class Aquarium extends Enclos {
 	public String toString() {
 		String chaine = "Aquarium "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
 				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures.\n"
-				+ "Salinite eau : "+niveauEau+"//"+constantes.SALINITE_CORRECT+"\n"
+				+ "Salinite eau : "+niveauEau+"//"+CONSTANTES.SALINITE_CORRECT+"\n"
 				+ "Niveau eau : "+niveauEau+"//"+profondeurBassin+"\n";
 		for (Creature creature : super.getListeCreatures().values()) {
 			chaine+="Index : "+ trouverCleParCreature(creature)+"\n";

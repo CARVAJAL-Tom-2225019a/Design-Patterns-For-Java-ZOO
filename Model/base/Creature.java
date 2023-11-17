@@ -5,7 +5,6 @@ import java.util.Random;
 import references.*;
 
 public abstract class Creature {
-    CONSTANTES constantes = new CONSTANTES();
 
     private Enum_Especes nomEspece;
     private Enum_Sexe sexe;
@@ -40,9 +39,9 @@ public abstract class Creature {
         this.poids = poids;
         this.taille = taille;
         this.age = 1;
-        this.indicateurFaim = constantes.MAX_INDICATEUR;
-        this.indicateurSommeil = constantes.MAX_INDICATEUR;
-        this.indicateurSante = constantes.MAX_INDICATEUR;
+        this.indicateurFaim = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
         this.enTrainDeDormir = false;
         this.vivant = true;
         this.bruit = bruit;
@@ -100,8 +99,8 @@ public abstract class Creature {
         if (vivant && !enTrainDeDormir) {
             indicateurFaim += num;
             // Vérification pas de dépassement
-            if (indicateurFaim > constantes.MAX_INDICATEUR)
-                indicateurFaim = constantes.MAX_INDICATEUR;
+            if (indicateurFaim > CONSTANTES.MAX_INDICATEUR)
+                indicateurFaim = CONSTANTES.MAX_INDICATEUR;
         } else {
             throw new Exception("Etat de la créature invalide, impossible de manger");
         }
@@ -132,8 +131,8 @@ public abstract class Creature {
         if (vivant) {
             indicateurSante += num;
             // Vérification pas de dépassement
-            if (indicateurSante > constantes.MAX_INDICATEUR)
-                indicateurSante = constantes.MAX_INDICATEUR;
+            if (indicateurSante > CONSTANTES.MAX_INDICATEUR)
+                indicateurSante = CONSTANTES.MAX_INDICATEUR;
         } else {
             throw new Exception("La creature n'est plus vivante, impossible de la soigner");
         }
@@ -146,7 +145,7 @@ public abstract class Creature {
      * @throws Exception Si la créature n'est pas vivante ou est déjà en train de dormir.
      */
     public void Dormir() throws Exception {
-        if (vivant && !enTrainDeDormir && indicateurSommeil < constantes.MAX_INDICATEUR)
+        if (vivant && !enTrainDeDormir && indicateurSommeil < CONSTANTES.MAX_INDICATEUR)
             enTrainDeDormir = true;
         else
             throw new Exception("État de la créature invalide, impossible de dormir");
@@ -160,7 +159,7 @@ public abstract class Creature {
     public void SeReveiller() throws Exception {
         if (vivant && enTrainDeDormir) {
             enTrainDeDormir = false;
-            indicateurSommeil = constantes.MAX_INDICATEUR;
+            indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
         } else {
             throw new Exception("Etat de la créature invalide, impossible de se reveiller");
         }
@@ -172,9 +171,9 @@ public abstract class Creature {
      *
      */
     public void Vieillir() throws Exception {
-        if (vivant && age < constantes.MAX_AGE)
+        if (vivant && age < CONSTANTES.MAX_AGE)
             age++;
-        else if (vivant && age == constantes.MAX_AGE)
+        else if (vivant && age == CONSTANTES.MAX_AGE)
             Mourir();
     }
 
@@ -195,7 +194,7 @@ public abstract class Creature {
     public void PerdreSommeil() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
-            indicateurSommeil -= constantes.VALEUR_PERTE_INDICATEUR;
+            indicateurSommeil -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurSommeil < 0)
             indicateurSommeil = 0;
@@ -210,7 +209,7 @@ public abstract class Creature {
     public void PerdreNourriture() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
-            indicateurFaim -= constantes.VALEUR_PERTE_INDICATEUR;
+            indicateurFaim -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurFaim < 0)
             indicateurFaim = 0;
@@ -225,7 +224,7 @@ public abstract class Creature {
     public void PerdreSante() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
-            indicateurSante -= constantes.VALEUR_PERTE_INDICATEUR;
+            indicateurSante -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurSante < 0)
             indicateurSante = 0;
@@ -243,9 +242,9 @@ public abstract class Creature {
     				+"\n   age : "+age
     				+"\n   vivant : "+vivant
     				+"\n   dort : "+enTrainDeDormir
-    				+"\n   faim : "+indicateurFaim+"/"+constantes.MAX_INDICATEUR
-    				+"\n   fatigue : "+indicateurSommeil+"/"+constantes.MAX_INDICATEUR
-    				+"\n   sante : "+indicateurSante+"/"+constantes.MAX_INDICATEUR
+    				+"\n   faim : "+indicateurFaim+"/"+CONSTANTES.MAX_INDICATEUR
+    				+"\n   fatigue : "+indicateurSommeil+"/"+CONSTANTES.MAX_INDICATEUR
+    				+"\n   sante : "+indicateurSante+"/"+CONSTANTES.MAX_INDICATEUR
     				+"\n\n";
     }
     
@@ -254,9 +253,9 @@ public abstract class Creature {
      */
     public void ReinitialiserCreature() {
         age = 1;
-        this.indicateurFaim = constantes.MAX_INDICATEUR;
-        this.indicateurSommeil = constantes.MAX_INDICATEUR;
-        this.indicateurSante = constantes.MAX_INDICATEUR;
+        this.indicateurFaim = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
         this.enTrainDeDormir = false;
         this.vivant = true;
     }

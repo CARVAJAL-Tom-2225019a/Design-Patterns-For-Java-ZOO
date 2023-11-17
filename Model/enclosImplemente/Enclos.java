@@ -6,7 +6,6 @@ import base.*;
 import references.*;
 
 public class Enclos {
-	CONSTANTES constantes = new CONSTANTES();
 	
 	private Enum_Especes nomEspece;
 	
@@ -14,7 +13,7 @@ public class Enclos {
 	private double superficie;
 	private int nbMaxCreatures;
 	private int nbCreatures;
-	private Map<Integer, Creature> listeCreatures;
+	private TreeMap<Integer, Creature> listeCreatures;
 	private Enum_DegrePropreteEnclos degreProprete;
 	
 	
@@ -30,7 +29,8 @@ public class Enclos {
 		this.superficie = superficie;
 		this.nbMaxCreatures = nbMaxCreatures;
 		this.nbCreatures = 0;
-		this.listeCreatures = new HashMap<>();
+		// Tri des creatures par age
+		this.listeCreatures = new TreeMap<>();
 		this.degreProprete = Enum_DegrePropreteEnclos.bon;
 	}
 
@@ -52,7 +52,7 @@ public class Enclos {
 	public int getNbCreatures() {
 		return nbCreatures;
 	}
-	public Map<Integer, Creature> getListeCreatures() {
+	public TreeMap<Integer, Creature> getListeCreatures() {
 		return listeCreatures;
 	}
 	public Enum_DegrePropreteEnclos getDegreProprete() {
@@ -84,8 +84,9 @@ public class Enclos {
 	 * et de les supprimer de l'enclos
 	 * 
 	 * @return la chaine de caractère contenant les informations
+	 * @throws Exception 
 	 */
-	public String creaturesMortes() {
+	public String creaturesMortes() throws Exception {
         String chaine = "Les creatures mortes dans " + nom + " :\n";
         Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -94,7 +95,7 @@ public class Enclos {
             // Si la créature est morte
             if (!creature.isVivant()) {
                 chaine += creature.toString();
-                iterator.remove();
+                SupprimerCreature(creature);
             }
         }
         return chaine;
@@ -115,7 +116,6 @@ public class Enclos {
 		if (nbCreatures < nbMaxCreatures && nomEspece==creature.getNomEspece()) {
 			nbCreatures++;
 			listeCreatures.put(nbCreatures, creature);
-			
 		}
 		else 
 			throw new Exception ("Ajout impossible si enclos plein ou si une autre espece est presente");
@@ -134,7 +134,6 @@ public class Enclos {
         if (listeCreatures.containsValue(creature)) {
         	listeCreatures.remove(trouverCleParCreature(creature));
         	nbCreatures--;
-        	
         	// si enclos vide
         	if(nbCreatures==0)
         		nomEspece = null;
@@ -150,7 +149,7 @@ public class Enclos {
 	 */
 	public void NourrirCreatures () throws Exception {
 		for (Creature creature : listeCreatures.values()) {
-			creature.Manger(constantes.MAX_INDICATEUR);
+			creature.Manger(CONSTANTES.MAX_INDICATEUR);
 		}
 	}
 	
@@ -189,17 +188,21 @@ public class Enclos {
 	
 	
 	public void reorganiserCles() {
-        Map<Integer, Creature> nouvelleMap = new HashMap<>();
+		// Copier les créatures dans une liste
+        List<Creature> creaturesList = new ArrayList<>(listeCreatures.values());
+        // Trier la liste par âge
+        Collections.sort(creaturesList, Comparator.comparingInt(Creature::getAge));
+        // Remettre les créatures triées dans la TreeMap
+        TreeMap<Integer, Creature> nouvelleMap = new TreeMap<>();
         int nouvelleCle = 1;
-
-        for (Creature creature : listeCreatures.values()) {
+        for (Creature creature : creaturesList) {
             nouvelleMap.put(nouvelleCle, creature);
             nouvelleCle++;
         }
-
+        // Mettre à jour la listeCreatures et nbCreatures
         listeCreatures = nouvelleMap;
-        nbCreatures = nouvelleCle-1; // Mettre à jour la prochaine clé disponible
-    }
+        nbCreatures = nouvelleCle - 1;
+	}
 	
 	
 	public void DegradationDegreProprete() {
@@ -254,5 +257,6 @@ public class Enclos {
     	}
     	return -1;
     }
+    
 	
 }

@@ -30,6 +30,7 @@ class TestEnclos {
 	Voliere enclosDragons = new Voliere("DragonLand", 20, 15, 100);
 	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 15, 100);
 	Enclos enclosSirene = new Enclos("SireneLand", 20, 15);
+	Enclos enclosNymphe = new Enclos("NympheLand", 20, 15);
 	Enclos enclosVide = new Enclos("EnclosVide", 20, 15);
 	
 	Enum_Sexe sexe;
@@ -61,7 +62,7 @@ class TestEnclos {
 			Kraken k = FactoryCreature.newCreature(Enum_Especes.Kraken, sexe, poids, taille);
 			enclosKraken.AjouterCreature(k);
 			// age aleatoire
-			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			age = 1 + (random.nextInt() * CONSTANTES.MAX_AGE-1);
 			for (int y=0; y<age; y++)
 				k.Vieillir();
 			
@@ -83,6 +84,21 @@ class TestEnclos {
 		}
 		zoo.AddEnclos(enclosSirene);
 		
+		// Nymphe
+		for (int i=0; i<10; i++) {
+			sexe = Creature.SexeAleatoire();
+			poids = 1 + (random.nextDouble() * 49);
+			taille = 1 + (random.nextDouble() * 49);
+			Nymphe s = FactoryCreature.newCreature(Enum_Especes.Nymphe, sexe, poids, taille);
+			enclosNymphe.AjouterCreature(s);
+			// age aleatoire
+			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			for (int y=0; y<age; y++)
+				s.Vieillir();
+			
+		}
+		zoo.AddEnclos(enclosNymphe);
+		
 		zoo.AddEnclos(enclosVide);
     }
 
@@ -94,15 +110,15 @@ class TestEnclos {
 	
 	@Test
 	void testChoixCreatureAleatoire() throws Exception {
-		Enclos enclos = new Enclos("Enclos", 20, 5);
-		for (int i=0; i<5; i++) {
+		Enclos enclos = new Enclos("Enclos", 20, 15);
+		for (int i=0; i<10; i++) {
 			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
 			taille = 1 + (random.nextDouble() * 49);
 			Phenix d = FactoryCreature.newCreature(Enum_Especes.Phenix, sexe, poids, taille);
 			enclos.AjouterCreature(d);
 			// age aleatoire
-			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			age = 1 + (random.nextInt(CONSTANTES.MAX_AGE-1));
 			for (int y=0; y<age; y++)
 				d.Vieillir();
 		}
@@ -130,11 +146,17 @@ class TestEnclos {
 		for (int i=0; i<2; i++ ) {
 	    	Creature creature = enclosSource.getListeCreatures().get(indexCreature);
 	    	maitre.TransfererCreature(creature, enclosSource, enclosDest);
-	    	enclosSource.reorganiserCles();
-	    	enclosDest.reorganiserCles();
 		}
     	
     	assertEquals(2, enclosDest.getNbCreatures());
+	}
+	
+	@Test
+	void testTriParAge() throws Exception {
+		Nymphe n = FactoryCreature.newCreature(Enum_Especes.Nymphe, sexe, poids, taille);
+		enclosNymphe.AjouterCreature(n);
+		enclosNymphe.reorganiserCles();
+		assertEquals(1, enclosNymphe.getListeCreatures().get(1).getAge());
 	}
 
 }

@@ -14,7 +14,9 @@ public class VueGlobale {
 	public void PassageAnnee() {
 		try {
 			System.out.println("\n ====== FIN ANNEE ====== \n");
-			System.out.println(control.NouvelleAnnee());
+			String chaine = control.NouvelleAnnee();
+			if (chaine != null)
+				System.out.println(chaine);
 		}
 		 catch (Exception e) {
 			 Afficher(e.getMessage());

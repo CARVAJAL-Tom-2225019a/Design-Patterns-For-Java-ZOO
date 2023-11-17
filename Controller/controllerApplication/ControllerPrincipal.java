@@ -16,16 +16,14 @@ public class ControllerPrincipal {
 	VueUtilisateur vueUtilisateur = new VueUtilisateur();
     // Instance du zoo fantastique (Singleton)
     private static ZooFantastique zoo = ZooFantastique.getInstance();
-    // Instance de CONSTANTES pour les références constantes
-    private static CONSTANTES constantes = new CONSTANTES();
     // Âge maximum aléatoire pour la création d'une créature
-    private static int MaxAgeAleatoire = constantes.MAX_AGE / 2;
+    private static int MaxAgeAleatoire = CONSTANTES.MAX_AGE / 2;
     
     /**
      * Méthode pour passer à la nouvelle année dans le zoo
      */
     public String NouvelleAnnee() {
-    	StringBuilder chaine = new StringBuilder();
+    	String chaine = "";
     	try {
             // Pour chaque enclos
             for (Enclos enclos : zoo.GetListeEnclos()) {
@@ -35,9 +33,7 @@ public class ControllerPrincipal {
                     creature.Vieillir();
                 }
                 // Ajoute les informations sur les créatures mortes à la chaîne
-                chaine.append(enclos.creaturesMortes());
-                // Mise a jour clés des creatures
-                enclos.reorganiserCles();
+                chaine+=enclos.creaturesMortes();
             }
     	}
     	catch (Exception e) {
@@ -54,7 +50,6 @@ public class ControllerPrincipal {
     		VueGlobale.Afficher("VERIFICATION DES NAISSANCES : ");
         	VerificationOeufs();
         	VerificationEnfants();
-        	VueGlobale.Afficher("  ================== ");
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
@@ -65,8 +60,8 @@ public class ControllerPrincipal {
     	try {
     		for (Oeuf o : zoo.GetlLsteOeufs()) {
         		if (o.getDureeIncubationRestante() == 0) {
-        			double poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
-        			double taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+        			double poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
+        			double taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
         			Creature enfant = o.Eclore(Creature.SexeAleatoire(), poids, taille);
         			VueGlobale.Afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
@@ -86,8 +81,8 @@ public class ControllerPrincipal {
     		for (Creature c : zoo.GetListeFemelleEnceinte()) {
         		nbJour = ((Vivipare)c).DecrementerNombreJourRestantAvantNaissance();
         		if (nbJour == 0) {
-        			double poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
-        			double taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+        			double poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
+        			double taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
         			Creature enfant = ((Vivipare)c).MettreBas(Creature.SexeAleatoire(), poids, taille);
         			VueGlobale.Afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
@@ -122,7 +117,7 @@ public class ControllerPrincipal {
         		numPourNom++;
         		nom = "Enclos"+numPourNom;
         	}
-        	Enclos newEnclos = new Enclos (nom, constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+        	Enclos newEnclos = new Enclos (nom, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
         	zoo.AddEnclos(newEnclos);
         	newEnclos.AjouterCreature(c);
     	}
@@ -137,20 +132,20 @@ public class ControllerPrincipal {
      * Methode pour remplir un enclos
      */
     public void remplirEnclos(Enclos enclos, Enum_Especes espece) {
-    	Random random = new Random(System.currentTimeMillis());
+    	Random random = new Random();
     	Enum_Sexe sexe;
 		double poids;
 		double taille;
 		int age;
 		try {
-			for (int i=0; i<constantes.NB_CREATURE_PAR_ENCLOS; i++) {
+			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
 				sexe = Creature.SexeAleatoire();
-				poids = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
-				taille = 1 + (random.nextDouble() * constantes.TAILLE_MAX_CREATURE);
+				poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
+				taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
 				Creature d = FactoryCreature.newCreature(espece, sexe, poids, taille);
 				enclos.AjouterCreature(d);
 				// age aleatoire
-				age = 1 + (random.nextInt() * MaxAgeAleatoire);
+				age = 1 + random.nextInt(MaxAgeAleatoire);
 				for (int y=0; y<age; y++)
 					d.Vieillir();
 			}
@@ -167,47 +162,47 @@ public class ControllerPrincipal {
 	public void creerDonneesJeu() {
 		try {
 			// Dragons
-			Voliere enclosDragons = new Voliere("DragonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+			Voliere enclosDragons = new Voliere("DragonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosDragons, Enum_Especes.Dragon);
 			zoo.AddEnclos(enclosDragons);
 
 			// Kraken
-			Aquarium enclosKraken = new Aquarium("KrakenLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+			Aquarium enclosKraken = new Aquarium("KrakenLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosKraken, Enum_Especes.Kraken);
 			zoo.AddEnclos(enclosKraken);
 			
 			// Licorne
-			Enclos enclosLicorne = new Enclos("LicorneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosLicorne = new Enclos("LicorneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
 			remplirEnclos(enclosLicorne, Enum_Especes.Licorne);
 			zoo.AddEnclos(enclosLicorne);
 			
 			// Lycanthrope
-			Enclos enclosLycanthrope = new Enclos("LycanthropeLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosLycanthrope = new Enclos("LycanthropeLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
 			remplirEnclos(enclosLycanthrope, Enum_Especes.Lycanthrope);
 			zoo.AddEnclos(enclosLycanthrope);
 			
 			// Megalodon
-			Aquarium enclosMegalodon = new Aquarium("MegalodonLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+			Aquarium enclosMegalodon = new Aquarium("MegalodonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 			zoo.AddEnclos(enclosMegalodon);
 			
 			// Nymphe
-			Enclos enclosNymphe = new Enclos("NympheLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosNymphe = new Enclos("NympheLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
 			remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
 			zoo.AddEnclos(enclosNymphe);
 			
 			// Phenix
-			Voliere enclosPhenix = new Voliere("PhenixLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+			Voliere enclosPhenix = new Voliere("PhenixLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosPhenix, Enum_Especes.Phenix);
 			zoo.AddEnclos(enclosPhenix);
 			
 			//Sirene
-			Aquarium enclosSirene = new Aquarium("SireneLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX, constantes.TAILLE_ENCLOS);
+			Aquarium enclosSirene = new Aquarium("SireneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosSirene, Enum_Especes.Sirene);
 			zoo.AddEnclos(enclosSirene);
 			
 			//Enclos vide
-			Enclos enclosVide = new Enclos("OtherLand", constantes.TAILLE_ENCLOS, constantes.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosVide = new Enclos("OtherLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
 			zoo.AddEnclos(enclosVide);
 		}
 		catch (Exception e) {

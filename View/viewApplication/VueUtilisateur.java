@@ -8,8 +8,6 @@ import references.*;
 public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
-	// Instance de CONSTANTES pour les références constantes
-	private static final CONSTANTES constantes = new CONSTANTES();
 
 	/**
 	 * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
@@ -53,7 +51,7 @@ public class VueUtilisateur {
 		// Message de bienvenue
 		System.out.println("Vous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! Bonne chance " + nom);
-		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + constantes.MAX_AGE);
+		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE);
 		// Initialisation du gestionnaire du zoo
 		return MaitreZoo.getInstance(nom, sexe, age);
 	}
