@@ -1,12 +1,15 @@
 package controllerApplication;
 
 import zoo.ZooFantastique;
+
+import java.util.Random;
+
+import enclosImplemente.Enclos;
+import references.CONSTANTES;
 import viewApplication.*;
 
 public class ControllerGestionAuto {
-	//private static final int NB_ACTION_MAX_AUTO = 20;
-	//private int nbAction = 0;
-	// constantes.DUREE_VIE_ZOO
+
 	private static ControllerZoo zooController;
 	private static VueGlobale VueGlobale;
 	private ZooFantastique zoo;
@@ -23,31 +26,49 @@ public class ControllerGestionAuto {
         zoo = ZooFantastique.getInstance();
     }
 	
-	//TODO 
+	//TODO : actions appropriés selon etat du zoo
 	
 	public void ChoixActionAleatoire () throws Exception {
-		int choix = 1;
-		switch (choix) {
-			case 1: 
-				zoo.ModificationEtatAleatoire();
-				break;
-			default :
-				break;
-		}
+		Random random = new Random();
+		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX);
+		zooController.effectuerAction(choix);
 	}
 	
 	public void run() throws Exception {
 		boolean run = true;
         zooController.init();
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {
-        	//TODO : suite gestion auto
+        	ChoixActionAleatoire ();
+        	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+        	zooController.runYear();
         	
-            // Si plus de creature
+        	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
             	run = false;
+            // Si duree de vie zoo fini
+            if (zooController.getAnnee() == CONSTANTES.DUREE_VIE_ZOO)
+            	run = false;
+            
         }
         VueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
-		
+	}
+	
+	
+	/**
+     * Méthode pour récupérer un enclos aléatoire dans le zoo.
+     *
+     * @return Un enclos choisi au hasard dans la liste des enclos du zoo.
+     */
+	public Enclos RecuperationEnclosAleatoire() {
+        // Vérifier s'il y a des enclos disponibles
+        if (zoo.GetListeEnclos().isEmpty()) {
+            return null;
+        }
+        // Obtenez un indice aléatoire
+        int indiceAleatoire = new Random().nextInt(zoo.GetListeEnclos().size());
+        // Retournez l'enclos correspondant à l'indice aléatoire
+        return (Enclos) zoo.GetListeEnclos().toArray()[indiceAleatoire];
 	}
 	
 }

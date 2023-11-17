@@ -7,12 +7,14 @@ import enclosImplemente.Enclos;
 import main.Run;
 import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
+import references.Enum_Sexe;
 import viewApplication.*;
 import zoo.ZooFantastique;
 
 public class ControllerZoo {
 	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
 	private static ControllerUserInterface controlUser = new ControllerUserInterface();
+	private static ControllerGestionAuto ControllerGestionAuto = new ControllerGestionAuto();
 	// Instance de Vues
 	private static VueGlobale VueGlobale;
     private static VueUtilisateur VueUtilisateur;
@@ -21,7 +23,6 @@ public class ControllerZoo {
     private MaitreZoo maitreZoo = MaitreZoo.getInstance();
     // Instance du zoo fantastique (Singleton)
     private ZooFantastique zoo = ZooFantastique.getInstance();
-    private int NB_ACTION_MAX ;
     private int nbAction ;
     private int annee;
     
@@ -41,7 +42,7 @@ public class ControllerZoo {
      * Getters
      */
     public int getNbActionMax() {
-        return NB_ACTION_MAX;
+        return CONSTANTES.NB_ACTION_MAX_USER;
     }
     public int getNbAction() {
         return nbAction;
@@ -50,7 +51,7 @@ public class ControllerZoo {
         return annee;
     }
     public int getActionRestante() {
-        return NB_ACTION_MAX - nbAction;
+        return CONSTANTES.NB_ACTION_MAX_USER - nbAction;
     }
 
     
@@ -60,7 +61,6 @@ public class ControllerZoo {
      */
     public void init() {
         // Initialisation des variables
-    	NB_ACTION_MAX = CONSTANTES.NB_ACTION_MAX_USER;
         nbAction = 0;
         annee = 1;
         try {
@@ -93,14 +93,14 @@ public class ControllerZoo {
             	break;
             // Voir les enclos
             case 1:
-            	VueGlobale.Afficher("\n ---- Vous avez choisi de voir les enclos existants ---- ");
+            	VueGlobale.Afficher("\n ---- Voir les enclos existants ---- ");
             	VueGlobale.Afficher(zoo.AfficherEnsembleZoo());
             	retour= true;
             	break;
             // Voir nombre total de créatures
             case 2:
             	VueGlobale.Afficher("\n ---- Voir le nombre de creatures totales ---- ");
-            	VueGlobale.Afficher("Il y a " + zoo.getNbCreaturesTotales() + " créatures.");
+            	VueGlobale.Afficher("Il y a " + zoo.getNbCreaturesTotales() + " creatures.");
             	retour= true;
             	break;
             // Examiner un enclos
@@ -177,10 +177,15 @@ public class ControllerZoo {
     public void runYear(){
     	try {
     		nbAction++;
-            if (nbAction == NB_ACTION_MAX) {
+            if (nbAction == CONSTANTES.NB_ACTION_MAX_USER) {
                 annee++;
-                nbAction = 0;
+                nbAction = 0;	
                 PassageAnnee();
+                //Voir liste enclors apres chaque annee si gestion auto
+                if (!Run.UtilisateurControle) {
+                	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+	            	effectuerAction(1);
+                }
             }
     	}
     	catch (Exception e) {
@@ -204,8 +209,7 @@ public class ControllerZoo {
                 enclos = zoo.trouverEnclosParNom(nomEnclos);
         	}
         	else {
-        		//TODO : gestion auto (recuperation info aleatoire)
-        		enclos = new Enclos("afaire", 0, 0);
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
         	}	
             VueGlobale.Afficher(maitreZoo.ExaminerEnclos(enclos));
     	}
@@ -226,11 +230,10 @@ public class ControllerZoo {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		//TODO : gestion auto (recuperation info aleatoire)
-        		enclos = new Enclos("afaire", 0, 0);
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
         	}
             maitreZoo.NettoyerEnclos(enclos);
-            VueGlobale.Afficher("NETTOYAGE FAIT\n" + enclos);
+            VueGlobale.Afficher("Nettoyage fait dans " + enclos+"\n");
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
@@ -249,11 +252,11 @@ public class ControllerZoo {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		//TODO : gestion auto (recuperation info aleatoire)
-        		enclos = new Enclos("afaire", 0, 0);
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        		nomEnclos = enclos.getNom();
         	}
             maitreZoo.NourrirCreaturesEnclos(enclos);
-            VueGlobale.Afficher("CRÉATURES ONT ÉTÉ NOURRIES");
+            VueGlobale.Afficher("Les creatures ont ete nourries dans "+nomEnclos);
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
@@ -277,12 +280,13 @@ public class ControllerZoo {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		//TODO : gestion auto (recuperation info aleatoire)
-        		enclos = new Enclos("afaire", 0, 0);
-        		enclosDest = new Enclos("afaire", 0, 0);
-        		creature = FactoryCreature.newCreature(null, null, 0, 0);
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        		enclosDest = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        		creature = enclos.selectionnerCreatureAleatoireParSexe(Creature.SexeAleatoire());
         	}
         	maitreZoo.TransfererCreature(creature, enclos, enclosDest);
+        	VueGlobale.Afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
+        			"pour \n"+creature);
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
@@ -308,21 +312,20 @@ public class ControllerZoo {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		//TODO : gestion auto (recuperation info aleatoire)
-        		enclos = new Enclos("afaire", 0, 0);
-        		femelle = FactoryCreature.newCreature(null, null, 0, 0);
-        		male = FactoryCreature.newCreature(null, null, 0, 0);
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        		femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
+        		male = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Male);
         	}
         	//Conception
         	int naitre = enclos.ConcevoirEnfant(femelle, male);
         	if (naitre==1) {
         		zoo.AddFemelleEnceinte(femelle);
-        		VueGlobale.Afficher("Enfant en cours");
+        		VueGlobale.Afficher("Enfant en cours de type "+femelle.getNomEspece());
         	}
         	else if (naitre==2) {
         		Oeuf o = ((Ovipare)femelle).PondreOeuf(male, femelle.getDureePourEnfant());
         		zoo.AddOeuf(o);
-        		VueGlobale.Afficher("Oeuf pondu");
+        		VueGlobale.Afficher("Oeuf pondu de type "+o.getEspece());
         	}
         	else if (naitre==-1)
         		VueGlobale.Afficher("Impossible de concevoir");

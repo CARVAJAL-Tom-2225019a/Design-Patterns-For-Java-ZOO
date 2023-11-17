@@ -9,6 +9,7 @@ import java.util.Set;
 import base.*;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.*;
+import references.CONSTANTES;
 
 public class ZooFantastique {
 
@@ -16,8 +17,6 @@ public class ZooFantastique {
     private static ZooFantastique instance;
     // Nom du zoo
     private String nom;
-    // Nombre maximal d'enclos dans le zoo
-    private int nbMaxEnclos;
     // Liste des enclos dans le zoo
     private Set<Enclos> listeEnclos;
     //Liste Oeuf et Enfant à naitre
@@ -27,7 +26,6 @@ public class ZooFantastique {
     // Constructeur privé pour empêcher l'instanciation directe
     private ZooFantastique() {
         this.nom = "Le Zoo Fantastique";
-        this.nbMaxEnclos = 10;
         this.listeEnclos = new HashSet<>();
         listeOeufs = new HashSet<>();
         listeFemelleEnceinte = new HashSet<>();
@@ -57,11 +55,14 @@ public class ZooFantastique {
     
     /**
      * Méthode pour ajouter un enclos au zoo
+     * @throws Exception 
      */
-    public void AddEnclos(Enclos enclos) {
-        if (listeEnclos.size() < nbMaxEnclos) {
+    public void AddEnclos(Enclos enclos) throws Exception {
+        if (listeEnclos.size() < CONSTANTES.NB_MAX_ENCLOS) {
             listeEnclos.add(enclos);
         }
+        else
+        	throw new Exception ("Le zoo ne peut plus avoir d'enclos, max atteint");
     }
     
     

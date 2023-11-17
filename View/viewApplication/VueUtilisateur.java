@@ -19,6 +19,35 @@ public class VueUtilisateur {
 		// Saisie des informations du joueur
 		String nom = DemandeUtilisateur("Votre nom : ");
 		// Recuperation sexe
+		Enum_Sexe sexe = RecupererSexe();
+		// Recuperation age
+		int age = RecupererAge();
+		// Message de bienvenue
+		System.out.println("Vous etes desormais maitre de votre zoo. \nJe suis sur que"
+				+ " vous serez un tres bon gestionnaire ! Bonne chance " + nom);
+		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE);
+		// Initialisation du gestionnaire du zoo
+		return MaitreZoo.getInstance(nom, sexe, age);
+	}
+	
+	
+	private int RecupererAge() {
+		int age;
+		while (true) {
+		    try {
+		        String input = DemandeUtilisateur("Votre age : ");
+		        age = Integer.parseInt(input);
+		        // Si la conversion en entier réussit, sortir de la boucle
+		        break;
+		    } catch (NumberFormatException e) {
+		        // Si la conversion échoue, afficher un message d'erreur et continuer la boucle
+		        System.out.println("Veuillez entrer un nombre entier valide");
+		    }
+		}
+		return age;
+	}
+	
+	private Enum_Sexe RecupererSexe() {
 		Enum_Sexe sexe = null;
 		while (sexe == null) {
 		    try {
@@ -35,25 +64,7 @@ public class VueUtilisateur {
 		        System.out.println("Erreur lors de la saisie");
 		    }
 		}
-		// Recuperation age
-		int age = 0;
-		while (true) {
-		    try {
-		        String input = DemandeUtilisateur("Votre age : ");
-		        age = Integer.parseInt(input);
-		        // Si la conversion en entier réussit, sortir de la boucle
-		        break;
-		    } catch (NumberFormatException e) {
-		        // Si la conversion échoue, afficher un message d'erreur et continuer la boucle
-		        System.out.println("Veuillez entrer un nombre entier valide");
-		    }
-		}
-		// Message de bienvenue
-		System.out.println("Vous etes desormais maitre de votre zoo. \nJe suis sur que"
-				+ " vous serez un tres bon gestionnaire ! Bonne chance " + nom);
-		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE);
-		// Initialisation du gestionnaire du zoo
-		return MaitreZoo.getInstance(nom, sexe, age);
+		return sexe;
 	}
 
 

@@ -9,11 +9,7 @@ import creaturesImplemente.*;
 import references.*;
 
 class TestCreature1 {
-
-    CONSTANTES constantes = new CONSTANTES();
-    FactoryCreature factory = new FactoryCreature();
-    
-
+	
     Dragon Krokmou;
     Phenix Pepito;
 
@@ -30,7 +26,7 @@ class TestCreature1 {
     @Test
     void testPerdreSante() throws Exception {
         Pepito.PerdreSante();
-        assertEquals(constantes.MAX_INDICATEUR - constantes.VALEUR_PERTE_INDICATEUR, Pepito.getIndicateurSante());
+        assertEquals(CONSTANTES.MAX_INDICATEUR - CONSTANTES.VALEUR_PERTE_INDICATEUR, Pepito.getIndicateurSante());
     }
  
     
@@ -52,8 +48,8 @@ class TestCreature1 {
     @Test
     void testManger() throws Exception {
     	Pepito.PerdreNourriture();
-    	Pepito.Manger((int)constantes.VALEUR_PERTE_INDICATEUR);
-    	assertEquals(constantes.MAX_INDICATEUR, Pepito.getIndicateurFaim());
+    	Pepito.Manger((int)CONSTANTES.VALEUR_PERTE_INDICATEUR);
+    	assertEquals(CONSTANTES.MAX_INDICATEUR, Pepito.getIndicateurFaim());
     }
     
     
@@ -63,8 +59,8 @@ class TestCreature1 {
      */
     @Test
     void testMangerQuandPlusFaim() throws Exception {
-    	Pepito.Manger((int)constantes.VALEUR_PERTE_INDICATEUR);
-    	assertEquals(constantes.MAX_INDICATEUR, Pepito.getIndicateurFaim());
+    	Pepito.Manger((int)CONSTANTES.VALEUR_PERTE_INDICATEUR);
+    	assertEquals(CONSTANTES.MAX_INDICATEUR, Pepito.getIndicateurFaim());
     }
     
     

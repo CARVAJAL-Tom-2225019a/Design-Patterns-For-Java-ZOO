@@ -23,7 +23,6 @@ class TestEnclos {
 	VueUtilisateur begin = new VueUtilisateur();
 	ControllerPrincipal control = new ControllerPrincipal();
 	Random random = new Random();
-	CONSTANTES constantes = new CONSTANTES();
 	ZooFantastique zoo = ZooFantastique.getInstance();
 	MaitreZoo maitre = MaitreZoo.getInstance("Pepito", Enum_Sexe.Male, 20);
 	FactoryCreature factory = new FactoryCreature();
@@ -48,7 +47,7 @@ class TestEnclos {
 			Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
 			enclosDragons.AjouterCreature(d);
 			// age aleatoire
-			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			age = 1 + (random.nextInt() * CONSTANTES.MAX_AGE-1);
 			for (int y=0; y<age; y++)
 				d.Vieillir();
 		}
@@ -77,7 +76,7 @@ class TestEnclos {
 			Sirene s = FactoryCreature.newCreature(Enum_Especes.Sirene, sexe, poids, taille);
 			enclosSirene.AjouterCreature(s);
 			// age aleatoire
-			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			age = 1 + (random.nextInt() * CONSTANTES.MAX_AGE-1);
 			for (int y=0; y<age; y++)
 				s.Vieillir();
 			
@@ -92,7 +91,7 @@ class TestEnclos {
 			Nymphe s = FactoryCreature.newCreature(Enum_Especes.Nymphe, sexe, poids, taille);
 			enclosNymphe.AjouterCreature(s);
 			// age aleatoire
-			age = 1 + (random.nextInt() * constantes.MAX_AGE-1);
+			age = 1 + (random.nextInt() * CONSTANTES.MAX_AGE-1);
 			for (int y=0; y<age; y++)
 				s.Vieillir();
 			

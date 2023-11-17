@@ -13,10 +13,6 @@ import references.*;
 import zoo.ZooFantastique;
 
 class TestCreatureConception {
-	
-	CONSTANTES constantes = new CONSTANTES();
-    FactoryCreature factory = new FactoryCreature();
-    
 
     Megalodon Couverture; // Ovipare
     Megalodon Polochon;
@@ -61,8 +57,8 @@ class TestCreatureConception {
 		ZooFantastique zoo = ZooFantastique.getInstance();
     	Enclos enclos = new Enclos ("TestE", 100, 15);
     	zoo.AddEnclos(enclos);
-    	enclos.AjouterCreature(factory.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 10, 10));
-    	enclos.AjouterCreature(factory.newCreature(Enum_Especes.Dragon, Enum_Sexe.Male, 10, 10));
+    	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 10, 10));
+    	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Male, 10, 10));
     	// Femelle
     	int indexCreature = 1;
     	Creature femelle = enclos.getListeCreatures().get(indexCreature);
@@ -83,8 +79,8 @@ class TestCreatureConception {
 		ZooFantastique zoo = ZooFantastique.getInstance();
     	Enclos enclos = new Enclos ("TestE", 100, 15);
     	zoo.AddEnclos(enclos);
-    	enclos.AjouterCreature(factory.newCreature(Enum_Especes.Sirene, Enum_Sexe.Femelle, 10, 10));
-    	enclos.AjouterCreature(factory.newCreature(Enum_Especes.Sirene, Enum_Sexe.Male, 10, 10));
+    	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Sirene, Enum_Sexe.Femelle, 10, 10));
+    	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Sirene, Enum_Sexe.Male, 10, 10));
     	// Femelle
     	int indexCreature = 1;
     	Creature femelle = enclos.getListeCreatures().get(indexCreature);
