@@ -117,9 +117,9 @@ public class ZooFantastique {
      * Methode pour afficher la liste des femelles qui attendent un bebe
      */
     public String AfficherFemellesEnceinte() {
-    	String chaine = "LES FEMELLES ENCEINTE :\n";
+    	String chaine = "LES FEMELLES ENCEINTES :\n";
     	for (Creature c : listeFemelleEnceinte) {
-    		chaine += c.toString();
+    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestant();
     	}
     	return chaine;
     }
@@ -138,8 +138,9 @@ public class ZooFantastique {
     
     /**
      * Méthode pour trouver un enclos par son nom
+     * @throws Exception 
      */
-    public Enclos trouverEnclosParNom(String nomRecherche) {
+    public Enclos trouverEnclosParNom(String nomRecherche) throws Exception {
         Iterator<Enclos> iterator = listeEnclos.iterator();
         while (iterator.hasNext()) {
             Enclos enclos = iterator.next();
@@ -147,7 +148,7 @@ public class ZooFantastique {
                 return enclos; // On a trouvé l'enclos
             }
         }
-        return null; // Aucun enclos trouvé avec le nom spécifié
+        throw new Exception ("Nom enclos inccorrect");
     }
     
 

@@ -1,9 +1,17 @@
 package controllerApplication;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import base.Creature;
 import base.Ovipare;
 import creaturesImplemente.*;
+import enclosImplemente.Aquarium;
 import enclosImplemente.Enclos;
+import enclosImplemente.Voliere;
+import interfaces.CreatureMarine;
+import interfaces.CreatureTerrestre;
+import interfaces.CreatureVolante;
 import main.Run;
 import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
@@ -103,36 +111,57 @@ public class ControllerZoo {
             	VueGlobale.Afficher("Il y a " + zoo.getNbCreaturesTotales() + " creatures.");
             	retour= true;
             	break;
+            // Creer enclos
+            case 3 : 
+            	CasCreerEnclos();
+            	retour= true;
+            	break;
+            	
             // Examiner un enclos
-            case 3:
+            case 4:
             	CasExaminerEnclos();
                 retour= true;
                 break;
             // Nettoyer un enclos
-            case 4:
+            case 5:
             	CasNettoyerEnclos();
                 retour= true;
                 break;
             // Nourrir les créatures d'un enclos
-            case 5:
+            case 6:
             	CasNourrirEnclos();
                 retour= true;
                 break;
             // Transférer une créature
-            case 6:
+            case 7:
             	CasTransfererCreature();
             	retour= true;
             	break;
+           // Transferer un enclos
+            case 8 : 
+            	CasTransfererEnclos();
+            	retour = true;
+            	break;
            // Concevoir un enfant
-            case 7 :
+            case 9 :
             	CasConcevoirEnfant();
             	retour= true;
             	break;
             // Voir liste bebes en cosntruction
-            case 8 :
+            case 10 :
             	VueGlobale.Afficher("\n ---- Voir les enfants qui vont bientot naitre ---- ");
             	VueGlobale.Afficher(zoo.AfficherFemellesEnceinte());
             	VueGlobale.Afficher(zoo.AfficherOeufs());
+            	retour= true;
+            	break;
+            // Mettre un enclos en mouvement
+            case 11 :
+            	CasEnclosEnMouvement();
+            	retour= true;
+            	break;
+            // Faire chanter un enclos
+            case 12 : 
+            	CasChanterEnclos();
             	retour= true;
             	break;
             // Exit
@@ -293,6 +322,90 @@ public class ControllerZoo {
     	}
     }
     
+    private void CasCreerEnclos() {
+        String nomEnclos;
+        String typeEnclos = "Classique";
+        boolean valeurOk = false;
+
+        try {
+            VueGlobale.Afficher("\n ---- Creation d'un enclos ---- ");
+            // GESTION MANUEL
+            if (Run.UtilisateurControle) {
+                nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
+                while (!valeurOk) {
+                    typeEnclos = VueUtilisateur.DemandeUtilisateur("Type enclos (Classique, Aquatique, Voliere) : ");
+                    if ("Classique".equals(typeEnclos) || "Aquatique".equals(typeEnclos) || "Voliere".equals(typeEnclos)) {
+                        valeurOk = true;
+                    } 
+                    else {
+                        VueGlobale.Afficher("Veuillez entrer Classique, Voliere ou Aquatique");
+                    }
+                }
+            }
+            // GESTION AUTOMATIQUE
+            else {
+                int i = zoo.GetListeEnclos().size() + 1;
+                nomEnclos = "Enclos" + i;
+            }
+
+            // creation enclos
+            if ("Classique".equals(typeEnclos)) {
+                Enclos e = new Enclos(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+                zoo.AddEnclos(e);
+            } 
+            else if ("Voliere".equals(typeEnclos)) {
+                Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+                zoo.AddEnclos(e);
+            } 
+            else if ("Aquatique".equals(typeEnclos)) {
+                Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+                zoo.AddEnclos(e);
+            } 
+            else {
+                throw new Exception("Erreur type enclos lors de la creation");
+            }
+        } catch (Exception e) {
+            VueGlobale.Afficher(e.getMessage());
+        }
+    }
+
+    
+    private void CasTransfererEnclos() {
+    	Enclos enclos;
+    	Enclos enclosDest;
+    	String nomEnclos;
+    	try {
+    		VueGlobale.Afficher("\n ---- Transferer un enclos ---- ");
+    		// GESTION MANUEL
+        	if (Run.UtilisateurControle) {
+        		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos source : ");
+            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos destination : ");
+            	enclosDest = zoo.trouverEnclosParNom(nomEnclos);
+        	}
+        	// GESTION AUTOMATIQUE
+        	else {
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        		int i = zoo.GetListeEnclos().size() + 1;
+        		nomEnclos="Enclos"+i;
+        		Enclos e = new Enclos (nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+        		zoo.AddEnclos(e);
+        		enclosDest = e;
+        	}
+        	 // Créez une copie de la liste des créatures
+    	    Set<Creature> creaturesACopier = new HashSet<>(enclos.getListeCreatures().values());
+    	    // Transférez les créatures de la copie vers enclos2
+    	    for (Creature c : creaturesACopier) {
+    	        maitreZoo.TransfererCreature(c, enclos, enclosDest);
+    	    }
+        	VueGlobale.Afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
+        			"effectue\n");
+    	}
+    	catch (Exception e) {
+    		VueGlobale.Afficher(e.getMessage());
+    	}
+    }
+    
     private void CasConcevoirEnfant() {
     	Enclos enclos;
     	Creature femelle;
@@ -329,6 +442,132 @@ public class ControllerZoo {
         	}
         	else if (naitre==-1)
         		VueGlobale.Afficher("Impossible de concevoir");
+    	}
+    	catch (Exception e) {
+    		VueGlobale.Afficher(e.getMessage());
+    	}
+    }
+    
+    public void CasEnclosEnMouvement() {
+    	String nomEnclos;
+    	Enclos enclos;
+    	boolean peutCourrir = false;
+    	boolean peutNager = false;
+    	boolean peutVoler = false;
+    	boolean ActionEffectue = false;
+    	String choix = "";
+    	String chaine = "";
+    	try {
+    		VueGlobale.Afficher("\n ---- Seance de sport pour un enclos ---- ");
+    		
+    		// Choix enclos
+    		// GESTION MANUEL
+        	if (Run.UtilisateurControle) {
+        		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
+            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+        	}
+        	// GESTION AUTOMATIQUE
+        	else {
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        	}
+        	
+    		// Proposition des actions selon type creature
+        	if (enclos.getListeCreatures().get(1) instanceof CreatureMarine && enclos instanceof Aquarium) {
+        		VueGlobale.Afficher("Les creature peuvent nager");
+        		peutNager = true;
+        	}
+        	if (enclos.getListeCreatures().get(1) instanceof CreatureTerrestre) {
+        		VueGlobale.Afficher("Les creature peuvent courir");
+        		peutCourrir = true;
+        	}
+        	if (enclos.getListeCreatures().get(1) instanceof CreatureVolante && enclos instanceof Voliere) {
+        		VueGlobale.Afficher("Les creature peuvent voler");
+        		peutVoler = true;
+        	}
+        	
+        	// GESTION MANUEL
+        	if (Run.UtilisateurControle) {
+        		while (!"nager".equals(choix) && !"courir".equals(choix) && !"voler".equals(choix))
+        			choix = VueUtilisateur.DemandeUtilisateur("Veuillez entrer votre choix (nager, courir, voler): ");
+        	}
+        	// GESTION AUTOMATIQUE
+        	else {
+    			if (peutNager) {
+    				choix = "nager";
+    				ActionEffectue=true;
+    			}
+    			if (peutCourrir && !ActionEffectue) {
+    				choix = "courir";
+    				ActionEffectue=true;
+    			}
+    			if (peutVoler && !ActionEffectue) {
+    				choix = "voler";
+    				ActionEffectue=true;
+    			}
+    			if (!ActionEffectue)
+    				throw new Exception ("Probleme choix automatique sport");
+        	}
+    		// Mouvement de l'enclos
+        	if ("nager".equals(choix) && peutNager == true) {
+        		VueGlobale.Afficher("ALLEZ ! On nage les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
+        		for (Creature c : enclos.getListeCreatures().values()) {
+        			Thread.sleep(1000);
+        			chaine = ((CreatureMarine)c).Nager();
+        			VueGlobale.Afficher(chaine);
+        		}
+        	}
+        	else if ("courir".equals(choix) && peutCourrir == true) {
+        		VueGlobale.Afficher("ALLEZ ! On court les "+enclos.getNomEspece()+"s. ALLEZ !\n");
+        		for (Creature c : enclos.getListeCreatures().values()) {
+        			Thread.sleep(1000);
+        			chaine = ((CreatureTerrestre)c).Courrir();
+        			VueGlobale.Afficher(chaine);
+        		}
+        	}
+        	else if ("voler".equals(choix) && peutVoler == true) {
+        		VueGlobale.Afficher("ALLEZ ! On vole les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
+        		for (Creature c : enclos.getListeCreatures().values()) {
+        			Thread.sleep(1000);
+        			chaine = ((CreatureVolante)c).Voler();
+        			VueGlobale.Afficher(chaine);
+        		}
+        	}
+        	else
+        		throw new Exception ("Assurez vous que l'enclos soit adapte et que les"
+        				+ " animaux ont la bonne categorie pour faire cette action");
+        	VueGlobale.Afficher("\nFelicitation mes petites creatures !");
+        	Thread.sleep(1000);
+    	}
+    	catch (Exception e) {
+    		VueGlobale.Afficher(e.getMessage());
+    	}
+    }
+    
+    
+    public void CasChanterEnclos() {
+    	String nomEnclos;
+    	Enclos enclos;
+    	try {
+    		VueGlobale.Afficher("\n ---- Concert prive pour un enclos ---- ");
+    		// Choix enclos
+    		// GESTION MANUEL
+        	if (Run.UtilisateurControle) {
+        		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
+            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+        	}
+        	// GESTION AUTOMATIQUE
+        	else {
+        		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
+        	}
+        	VueGlobale.Afficher("\nAllez les "+enclos.getNomEspece()+"s.\n"
+        			+ "On chante l'un apres l'autre !\n");
+        	Thread.sleep(1000);
+        	for (Creature c : enclos.getListeCreatures().values()) {
+        		VueGlobale.Afficher(c.FaireBruit());
+        		Thread.sleep(1000);
+        	}
+        	VueGlobale.Afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");
+        	Thread.sleep(1000);
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());

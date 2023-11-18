@@ -67,8 +67,8 @@ public class Enclos {
 	 * @return la chaine de caractère contenant les informations
 	 */
 	public String toString() {
-		String chaine = "Enclos "+nom+" de superficie "+superficie+" pouvant contenir au "
-				+ "plus "+nbMaxCreatures+".\n Il y a actuellement "+nbCreatures+" creatures.\n"
+		String chaine = "Enclos "+nom+" de superficie "+superficie+" m^2 pouvant contenir au "
+				+ "plus "+nbMaxCreatures+" creatures.\n Il y a actuellement "+nbCreatures+" creatures.\n"
 				+ "Degre de proprete : "+degreProprete+"\n";
 		for (Creature creature : listeCreatures.values()) {
 			// si la creature est vivante

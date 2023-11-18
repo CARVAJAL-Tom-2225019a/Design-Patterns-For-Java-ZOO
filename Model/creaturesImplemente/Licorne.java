@@ -27,12 +27,18 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * Permet à la licorne de courir sur terre.
      * 
      * @return Un message indiquant que la licorne court.
+     * @throws Exception 
      * 
      */
     @Override
-    public String Courrir() {
-        // TODO: Implémentez la logique spécifique de course de la licorne
-        return "La licorne court";
+    public String Courrir() throws Exception {
+    	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.PerdreNourriture();
+            super.PerdreSommeil();
+            return "La licorne est en mouvement";
+        } else {
+            throw new Exception("Licorne pas en etat de courir");
+        }
     }
     
     

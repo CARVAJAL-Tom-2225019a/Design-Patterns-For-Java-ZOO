@@ -28,12 +28,18 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * Permet à la sirène de nager dans l'eau.
      * 
      * @return Un message indiquant que la sirène nage.
+     * @throws Exception 
      * 
      */
     @Override
-    public String Nager() {
-        // TODO: Implémentez la logique spécifique de nage de la sirène
-        return "La sirène nage";
+    public String Nager() throws Exception {
+    	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.PerdreNourriture();
+            super.PerdreSommeil();
+            return "La sirene nage";
+        } else {
+            throw new Exception("Sirene pas en etat de nager");
+        }
     }
     
     

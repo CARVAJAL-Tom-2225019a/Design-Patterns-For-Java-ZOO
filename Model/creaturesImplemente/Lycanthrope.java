@@ -4,9 +4,29 @@ import java.util.Random;
 
 import base.*;
 import interfaces.*;
+import meuteLycanthrope.Meute;
 import references.*;
 
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
+	//TODO : calcul niveau
+	
+	//TODO : selon hurlement, action
+	// permet de communiquer avec les autres loups
+	
+	// TODO : se separer de sa meute
+	
+	//TODO : entendre hurlement d'un autre loup
+	
+	//TODO : rejoindre meute
+	
+	//TODO : se battre
+	
+	// TODO : dominer un autre pair (selon rang, echec ou reussite)
+	// pas femelle alpha
+	// si reussite : echange rang
+	// si echec : perte d'un rang
+	
+	// TODO : a partir du 3.3
 
 	private Enum_CategorieAge categorieAge;
 	private int force;
@@ -14,10 +34,19 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	private int dominationsExercercees;
 	private int dominationsSubies;
 	
+<<<<<<< HEAD
 	private int rangDomination;
 	private int niveau;
 	private int facteurImpetuosite;
 	
+=======
+	private Enum_RangDomination rangDomination;
+	private int niveau;
+	private int facteurImpetuosite;
+	
+	private Meute meute;
+	
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     /**
      * Constructeur de la classe Lycanthrope.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -35,9 +64,17 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         this.force = getIntAleatoire(CONSTANTES.MAX_FORCE);
         dominationsExercercees=0;
         dominationsSubies=0;
+<<<<<<< HEAD
         rangDomination=getIntAleatoire(CONSTANTES.MAX_RANG_DOMINATION);
         niveau = calculNiveau();
         facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
+=======
+        //TODO : rang domination dans enum
+        rangDomination=null;
+        niveau = calculNiveau();
+        facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
+        meute = null;
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     } 
     
     
@@ -59,7 +96,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public int getFacteurDomination() {
     	return dominationsExercercees-dominationsSubies;
     }
+<<<<<<< HEAD
     public int getRangDomination() {
+=======
+    public Enum_RangDomination getRangDomination() {
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     	return rangDomination;
     }
     public int getNiveau() {
@@ -68,7 +109,13 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public int getFacteurImpetuosite() {
     	return facteurImpetuosite;
     }
+<<<<<<< HEAD
     
+=======
+    public Meute getMeute() {
+    	return meute;
+    }
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     
     
     private int getIntAleatoire(int max) {
@@ -77,8 +124,17 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
+<<<<<<< HEAD
     private int calculNiveau() {
     	//TODO : calcul niveau
+=======
+    
+    private void RejoindreMeute (Meute m) {
+    	return;
+    }
+    
+    private int calculNiveau() {
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     	return 0;
     }
 
@@ -91,10 +147,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      *         Note : Dans cet exemple, la méthode ne fait rien (retourne null),
      *         car la logique spécifique de course du lycanthrope n'est pas encore implémentée.
      *         Vous devriez remplacer le retour null par la logique réelle de course du lycanthrope.
+     * @throws Exception 
      */
     @Override
-    public String Courrir() {
-        // TODO: Implémentez la logique spécifique de course du lycanthrope
+    public String Courrir() throws Exception {
+        super.PerdreNourriture();
+        super.PerdreSommeil();
         return "Le lycanthrope court";
     }
     
@@ -155,4 +213,28 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         	categorieAge = Enum_CategorieAge.mort;
         }
     }
+<<<<<<< HEAD
+=======
+    
+    
+    public void Hurler() {
+
+    }
+    
+    public void EntendreHurlement() {
+    	if (super.isVivant() && !super.isEnTrainDeDormir() && super.getIndicateurSante()>CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
+    		
+    	}
+    }
+    
+    public void SeSeparerDeSaMeute() {
+    	
+    }
+    
+    public Humain SeTransformerEnHumain() {
+    	//TODO : changer pour le nom de l'humain
+    	return new Humain("Humain", super.getSexe(), super.getAge());
+    }
+    
+>>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
 }

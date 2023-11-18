@@ -70,8 +70,8 @@ public class Voliere extends Enclos {
 	 * @return la chaine de caractère contenant les informations
 	 */
 	public String toString() {
-		String chaine = "Voliere "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
-				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures\n"
+		String chaine = "Voliere "+super.getNom()+" de superficie "+super.getSuperficie()+" m^2 pouvant contenir au "
+				+ "plus "+super.getNbCreatures()+" creatures.\n Il y a actuellement "+super.getNbCreatures()+" creatures\n"
 				+ "Degre de proprete : "+super.getDegreProprete()+"\n"
 				+ "Etat toit : "+etatToit+"\n";
 		for (Creature creature : super.getListeCreatures().values()) {
