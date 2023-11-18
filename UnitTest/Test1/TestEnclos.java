@@ -2,7 +2,9 @@ package Test1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,7 +104,7 @@ class TestEnclos {
     }
 
 	@Test
-	void testTrouverCreature() {
+	void testTrouverCreature() throws Exception {
 		Enclos enclos = zoo.trouverEnclosParNom("KrakenLand");
 		assertNotNull(enclos);
 	}
@@ -156,6 +158,23 @@ class TestEnclos {
 		enclosNymphe.AjouterCreature(n);
 		enclosNymphe.reorganiserCles();
 		assertEquals(1, enclosNymphe.getListeCreatures().get(1).getAge());
+	}
+	
+	@Test
+	void testTransfertEnclos() throws Exception {
+		Enclos enclos1 = new Enclos("enclosSource", 20, 15);
+	    for (int i = 0; i < 10; i++) {
+	        Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
+	        enclos1.AjouterCreature(d);
+	    }
+	    Enclos enclos2 = new Enclos("enclosDest", 20, 15);
+	    // Créez une copie de la liste des créatures
+	    Set<Creature> creaturesACopier = new HashSet<>(enclos1.getListeCreatures().values());
+	    // Transférez les créatures de la copie vers enclos2
+	    for (Creature c : creaturesACopier) {
+	        maitre.TransfererCreature(c, enclos1, enclos2);
+	    }
+	    assertEquals(0, enclos1.getNbCreatures());
 	}
 
 }

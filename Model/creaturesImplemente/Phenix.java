@@ -28,12 +28,18 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * Permet au phénix de voler dans les airs.
      * 
      * @return Un message indiquant que le phénix vole.
+     * @throws Exception 
      * 
      */
     @Override
-    public String Voler() {
-        // TODO: Implémentez la logique spécifique de vol du phénix
-        return "Le phénix vole";
+    public String Voler() throws Exception {
+    	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.PerdreNourriture();
+            super.PerdreSommeil();
+            return "Le phenix vole";
+        } else {
+            throw new Exception("Phenix pas en etat de voler");
+        }
     }
 
     

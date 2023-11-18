@@ -27,12 +27,18 @@ public class Kraken extends Ovipare implements CreatureMarine {
      * Permet au kraken de nager dans l'eau.
      * 
      * @return Un message indiquant que le kraken nage.
+     * @throws Exception 
      *        
      */
     @Override
-    public String Nager() {
-    	// TODO: Implémentez la logique spécifique
-        return "Le kraken nage";
+    public String Nager() throws Exception {
+    	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.PerdreNourriture();
+            super.PerdreSommeil();
+            return "Le Kraken nage";
+        } else {
+            throw new Exception("Kraken pas en etat de nager");
+        }
     }
     
     

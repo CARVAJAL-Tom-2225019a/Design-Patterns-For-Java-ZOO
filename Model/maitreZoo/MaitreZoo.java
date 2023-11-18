@@ -1,32 +1,19 @@
 package maitreZoo;
 
 import base.*;
+import creaturesImplemente.Humain;
 import enclosImplemente.*;
 import references.*;
 
-public class MaitreZoo {
+public class MaitreZoo extends Humain{
     // Instance unique de la classe MaitreZoo
     private static MaitreZoo instance;
 
-    private String nom;
-    private Enum_Sexe sexe;
-    private int age;
-
     // Constructeur privé pour empêcher l'instanciation directe
-    private MaitreZoo(String nom, Enum_Sexe sexe, int age) {
-        this.nom = nom;
-        this.sexe = sexe;
-        this.age = age;
+    private MaitreZoo (String nom, Enum_Sexe sexe, int age) {
+    	super(nom, sexe, age);
     }
     
-    /**
-     * Methode pour afficher les informations du maitre zoo
-     * 
-     * @return une chaine de caractere avec les informations
-     */
-    public String toString() {
-    	return "Maitre "+nom+" a "+age+" an(s) et est "+sexe+"\n";
-    }
 
     /**
      * Méthode statique pour obtenir l'instance unique de la classe MaitreZoo.

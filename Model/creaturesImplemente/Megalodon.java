@@ -27,12 +27,18 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      * Permet au Megalodon de nager dans l'eau.
      * 
      * @return Un message indiquant que le Megalodon nage.
+     * @throws Exception 
      *        
      */
     @Override
-    public String Nager() {
-        // TODO: Implémentez la logique spécifique de nage du Megalodon
-        return "Le Megalodon nage";
+    public String Nager() throws Exception {
+    	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.PerdreNourriture();
+            super.PerdreSommeil();
+            return "Le megalodon nage";
+        } else {
+            throw new Exception("Megalodon pas en etat de nager");
+        }
     }
     
     

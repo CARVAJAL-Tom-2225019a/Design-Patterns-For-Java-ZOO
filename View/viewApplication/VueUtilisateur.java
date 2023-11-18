@@ -23,8 +23,8 @@ public class VueUtilisateur {
 		// Recuperation age
 		int age = RecupererAge();
 		// Message de bienvenue
-		System.out.println("Vous etes desormais maitre de votre zoo. \nJe suis sur que"
-				+ " vous serez un tres bon gestionnaire ! Bonne chance " + nom);
+		System.out.println("\nVous etes desormais maitre de votre zoo. \nJe suis sur que"
+				+ " vous serez un tres bon gestionnaire ! \nBonne chance " + nom);
 		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE);
 		// Initialisation du gestionnaire du zoo
 		return MaitreZoo.getInstance(nom, sexe, age);
@@ -74,15 +74,25 @@ public class VueUtilisateur {
 	public void proposerAction(int annee, int actionRestante) {
 		System.out.println(
 				"\nLES ACTIONS DISPONIBLES (annee " + annee + "):" 
-						+ "\n  0 : Pas d'action" 
+						+ "\n\n  0 : Pas d'action" 
+						+ "\n"
 						+ "\n  1 : Voir les enclos"
-						+ "\n  2 : Voir le nombre de creatures totales" 
-						+ "\n  3 : Examiner un enclos"
-						+ "\n  4 : Nettoyer un enclos" 
-						+ "\n  5 : Nourrir les creatures d'un enclos"
-						+ "\n  6 : Transferer une creature"
-						+ "\n  7 : Concevoir un enfant"
-						+ "\n  8 : Voir la liste des creatures qui vont bientot naitre"
+						+ "\n  2 : Voir le nombre de creatures totales"
+						+ "\n  3 : Creer un nouvel enclos" 
+						+ "\n  4 : Examiner un enclos"
+						+ "\n"
+						+ "\n  5 : Nettoyer un enclos" 
+						+ "\n  6 : Nourrir les creatures d'un enclos"
+						+ "\n"
+						+ "\n  7 : Transferer une creature"
+						+ "\n  8 : Transferer un enclos"
+						+ "\n"
+						+ "\n  9 : Concevoir un enfant"
+						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre"
+						+ "\n"
+						+ "\n  11 : Organiser une seance de sport pour un enclos"
+						+ "\n  12 : Organiser un concert prive avec les creatures"
+						+ "\n"
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");
