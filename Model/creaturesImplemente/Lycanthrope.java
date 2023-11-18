@@ -34,19 +34,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	private int dominationsExercercees;
 	private int dominationsSubies;
 	
-<<<<<<< HEAD
-	private int rangDomination;
-	private int niveau;
-	private int facteurImpetuosite;
-	
-=======
 	private Enum_RangDomination rangDomination;
 	private int niveau;
 	private int facteurImpetuosite;
 	
 	private Meute meute;
 	
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     /**
      * Constructeur de la classe Lycanthrope.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -64,17 +57,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         this.force = getIntAleatoire(CONSTANTES.MAX_FORCE);
         dominationsExercercees=0;
         dominationsSubies=0;
-<<<<<<< HEAD
-        rangDomination=getIntAleatoire(CONSTANTES.MAX_RANG_DOMINATION);
-        niveau = calculNiveau();
-        facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
-=======
         //TODO : rang domination dans enum
         rangDomination=null;
         niveau = calculNiveau();
         facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
         meute = null;
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     } 
     
     
@@ -96,11 +83,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public int getFacteurDomination() {
     	return dominationsExercercees-dominationsSubies;
     }
-<<<<<<< HEAD
-    public int getRangDomination() {
-=======
     public Enum_RangDomination getRangDomination() {
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     	return rangDomination;
     }
     public int getNiveau() {
@@ -109,13 +92,9 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public int getFacteurImpetuosite() {
     	return facteurImpetuosite;
     }
-<<<<<<< HEAD
-    
-=======
     public Meute getMeute() {
     	return meute;
     }
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     
     
     private int getIntAleatoire(int max) {
@@ -124,17 +103,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
-<<<<<<< HEAD
-    private int calculNiveau() {
-    	//TODO : calcul niveau
-=======
     
     private void RejoindreMeute (Meute m) {
     	return;
     }
     
     private int calculNiveau() {
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
     	return 0;
     }
 
@@ -213,8 +187,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         	categorieAge = Enum_CategorieAge.mort;
         }
     }
-<<<<<<< HEAD
-=======
     
     
     public void Hurler() {
@@ -236,5 +208,4 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return new Humain("Humain", super.getSexe(), super.getAge());
     }
     
->>>>>>> ad06737 (Debut Lycanthrope ameliore, ajout choix actions (sport et chant))
 }
