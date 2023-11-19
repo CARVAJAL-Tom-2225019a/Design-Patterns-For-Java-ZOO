@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature megalodon
+ * qui est un ovipare
+ * et qui est aquatique
+ *
+ */
 public class Megalodon extends Ovipare implements CreatureMarine {
 
     /**

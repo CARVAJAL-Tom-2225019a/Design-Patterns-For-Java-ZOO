@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature kraken
+ * qui est un ovipare
+ * et qui est aquatique
+ *
+ */
 public class Kraken extends Ovipare implements CreatureMarine {
 
     /**

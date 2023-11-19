@@ -5,9 +5,14 @@ import java.util.Random;
 import creaturesImplemente.FactoryCreature;
 import references.*;
 
+/**
+ * Cette classe abstraite représente une créature vivipare
+ *
+ */
 public abstract class Vivipare extends Creature {
 	
 	private  int nbJourConceptionRestant;
+	
 	
     /**
      * Constructeur de la classe Vivipare.
@@ -23,6 +28,7 @@ public abstract class Vivipare extends Creature {
         super(nomEspece, sexe, poids, taille, bruit, duree);
         nbJourConceptionRestant=0;
     }
+    
     
     /**
      * Getters
@@ -64,6 +70,13 @@ public abstract class Vivipare extends Creature {
     	
     }
     
+    
+    /**
+     * Methode permettant de decrementer le nombre de jour avant la naissance
+     * du bebe et d'apeller la methode pour mettre bas dans ce cas
+     * @return La creature mise au monde ou null
+     * @throws Exception
+     */
     public Creature VerificationEnfantEnConception() throws Exception {
     	Random random = new Random(System.currentTimeMillis());
     	double poids = 1 + (random.nextDouble() * 49);

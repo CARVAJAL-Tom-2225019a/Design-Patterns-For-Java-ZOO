@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature sirene
+ * qui est un vivipare
+ * et qui est aquatique
+ *
+ */
 public class Sirene extends Vivipare implements CreatureMarine {
 
     /**
@@ -20,7 +26,6 @@ public class Sirene extends Vivipare implements CreatureMarine {
     protected Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
     }
-
 
     
     /**

@@ -28,11 +28,11 @@ class TestEnclos {
 	ZooFantastique zoo = ZooFantastique.getInstance();
 	MaitreZoo maitre = MaitreZoo.getInstance("Pepito", Enum_Sexe.Male, 20);
 	FactoryCreature factory = new FactoryCreature();
-	Voliere enclosDragons = new Voliere("DragonLand", 20, 15, 100);
-	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 15, 100);
-	Enclos enclosSirene = new Enclos("SireneLand", 20, 15);
-	Enclos enclosNymphe = new Enclos("NympheLand", 20, 15);
-	Enclos enclosVide = new Enclos("EnclosVide", 20, 15);
+	Voliere enclosDragons = new Voliere("DragonLand", 20, 100);
+	Aquarium enclosKraken = new Aquarium("KrakenLand", 20, 100);
+	Enclos enclosSirene = new Enclos("SireneLand", 20);
+	Enclos enclosNymphe = new Enclos("NympheLand", 20);
+	Enclos enclosVide = new Enclos("EnclosVide", 20);
 	
 	Enum_Sexe sexe;
 	double poids;
@@ -111,7 +111,7 @@ class TestEnclos {
 	
 	@Test
 	void testChoixCreatureAleatoire() throws Exception {
-		Enclos enclos = new Enclos("Enclos", 20, 15);
+		Enclos enclos = new Enclos("Enclos", 20);
 		for (int i=0; i<10; i++) {
 			sexe = Creature.SexeAleatoire();
 			poids = 1 + (random.nextDouble() * 49);
@@ -162,12 +162,12 @@ class TestEnclos {
 	
 	@Test
 	void testTransfertEnclos() throws Exception {
-		Enclos enclos1 = new Enclos("enclosSource", 20, 15);
+		Enclos enclos1 = new Enclos("enclosSource", 20);
 	    for (int i = 0; i < 10; i++) {
 	        Dragon d = FactoryCreature.newCreature(Enum_Especes.Dragon, sexe, poids, taille);
 	        enclos1.AjouterCreature(d);
 	    }
-	    Enclos enclos2 = new Enclos("enclosDest", 20, 15);
+	    Enclos enclos2 = new Enclos("enclosDest", 20);
 	    // Créez une copie de la liste des créatures
 	    Set<Creature> creaturesACopier = new HashSet<>(enclos1.getListeCreatures().values());
 	    // Transférez les créatures de la copie vers enclos2

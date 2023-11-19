@@ -8,6 +8,10 @@ import enclosImplemente.Enclos;
 import references.CONSTANTES;
 import viewApplication.*;
 
+/**
+ * Classe representant le controleur de la partie
+ * gestion automatique du zoo
+ */
 public class ControllerGestionAuto {
 
 	private static ControllerZoo zooController;
@@ -26,14 +30,25 @@ public class ControllerGestionAuto {
         zoo = ZooFantastique.getInstance();
     }
 	
+    
 	//TODO : actions appropriés selon etat du zoo
 	
+    
+    /**
+     * Methode permettant d'effectuer un choix aleatoire 
+     * @throws Exception
+     */
 	public void ChoixActionAleatoire () throws Exception {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX);
 		zooController.effectuerAction(choix);
 	}
 	
+	
+	/**
+	 * Point d'entree de la gestion automatique
+	 * @throws Exception
+	 */
 	public void run() throws Exception {
 		boolean run = true;
         zooController.init();

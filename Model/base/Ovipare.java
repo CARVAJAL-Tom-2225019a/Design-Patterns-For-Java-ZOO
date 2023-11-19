@@ -3,6 +3,10 @@ package base;
 import creaturesImplemente.*;
 import references.*;
 
+/**
+ * Cette classe abstraite représente une créature de type ovipare
+ *
+ */
 public abstract class Ovipare extends Creature {
 
     /**

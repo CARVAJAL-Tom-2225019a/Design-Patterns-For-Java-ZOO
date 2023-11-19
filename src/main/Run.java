@@ -7,12 +7,13 @@ import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
-	//TODO : voir en cas d'erreur d'entree pour chaque
-	//TODO : ajout de fonctionnalités (enfant, creation enclos...)
-	//TODO : gestion automatique
+	//TODO : ajout de fonctionnalités 
 	//TODO : mort si etat enclos plus adapte ou etat cretaure
 
 
+/**
+ * Point d'entree de l'application
+ */
 public class Run {
     // Le contrôleur principal de l'application
 	static VueUtilisateur vueUtilisateur = new VueUtilisateur();
@@ -29,8 +30,6 @@ public class Run {
 
     public static void main(String[] args) throws Exception {
         // Point d'entrée de la simulation
-    	
-        // TODO : gestion manuel ou automatique
 
         // Crée les données de jeu nécessaires à la simulation
     	controllerPrincipal.creerDonneesJeu();

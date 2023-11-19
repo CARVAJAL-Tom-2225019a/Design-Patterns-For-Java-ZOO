@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature nymphe
+ * qui est un vivipare
+ * et qui est immortel
+ *
+ */
 public class Nymphe extends Vivipare implements CreatureImmortel {
 
     /**

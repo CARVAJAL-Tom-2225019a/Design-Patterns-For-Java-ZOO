@@ -7,6 +7,12 @@ import interfaces.*;
 import meuteLycanthrope.Meute;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature lycanthrope (loup-garou)
+ * qui est un vivipare
+ * et qui est terrestre
+ *
+ */
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	//TODO : calcul niveau
 	
@@ -39,6 +45,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	private int facteurImpetuosite;
 	
 	private Meute meute;
+	
 	
     /**
      * Constructeur de la classe Lycanthrope.
@@ -97,6 +104,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
+    /**
+     * Methode permetant de generer un entier aleatoire entre 0 et max
+     * @param max	Entier maximal
+     * @return	Le nombre aleatoire
+     */
     private int getIntAleatoire(int max) {
     	Random random = new Random();
     	return random.nextInt(max);
@@ -203,6 +215,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	
     }
     
+    
+    /**
+     * Methode permettant au loup de se transofrmer en humain
+     * @return l'instance de l'humain créé
+     */
     public Humain SeTransformerEnHumain() {
     	//TODO : changer pour le nom de l'humain
     	return new Humain("Humain", super.getSexe(), super.getAge());

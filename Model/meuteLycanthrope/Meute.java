@@ -7,6 +7,9 @@ import creaturesImplemente.Lycanthrope;
 import enclosImplemente.Enclos;
 import references.*;
 
+/**
+ * Classe d'une meute de lycanthrope (loup-garou)
+ */
 public class Meute {
 	
 	// TODO : go to un enclos
@@ -17,7 +20,7 @@ public class Meute {
 	
 	private int CapaciteMeute; 
 	private Set<Lycanthrope> listeLoup;
-	//TODO : remplir liste
+	//TODO : verifier rang loup si dans liste
 	private Set<Enum_RangDomination> rangPossible;
 	
 	// TODO : une seule meute par enclos
@@ -64,6 +67,11 @@ public class Meute {
 	}
 	
 	
+	/**
+	 * Methode permettant d'ajouter un lycanthrope a la meute
+	 * @param loup	le lycanthrope a ajouter
+	 * @throws Exception si le lycanthrope a deja une meute ou s'il n'y a plus de place
+	 */
 	public void AddLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.size() < CapaciteMeute) {
 			if (loup.getMeute() == null ) {
@@ -73,18 +81,26 @@ public class Meute {
 				throw new Exception ("Le loup a deja une meute");
 		}
 		else
-			throw new Exception ("La meute est pleine, impossible de rajouer un loup");
+			throw new Exception ("La meute est pleine, impossible de rajouter un loup");
 	}
 	
 
-
+	/**
+	 * Methode permettant de supprimer un loup de la meute
+	 * @param loup	Le loup a supprimer
+	 * @throws Exception	SI le loup fait partie du couple alpha ou n'est pas dans la meute
+	 */
 	public void RemoveLoup(Lycanthrope loup) throws Exception {
-		if (loup != femelleAlpha && loup !=maleAlpha) {
-			listeLoup.remove(loup);
-			loup.SeSeparerDeSaMeute();
+		if (listeLoup.contains(loup)) {	
+			if (loup != femelleAlpha && loup !=maleAlpha) {
+				listeLoup.remove(loup);
+				loup.SeSeparerDeSaMeute();
+			}
+			else
+				throw new Exception ("Un membre du couple alpha ne peut pas quitter la meute");
 		}
 		else
-			throw new Exception ("Un membre du couple alpha ne peut pas quitter la meute");
+			throw new Exception ("Le loup n'appartient pas a cette meute");
 	}
 	
 }

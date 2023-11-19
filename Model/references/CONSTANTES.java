@@ -9,7 +9,7 @@ public class CONSTANTES {
 	
 	public static int NB_ACTION_MAX_USER = 6;
 	
-	public static int MAX_INDICATEUR = 10;
+	public static int MAX_INDICATEUR = 16;
 	public static int VALEUR_PERTE_INDICATEUR = 2;
 	public static int VALEUR_INDICATEUR_MAUVAIS = 5;
 	

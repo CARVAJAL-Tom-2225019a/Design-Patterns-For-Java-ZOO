@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature phenix
+ * qui est un ovipare
+ * et qui est aerien et immortel
+ *
+ */
 public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel {
 	
     /**
@@ -22,7 +28,6 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
     }
 
 
-    
     /**
      * Méthode de l'interface CreatureVolante : Voler.
      * Permet au phénix de voler dans les airs.

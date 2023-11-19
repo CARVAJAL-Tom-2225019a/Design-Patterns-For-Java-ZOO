@@ -4,8 +4,8 @@ import base.Creature;
 import references.*;
 
 public class FactoryCreature {
-	// Méthode statique pour créer une instance en fonction du type d'espèce et des paramètres
-    @SuppressWarnings("unchecked")
+	// Méthode statique pour créer une instance en fonction du type d'espèce
+	@SuppressWarnings("unchecked")
 	public static <T extends Creature> T newCreature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille) throws Exception {
         switch (nomEspece) {
             case Dragon:

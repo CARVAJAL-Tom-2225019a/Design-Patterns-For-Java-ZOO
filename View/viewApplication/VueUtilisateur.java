@@ -5,6 +5,10 @@ import java.util.Scanner;
 import maitreZoo.MaitreZoo;
 import references.*;
 
+/**
+ * Classe permettant l'affichage et la recuperation d'infomration
+ * pour la gestion manuel du zoo
+ */
 public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
@@ -25,12 +29,16 @@ public class VueUtilisateur {
 		// Message de bienvenue
 		System.out.println("\nVous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! \nBonne chance " + nom);
-		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE);
+		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE+" ans.");
 		// Initialisation du gestionnaire du zoo
 		return MaitreZoo.getInstance(nom, sexe, age);
 	}
 	
 	
+	/**
+	 * Methode permettant de recuperer l'age tant que ce n'est pas un entier
+	 * @return entier entre par l'utilisateur
+	 */
 	private int RecupererAge() {
 		int age;
 		while (true) {
@@ -47,6 +55,12 @@ public class VueUtilisateur {
 		return age;
 	}
 	
+	
+	/**
+	 * Methode permettant de recuperer F ou M
+	 * et de traduire selon l'enumeration sexe
+	 * @return	le sexe choisi par l'utilisateur
+	 */
 	private Enum_Sexe RecupererSexe() {
 		Enum_Sexe sexe = null;
 		while (sexe == null) {
@@ -98,6 +112,7 @@ public class VueUtilisateur {
 						+ "\n\n Votre choix = ");
 	}
 
+	
 	/**
 	 * Méthode pour récupérer le choix de l'utilisateur
 	 */
@@ -114,6 +129,7 @@ public class VueUtilisateur {
 	    return choix;
 	}
 
+	
 	/**
 	 * Méthode pour demander une saisie utilisateur avec un message donné
 	 */

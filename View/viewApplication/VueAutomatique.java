@@ -4,6 +4,10 @@ import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
 import references.Enum_Sexe;
 
+/**
+ * Classe permettant l'affichage concernant la gestion
+ * automatique du zoo
+ */
 public class VueAutomatique {
 
 	public MaitreZoo Bienvenue() {
