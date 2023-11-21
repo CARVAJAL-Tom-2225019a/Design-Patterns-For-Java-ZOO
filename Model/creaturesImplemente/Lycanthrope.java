@@ -16,21 +16,7 @@ import references.*;
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	//TODO : calcul niveau
 	
-	//TODO : selon hurlement, action
-	// permet de communiquer avec les autres loups
-	
-	// TODO : se separer de sa meute
-	
-	//TODO : entendre hurlement d'un autre loup
-	
-	//TODO : rejoindre meute
-	
 	//TODO : se battre
-	
-	// TODO : dominer un autre pair (selon rang, echec ou reussite)
-	// pas femelle alpha
-	// si reussite : echange rang
-	// si echec : perte d'un rang
 	
 	// TODO : a partir du 3.3
 
@@ -64,8 +50,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         this.force = getIntAleatoire(CONSTANTES.MAX_FORCE);
         dominationsExercercees=0;
         dominationsSubies=0;
-        //TODO : rang domination dans enum
-        rangDomination=null;
+        rangDomination=Enum_RangDomination.OMEGA;
         niveau = calculNiveau();
         facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
         meute = null;
@@ -93,6 +78,9 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public Enum_RangDomination getRangDomination() {
     	return rangDomination;
     }
+    public void setRangDomination(Enum_RangDomination rang) {
+    	rangDomination=rang;;
+    }
     public int getNiveau() {
     	return niveau;
     }
@@ -114,11 +102,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return random.nextInt(max);
     }
     
-    
-    
-    private void RejoindreMeute (Meute m) {
-    	return;
-    }
     
     private int calculNiveau() {
     	return 0;
@@ -171,7 +154,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     				+"\n   categorie age :"+categorieAge
     				+"\n   force : "+force
     				+"\n   facteur domination"+getFacteurDomination()
-    				+"\n   rang domination : "+rangDomination
+    				+"\n   rang domination : "+rangDomination.getDescription()
     				+"\n   niveau : "+niveau
     				+"\n   facteur impetuosite : "+facteurImpetuosite
     				+"\n\n";
@@ -201,18 +184,135 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
-    public void Hurler() {
-
+    /**
+     * Methode permettant d'hurler
+     * @param action	que le lycanthrope veut effectuer par son hurlement
+     * @return
+     * @throws Exception
+     */
+    public String Hurler(Enum_ActionHurlement action, Lycanthrope loup) throws Exception {
+    	String chaine = "";
+    	if (super.isVivant() && !super.isEnTrainDeDormir() && super.getIndicateurSante()>CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
+    		// Exprimer appartenance
+    		if (action == Enum_ActionHurlement.Appartenance) {
+    			chaine =  super.getBruit()+"\n"+ExprimerAppartenance();
+    		}
+    		// Exprimer domination
+    		else if (action == Enum_ActionHurlement.Domination) {
+    			chaine = super.getBruit()+"\n"+ExprimerDomination (loup);
+    		}
+        	// Exprimer soumission
+    		else if (action == Enum_ActionHurlement.Soumission) {
+    			chaine = super.getBruit()+"\n"+ExprimerSoumission (loup);
+    		}
+        	// Exprimer aggresivite
+    		else if (action == Enum_ActionHurlement.Agressivite) {
+    			chaine = super.getBruit()+"\n"+ExprimerAgressivite ();
+    		}
+    		else
+    			throw new Exception ("Choix hurlement lycanthrope invalide\n");
+    		chaine += loup.EntendreHurlement(action, this);
+    		return chaine;
+    	}
+    	else
+    		throw new Exception("Le lycanthrope n'est pas en etat d'hurler\n");
     }
     
-    public void EntendreHurlement() {
-    	if (super.isVivant() && !super.isEnTrainDeDormir() && super.getIndicateurSante()>CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
-    		
+    
+    /**
+     * Methodes permettant d'effectuer une action correspondant a un hurlement
+     */
+    private String ExprimerAppartenance() {
+    	if (meute == null)
+    		return "Je suis un loup solitaire, et je n'ai peur peur de rien\n";
+    	else
+    		return "Ma meute, la meilleure, est "+meute+"\n";
+    }
+    
+    private String ExprimerDomination (Lycanthrope loup) throws Exception {
+    	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
+    		if (meute==null || meute.getFemelleAlpha()!= loup) {
+    			dominationsExercercees++;
+    			// Echange de rang ??
+    			//Enum_RangDomination temp = loup.getRangDomination();
+    			//loup.setRangDomination(this.getRangDomination());
+    			//this.setRangDomination(temp);
+            	return "Je suis un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription()+"\n";
+    		}
+    		else
+    			throw new Exception ("Domination impossible");
+    	}
+    	else {
+    		return ExprimerSoumission(loup);
     	}
     }
     
-    public void SeSeparerDeSaMeute() {
-    	
+    private String ExprimerSoumission (Lycanthrope loup) {
+    	dominationsSubies++;
+    	// rang inferieur
+    	rangDomination = rangDomination.getRangInferieur();
+    	return "Je suis un "+rangDomination.getDescription()+", et je me soumet a toi "+loup.getRangDomination().getDescription()+"\n";
+    }
+    
+    private String ExprimerAgressivite () {
+    	return "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+", alors"
+    			+ "ne me defie pas !\n";
+    }
+    
+    
+    /**
+     * Methode permettant a un loup d'entendre un hurlement
+     * @throws Exception 
+     */
+    private String EntendreHurlement(Enum_ActionHurlement action, Lycanthrope loupOrigine) throws Exception {
+    	if (super.isVivant() && !super.isEnTrainDeDormir()) {
+    		if (action == Enum_ActionHurlement.Appartenance) {
+    			return "Je ne te crois pas superieur a moi !\n";
+    		}
+    		// Exprimer domination
+    		else if (action == Enum_ActionHurlement.Domination) {
+    			// se soumet a la domination
+    			return ExprimerSoumission(loupOrigine);
+    		}
+        	// Exprimer soumission
+    		else if (action == Enum_ActionHurlement.Soumission) {
+    			// domine
+    			return ExprimerDomination(loupOrigine);
+    		}
+        	// Exprimer aggresivite
+    		else if (action == Enum_ActionHurlement.Agressivite) {
+    			return "Tu ne me fais pas peur !\n";
+    		}
+    		else
+    			throw new Exception ("Choix hurlement lycanthrope invalide\n");
+    	}
+    	else
+    		throw new Exception("Le lycanthrope n'est pas en etat d'entendre le hurlement\n");
+    }
+    
+    
+    /**
+     * Methode permeyttant a un lycanthrope de rejoindre une meute
+     * @throws Exception
+     */
+    public void RejoindreMeute(Meute m) throws Exception {
+    	if (meute.AddLoup(this))
+    		meute = m;
+    	else
+    		throw new Exception ("Impossible de rejoindre cette meute");
+    }
+    
+    
+    /**
+     * Methode permeyttant a un lycanthrope de quitter sa meute et
+     * devenir solitaire
+     * @throws Exception
+     */
+    public void SeSeparerDeSaMeute() throws Exception {
+    	if(meute.RemoveLoup(this))
+    		meute = null;
+    	else
+    		throw new Exception ("Le loup ne peut pas quitter sa meute");
     }
     
     
@@ -225,4 +325,8 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return new Humain("Humain", super.getSexe(), super.getAge());
     }
     
+}
+
+enum Enum_ActionHurlement {
+	Appartenance, Domination, Soumission, Agressivite
 }

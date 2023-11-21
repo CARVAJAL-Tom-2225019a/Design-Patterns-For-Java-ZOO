@@ -45,4 +45,20 @@ public enum Enum_RangDomination {
     public int getValeur() {
         return valeur;
     }
+    
+    // Methode pour avoirLeRangInferieur
+    public Enum_RangDomination getRangInferieur() {
+    	// Obtenir la liste des valeurs de l'énumération
+        Enum_RangDomination[] rangs = Enum_RangDomination.values();
+        // Trouvez l'index du rang courant
+        int index = this.ordinal();
+        // Vérifiez si l'index est valide et renvoyez le rang inférieur
+        if (index > 0 && index < rangs.length) {
+            return rangs[index - 1];
+        } else {
+            // Si le rang courant est déjà le plus bas, vous pouvez décider de renvoyer null ou une valeur spéciale.
+            // Dans cet exemple, je choisis de renvoyer null.
+            return this;
+        }
+    }
 }

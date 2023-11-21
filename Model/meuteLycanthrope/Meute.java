@@ -12,7 +12,6 @@ import references.*;
  */
 public class Meute {
 	
-	// TODO : go to un enclos
 	// TODO : donner rang a nouveau loup
 	
 	private Lycanthrope femelleAlpha;
@@ -23,7 +22,6 @@ public class Meute {
 	//TODO : verifier rang loup si dans liste
 	private Set<Enum_RangDomination> rangPossible;
 	
-	// TODO : une seule meute par enclos
 	private Enclos enclosReference;
 	
 	
@@ -40,6 +38,8 @@ public class Meute {
 		this.maleAlpha = maleAlpha;
 		this.CapaciteMeute = CapaciteMeute;
 		this.listeLoup = new HashSet<Lycanthrope>();
+		listeLoup.add(femelleAlpha);
+		listeLoup.add(maleAlpha);
 		this.rangPossible = rangPossible;
 		this.enclosReference = null;
 	}
@@ -66,16 +66,24 @@ public class Meute {
 		return enclosReference;
 	}
 	
+	/**
+	 * Setters
+	 */
+	public void setEnclosReference (Enclos e) {
+		enclosReference = e;
+	}
+	
 	
 	/**
 	 * Methode permettant d'ajouter un lycanthrope a la meute
 	 * @param loup	le lycanthrope a ajouter
 	 * @throws Exception si le lycanthrope a deja une meute ou s'il n'y a plus de place
 	 */
-	public void AddLoup(Lycanthrope loup) throws Exception {
+	public boolean AddLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.size() < CapaciteMeute) {
 			if (loup.getMeute() == null ) {
 				listeLoup.add(loup);
+				return true;
 			}
 			else 
 				throw new Exception ("Le loup a deja une meute");
@@ -90,11 +98,12 @@ public class Meute {
 	 * @param loup	Le loup a supprimer
 	 * @throws Exception	SI le loup fait partie du couple alpha ou n'est pas dans la meute
 	 */
-	public void RemoveLoup(Lycanthrope loup) throws Exception {
+	public boolean RemoveLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.contains(loup)) {	
 			if (loup != femelleAlpha && loup !=maleAlpha) {
 				listeLoup.remove(loup);
 				loup.SeSeparerDeSaMeute();
+				return true;
 			}
 			else
 				throw new Exception ("Un membre du couple alpha ne peut pas quitter la meute");
@@ -103,4 +112,13 @@ public class Meute {
 			throw new Exception ("Le loup n'appartient pas a cette meute");
 	}
 	
+	
+	/**
+	 * Methode permettant de recuperer les informations sur une meute
+	 */
+	public String toString() {
+		return "Meute se trouvant dans "+enclosReference+" avec "+listeLoup.size()+"/"+CapaciteMeute+"\n"
+				+ "  * Male Alpha : "+maleAlpha+"\n"
+				+ "  * Femelle Alpha : "+femelleAlpha+"\n\n";
+	}
 }
