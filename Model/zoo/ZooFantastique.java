@@ -264,5 +264,16 @@ public class ZooFantastique {
             }
         }
     }
+    
+    
+    /**
+     * Methode permetant de generer un entier aleatoire entre 0 et max
+     * @param max	Entier maximal
+     * @return	Le nombre aleatoire
+     */
+    public static int getIntAleatoire(int max) {
+    	Random random = new Random();
+    	return random.nextInt(max);
+    }
 
 }

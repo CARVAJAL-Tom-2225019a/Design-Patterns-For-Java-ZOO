@@ -29,4 +29,5 @@ public class CONSTANTES {
 	public static int MAX_FORCE = 100;
 	public static int MAX_RANG_DOMINATION = 5;
 	public static int MAX_FACTEUR_IMPETUOSITE=5;
+	public static int SEUIL_FACTEUR_DOMINATION = -5;
 }

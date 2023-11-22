@@ -1,11 +1,10 @@
 package creaturesImplemente;
 
-import java.util.Random;
-
 import base.*;
 import interfaces.*;
 import meuteLycanthrope.Meute;
 import references.*;
+import zoo.ZooFantastique;
 
 /**
  * Cette classe correspond à la crature lycanthrope (loup-garou)
@@ -16,15 +15,20 @@ import references.*;
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	//TODO : calcul niveau
 	
-	//TODO : se battre
+	//TODO : agresser, selon niveau de sante... + conséquences
 	
-	// TODO : a partir du 3.3
+	
+	//TODO : Les lycanthropes communiquent au moyen 
+	// de hurlements (qui sont perçus depuis n’importe quel 
+	// enclos dans un zoo fantastique) */
+
+	
+	// TODO : a partir du 3.5
 
 	private Enum_CategorieAge categorieAge;
 	private int force;
 	
-	private int dominationsExercercees;
-	private int dominationsSubies;
+	private int facteurDomination;
 	
 	private Enum_RangDomination rangDomination;
 	private int niveau;
@@ -47,12 +51,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     protected Lycanthrope(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
         super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
         categorieAge = Enum_CategorieAge.jeune;
-        this.force = getIntAleatoire(CONSTANTES.MAX_FORCE);
-        dominationsExercercees=0;
-        dominationsSubies=0;
+        this.force = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FORCE);
+        facteurDomination = 0;
         rangDomination=Enum_RangDomination.OMEGA;
         niveau = calculNiveau();
-        facteurImpetuosite=getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
+        facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
         meute = null;
     } 
     
@@ -66,14 +69,8 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public int getForce() {
     	return force;
     }
-    public int getDominationsExercercees() {
-    	return dominationsExercercees;
-    }
-    public int getDominationsSubies() {
-    	return dominationsSubies;
-    }
     public int getFacteurDomination() {
-    	return dominationsExercercees-dominationsSubies;
+    	return facteurDomination;
     }
     public Enum_RangDomination getRangDomination() {
     	return rangDomination;
@@ -92,19 +89,18 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
-    /**
-     * Methode permetant de generer un entier aleatoire entre 0 et max
-     * @param max	Entier maximal
-     * @return	Le nombre aleatoire
-     */
-    private int getIntAleatoire(int max) {
-    	Random random = new Random();
-    	return random.nextInt(max);
-    }
-    
     
     private int calculNiveau() {
     	return 0;
+    }
+    
+    
+    public boolean SeuilFacteurDominationAtteint () {
+    	if (facteurDomination < CONSTANTES.SEUIL_FACTEUR_DOMINATION) {
+    		return true;
+    	}
+    	else
+    		return false;
     }
 
     
@@ -195,19 +191,21 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (super.isVivant() && !super.isEnTrainDeDormir() && super.getIndicateurSante()>CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
     		// Exprimer appartenance
     		if (action == Enum_ActionHurlement.Appartenance) {
-    			chaine =  super.getBruit()+"\n"+ExprimerAppartenance();
+    			chaine =  super.toString()+" \n "+ExprimerAppartenance();
     		}
     		// Exprimer domination
     		else if (action == Enum_ActionHurlement.Domination) {
-    			chaine = super.getBruit()+"\n"+ExprimerDomination (loup);
+    			chaine = super.toString()+"\n"+ExprimerDomination(loup);
+    			chaine +="\n"+Hurler(Enum_ActionHurlement.Agressivite, loup);
     		}
         	// Exprimer soumission
     		else if (action == Enum_ActionHurlement.Soumission) {
-    			chaine = super.getBruit()+"\n"+ExprimerSoumission (loup);
+    			chaine = super.toString()+"\n"+ExprimerSoumission (loup);
     		}
         	// Exprimer aggresivite
     		else if (action == Enum_ActionHurlement.Agressivite) {
-    			chaine = super.getBruit()+"\n"+ExprimerAgressivite ();
+    			// TODO : if souffre douleur
+    			chaine = super.toString()+"\n"+ExprimerAgressivite (loup);
     		}
     		else
     			throw new Exception ("Choix hurlement lycanthrope invalide\n");
@@ -232,31 +230,54 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     private String ExprimerDomination (Lycanthrope loup) throws Exception {
     	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
     		if (meute==null || meute.getFemelleAlpha()!= loup) {
-    			dominationsExercercees++;
-    			// Echange de rang ??
-    			//Enum_RangDomination temp = loup.getRangDomination();
-    			//loup.setRangDomination(this.getRangDomination());
-    			//this.setRangDomination(temp);
+    			facteurDomination++;
             	return "Je suis un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription()+"\n";
     		}
     		else
     			throw new Exception ("Domination impossible");
     	}
     	else {
+    		loup.facteurDomination++;
     		return ExprimerSoumission(loup);
     	}
     }
     
     private String ExprimerSoumission (Lycanthrope loup) {
-    	dominationsSubies++;
+    	facteurDomination--;
     	// rang inferieur
     	rangDomination = rangDomination.getRangInferieur();
     	return "Je suis un "+rangDomination.getDescription()+", et je me soumet a toi "+loup.getRangDomination().getDescription()+"\n";
     }
     
-    private String ExprimerAgressivite () {
-    	return "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+", alors"
-    			+ "ne me defie pas !\n";
+    private String ExprimerAgressivite (Lycanthrope loup) throws Exception {
+    	return "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+", "
+    			+agresser(loup);
+    }
+    
+    
+    /**
+     * Methode simulant une agression d'un loup vers un autre loup
+     * @param loup
+     * @return
+     * @throws Exception
+     */
+    private String agresser (Lycanthrope loup) throws Exception {
+    	if (loup != meute.getFemelleAlpha()) {
+    		if (loup.getRangDomination() == Enum_RangDomination.OMEGA || loup == meute.getMaleAlpha()) {
+    			loup.PerdreSommeil();
+            	loup.PerdreSante();
+            	loup.PerdreNourriture();
+            	loup.facteurDomination--;
+            	this.PerdreNourriture();
+            	this.PerdreSommeil();
+            	this.facteurDomination++;
+            	return "ATTAQUE DU LYCANTHROPE !\n";
+    		}
+    		else
+    			throw new Exception ("Impossible d'attaquer ce lycanthrope");
+    	}
+    	else
+    		throw new Exception ("Impossible d'attaquer la femelle alpha\n");
     }
     
     
@@ -325,8 +346,4 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return new Humain("Humain", super.getSexe(), super.getAge());
     }
     
-}
-
-enum Enum_ActionHurlement {
-	Appartenance, Domination, Soumission, Agressivite
 }

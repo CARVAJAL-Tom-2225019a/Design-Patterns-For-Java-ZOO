@@ -56,9 +56,8 @@ public enum Enum_RangDomination {
         if (index > 0 && index < rangs.length) {
             return rangs[index - 1];
         } else {
-            // Si le rang courant est déjà le plus bas, vous pouvez décider de renvoyer null ou une valeur spéciale.
-            // Dans cet exemple, je choisis de renvoyer null.
-            return this;
+            // Si le rang courant est déjà le plus bas.
+            return OMEGA;
         }
     }
 }

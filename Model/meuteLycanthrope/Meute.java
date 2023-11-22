@@ -11,8 +11,23 @@ import references.*;
  * Classe d'une meute de lycanthrope (loup-garou)
  */
 public class Meute {
+	//TODO :transformation enclosLycanthrope si espece presente
 	
 	// TODO : donner rang a nouveau loup
+	
+	// TODO : couple reste uni tant que le mâle α n’est pas dominé par un autre mâle
+	
+	// TODO : (n’importe quel mâle adulte considérant être à la hauteur peut 
+	// déclencher un conflit avec le mâle alpha
+	
+	// un nouveau couple sera alors constitué avec la femelle adulte ayant le plus haut niveau à ce
+	// moment-là (cela peut être l’ancienne femelle α). Une femelle déchue du couple α prend le même 
+	// rang de domination que son ancien conjoint
+	
+	// TODO : il arrive que les lycanthropes ω et les lycanthropes ayant échoués lors d’un 
+	// conflit pour devenir mâle α se dispersent pour devenir solitaires (un maître de zoo fantastique aura 
+	// alors la possibilité de les déplacer individuellement dans un autre enclot
+
 	
 	private Lycanthrope femelleAlpha;
 	private Lycanthrope maleAlpha;
@@ -111,6 +126,48 @@ public class Meute {
 		else
 			throw new Exception ("Le loup n'appartient pas a cette meute");
 	}
+	
+	
+	public boolean DefierMaleAlpha (Lycanthrope l) {
+		boolean reussite = false;
+		//TODO : tenter aggression
+		// reussite
+		if (reussite) {
+			return true;
+		}
+		// echec
+		else {
+			return false;
+		}
+	}
+	
+	
+	public String VerificationSeuilFacteurDominationMeute() {
+		String chaine = "LES LOUPS QUI PERDENT UN RANG :\n";
+		for (Lycanthrope l : listeLoup) {
+			if (l.SeuilFacteurDominationAtteint()) {
+				if (!IsDernierDuRang(l.getRangDomination())) {
+					l.setRangDomination(l.getRangDomination().getRangInferieur());
+					chaine += "   - "+l+"\n";
+				}	
+			}
+		}
+		return chaine;
+	}
+	
+	
+	private boolean IsDernierDuRang(Enum_RangDomination rang) {
+		int compteur = 0;
+		for (Lycanthrope l : listeLoup) {
+			if (l.getRangDomination() == rang)
+				compteur++;
+		}
+		if (compteur < 2)
+			return true;
+		else
+			return false;
+	}
+	
 	
 	
 	/**
