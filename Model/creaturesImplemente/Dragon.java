@@ -4,6 +4,8 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+import java.util.ArrayList;
+
 /**
  * Cette classe correspond à la crature du dragon
  * qui est un ovipare
@@ -11,6 +13,8 @@ import references.*;
  *
  */
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
+
+    private final int dureeIncubation = 1;
 
     /**
      * Constructeur de la classe Dragon.
@@ -21,10 +25,22 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @param poids            Le poids du dragon.
      * @param taille           La taille du dragon.
      */
-    protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
+    public Dragon(Dragon parent1,Dragon parent2,String bruit) {
+        super(parent1, parent2);
+        this.setAgressivite(Enum_Agressivite.cannibale);
+        this.setNomEspece(parent1.getNomEspece());
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
     }
-    
+
+    public Dragon (String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.cannibale);
+        this.setNomEspece(Enum_Especes.Dragon);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
+    }
+
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.
@@ -89,17 +105,8 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      */
     @Override
     public void Mourrir() {
-        ReinitialiserCreature();
+        ReinitialiserCreature(); //TODO changer ca en un oeuf
     }
     
-    
-    /**
-     * Méthode pour pondre un œuf.
-     * 
-     * @param dateNaissance     La date de naissance de l'œuf.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     */
-    public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, super.getDureePourEnfant());
-    }
+
 }

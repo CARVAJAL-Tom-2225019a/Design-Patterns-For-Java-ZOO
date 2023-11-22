@@ -1,5 +1,6 @@
 package controllerApplication;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -447,9 +448,11 @@ public class ControllerZoo {
         		VueGlobale.Afficher("Enfant en cours de type "+femelle.getNomEspece());
         	}
         	else if (naitre==2) {
-        		Oeuf o = ((Ovipare)femelle).PondreOeuf(male, femelle.getDureePourEnfant());
-        		zoo.AddOeuf(o);
+        		ArrayList<Oeuf> oeufs = ((Ovipare)femelle).PondreOeuf();
+        		for (Oeuf o : oeufs) {
+					zoo.AddOeuf(o);
         		VueGlobale.Afficher("Oeuf pondu de type "+o.getEspece());
+				}
         	}
         	else if (naitre==-1)
         		VueGlobale.Afficher("Impossible de concevoir");

@@ -1,7 +1,10 @@
 package references;
 
 public class CONSTANTES {
-	
+
+    public static final int MAX_POIDS = 1000;
+	public static final int MAX_TAILLE = 1000;
+	public static final int MAX_AGE_BEBE = 5 ; // toute espece confondu un bébé est maximum de 5 ans
 	public static int TEMPS_APPLICATION_SLEEP = 6000;
 	public static int DUREE_VIE_ZOO = 15;
 	

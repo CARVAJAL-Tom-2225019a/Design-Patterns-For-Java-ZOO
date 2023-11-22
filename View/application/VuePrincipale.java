@@ -1,9 +1,10 @@
 package application;
+import controllerApplication.ControllerPrincipal;
+import maitreZoo.MaitreZoo;
+import references.CONSTANTES;
+import references.Enum_Sexe;
 
 import java.util.Scanner;
-import ControllerApplication.ControllerPrincipal;
-import maitreZoo.MaitreZoo;
-import references.*;
 
 public class VuePrincipale {
 	// Scanner pour la saisie utilisateur

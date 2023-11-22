@@ -11,7 +11,9 @@ import references.*;
  *
  */
 public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel {
-	
+
+    private final int dureeIncubation = 1;
+
     /**
      * Constructeur de la classe Phenix.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -23,8 +25,20 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * @param bruit            Le bruit que fait le phénix.
      * @param dureeIncubation  La durée d'incubation spécifique pour les pehnixs.
      */
-    protected Phenix(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
+    public Phenix(Phenix parent1,Phenix parent2,String bruit) {
+        super(parent1, parent2);
+        this.setAgressivite(Enum_Agressivite.farouche);
+        this.setNomEspece(parent1.getNomEspece());
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
+    }
+
+    public Phenix (String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.farouche);
+        this.setNomEspece(Enum_Especes.Phenix);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
     }
 
 
@@ -59,13 +73,5 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
     }
     
     
-    /**
-     * Méthode pour pondre un œuf.
-     * 
-     * @param dateNaissance     La date de naissance de l'œuf.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     */
-    public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, super.getDureePourEnfant());
-    }
+
 }

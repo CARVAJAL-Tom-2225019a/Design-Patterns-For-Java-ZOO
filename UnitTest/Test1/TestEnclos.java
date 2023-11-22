@@ -2,6 +2,7 @@ package Test1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -131,8 +132,8 @@ class TestEnclos {
 	void testPondreOeuf() throws Exception {
 		Creature femelle = FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 10, 10);
 		Creature male = FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Male, 10, 10);
-		Oeuf oeuf = ((Ovipare)femelle).PondreOeuf(male, femelle.getDureePourEnfant());
-		assertNotNull(oeuf);
+		ArrayList<Oeuf> oeufs = ((Ovipare)femelle).PondreOeuf();
+		assertNotNull(oeufs);
 	}
 	
 	@Test

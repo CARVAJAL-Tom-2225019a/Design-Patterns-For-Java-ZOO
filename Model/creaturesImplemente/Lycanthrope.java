@@ -13,6 +13,7 @@ import zoo.ZooFantastique;
  *
  */
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
+	private final int dureeGestation = 1;
 	//TODO : calcul niveau
 	
 	//TODO : agresser, selon niveau de sante... + conséquences
@@ -41,23 +42,37 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * Constructeur de la classe Lycanthrope.
      * Protected afin que la création se fasse essentiellement depuis le factory
      * 
-     * @param nomEspece       L'espèce du lycanthrope.
-     * @param sexe            Le sexe du lycanthrope.
-     * @param poids           Le poids du lycanthrope.
-     * @param taille          La taille du lycanthrope.
      * @param bruit           Le bruit que fait le lycanthrope.
-     * @param dureeGestation  La durée de gestation spécifique pour les lycanthrope.
      */
-    protected Lycanthrope(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
-        categorieAge = Enum_CategorieAge.jeune;
-        this.force = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FORCE);
-        facteurDomination = 0;
-        rangDomination=Enum_RangDomination.OMEGA;
-        niveau = calculNiveau();
-        facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
-        meute = null;
-    } 
+
+
+	protected Lycanthrope(Licorne parent1,Licorne parent2, String bruit) {
+		super(parent1, parent2, parent1.getDureeGestation());
+		this.setAgressivite(Enum_Agressivite.pacifique);
+		this.setNomEspece(Enum_Especes.Licorne);
+		this.setDureeGestation(dureeGestation);
+		this.setBruit( bruit);
+		this.CalculerForce();
+		facteurDomination = 0;
+		rangDomination=Enum_RangDomination.OMEGA;
+		niveau = calculNiveau();
+		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
+		meute = null;
+	}
+	protected Lycanthrope(  String bruit) {
+		super();
+		this.setAgressivite(Enum_Agressivite.pacifique);
+		this.setNomEspece(Enum_Especes.Licorne);
+		this.setBruit( bruit);
+		this.CalculerForce();
+		this.setDureeGestation(dureeGestation);
+
+		facteurDomination = 0;
+		rangDomination=Enum_RangDomination.OMEGA;
+		niveau = calculNiveau();
+		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
+		meute = null;
+	}
     
     
     /**
@@ -66,7 +81,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public Enum_CategorieAge getCategorieAge() {
     	return categorieAge;
     }
-    public int getForce() {
+    public double getForce() {
     	return force;
     }
     public int getFacteurDomination() {
@@ -165,18 +180,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         super.Vieillir();
         int curseur = CONSTANTES.MAX_AGE/3;
         // changement categorie age
-        if (super.getAge()>0 && super.getAge()<curseur) {
-        	categorieAge = Enum_CategorieAge.jeune;
-        }
-        else if (super.getAge()>=curseur && super.getAge()<curseur*2) {
-        	categorieAge = Enum_CategorieAge.adulte;
-        }
-        else if (super.getAge()>=curseur*2 && curseur*2<=CONSTANTES.MAX_AGE) {
-        	categorieAge = Enum_CategorieAge.vieux;
-        }
-        if (super.isVivant()){
-        	categorieAge = Enum_CategorieAge.mort;
-        }
+        categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
     }
     
     

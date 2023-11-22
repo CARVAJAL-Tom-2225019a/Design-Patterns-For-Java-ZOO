@@ -12,6 +12,8 @@ import references.*;
  */
 public class Nymphe extends Vivipare implements CreatureImmortel {
 
+    private final int dureeGestation = 1;
+
     /**
      * Constructeur de la classe Nymphe.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -23,10 +25,20 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      * @param bruit           Le bruit que fait la Nymphe.
      * @param dureeGestation  La durée de gestation spécifique pour les nymphes.
      */
-    protected Nymphe(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
+    protected Nymphe(Nymphe parent1,Nymphe parent2, String bruit) {
+        super(parent1, parent2, parent1.getDureeGestation());
+        this.setAgressivite(Enum_Agressivite.defensif);
+        this.setNomEspece(Enum_Especes.Nymphe);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
     }
-
+    protected Nymphe( String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.defensif);
+        this.setNomEspece(Enum_Especes.Nymphe);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
+    }
     
     /**
      * Méthode de l'interface CreatureImmortel : Mourrir.

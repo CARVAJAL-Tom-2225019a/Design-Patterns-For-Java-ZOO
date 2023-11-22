@@ -11,20 +11,26 @@ import references.*;
  *
  */
 public class Megalodon extends Ovipare implements CreatureMarine {
-
+    private final int dureeIncubation = 1;
     /**
      * Constructeur de la classe Megalodon.
      * Protected afin que la création se fasse essentiellement depuis le factory
      * 
-     * @param nomEspece        L'espèce du Megalodon.
-     * @param sexe             Le sexe du Megalodon.
-     * @param poids            Le poids du Megalodon.
-     * @param taille           La taille du Megalodon.
      * @param bruit            Le bruit que fait le Megalodon.
-     * @param dureeIncubation  La durée d'incubation spécifique pour les megalodons.
      */
-    protected Megalodon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
+    protected Megalodon(Kraken parent1,Kraken parent2, String bruit) {
+        super(parent1, parent2);
+        this.setAgressivite(Enum_Agressivite.curieux);
+        this.setNomEspece(Enum_Especes.Megalodon);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
+    }
+    protected Megalodon( String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.curieux);
+        this.setNomEspece(Enum_Especes.Megalodon);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
     }
 
     
@@ -45,16 +51,5 @@ public class Megalodon extends Ovipare implements CreatureMarine {
         } else {
             throw new Exception("Megalodon pas en etat de nager");
         }
-    }
-    
-    
-    /**
-     * Méthode pour pondre un œuf.
-     * 
-     * @param dateNaissance     La date de naissance de l'œuf.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     */
-    public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, super.getDureePourEnfant());
     }
 }

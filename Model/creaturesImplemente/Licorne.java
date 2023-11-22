@@ -12,6 +12,7 @@ import references.*;
  */
 public class Licorne extends Vivipare implements CreatureTerrestre {
 
+    private final int dureeGestation = 1;
     /**
      * Constructeur de la classe Licorne.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -23,10 +24,22 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * @param bruit           Le bruit que fait la licorne.
      * @param dureeGestation  La durée de gestation spécifique pour les licornes.
      */
-    protected Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
-    }
 
+
+    protected Licorne(Licorne parent1,Licorne parent2, String bruit) {
+        super(parent1, parent2, parent1.getDureeGestation());
+        this.setAgressivite(Enum_Agressivite.pacifique);
+        this.setNomEspece(Enum_Especes.Licorne);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
+    }
+    protected Licorne( String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.pacifique);
+        this.setNomEspece(Enum_Especes.Licorne);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
+    }
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.

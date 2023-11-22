@@ -357,11 +357,11 @@ public class Enclos {
      */
     public int ConcevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (femelle.isVivant() && femelle instanceof Vivipare) {
-    		((Vivipare)femelle).concevoirUnEnfant(male, femelle.getDureePourEnfant());
+    		((Vivipare)femelle).concevoirUnEnfant((Vivipare)male, femelle.getDureeGestation());
     		return 1;
     	}
     	else if (femelle.isVivant() && femelle instanceof Ovipare) {
-    		
+			((Ovipare)femelle).CreerBebe((Ovipare) male);
     		// TODO : eclore
     		return 2;
     	}

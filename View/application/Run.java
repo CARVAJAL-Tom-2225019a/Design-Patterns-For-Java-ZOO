@@ -1,6 +1,6 @@
 package application;
 
-import ControllerApplication.ControllerPrincipal;
+import controllerApplication.ControllerPrincipal;
 import zoo.ZooFantastique;
 
 	//TODO : voir en cas d'erreur d'entree pour chaque
@@ -25,6 +25,6 @@ public class Run {
         control.creerDonneesJeu();
 
         // Passe le contrôle de l'application à l'utilisateur
-        zoo.PasserLaMainUtilisateur();
+        //zoo.PasserLaMainUtilisateur();
     }
 }

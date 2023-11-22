@@ -16,15 +16,22 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * Constructeur de la classe Sirene.
      * Protected afin que la création se fasse essentiellement depuis le factory
      * 
-     * @param nomEspece       L'espèce de la sirène.
-     * @param sexe            Le sexe de la sirène.
-     * @param poids           Le poids de la sirène.
-     * @param taille          La taille de la sirène.
      * @param bruit           Le bruit que fait la sirène.
-     * @param dureeGestation  La durée de gestation spécifique pour les sirènes.
      */
-    protected Sirene(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
+
+    protected Sirene(Sirene parent1,Sirene parent2, String bruit) {
+        super(parent1, parent2, parent1.getDureeGestation());
+        this.setAgressivite(Enum_Agressivite.agressif);
+        this.setNomEspece(Enum_Especes.Kraken);
+        this.setDureeGestation(getDureeGestation());
+        this.setBruit( bruit);
+    }
+    protected Sirene( String bruit) {
+        super();
+        this.setAgressivite(Enum_Agressivite.agressif);
+        this.setNomEspece(Enum_Especes.Kraken);
+        this.setDureeGestation(getDureeGestation());
+        this.setBruit( bruit);
     }
 
     

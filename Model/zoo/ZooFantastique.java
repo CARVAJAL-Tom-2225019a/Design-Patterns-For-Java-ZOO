@@ -123,7 +123,7 @@ public class ZooFantastique {
     public String AfficherFemellesEnceinte() {
     	String chaine = "LES FEMELLES ENCEINTES :\n";
     	for (Creature c : listeFemelleEnceinte) {
-    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestant();
+    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestantAvantMiseABas();
     	}
     	return chaine;
     }
