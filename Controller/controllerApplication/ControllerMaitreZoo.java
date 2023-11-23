@@ -1,6 +1,6 @@
-package ControllerApplication;
+package controllerApplication;
 
-import application.VuePrincipale;
+import viewApplication.VuePrincipale;
 import base.Creature;
 import enclosImplemente.Enclos;
 import maitreZoo.MaitreZoo;

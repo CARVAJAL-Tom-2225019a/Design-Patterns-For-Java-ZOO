@@ -20,14 +20,14 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      */
     protected Megalodon(Kraken parent1,Kraken parent2, String bruit) {
         super(parent1, parent2);
-        this.setAgressivite(Enum_Agressivite.curieux);
+        this.setAgressivite(Enum_Aggressivite.curieux);
         this.setNomEspece(Enum_Especes.Megalodon);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
     }
     protected Megalodon( String bruit) {
         super();
-        this.setAgressivite(Enum_Agressivite.curieux);
+        this.setAgressivite(Enum_Aggressivite.curieux);
         this.setNomEspece(Enum_Especes.Megalodon);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);

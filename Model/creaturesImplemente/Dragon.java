@@ -27,7 +27,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      */
     public Dragon(Dragon parent1,Dragon parent2,String bruit) {
         super(parent1, parent2);
-        this.setAgressivite(Enum_Agressivite.cannibale);
+        this.setAgressivite(Enum_Aggressivite.cannibale);
         this.setNomEspece(parent1.getNomEspece());
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
@@ -35,7 +35,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     public Dragon (String bruit) {
         super();
-        this.setAgressivite(Enum_Agressivite.cannibale);
+        this.setAgressivite(Enum_Aggressivite.cannibale);
         this.setNomEspece(Enum_Especes.Dragon);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);

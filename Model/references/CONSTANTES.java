@@ -21,9 +21,9 @@ public class CONSTANTES {
 	public static int SALINITE_CORRECT = 5;
 	public static int NB_CREATURE_PAR_ENCLOS = 10;
 	public static int NB_CREATURE_PAR_ENCLOS_MAX = 15;
-	public static int TAILLE_ENCLOS = 100;
+	public static int TAILLE_ENCLOS = 1000;
 	
-	public static int TAILLE_MAX_CREATURE=50;
+
 	
 	
 	public static int NUM_CHOIX_MAX = 12;

@@ -27,7 +27,7 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      */
     public Phenix(Phenix parent1,Phenix parent2,String bruit) {
         super(parent1, parent2);
-        this.setAgressivite(Enum_Agressivite.farouche);
+        this.setAgressivite(Enum_Aggressivite.farouche);
         this.setNomEspece(parent1.getNomEspece());
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
@@ -35,7 +35,7 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
 
     public Phenix (String bruit) {
         super();
-        this.setAgressivite(Enum_Agressivite.farouche);
+        this.setAgressivite(Enum_Aggressivite.farouche);
         this.setNomEspece(Enum_Especes.Phenix);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);

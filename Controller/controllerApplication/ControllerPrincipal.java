@@ -65,8 +65,8 @@ public class ControllerPrincipal {
     	try {
     		for (Oeuf o : zoo.GetlLsteOeufs()) {
         		if (o.getDureeIncubationRestante() == 0) {
-        			double poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
-        			double taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
+        			double poids = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
+        			double taille = 1 + (random.nextDouble() * CONSTANTES.MAX_POIDS);
         			Creature enfant = o.Eclore(Creature.SexeAleatoire(), poids, taille);
         			VueGlobale.Afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
@@ -86,8 +86,8 @@ public class ControllerPrincipal {
     		for (Creature c : zoo.GetListeFemelleEnceinte()) {
         		nbJour = ((Vivipare)c).DecrementerNombreJourRestantAvantNaissance();
         		if (nbJour == 0) {
-        			double poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
-        			double taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
+        			double poids = 1 + (random.nextDouble() * CONSTANTES.MAX_POIDS);
+        			double taille = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
         			Creature enfant = ((Vivipare)c).MettreBas(Creature.SexeAleatoire(), poids, taille);
         			VueGlobale.Afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
@@ -146,9 +146,9 @@ public class ControllerPrincipal {
 		try {
 			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
 				sexe = Creature.SexeAleatoire();
-				poids = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
-				taille = 1 + (random.nextDouble() * CONSTANTES.TAILLE_MAX_CREATURE);
-				Creature d = FactoryCreature.newCreature(espece, sexe, poids, taille);
+				poids = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
+				taille = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
+				Creature d = FactoryCreature.newCreature(espece);
 				enclos.AjouterCreature(d);
 				// age aleatoire
 				age = 1 + random.nextInt(MaxAgeAleatoire);

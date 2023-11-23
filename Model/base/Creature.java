@@ -3,6 +3,7 @@ package base;
 import java.util.ArrayList;
 import java.util.Random;
 import references.*;
+import zoo.ZooFantastique;
 
 
 /**
@@ -27,10 +28,10 @@ public abstract class Creature {
     private boolean enTrainDeDormir;
     private boolean vivant;
     private String bruit;
-    private int dureeGestation = 1; // ans
+    private int dureeGestation; // ans
 
     private int bonheur;
-    private Enum_Agressivite agressivite;
+    private Enum_Aggressivite agressivite;
     private ArrayList<Creature> listeEnfants;
     private ArrayList<Creature> listeParents; // doit en avoir max 2.
     private String prenom;
@@ -48,15 +49,15 @@ public abstract class Creature {
      */
     public Creature (){
         this.sexe= SexeAleatoire();
-        this.age = intAleatoire(1, CONSTANTES.MAX_AGE);
+        this.age = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_AGE);
         this.categorieAge = Enum_CategorieAge.getCategorieByAge(age);
-        this.bonheur = intAleatoire(1, 100);
-        this.poids = intAleatoire(1, CONSTANTES.MAX_POIDS);
-        this.taille = intAleatoire(1, CONSTANTES.MAX_TAILLE);
-        this.indicateurFaim = intAleatoire(1, CONSTANTES.MAX_INDICATEUR);
-        this.indicateurSommeil = intAleatoire(1, CONSTANTES.MAX_INDICATEUR);
-        this.indicateurSante = intAleatoire(1, CONSTANTES.MAX_INDICATEUR);
-        this.enTrainDeDormir = (intAleatoire(0, 1) == 1);
+        this.bonheur = ZooFantastique.getIntAleatoire(100);
+        this.poids = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_POIDS);
+        this.taille = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_TAILLE);
+        this.indicateurFaim = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
+        this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
+        this.enTrainDeDormir = false;
         this.vivant = true;
         this.listeEnfants= new ArrayList<Creature>();
         this.listeParents= new ArrayList<Creature>();
@@ -73,7 +74,7 @@ public abstract class Creature {
         this.status = Enum_RangDomination.ALPHA ; //a surcharger plus tard
         this.bruit = ""; // a sucharger plus tard
         this.nomEspece = null; // a surcharger plus tard
-        this.agressivite = Enum_Agressivite.pacifique; // par default, pourra changer selon l'espece par surcharge
+        this.agressivite = Enum_Aggressivite.pacifique; // par default, pourra changer selon l'espece par surcharge
         this.dureeGestation = 1;// sera surcharger plus tard
 
     }
@@ -147,7 +148,7 @@ public abstract class Creature {
     public int getBonheur() {
         return bonheur;
     }
-    public Enum_Agressivite getAgressivite() {
+    public Enum_Aggressivite getAgressivite() {
         return agressivite;
     }
     public ArrayList<Creature> getListeEnfants() {
@@ -174,7 +175,7 @@ public abstract class Creature {
     public void setBonheur(int bonheur) {
         this.bonheur = bonheur;
     }
-    public void setAgressivite(Enum_Agressivite agressivite) {
+    public void setAgressivite(Enum_Aggressivite agressivite) {
         this.agressivite = agressivite;
     }
     public void setCombatVaincu(int combatVaincu) {
@@ -183,6 +184,18 @@ public abstract class Creature {
     public void setStatus(Enum_RangDomination status) {
         this.status = status;
     }
+    
+    /**
+     * Setters
+     */
+    protected void setNomEspece(Enum_Especes enumEspeces) {
+        this.nomEspece = enumEspeces;
+    }
+
+    protected void setBruit(String bruit) {
+        this.bruit = bruit;
+    }
+    
 
     /**
      * Méthode pour que la créature mange.
@@ -387,15 +400,6 @@ public abstract class Creature {
             return Enum_Sexe.Femelle;
     }
 
-    /**
-     * Méthode pour générer un nombre aléatoire dans une fourchette
-     * @return int
-     */
-    public int intAleatoire(int min, int max) {
-        Random random = new Random();
-        return min + random.nextInt(max - min);
-    }
-
 
 
     /**
@@ -403,7 +407,7 @@ public abstract class Creature {
      * selon la force
      * @return Creature gagnante
      */
-    public Creature Combatre(Creature other){
+    public Creature Combattre(Creature other){
         if (this.force > other.force)
             return this;
         else
@@ -436,14 +440,5 @@ public abstract class Creature {
         }
         force = age + poids + taille + indicateurSante + indicateurFaim + indicateurSommeil + combatVaincu + facteurBonus;
         return force;
-    }
-
-
-    protected void setNomEspece(Enum_Especes enumEspeces) {
-        this.nomEspece = enumEspeces;
-    }
-
-    protected void setBruit(String bruit) {
-        this.bruit = bruit;
     }
 }

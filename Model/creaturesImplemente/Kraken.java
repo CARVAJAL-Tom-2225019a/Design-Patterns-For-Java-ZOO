@@ -26,14 +26,14 @@ public class Kraken extends Ovipare implements CreatureMarine {
      */
     protected Kraken(Kraken parent1,Kraken parent2, String bruit) {
         super(parent1, parent2);
-        this.setAgressivite(Enum_Agressivite.agressif);
+        this.setAgressivite(Enum_Aggressivite.agressif);
         this.setNomEspece(Enum_Especes.Kraken);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
     }
     protected Kraken( String bruit) {
         super();
-        this.setAgressivite(Enum_Agressivite.agressif);
+        this.setAgressivite(Enum_Aggressivite.agressif);
         this.setNomEspece(Enum_Especes.Kraken);
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);

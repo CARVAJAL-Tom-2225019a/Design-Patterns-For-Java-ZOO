@@ -27,14 +27,14 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      */
     protected Nymphe(Nymphe parent1,Nymphe parent2, String bruit) {
         super(parent1, parent2, parent1.getDureeGestation());
-        this.setAgressivite(Enum_Agressivite.defensif);
+        this.setAgressivite(Enum_Aggressivite.defensif);
         this.setNomEspece(Enum_Especes.Nymphe);
         this.setDureeGestation(dureeGestation);
         this.setBruit( bruit);
     }
     protected Nymphe( String bruit) {
         super();
-        this.setAgressivite(Enum_Agressivite.defensif);
+        this.setAgressivite(Enum_Aggressivite.defensif);
         this.setNomEspece(Enum_Especes.Nymphe);
         this.setDureeGestation(dureeGestation);
         this.setBruit( bruit);

@@ -110,7 +110,7 @@ public abstract class Vivipare extends Creature {
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
     public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return FactoryCreature.newCreature(super.getNomEspece(), sexe, poids, taille);
+    	return FactoryCreature.newCreature(super.getNomEspece());
     }
     
     

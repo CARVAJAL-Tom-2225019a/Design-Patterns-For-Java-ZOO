@@ -48,7 +48,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 
 	protected Lycanthrope(Licorne parent1,Licorne parent2, String bruit) {
 		super(parent1, parent2, parent1.getDureeGestation());
-		this.setAgressivite(Enum_Agressivite.pacifique);
+		this.setAgressivite(Enum_Aggressivite.pacifique);
 		this.setNomEspece(Enum_Especes.Licorne);
 		this.setDureeGestation(dureeGestation);
 		this.setBruit( bruit);
@@ -61,7 +61,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	}
 	protected Lycanthrope(  String bruit) {
 		super();
-		this.setAgressivite(Enum_Agressivite.pacifique);
+		this.setAgressivite(Enum_Aggressivite.pacifique);
 		this.setNomEspece(Enum_Especes.Licorne);
 		this.setBruit( bruit);
 		this.CalculerForce();

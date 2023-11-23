@@ -72,7 +72,7 @@ public class Oeuf {
                 isOpen = true;
 
                 // Création de la créature
-                return FactoryCreature.newCreature(espece, sexe, poids, taille);
+                return FactoryCreature.newCreature(espece);
             } else {
                 throw new Exception("Durée d'incubation non terminée");
             }
