@@ -46,6 +46,7 @@ public abstract class Vivipare extends Creature {
     
     public void RemiseAZeroApresNaissance() {
     	nbJourConceptionRestantAvantMiseABas =0;
+    	ventre.clear();
     }
     
 
@@ -63,8 +64,7 @@ public abstract class Vivipare extends Creature {
     		// Verification femelle et male, et meme espece
     		if (super.getSexe() == Enum_Sexe.Femelle  &&  papa.getSexe() == Enum_Sexe.Male  && super.getNomEspece()==papa.getNomEspece()) {
         		// Verification qu'un enfant n'est pas deja en cours
-    			if (getNbJourConceptionRestantAvantMiseABas()==0) {
-
+    			if (ventre.isEmpty()) {
 					// ajout de n embryon dans le ventre avec n entre 0 et 10
 					Random random = new Random(System.currentTimeMillis());
 					int nbEmbryon = random.nextInt(3);
@@ -91,11 +91,8 @@ public abstract class Vivipare extends Creature {
      * @throws Exception
      */
     public Creature VerificationEnfantEnConception() throws Exception {
-    	Random random = new Random(System.currentTimeMillis());
-    	double poids = 1 + (random.nextDouble() * 49);
-		double taille = 1 + (random.nextDouble() * 49);
     	if (DecrementerNombreJourRestantAvantNaissance() == 0)
-			return MettreBas(Creature.SexeAleatoire(), poids, taille);
+			return MettreBas();
 		return null;
     }
     
@@ -109,7 +106,7 @@ public abstract class Vivipare extends Creature {
      * @return Une instance de la classe Creature qui né.
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
-    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    public Creature MettreBas() throws Exception {
     	return FactoryCreature.newCreature(super.getNomEspece());
     }
     

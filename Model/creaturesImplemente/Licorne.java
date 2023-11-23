@@ -67,7 +67,7 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return super.MettreBas(sexe, poids, taille);
+    public Creature MettreBas() throws Exception {
+    	return super.MettreBas();
     }
 }

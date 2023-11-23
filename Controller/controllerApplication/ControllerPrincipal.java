@@ -80,15 +80,12 @@ public class ControllerPrincipal {
     	
     }
     public void VerificationEnfants() throws Exception {
-    	Random random = new Random(System.currentTimeMillis());
     	int nbJour;
     	try {
     		for (Creature c : zoo.GetListeFemelleEnceinte()) {
         		nbJour = ((Vivipare)c).DecrementerNombreJourRestantAvantNaissance();
         		if (nbJour == 0) {
-        			double poids = 1 + (random.nextDouble() * CONSTANTES.MAX_POIDS);
-        			double taille = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
-        			Creature enfant = ((Vivipare)c).MettreBas(Creature.SexeAleatoire(), poids, taille);
+        			Creature enfant = ((Vivipare)c).MettreBas();
         			VueGlobale.Afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
         			zoo.AddFemelleEnceinte(c);

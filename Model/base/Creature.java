@@ -13,7 +13,7 @@ import zoo.ZooFantastique;
 public abstract class Creature {
 
     private Enum_Especes nomEspece; // TODO a defenir dans chaque constructeur
-    private final Enum_Sexe sexe;
+    private Enum_Sexe sexe;
     private double poids;
     private double taille;
 
@@ -440,5 +440,12 @@ public abstract class Creature {
         }
         force = age + poids + taille + indicateurSante + indicateurFaim + indicateurSommeil + combatVaincu + facteurBonus;
         return force;
+    }
+    
+    
+    
+    // METHODE POUR LES TESTS UNITAIRES
+    public void setSexe (Enum_Sexe s) {
+    	sexe = s;
     }
 }
