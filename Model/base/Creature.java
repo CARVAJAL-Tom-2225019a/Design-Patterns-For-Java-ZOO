@@ -241,7 +241,7 @@ public abstract class Creature {
      */
     public void Soigner() throws Exception {
         if (vivant) {
-            indicateurSante += CONSTANTES.MAX_INDICATEUR;
+            indicateurSante = CONSTANTES.MAX_INDICATEUR;
         } else {
             throw new Exception("La creature n'est plus vivante, impossible de la soigner");
         }
