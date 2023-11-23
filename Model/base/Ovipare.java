@@ -29,6 +29,10 @@ public abstract class Ovipare extends Creature {
         this.ventre = new ArrayList<Oeuf>();
         this.setDureeGestation(dureeAvantEclosion);
     }
+    
+    public ArrayList<Oeuf> getVentre() {
+    	return ventre;
+    }
 
     public void CreerBebe(Ovipare partenaire) throws Exception {
         if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && partenaire.isVivant() && partenaire.getSexe() == Enum_Sexe.Male && this.getNomEspece() == partenaire.getNomEspece()) {

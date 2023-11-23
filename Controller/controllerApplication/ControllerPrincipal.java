@@ -31,19 +31,22 @@ public class ControllerPrincipal {
     	try {
             // Pour chaque enclos
             for (Enclos enclos : zoo.GetListeEnclos()) {
-                // Pour chaque créature
-                for (Creature creature : enclos.getListeCreatures().values()) {
-                    // Passage d'une année
-                    creature.Vieillir();
-                }
-                // Ajoute les informations sur les créatures mortes à la chaîne
-                chaine+=enclos.creaturesMortes();
+            	if (!enclos.getListeCreatures().isEmpty()) {
+            		// Pour chaque créature
+                    for (Creature creature : enclos.getListeCreatures().values()) {
+                        // Passage d'une année
+                        creature.Vieillir();
+                    }
+                    // Ajoute les informations sur les créatures mortes à la chaîne
+                    chaine+=enclos.creaturesMortes();
+            	}
             }
+            return chaine;
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
     	}
-    	return chaine.toString();
+    	return "erreur";
     }
     
     

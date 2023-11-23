@@ -22,7 +22,7 @@ public class Sirene extends Vivipare implements CreatureMarine {
     protected Sirene(Sirene parent1,Sirene parent2, String bruit) {
         super(parent1, parent2, parent1.getDureeGestation());
         this.setAgressivite(Enum_Aggressivite.agressif);
-        this.setNomEspece(Enum_Especes.Kraken);
+        this.setNomEspece(Enum_Especes.Sirene);
         this.setDureeGestation(getDureeGestation());
         this.setBruit( bruit);
     }

@@ -299,8 +299,9 @@ public abstract class Creature {
         	PerdreSommeil();
         	age++;
         }
-        else if (vivant && age == CONSTANTES.MAX_AGE)
+        else if (vivant && age == CONSTANTES.MAX_AGE) {
             Mourir();
+        }
     }
 
     
@@ -364,6 +365,7 @@ public abstract class Creature {
      */
     public String toString() {
     	return "-- Creature de type "+nomEspece+" ="
+    				+"\n   prenom : "+prenom
     				+"\n   sexe : "+sexe
     				+"\n   age : "+age
     				+"\n   vivant : "+vivant
@@ -415,7 +417,6 @@ public abstract class Creature {
     }
 
     public double CalculerForce () {
-
         int facteurBonus = 0;
         if (sexe == Enum_Sexe.Male){
             facteurBonus += 50;

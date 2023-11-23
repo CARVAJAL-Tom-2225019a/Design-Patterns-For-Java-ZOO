@@ -96,7 +96,7 @@ public abstract class Enclos {
 	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
 	 */
 	public String voirCreaturesAyantUnBesoin() {
-		String chaine = "";
+		String chaine = "\nLES CREATURES QUI ONT UN BESOIN : ";
 		boolean isValue = false;
 		String temp = voirCreaturesMauvaiseSante();
 		if (temp != null) {
@@ -116,7 +116,7 @@ public abstract class Enclos {
 		if (isValue)
 			return chaine+"\n";
 		else
-			return null;
+			return chaine;
 	}	
 	
 	
@@ -185,11 +185,13 @@ public abstract class Enclos {
 	 * @throws Exception 
 	 */
 	public String creaturesMortes() throws Exception {
-        String chaine = "Les creatures mortes dans " + nom + " :\n";
-        for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-        	if (!entry.getValue().isVivant()) {
-                chaine += entry.getValue().toString();
-                SupprimerCreature(entry.getValue());
+        String chaine = "\nLes creatures mortes dans " + nom + " :\n";
+        Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Creature> entry = iterator.next();
+            if (!entry.getValue().isVivant()) {
+                chaine += entry.getValue().getPrenom()+"\n";
+                iterator.remove(); // Supprime la créature de la liste en utilisant l'itérateur
             }
         }
         return chaine;
@@ -328,8 +330,9 @@ public abstract class Enclos {
      * 
      * @param sexe Le sexe de la créature souhaitée
      * @return La créature sélectionnée aléatoirement
+	 * @throws Exception 
      */
-    public Creature selectionnerCreatureAleatoireParSexe(Enum_Sexe sexe) {
+    public Creature selectionnerCreatureAleatoireParSexe(Enum_Sexe sexe) throws Exception {
         // Créer une liste pour stocker les créatures correspondant au sexe spécifié
         List<Creature> creaturesDuSexe = new ArrayList<>();
         // Filtrer les créatures par sexe
@@ -345,8 +348,7 @@ public abstract class Enclos {
             int indexAleatoire = random.nextInt(creaturesDuSexe.size());
             return creaturesDuSexe.get(indexAleatoire);
         } else {
-            // Aucune créature du sexe spécifié trouvée
-            return null;
+            throw new Exception ("Dans enclos "+nom+", pas de creature de sexe "+sexe+"\n");
         }
     }
     
@@ -362,7 +364,6 @@ public abstract class Enclos {
     	}
     	else if (femelle.isVivant() && femelle instanceof Ovipare) {
 			((Ovipare)femelle).CreerBebe((Ovipare) male);
-    		// TODO : eclore
     		return 2;
     	}
     	return -1;

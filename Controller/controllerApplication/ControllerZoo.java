@@ -452,7 +452,7 @@ public class ControllerZoo {
         		ArrayList<Oeuf> oeufs = ((Ovipare)femelle).PondreOeuf();
         		for (Oeuf o : oeufs) {
 					zoo.AddOeuf(o);
-        		VueGlobale.Afficher("Oeuf pondu de type "+o.getEspece());
+        		VueGlobale.Afficher("Oeuf(s) pondu de type "+o.getEspece());
 				}
         	}
         	else if (naitre==-1)
@@ -520,14 +520,15 @@ public class ControllerZoo {
     				ActionEffectue=true;
     			}
     			if (!ActionEffectue)
-    				throw new Exception ("Probleme choix automatique sport");
+    				throw new Exception ("Impossible de faire du sport pour eux... en esperant qu'ils ne grossisent pas trop du coup\n");
         	}
     		// Mouvement de l'enclos
         	if ("nager".equals(choix) && peutNager == true) {
         		VueGlobale.Afficher("ALLEZ ! On nage les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
-        			chaine = ((CreatureMarine)c).Nager();
+        			if (!c.isEnTrainDeDormir() && c.isVivant())
+        				chaine = ((CreatureMarine)c).Nager();
         			VueGlobale.Afficher(chaine);
         		}
         	}
@@ -535,7 +536,8 @@ public class ControllerZoo {
         		VueGlobale.Afficher("ALLEZ ! On court les "+enclos.getNomEspece()+"s. ALLEZ !\n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
-        			chaine = ((CreatureTerrestre)c).Courrir();
+        			if (!c.isEnTrainDeDormir() && c.isVivant())
+        				chaine = ((CreatureTerrestre)c).Courrir();
         			VueGlobale.Afficher(chaine);
         		}
         	}
@@ -543,7 +545,8 @@ public class ControllerZoo {
         		VueGlobale.Afficher("ALLEZ ! On vole les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
-        			chaine = ((CreatureVolante)c).Voler();
+        			if (!c.isEnTrainDeDormir() && c.isVivant())
+        				chaine = ((CreatureVolante)c).Voler();
         			VueGlobale.Afficher(chaine);
         		}
         	}
@@ -578,7 +581,8 @@ public class ControllerZoo {
         			+ "On chante l'un apres l'autre !\n");
         	Thread.sleep(1000);
         	for (Creature c : enclos.getListeCreatures().values()) {
-        		VueGlobale.Afficher(c.FaireBruit());
+        		if (!c.isEnTrainDeDormir() && c.isVivant())
+        			VueGlobale.Afficher(c.FaireBruit());
         		Thread.sleep(1000);
         	}
         	VueGlobale.Afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");

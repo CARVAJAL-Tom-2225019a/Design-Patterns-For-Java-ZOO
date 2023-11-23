@@ -4,8 +4,6 @@ import base.*;
 import interfaces.*;
 import references.*;
 
-import java.util.ArrayList;
-
 /**
  * Cette classe correspond à la crature du dragon
  * qui est un ovipare
