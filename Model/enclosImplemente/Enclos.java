@@ -9,7 +9,7 @@ import references.*;
  * Cette classe correspond a un enclos classique
  *
  */
-public class Enclos {
+public abstract class Enclos {
 	
 	private Enum_Especes nomEspece;
 	

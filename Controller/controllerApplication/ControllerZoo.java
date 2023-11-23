@@ -9,6 +9,7 @@ import base.Ovipare;
 import creaturesImplemente.*;
 import enclosImplemente.Aquarium;
 import enclosImplemente.Enclos;
+import enclosImplemente.EnclosClassique;
 import enclosImplemente.Voliere;
 import interfaces.CreatureMarine;
 import interfaces.CreatureTerrestre;
@@ -362,7 +363,7 @@ public class ControllerZoo {
 
             // creation enclos
             if ("Classique".equals(typeEnclos)) {
-                Enclos e = new Enclos(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+                Enclos e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
                 zoo.AddEnclos(e);
             } 
             else if ("Voliere".equals(typeEnclos)) {
@@ -400,7 +401,7 @@ public class ControllerZoo {
         		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
         		int i = zoo.GetListeEnclos().size() + 1;
         		nomEnclos="Enclos"+i;
-        		Enclos e = new Enclos (nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+        		Enclos e = new EnclosClassique (nomEnclos, CONSTANTES.TAILLE_ENCLOS);
         		zoo.AddEnclos(e);
         		enclosDest = e;
         	}

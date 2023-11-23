@@ -123,7 +123,7 @@ public class ControllerPrincipal {
         		numPourNom++;
         		nom = "Enclos"+numPourNom;
         	}
-        	Enclos newEnclos = new Enclos (nom, CONSTANTES.TAILLE_ENCLOS);
+        	Enclos newEnclos = new EnclosClassique (nom, CONSTANTES.TAILLE_ENCLOS);
         	zoo.AddEnclos(newEnclos);
         	newEnclos.AjouterCreature(c);
     	}
@@ -139,15 +139,9 @@ public class ControllerPrincipal {
      */
     public void remplirEnclos(Enclos enclos, Enum_Especes espece) {
     	Random random = new Random();
-    	Enum_Sexe sexe;
-		double poids;
-		double taille;
 		int age;
 		try {
 			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
-				sexe = Creature.SexeAleatoire();
-				poids = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
-				taille = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
 				Creature d = FactoryCreature.newCreature(espece);
 				enclos.AjouterCreature(d);
 				// age aleatoire
@@ -179,12 +173,12 @@ public class ControllerPrincipal {
 			zoo.AddEnclos(enclosKraken);
 			
 			// Licorne
-			Enclos enclosLicorne = new Enclos("LicorneLand", CONSTANTES.TAILLE_ENCLOS);
+			EnclosClassique enclosLicorne = new EnclosClassique("LicorneLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosLicorne, Enum_Especes.Licorne);
 			zoo.AddEnclos(enclosLicorne);
 			
 			// Lycanthrope
-			Enclos enclosLycanthrope = new Enclos("LycanthropeLand", CONSTANTES.TAILLE_ENCLOS);
+			EnclosClassique enclosLycanthrope = new EnclosClassique("LycanthropeLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosLycanthrope, Enum_Especes.Lycanthrope);
 			zoo.AddEnclos(enclosLycanthrope);
 			
@@ -194,7 +188,7 @@ public class ControllerPrincipal {
 			zoo.AddEnclos(enclosMegalodon);
 			
 			// Nymphe
-			Enclos enclosNymphe = new Enclos("NympheLand", CONSTANTES.TAILLE_ENCLOS);
+			EnclosClassique enclosNymphe = new EnclosClassique("NympheLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
 			zoo.AddEnclos(enclosNymphe);
 			
@@ -209,8 +203,16 @@ public class ControllerPrincipal {
 			zoo.AddEnclos(enclosSirene);
 			
 			//Enclos vide
-			Enclos enclosVide = new Enclos("OtherLand", CONSTANTES.TAILLE_ENCLOS);
-			zoo.AddEnclos(enclosVide);
+			Enclos enclosClassiqueVide = new EnclosClassique("ClassiqueLand", CONSTANTES.TAILLE_ENCLOS);
+			zoo.AddEnclos(enclosClassiqueVide);
+			
+			//Enclos vide
+			Aquarium aquariumVide = new Aquarium("AquariumLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+			zoo.AddEnclos(aquariumVide);
+			
+			//Enclos vide
+			Voliere voliereVide = new Voliere("VoliereLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+			zoo.AddEnclos(voliereVide);
 		}
 		catch (Exception e) {
 			VueGlobale.Afficher(e.getMessage());
