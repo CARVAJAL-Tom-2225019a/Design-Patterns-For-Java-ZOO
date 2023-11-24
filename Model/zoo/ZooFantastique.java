@@ -170,7 +170,7 @@ public class ZooFantastique {
      * Méthode pour trouver un enclos par son nom
      * @throws Exception 
      */
-    public Enclos trouverEnclosParNom(String nomRecherche) throws Exception {
+    public Enclos TrouverEnclosParNom(String nomRecherche) throws Exception {
         Iterator<Enclos> iterator = listeEnclos.iterator();
         while (iterator.hasNext()) {
             Enclos enclos = iterator.next();

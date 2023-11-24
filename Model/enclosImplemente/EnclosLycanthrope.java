@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import base.Creature;
+import base.Enclos;
 import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
 import references.CONSTANTES;

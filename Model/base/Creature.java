@@ -49,7 +49,7 @@ public abstract class Creature {
      */
     public Creature (){
         this.sexe= SexeAleatoire();
-        this.age = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_AGE);
+        this.age = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_AGE/2);
         this.categorieAge = Enum_CategorieAge.getCategorieByAge(age);
         this.bonheur = ZooFantastique.getIntAleatoire(100);
         this.poids = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_POIDS);

@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import base.Creature;
+import base.Enclos;
 import base.Ovipare;
 import creaturesImplemente.*;
 import enclosImplemente.Aquarium;
-import enclosImplemente.Enclos;
 import enclosImplemente.EnclosClassique;
 import enclosImplemente.Voliere;
 import interfaces.CreatureMarine;
@@ -248,7 +248,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom de l'enclos : ");
-                enclos = zoo.trouverEnclosParNom(nomEnclos);
+                enclos = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	else {
         		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
@@ -268,7 +268,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom de l'enclos : ");
-                enclos = zoo.trouverEnclosParNom(nomEnclos);
+                enclos = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -290,7 +290,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom de l'enclos : ");
-                enclos = zoo.trouverEnclosParNom(nomEnclos);
+                enclos = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -315,10 +315,10 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos source : ");
-            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	enclos = zoo.TrouverEnclosParNom(nomEnclos);
         		creature = controlUser.SelectionCreatureDansEnclos(enclos);
             	nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos destination : ");
-            	enclosDest = zoo.trouverEnclosParNom(nomEnclos);
+            	enclosDest = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -392,9 +392,9 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos source : ");
-            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	enclos = zoo.TrouverEnclosParNom(nomEnclos);
             	nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos destination : ");
-            	enclosDest = zoo.trouverEnclosParNom(nomEnclos);
+            	enclosDest = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -429,7 +429,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
-            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	enclos = zoo.TrouverEnclosParNom(nomEnclos);
             	VueGlobale.Afficher(enclos.toString() + "\n\nVeuillez selectionner une femelle puis un male\n");
             	// Femelle
             	femelle = controlUser.SelectionCreatureDansEnclos(enclos);
@@ -479,7 +479,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
-            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	enclos = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -571,7 +571,7 @@ public class ControllerZoo {
     		// GESTION MANUEL
         	if (Run.UtilisateurControle) {
         		nomEnclos = VueUtilisateur.DemandeUtilisateur("Nom enclos : ");
-            	enclos = zoo.trouverEnclosParNom(nomEnclos);
+            	enclos = zoo.TrouverEnclosParNom(nomEnclos);
         	}
         	// GESTION AUTOMATIQUE
         	else {

@@ -4,6 +4,7 @@ import creaturesImplemente.*;
 import references.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -38,7 +39,7 @@ public abstract class Ovipare extends Creature {
         if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && partenaire.isVivant() && partenaire.getSexe() == Enum_Sexe.Male && this.getNomEspece() == partenaire.getNomEspece()) {
             // creation n oeuf dans le ventre
             Random random = new Random(System.currentTimeMillis());
-            int nbOeuf = random.nextInt(3);
+            int nbOeuf = 1+random.nextInt(3);
             for (int i = 0; i < nbOeuf; i++) {
                 this.ventre.add(new Oeuf(this,partenaire));
             }
@@ -53,19 +54,20 @@ public abstract class Ovipare extends Creature {
      * @param dateNaissance   La date de naissance de l'œuf.
      * @param dureeIncubation La durée d'incubation spécifique.
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
+     * @throws Exception 
      */
-    public ArrayList<Oeuf> PondreOeuf()  {
-        if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && !this.ventre.isEmpty() && !this.isEnTrainDeDormir()) {
+    public ArrayList<Oeuf> PondreOeuf() throws Exception  {
+    	if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && !this.ventre.isEmpty() && !this.isEnTrainDeDormir()) {
             ArrayList<Oeuf> oeufs = new ArrayList<Oeuf>();
-            for (Oeuf oeuf : this.ventre) {
-                if (oeuf.getDureeIncubationRestante() == 0) {
-                    oeufs.add(oeuf);
-                    ventre.remove(oeuf);
-                }
+            Iterator<Oeuf> it = this.ventre.iterator();
+            while (it.hasNext()) {
+                Oeuf oeuf = it.next();
+                oeufs.add(oeuf);
+                it.remove(); // Utilisez remove() sur l'itérateur pour éviter la ConcurrentModificationException
             }
             return oeufs;
         } else {
-            return null;
+            throw new Exception("Ovipare pas en etat de pondre Oeuf");
         }
     }
 }

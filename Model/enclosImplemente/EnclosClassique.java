@@ -1,6 +1,7 @@
 package enclosImplemente;
 
 import base.Creature;
+import base.Enclos;
 import interfaces.CreatureTerrestre;
 
 public class EnclosClassique extends Enclos {

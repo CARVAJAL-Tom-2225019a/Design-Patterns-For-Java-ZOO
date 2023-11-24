@@ -187,11 +187,6 @@ public class ControllerPrincipal {
 			remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 			zoo.AddEnclos(enclosMegalodon);
 			
-			// Nymphe
-			EnclosClassique enclosNymphe = new EnclosClassique("NympheLand", CONSTANTES.TAILLE_ENCLOS);
-			remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
-			zoo.AddEnclos(enclosNymphe);
-			
 			// Phenix
 			Voliere enclosPhenix = new Voliere("PhenixLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosPhenix, Enum_Especes.Phenix);

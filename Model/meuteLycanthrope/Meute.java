@@ -3,8 +3,8 @@ package meuteLycanthrope;
 import java.util.HashSet;
 import java.util.Set;
 
+import base.Enclos;
 import creaturesImplemente.Lycanthrope;
-import enclosImplemente.Enclos;
 import references.*;
 
 /**

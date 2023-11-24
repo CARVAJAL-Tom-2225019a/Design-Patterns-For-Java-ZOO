@@ -4,7 +4,7 @@ import zoo.ZooFantastique;
 
 import java.util.Random;
 
-import enclosImplemente.Enclos;
+import base.Enclos;
 import references.CONSTANTES;
 import viewApplication.*;
 

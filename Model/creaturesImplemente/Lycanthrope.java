@@ -178,7 +178,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      */
     public void Vieillir() throws Exception {
         super.Vieillir();
-        int curseur = CONSTANTES.MAX_AGE/3;
         // changement categorie age
         categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
     }

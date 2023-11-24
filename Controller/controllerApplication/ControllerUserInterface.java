@@ -1,7 +1,7 @@
 package controllerApplication;
 
 import base.Creature;
-import enclosImplemente.Enclos;
+import base.Enclos;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
