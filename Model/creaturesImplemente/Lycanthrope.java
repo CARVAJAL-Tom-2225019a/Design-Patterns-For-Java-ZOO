@@ -25,9 +25,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 
 	
 	// TODO : a partir du 3.5
-
-	private Enum_CategorieAge categorieAge;
-	private int force;
 	
 	private int facteurDomination;
 	
@@ -54,7 +51,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		this.setBruit( bruit);
 		this.CalculerForce();
 		facteurDomination = 0;
-		rangDomination=Enum_RangDomination.OMEGA;
+		rangDomination=null;
 		niveau = calculNiveau();
 		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
 		meute = null;
@@ -78,12 +75,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     /**
      * Getters
      */
-    public Enum_CategorieAge getCategorieAge() {
-    	return categorieAge;
-    }
-    public double getForce() {
-    	return force;
-    }
     public int getFacteurDomination() {
     	return facteurDomination;
     }
@@ -124,9 +115,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * Permet au lycanthrope de courir sur terre.
      * 
      * @return Un message indiquant que le lycanthrope court.
-     *         Note : Dans cet exemple, la méthode ne fait rien (retourne null),
-     *         car la logique spécifique de course du lycanthrope n'est pas encore implémentée.
-     *         Vous devriez remplacer le retour null par la logique réelle de course du lycanthrope.
      * @throws Exception 
      */
     @Override
@@ -162,24 +150,13 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     				+"\n   fatigue : "+getIndicateurSommeil()+"/"+CONSTANTES.MAX_INDICATEUR
     				+"\n   sante : "+getIndicateurSante()+"/"+CONSTANTES.MAX_INDICATEUR
     				+"\n"
-    				+"\n   categorie age :"+categorieAge
-    				+"\n   force : "+force
+    				+"\n   categorie age :"+getCategorieAge()
+    				+"\n   force : "+getForce()
     				+"\n   facteur domination"+getFacteurDomination()
     				+"\n   rang domination : "+rangDomination.getDescription()
     				+"\n   niveau : "+niveau
     				+"\n   facteur impetuosite : "+facteurImpetuosite
     				+"\n\n";
-    }
-    
-    
-    /**
-     * Méthode pour faire vieillir la créature d'un an
-     *
-     */
-    public void Vieillir() throws Exception {
-        super.Vieillir();
-        // changement categorie age
-        categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
     }
     
     
@@ -253,8 +230,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     private String ExprimerAgressivite (Lycanthrope loup) throws Exception {
-    	return "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+", "
-    			+agresser(loup);
+    	String chaine =  "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
+    	if (IsPlusFort(loup))
+    		chaine+=agresser(loup);
+    	else
+    		chaine+="Je ne suis pas asses fort pour te defier...\n";
+    	return chaine;
     }
     
     
@@ -281,6 +262,21 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	}
     	else
     		throw new Exception ("Impossible d'attaquer la femelle alpha\n");
+    }
+    
+    public boolean IsPlusFort(Lycanthrope loup2) {
+    	if (rangDomination.getValeur() > loup2.getRangDomination().getValeur()) {
+    		return true;
+    	}
+    	else if (rangDomination.getValeur() < loup2.getRangDomination().getValeur()) {
+    		return false;
+    	}
+    	else {
+    		if (niveau > loup2.getNiveau())
+    			return true;
+    		else
+    			return false;
+    	}
     }
     
     
@@ -333,8 +329,10 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception
      */
     public void SeSeparerDeSaMeute() throws Exception {
-    	if(meute.RemoveLoup(this))
+    	if(meute.RemoveLoup(this)) {
+    		rangDomination = null;
     		meute = null;
+    	}
     	else
     		throw new Exception ("Le loup ne peut pas quitter sa meute");
     }

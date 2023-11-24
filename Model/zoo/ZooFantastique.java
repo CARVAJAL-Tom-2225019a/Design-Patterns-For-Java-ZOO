@@ -162,7 +162,7 @@ public class ZooFantastique {
     				chaine+="  - "+e.getNom()+"\n";
     		}
     	}
-    	return chaine+"\n";
+    	return chaine;
     }
 
     

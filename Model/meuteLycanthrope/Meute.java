@@ -14,19 +14,6 @@ public class Meute {
 	//TODO :transformation enclosLycanthrope si espece presente
 	
 	// TODO : donner rang a nouveau loup
-	
-	// TODO : couple reste uni tant que le mâle α n’est pas dominé par un autre mâle
-	
-	// TODO : (n’importe quel mâle adulte considérant être à la hauteur peut 
-	// déclencher un conflit avec le mâle alpha
-	
-	// un nouveau couple sera alors constitué avec la femelle adulte ayant le plus haut niveau à ce
-	// moment-là (cela peut être l’ancienne femelle α). Une femelle déchue du couple α prend le même 
-	// rang de domination que son ancien conjoint
-	
-	// TODO : il arrive que les lycanthropes ω et les lycanthropes ayant échoués lors d’un 
-	// conflit pour devenir mâle α se dispersent pour devenir solitaires (un maître de zoo fantastique aura 
-	// alors la possibilité de les déplacer individuellement dans un autre enclot
 
 	
 	private Lycanthrope femelleAlpha;
@@ -128,17 +115,20 @@ public class Meute {
 	}
 	
 	
-	public boolean DefierMaleAlpha (Lycanthrope l) {
+	public String DefierMaleAlpha (Lycanthrope loup1) throws Exception {
 		boolean reussite = false;
-		//TODO : tenter aggression
+		if (loup1.IsPlusFort(maleAlpha))
+			reussite=true;
+		String chaine = loup1.Hurler(Enum_ActionHurlement.Agressivite, maleAlpha);
 		// reussite
 		if (reussite) {
-			return true;
+			Lycanthrope ancienAlpha = maleAlpha;
+			loup1.setRangDomination(Enum_RangDomination.ALPHA);
+			maleAlpha = loup1;
+			RemoveLoup(ancienAlpha);
+			chaine+= "\n"+loup1.getPrenom()+"est maintenant le male alpha\n";
 		}
-		// echec
-		else {
-			return false;
-		}
+		return chaine;
 	}
 	
 	

@@ -97,7 +97,7 @@ public class Aquarium extends Enclos {
 	 */
 	public String toString() {
 		String chaine = "Aquarium "+super.getNom()+" de superficie "+super.getSuperficie()+" pouvant contenir au "
-				+ "plus "+super.getNbCreatures()+".\n Il y a actuellement "+super.getNbCreatures()+" creatures.\n"
+				+ "plus "+super.getNbMaxCreatures()+" creatures.\n Il y a actuellement "+super.getNbCreatures()+" creatures.\n"
 				+ "Salinite eau : "+saliniteEau+"/"+CONSTANTES.SALINITE_CORRECT+"\n"
 				+ "Niveau eau : "+niveauEau+"/"+profondeurBassin+"\n";
 		for (Creature creature : super.getListeCreatures().values()) {

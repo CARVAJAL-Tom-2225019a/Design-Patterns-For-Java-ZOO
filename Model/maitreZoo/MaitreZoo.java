@@ -9,6 +9,11 @@ import references.*;
  * Classe representant l'unique maitre Zoo (singleton)
  */
 public class MaitreZoo extends Humain{
+	
+	// TODO : si échec defier male alpha, maitre zoo aura 
+		// alors la possibilité de les déplacer individuellement dans un autre enclot
+	
+	
     // Instance unique de la classe MaitreZoo
     private static MaitreZoo instance;
 

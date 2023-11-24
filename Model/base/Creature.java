@@ -295,11 +295,11 @@ public abstract class Creature {
      */
     public void Vieillir() throws Exception {
         if (vivant && age < CONSTANTES.MAX_AGE) {
-        	PerdreNourriture();
-        	PerdreSommeil();
         	age++;
+        	categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
         }
         else if (vivant && age == CONSTANTES.MAX_AGE) {
+        	categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
             Mourir();
         }
     }

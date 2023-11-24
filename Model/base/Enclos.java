@@ -134,7 +134,7 @@ public abstract class Enclos {
 		if (isValue)
 			return chaine;
 		else
-			return null;
+			return "";
 	}
 	
 	
@@ -153,7 +153,7 @@ public abstract class Enclos {
 		if (isValue)
 			return chaine;
 		else
-			return null;
+			return "";
 	}
 	
 	
@@ -172,7 +172,7 @@ public abstract class Enclos {
 		if (isValue)
 			return chaine;
 		else
-			return null;
+			return "";
 	}
 	
 	
