@@ -2,7 +2,6 @@ package maitreZoo;
 
 import base.*;
 import creaturesImplemente.Humain;
-import enclosImplemente.*;
 import references.*;
 
 /**
@@ -49,7 +48,7 @@ public class MaitreZoo extends Humain{
      * @return La chaine de caractere contenant les informations de l'enclos
      * @throws Exception 
      */
-    public String ExaminerEnclos (Enclos enclos) throws Exception {
+    public String examinerEnclos (Enclos enclos) throws Exception {
     	if (enclos != null)
     		return enclos.toString();
     	else
@@ -64,8 +63,8 @@ public class MaitreZoo extends Humain{
      * @param enclos	Enclos a nettoyer
      * @throws Exception 
      */
-    public void NettoyerEnclos (Enclos enclos) throws Exception {
-    	enclos.EntretenirEnclos();
+    public void nettoyerEnclos (Enclos enclos) throws Exception {
+    	enclos.entretenirEnclos();
     }
     
     
@@ -73,8 +72,8 @@ public class MaitreZoo extends Humain{
      * Methode pour nourrir les creatures d'un enclos
      * @throws Exception 
      */
-    public void NourrirCreaturesEnclos (Enclos enclos) throws Exception {
-    	enclos.NourrirCreatures();
+    public void nourrirCreaturesEnclos (Enclos enclos) throws Exception {
+    	enclos.nourrirCreatures();
     }
     
     
@@ -86,13 +85,13 @@ public class MaitreZoo extends Humain{
      * @param enclosDest	enclos de destination
      * @throws Exception 	si l'enclos de destination est plein
      */
-    public void TransfererCreature (Creature creature, Enclos enclosSource, Enclos enclosDest) throws Exception {
+    public void transfererCreature (Creature creature, Enclos enclosSource, Enclos enclosDest) throws Exception {
     	// verification place dans enclos destination
     	if (enclosDest.getNbCreatures() < enclosDest.getNbMaxCreatures()) {
     		// Verification creature existe
     		if (enclosSource.getListeCreatures().containsValue(creature)) {
-    			enclosSource.SupprimerCreature(creature);
-            	enclosDest.AjouterCreature(creature);
+    			enclosSource.supprimerCreature(creature);
+            	enclosDest.ajouterCreature(creature);
             	enclosDest.reorganiserCles();
     		}
     		else

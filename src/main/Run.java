@@ -19,14 +19,13 @@ public class Run {
 	static VueUtilisateur vueUtilisateur = new VueUtilisateur();
 	static VueGlobale vueGlobale = new VueGlobale();
     static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
-
     ControllerZoo zooController = new ControllerZoo();
     ControllerUserInterface userInterfaceController = new ControllerUserInterface();
 
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
     static ZooFantastique zoo = ZooFantastique.getInstance();
     
-    public static boolean UtilisateurControle;
+    public static boolean utilisateurControle;
 
     public static void main(String[] args) throws Exception {
         // Point d'entrée de la simulation
@@ -43,11 +42,11 @@ public class Run {
 		        choix = Integer.parseInt(input);
 		        // Si la conversion en entier réussit, sortir de la boucle
 		        if (choix==1) {
-		        	UtilisateurControle=false;
+		        	utilisateurControle=false;
 		    		break;
 		        }
 		    	else if (choix==2) {
-		    		UtilisateurControle=true;
+		    		utilisateurControle=true;
 		    		break;
 		    	}     
 		    } catch (NumberFormatException e) {
@@ -55,11 +54,11 @@ public class Run {
 		        System.out.println("Veuillez entrer 1 ou 2");
 		    }
 		}
-        if (UtilisateurControle)
+        if (utilisateurControle)
 	        // Passe le contrôle de l'application à l'utilisateur
-        	controllerPrincipal.PasserLaMainUtilisateur();
+        	controllerPrincipal.passerLaMainUtilisateur();
         else
-        	controllerPrincipal.GestionAuto();
+        	controllerPrincipal.gestionAuto();
         	return;
     }
 }

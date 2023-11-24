@@ -51,10 +51,10 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * 
      */
     @Override
-    public String Voler() throws Exception {
+    public String voler() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le phenix vole";
         } else {
             throw new Exception("Phenix pas en etat de voler");
@@ -68,8 +68,8 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
      * 
      */
     @Override
-    public void Mourrir() {
-        ReinitialiserCreature();
+    public void mourrir() {
+        reinitialiserCreature();
     }
     
     

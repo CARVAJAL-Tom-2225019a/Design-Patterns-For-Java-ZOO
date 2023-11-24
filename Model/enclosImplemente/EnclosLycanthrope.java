@@ -42,9 +42,9 @@ public class EnclosLycanthrope extends Enclos {
 	}
 	
 	
-	public void PassageAnneLycanthrope() {
+	public void passageAnneLycanthrope() {
 		if (meutePresente != null)
-			meutePresente.VerificationSeuilFacteurDominationMeute();
+			meutePresente.verificationSeuilFacteurDominationMeute();
 		isNecessiteNouvelleMeute();
 	}
 	
@@ -76,10 +76,10 @@ public class EnclosLycanthrope extends Enclos {
 
 
 	
-	public String ExpressionAppartenanceCollective () throws Exception {
+	public String expressionAppartenanceCollective () throws Exception {
 		String chaine = "";
 		for (Creature l : super.getListeCreatures().values()) {
-			chaine += ((Lycanthrope)l).Hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l);
+			chaine += ((Lycanthrope)l).hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l);
 		}
 		return chaine;
 	}

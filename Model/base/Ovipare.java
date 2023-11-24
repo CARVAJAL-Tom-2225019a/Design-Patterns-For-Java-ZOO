@@ -35,7 +35,7 @@ public abstract class Ovipare extends Creature {
     	return ventre;
     }
 
-    public void CreerBebe(Ovipare partenaire) throws Exception {
+    public void creerBebe(Ovipare partenaire) throws Exception {
         if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && partenaire.isVivant() && partenaire.getSexe() == Enum_Sexe.Male && this.getNomEspece() == partenaire.getNomEspece()) {
             // creation n oeuf dans le ventre
             Random random = new Random(System.currentTimeMillis());
@@ -56,7 +56,7 @@ public abstract class Ovipare extends Creature {
      * @return Une instance de la classe Oeuf pondue par l'ovipare.
      * @throws Exception 
      */
-    public ArrayList<Oeuf> PondreOeuf() throws Exception  {
+    public ArrayList<Oeuf> pondreOeuf() throws Exception  {
     	if (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle && !this.ventre.isEmpty() && !this.isEnTrainDeDormir()) {
             ArrayList<Oeuf> oeufs = new ArrayList<Oeuf>();
             Iterator<Oeuf> it = this.ventre.iterator();

@@ -45,8 +45,8 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      * Implémente la logique de renaissance de la Nymphe.
      */
     @Override
-    public void Mourrir() {
-        	ReinitialiserCreature();
+    public void mourrir() {
+        	reinitialiserCreature();
     }
     
     
@@ -55,7 +55,7 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature MettreBas() throws Exception {
-    	return super.MettreBas();
+    public Creature mettreBas() throws Exception {
+    	return super.mettreBas();
     }
 }

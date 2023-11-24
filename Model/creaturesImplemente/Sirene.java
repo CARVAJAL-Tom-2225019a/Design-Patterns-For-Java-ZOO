@@ -44,10 +44,10 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * 
      */
     @Override
-    public String Nager() throws Exception {
+    public String nager() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "La sirene nage";
         } else {
             throw new Exception("Sirene pas en etat de nager");
@@ -60,7 +60,7 @@ public class Sirene extends Vivipare implements CreatureMarine {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature MettreBas() throws Exception {
-    	return super.MettreBas();
+    public Creature mettreBas() throws Exception {
+    	return super.mettreBas();
     }
 }

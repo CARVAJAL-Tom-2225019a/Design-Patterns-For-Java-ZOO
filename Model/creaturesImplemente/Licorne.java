@@ -50,10 +50,10 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * 
      */
     @Override
-    public String Courrir() throws Exception {
+    public String courrir() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "La licorne est en mouvement";
         } else {
             throw new Exception("Licorne pas en etat de courir");
@@ -67,7 +67,7 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature MettreBas() throws Exception {
-    	return super.MettreBas();
+    public Creature mettreBas() throws Exception {
+    	return super.mettreBas();
     }
 }

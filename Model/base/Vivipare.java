@@ -44,7 +44,7 @@ public abstract class Vivipare extends Creature {
 		return nbJourConceptionRestantAvantMiseABas;
 	}
     
-    public void RemiseAZeroApresNaissance() {
+    public void remiseAZeroApresNaissance() {
     	nbJourConceptionRestantAvantMiseABas =0;
     	ventre.clear();
     }
@@ -90,9 +90,9 @@ public abstract class Vivipare extends Creature {
      * @return La creature mise au monde ou null
      * @throws Exception
      */
-    public Creature VerificationEnfantEnConception() throws Exception {
-    	if (DecrementerNombreJourRestantAvantNaissance() == 0)
-			return MettreBas();
+    public Creature verificationEnfantEnConception() throws Exception {
+    	if (decrementerNombreJourRestantAvantNaissance() == 0)
+			return mettreBas();
 		return null;
     }
     
@@ -106,7 +106,7 @@ public abstract class Vivipare extends Creature {
      * @return Une instance de la classe Creature qui né.
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
-    public Creature MettreBas() throws Exception {
+    public Creature mettreBas() throws Exception {
     	return FactoryCreature.newCreature(super.getNomEspece());
     }
     
@@ -115,7 +115,7 @@ public abstract class Vivipare extends Creature {
      * Methode pour decrementer le nombre de jour restant
      * @throws Exception 
      */
-    public int DecrementerNombreJourRestantAvantNaissance (){
+    public int decrementerNombreJourRestantAvantNaissance (){
     	if (nbJourConceptionRestantAvantMiseABas > 0) {
     		return nbJourConceptionRestantAvantMiseABas--;
     	}

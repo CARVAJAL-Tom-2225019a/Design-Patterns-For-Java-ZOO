@@ -49,12 +49,12 @@ public class Voliere extends Enclos {
      * @param creature La créature à ajouter à la volière.
      * @throws Exception Si la créature n'est pas volante ou si elle est trop grande pour la volière.
      */
-    public void AjouterCreature(Creature creature) throws Exception {
+    public void ajouterCreature(Creature creature) throws Exception {
         // Vérification si la créature est une créature volante
         if (creature instanceof CreatureVolante) {
             // Vérification si la créature n'est pas trop grande pour la volière
             if (creature.getTaille() < hauteur)
-                super.AjouterCreature(creature);
+                super.ajouterCreature(creature);
             else
                 throw new Exception("Creature trop grande pour enclos");
         } else {
@@ -69,12 +69,12 @@ public class Voliere extends Enclos {
      *
      * @throws Exception Si l'état du toit est bon et il y a créature dans la volière.
      */
-    public void EntretenirEnclos() throws Exception {
+    public void entretenirEnclos() throws Exception {
         // Vérification de l'état du toit
         if (super.getNbCreatures() == 0 && etatToit != Enum_DegrePropreteEnclos.bon)
             etatToit = Enum_DegrePropreteEnclos.bon;
         // Entretien classique de l'enclos
-        super.EntretenirEnclos();
+        super.entretenirEnclos();
     }
     
     
@@ -100,7 +100,7 @@ public class Voliere extends Enclos {
 	/**
 	 * Methode pour avoir le nom de l'enclos et son etat
 	 */
-	public String VoirInfoEnclos() {
+	public String voirInfoEnclos() {
 		return " -Voliere "+getNom()+" avec "+getNbCreatures()
         +" creatures.\n          Degre proprete : "+getDegreProprete()
         +"\n          Etat toit : "+etatToit+"\n";
@@ -110,7 +110,7 @@ public class Voliere extends Enclos {
 	/**
 	 * Methode permettant de degrader l'etat du toit de la voliere
 	 */
-	public void DegradationEtatToit() {
+	public void degradationEtatToit() {
 		if (etatToit == Enum_DegrePropreteEnclos.bon)
 			etatToit = Enum_DegrePropreteEnclos.correct;
 		else if (etatToit == Enum_DegrePropreteEnclos.correct)

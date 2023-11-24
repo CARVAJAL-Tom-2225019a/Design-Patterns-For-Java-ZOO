@@ -11,15 +11,11 @@ import references.*;
  * Classe d'une meute de lycanthrope (loup-garou)
  */
 public class Meute {
-	//TODO :transformation enclosLycanthrope si espece presente
-	
-	// TODO : donner rang a nouveau loup
-
 	
 	private Lycanthrope femelleAlpha;
 	private Lycanthrope maleAlpha;
 	
-	private int CapaciteMeute; 
+	private int capaciteMeute; 
 	private Set<Lycanthrope> listeLoup;
 	//TODO : verifier rang loup si dans liste
 	private Set<Enum_RangDomination> rangPossible;
@@ -38,7 +34,7 @@ public class Meute {
 			Set<Enum_RangDomination> rangPossible) {
 		this.femelleAlpha = femelleAlpha;
 		this.maleAlpha = maleAlpha;
-		this.CapaciteMeute = CapaciteMeute;
+		this.capaciteMeute = CapaciteMeute;
 		this.listeLoup = new HashSet<Lycanthrope>();
 		listeLoup.add(femelleAlpha);
 		listeLoup.add(maleAlpha);
@@ -56,7 +52,7 @@ public class Meute {
 		return maleAlpha;
 	}
 	public int getCapaciteMeute() {
-		return CapaciteMeute;
+		return capaciteMeute;
 	}
 	public Set<Lycanthrope> getListeLoup() {
 		return listeLoup;
@@ -81,10 +77,11 @@ public class Meute {
 	 * @param loup	le lycanthrope a ajouter
 	 * @throws Exception si le lycanthrope a deja une meute ou s'il n'y a plus de place
 	 */
-	public boolean AddLoup(Lycanthrope loup) throws Exception {
-		if (listeLoup.size() < CapaciteMeute) {
+	public boolean addLoup(Lycanthrope loup) throws Exception {
+		if (listeLoup.size() < capaciteMeute) {
 			if (loup.getMeute() == null ) {
 				listeLoup.add(loup);
+				loup.setRangDomination(affecterRang(loup));
 				return true;
 			}
 			else 
@@ -94,17 +91,30 @@ public class Meute {
 			throw new Exception ("La meute est pleine, impossible de rajouter un loup");
 	}
 	
+	
+	private Enum_RangDomination affecterRang(Lycanthrope loup) {
+		double forceLoup = loup.getForce();
+		double forceTemp = femelleAlpha.getForce();
+		for (Lycanthrope l : listeLoup) {
+			if (forceLoup > forceTemp && forceLoup < l.getForce()) {
+				return l.getRangDomination();
+			}
+			forceTemp = l.getForce();
+		}
+		return Enum_RangDomination.OMEGA;
+	}
+	
 
 	/**
 	 * Methode permettant de supprimer un loup de la meute
 	 * @param loup	Le loup a supprimer
 	 * @throws Exception	SI le loup fait partie du couple alpha ou n'est pas dans la meute
 	 */
-	public boolean RemoveLoup(Lycanthrope loup) throws Exception {
+	public boolean removeLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.contains(loup)) {	
 			if (loup != femelleAlpha && loup !=maleAlpha) {
 				listeLoup.remove(loup);
-				loup.SeSeparerDeSaMeute();
+				loup.seSeparerDeSaMeute();
 				return true;
 			}
 			else
@@ -115,28 +125,28 @@ public class Meute {
 	}
 	
 	
-	public String DefierMaleAlpha (Lycanthrope loup1) throws Exception {
+	public String defierMaleAlpha (Lycanthrope loup1) throws Exception {
 		boolean reussite = false;
-		if (loup1.IsPlusFort(maleAlpha))
+		if (loup1.isPlusFort(maleAlpha))
 			reussite=true;
-		String chaine = loup1.Hurler(Enum_ActionHurlement.Agressivite, maleAlpha);
+		String chaine = loup1.hurler(Enum_ActionHurlement.Agressivite, maleAlpha);
 		// reussite
 		if (reussite) {
 			Lycanthrope ancienAlpha = maleAlpha;
 			loup1.setRangDomination(Enum_RangDomination.ALPHA);
 			maleAlpha = loup1;
-			RemoveLoup(ancienAlpha);
+			removeLoup(ancienAlpha);
 			chaine+= "\n"+loup1.getPrenom()+"est maintenant le male alpha\n";
 		}
 		return chaine;
 	}
 	
 	
-	public String VerificationSeuilFacteurDominationMeute() {
+	public String verificationSeuilFacteurDominationMeute() {
 		String chaine = "LES LOUPS QUI PERDENT UN RANG :\n";
 		for (Lycanthrope l : listeLoup) {
-			if (l.SeuilFacteurDominationAtteint()) {
-				if (!IsDernierDuRang(l.getRangDomination())) {
+			if (l.seuilFacteurDominationAtteint()) {
+				if (!isDernierDuRang(l.getRangDomination())) {
 					l.setRangDomination(l.getRangDomination().getRangInferieur());
 					chaine += "   - "+l+"\n";
 				}	
@@ -146,7 +156,7 @@ public class Meute {
 	}
 	
 	
-	private boolean IsDernierDuRang(Enum_RangDomination rang) {
+	private boolean isDernierDuRang(Enum_RangDomination rang) {
 		int compteur = 0;
 		for (Lycanthrope l : listeLoup) {
 			if (l.getRangDomination() == rang)
@@ -164,7 +174,7 @@ public class Meute {
 	 * Methode permettant de recuperer les informations sur une meute
 	 */
 	public String toString() {
-		return "Meute se trouvant dans "+enclosReference+" avec "+listeLoup.size()+"/"+CapaciteMeute+"\n"
+		return "Meute se trouvant dans "+enclosReference+" avec "+listeLoup.size()+"/"+capaciteMeute+"\n"
 				+ "  * Male Alpha : "+maleAlpha+"\n"
 				+ "  * Femelle Alpha : "+femelleAlpha+"\n\n";
 	}

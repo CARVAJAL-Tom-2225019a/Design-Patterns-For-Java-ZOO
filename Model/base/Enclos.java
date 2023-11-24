@@ -85,7 +85,7 @@ public abstract class Enclos {
 	/**
 	 * Methode pour avoir le nom de l'enclos et son etat
 	 */
-	public String VoirInfoEnclos() {
+	public String voirInfoEnclos() {
 		return " -Enclos "+getNom()+" avec "+getNbCreatures()
         +" creatures.\n          Degre proprete : "+getDegreProprete()+"\n";
 	}
@@ -204,7 +204,7 @@ public abstract class Enclos {
 	 * @throws Exception si l'enclos est plein
 	 * 
 	 */
-	public void AjouterCreature (Creature creature) throws Exception {
+	public void ajouterCreature (Creature creature) throws Exception {
 		// si 1er animal
 		if (nbCreatures==0)
 			nomEspece = creature.getNomEspece();
@@ -225,7 +225,7 @@ public abstract class Enclos {
 	 * @throws Exception si la creature n'est pas trouve
 	 * 
 	 */
-	public void SupprimerCreature (Creature creature) throws Exception {
+	public void supprimerCreature (Creature creature) throws Exception {
 		// Vérification de la présence de la creature
         if (listeCreatures.containsValue(creature)) {
         	listeCreatures.remove(trouverCleParCreature(creature));
@@ -245,9 +245,33 @@ public abstract class Enclos {
 	 * Methode pour nourrir les creatures
 	 * 
 	 */
-	public void NourrirCreatures () throws Exception {
+	public void nourrirCreatures () throws Exception {
 		for (Creature creature : listeCreatures.values()) {
-			creature.Manger(CONSTANTES.MAX_INDICATEUR);
+			creature.manger(CONSTANTES.MAX_INDICATEUR);
+		}
+	}
+	
+	
+	/**
+	 * Methode pour faire dormir les creatures
+	 * 
+	 */
+	public void faireDormirCreatures () throws Exception {
+		for (Creature creature : listeCreatures.values()) {
+			if (creature.isVivant())
+				creature.dormir();
+		}
+	}
+	
+	
+	/**
+	 * Methode pour reveiller les creatures
+	 * 
+	 */
+	public void reveillerCreatures () throws Exception {
+		for (Creature creature : listeCreatures.values()) {
+			if(creature.isVivant() && creature.isEnTrainDeDormir())
+				creature.seReveiller();
 		}
 	}
 	
@@ -258,7 +282,7 @@ public abstract class Enclos {
 	 * @throws Exception si l'enclos n'est pas sale ou s'il est vide
 	 * 
 	 */
-	public void EntretenirEnclos () throws Exception {
+	public void entretenirEnclos () throws Exception {
 		// Verification enclos sale
 		if (degreProprete != Enum_DegrePropreteEnclos.bon) {
 			// Verification enclos vide
@@ -316,7 +340,7 @@ public abstract class Enclos {
 	/**
 	 * Methode permettant de degrader la proprete de l'enclos
 	 */
-	public void DegradationDegreProprete() {
+	public void degradationDegreProprete() {
 		if (degreProprete == Enum_DegrePropreteEnclos.bon)
 			degreProprete = Enum_DegrePropreteEnclos.correct;
 		else if (degreProprete == Enum_DegrePropreteEnclos.correct)
@@ -356,13 +380,13 @@ public abstract class Enclos {
      * Methode permettant de concevoir un enfant selon le type de creature
      * @throws Exception 
      */
-    public int ConcevoirEnfant(Creature femelle, Creature male) throws Exception {
+    public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (femelle.isVivant() && femelle instanceof Vivipare) {
     		((Vivipare)femelle).concevoirUnEnfant((Vivipare)male, femelle.getDureeGestation());
     		return 1;
     	}
     	else if (femelle.isVivant() && femelle instanceof Ovipare) {
-			((Ovipare)femelle).CreerBebe((Ovipare) male);
+			((Ovipare)femelle).creerBebe((Ovipare) male);
     		return 2;
     	}
     	return -1;

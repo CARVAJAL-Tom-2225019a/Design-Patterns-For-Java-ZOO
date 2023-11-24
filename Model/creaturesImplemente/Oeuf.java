@@ -48,7 +48,7 @@ public class Oeuf {
 	/**
 	 * Methode permettant de decrementer la duree d'incubation restante
 	 */
-	public void DecrementerDureeIncubationRestante() {
+	public void decrementerDureeIncubationRestante() {
 		dureeIncubationRestante--;
 		if (dureeIncubationRestante<0)
 			dureeIncubationRestante=0;
@@ -64,7 +64,7 @@ public class Oeuf {
      * @return Une instance de la classe Creature.
      * @throws Exception Si la durée d'incubation n'est pas terminée ou si l'œuf est déjà éclos.
      */
-    public Creature Eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    public Creature eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
         if (!isOpen) {
             // Vérification si la durée d'incubation est dépassée
             if (dureeIncubationRestante == 0 ) {

@@ -45,14 +45,14 @@ class TestConceptionVivipare {
 	@Test
 	void TestMethodeVerificationEnfantEnConception() throws Exception {
 		sireneFemelle.concevoirUnEnfant(sireneMale, 2);
-		assertEquals(null, sireneFemelle.VerificationEnfantEnConception());
+		assertEquals(null, sireneFemelle.verificationEnfantEnConception());
 		
 	}
 	
 	@Test
 	void TestMethodeMettreBas() throws Exception {
 		sireneFemelle.concevoirUnEnfant(sireneMale, 1);
-		sireneFemelle.DecrementerNombreJourRestantAvantNaissance();
-		assertNotNull(sireneFemelle.VerificationEnfantEnConception());
+		sireneFemelle.decrementerNombreJourRestantAvantNaissance();
+		assertNotNull(sireneFemelle.verificationEnfantEnConception());
 	}
 }

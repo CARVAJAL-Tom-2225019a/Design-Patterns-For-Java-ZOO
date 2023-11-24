@@ -48,10 +48,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de courir.
      */
     @Override
-    public String Courrir() throws Exception {
+    public String courrir() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon est en mouvement";
         } else {
             throw new Exception("Dragon pas en etat de courir");
@@ -67,10 +67,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de nager.
      */
     @Override
-    public String Nager() throws Exception {
+    public String nager() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon nage";
         } else {
             throw new Exception("Dragon pas en etat de nager");
@@ -86,10 +86,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de voler.
      */
     @Override
-    public String Voler() throws Exception {
+    public String voler() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon vole";
         } else {
             throw new Exception("Dragon pas en etat de voler");
@@ -102,8 +102,8 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * Implémente la logique de renaissance du dragon.
      */
     @Override
-    public void Mourrir() {
-        ReinitialiserCreature(); //TODO changer ca en un oeuf
+    public void mourrir() {
+        reinitialiserCreature(); //TODO changer ca en un oeuf
     }
     
 

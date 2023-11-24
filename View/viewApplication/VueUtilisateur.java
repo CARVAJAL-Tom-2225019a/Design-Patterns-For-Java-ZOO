@@ -2,6 +2,8 @@ package viewApplication;
 
 import java.util.Scanner;
 
+import controllerTemps.Enum_ActionsPossibles;
+import controllerTemps.GestionnaireTemps;
 import maitreZoo.MaitreZoo;
 import references.*;
 
@@ -86,30 +88,33 @@ public class VueUtilisateur {
 	/**
 	 * Méthode pour afficher les actions disponibles à l'utilisateur
 	 */
-	public void proposerAction(int annee, int actionRestante) {
+	public void proposerAction() {
+		GestionnaireTemps temps = GestionnaireTemps.getInstance();
 		System.out.println(
-				"\nLES ACTIONS DISPONIBLES (annee " + annee + "):" 
-						+ "\n\n  0 : Pas d'action" 
+				"\nLES ACTIONS DISPONIBLES (annee " + temps.getAnnee() + "):" 
+						+ "\n\n  0 : Pas d'action ("+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+")" 
 						+ "\n"
-						+ "\n  1 : Voir les enclos"
-						+ "\n  2 : Voir le nombre de creatures totales"
-						+ "\n  3 : Creer un nouvel enclos" 
-						+ "\n  4 : Examiner un enclos"
+						+ "\n  1 : Voir les enclos ("+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+")"
+						+ "\n  2 : Voir le nombre de creatures totales ("+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+")"
+						+ "\n  3 : Creer un nouvel enclos ("+Enum_ActionsPossibles.CREER_ENCLOS.getDureeTotale()+")" 
+						+ "\n  4 : Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  5 : Nettoyer un enclos" 
-						+ "\n  6 : Nourrir les creatures d'un enclos"
+						+ "\n  5 : Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+")" 
+						+ "\n  6 : Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  7 : Transferer une creature"
-						+ "\n  8 : Transferer un enclos"
+						+ "\n  7 : Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+")"
+						+ "\n  8 : Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  9 : Concevoir un enfant"
-						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre"
+						+ "\n  9 : Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+")"
+						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre ("+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  11 : Organiser une seance de sport pour un enclos"
-						+ "\n  12 : Organiser un concert prive avec les creatures"
+						+ "\n  11 : Organiser une seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+")"
+						+ "\n  12 : Organiser un concert prive avec les creatures ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+")"
+						+ "\n  13 : Dodo Party pour un enclos ("+Enum_ActionsPossibles.DORMIR_ENCLOS.getDureeTotale()+")"
+						+ "\n  14 : Reveiller un enclos en douceur ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  99 : Exit" 
-						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
+						+ "\n\n Nous sommes le " + temps.getDateActuelle()+"\n" 
 						+ "\n\n Votre choix = ");
 	}
 

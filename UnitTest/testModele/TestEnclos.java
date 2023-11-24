@@ -22,13 +22,13 @@ class TestEnclos {
 		enclos = new EnclosClassique("enclosClassique", 1000);
 		for (int i=0; i<10; i++) {
 			Creature d = FactoryCreature.newCreature(Enum_Especes.Licorne);
-			enclos.AjouterCreature(d);
+			enclos.ajouterCreature(d);
 		}
 		enclos.reorganiserCles();
 		
 		enclosVide = new EnclosClassique("enclosVide", 1000);
-		enclosVide.DegradationDegreProprete();
-		enclosVide.DegradationDegreProprete();
+		enclosVide.degradationDegreProprete();
+		enclosVide.degradationDegreProprete();
 	}
 
 	@Test
@@ -41,7 +41,7 @@ class TestEnclos {
 		Creature d = FactoryCreature.newCreature(Enum_Especes.Sirene);
 		Exception thrown = assertThrows(
                 Exception.class,
-                () -> enclos.AjouterCreature(d),
+                () -> enclos.ajouterCreature(d),
                 "Un enclos classique ne peut contenir que des créatures terrestres");
         assertTrue(thrown.getMessage().contains("Un enclos classique ne peut contenir que des créatures terrestres"));
 	}
@@ -49,7 +49,7 @@ class TestEnclos {
 	@Test
 	void TestMethodeVoirCreaturesAyantUnBesoin() throws Exception {
 		for (int i=0; i<10; i++)
-			enclos.getListeCreatures().get(1).PerdreNourriture();
+			enclos.getListeCreatures().get(1).perdreNourriture();
 		String result = "\\nLES CREATURES QUI ONT UN BESOIN : ";
 		assertTrue(result != enclos.voirCreaturesAyantUnBesoin());
 	}
@@ -62,7 +62,7 @@ class TestEnclos {
 	
 	@Test
 	void TestMethodeVoirCreaturesMortes() throws Exception {
-		enclos.getListeCreatures().get(1).Mourir();
+		enclos.getListeCreatures().get(1).mourir();
 		String result = "\nLes creatures mortes dans " +enclos.getNom()+ " :\n";
 		assertTrue(result != enclos.creaturesMortes());
 	}
@@ -71,7 +71,7 @@ class TestEnclos {
 	void TestMethodeSupprimerCreature() throws Exception {
 		int sizeListe = enclos.getListeCreatures().size();
 		Creature d = enclos.getListeCreatures().get(2);
-		enclos.SupprimerCreature(d);
+		enclos.supprimerCreature(d);
 		assertEquals(sizeListe - 1, enclos.getListeCreatures().size());
 	}
 	
@@ -80,7 +80,7 @@ class TestEnclos {
 		Creature d = FactoryCreature.newCreature(Enum_Especes.Dragon);
 		Exception thrown = assertThrows(
                 Exception.class,
-                () -> enclos.SupprimerCreature(d),
+                () -> enclos.supprimerCreature(d),
                 "Creature introuvable");
         assertTrue(thrown.getMessage().contains("Creature introuvable"));
 	}
@@ -92,7 +92,7 @@ class TestEnclos {
 	
 	@Test
 	void TestMethodeEntretenirEnclos() throws Exception {
-		enclosVide.EntretenirEnclos();
+		enclosVide.entretenirEnclos();
 		assertEquals (Enum_DegrePropreteEnclos.bon, enclosVide.getDegreProprete() );
 	}
 	
@@ -100,7 +100,7 @@ class TestEnclos {
 	void TestMethodeEntretenirEnclosAvecException() {
 		Exception thrown = assertThrows(
                 Exception.class,
-                () -> enclos.EntretenirEnclos(),
+                () -> enclos.entretenirEnclos(),
                 "Enclos "+enclos.getNom()+" n'a pas besoin d etre nettoye");
         assertTrue(thrown.getMessage().contains("Enclos "+enclos.getNom()+" n'a pas besoin d etre nettoye"));
 	}

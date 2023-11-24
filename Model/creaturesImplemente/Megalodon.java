@@ -43,10 +43,10 @@ public class Megalodon extends Ovipare implements CreatureMarine {
      *        
      */
     @Override
-    public String Nager() throws Exception {
+    public String nager() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le megalodon nage";
         } else {
             throw new Exception("Megalodon pas en etat de nager");

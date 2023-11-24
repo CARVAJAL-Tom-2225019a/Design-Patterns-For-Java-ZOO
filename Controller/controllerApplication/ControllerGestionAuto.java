@@ -5,6 +5,7 @@ import zoo.ZooFantastique;
 import java.util.Random;
 
 import base.Enclos;
+import controllerTemps.GestionnaireTemps;
 import references.CONSTANTES;
 import viewApplication.*;
 
@@ -15,15 +16,16 @@ import viewApplication.*;
 public class ControllerGestionAuto {
 
 	private static ControllerZoo zooController;
-	private static VueGlobale VueGlobale;
+	private static VueGlobale vueGlobale;
 	private ZooFantastique zoo;
+	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
 	
 	/**
      * Constructeur
      */
     public ControllerGestionAuto() {
-        VueGlobale = new VueGlobale();
+        vueGlobale = new VueGlobale();
         new VueAutomatique();
         new ControllerPrincipal();
         zooController = new ControllerZoo();
@@ -38,7 +40,7 @@ public class ControllerGestionAuto {
      * Methode permettant d'effectuer un choix aleatoire 
      * @throws Exception
      */
-	public void ChoixActionAleatoire () throws Exception {
+	public void choixActionAleatoire () throws Exception {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX);
 		zooController.effectuerAction(choix);
@@ -54,19 +56,17 @@ public class ControllerGestionAuto {
         zooController.init();
         Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {
-        	ChoixActionAleatoire ();
+        	vueGlobale.Afficher("DATE : "+temps.getDateActuelle()+"\n");
+        	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        	choixActionAleatoire ();
         	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-        	zooController.runYear();
         	
         	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
             	run = false;
-            // Si duree de vie zoo fini
-            if (zooController.getAnnee() == CONSTANTES.DUREE_VIE_ZOO)
-            	run = false;
             
         }
-        VueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
+        vueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
 	}
 	
 	
@@ -75,15 +75,15 @@ public class ControllerGestionAuto {
      *
      * @return Un enclos choisi au hasard dans la liste des enclos du zoo.
      */
-	public Enclos RecuperationEnclosAleatoire() {
+	public Enclos recuperationEnclosAleatoire() {
         // Vérifier s'il y a des enclos disponibles
-        if (zoo.GetListeEnclos().isEmpty()) {
+        if (zoo.getListeEnclos().isEmpty()) {
             return null;
         }
         // Obtenez un indice aléatoire
-        int indiceAleatoire = new Random().nextInt(zoo.GetListeEnclos().size());
+        int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
         // Retournez l'enclos correspondant à l'indice aléatoire
-        return (Enclos) zoo.GetListeEnclos().toArray()[indiceAleatoire];
+        return (Enclos) zoo.getListeEnclos().toArray()[indiceAleatoire];
 	}
 	
 }

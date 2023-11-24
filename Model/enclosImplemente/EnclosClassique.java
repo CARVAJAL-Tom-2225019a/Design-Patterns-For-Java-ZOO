@@ -10,12 +10,12 @@ public class EnclosClassique extends Enclos {
 		super(nom, superficie);
 	}
 	
-	public void AjouterCreature(Creature creature) throws Exception {
+	public void ajouterCreature(Creature creature) throws Exception {
         // Vérification si la créature est une créature marine
         if (creature instanceof CreatureTerrestre) {
             // Vérification si la créature n'est pas trop grande pour le bassin de l'aquarium
             if (creature.getTaille() < getSuperficie())
-                super.AjouterCreature(creature);
+                super.ajouterCreature(creature);
             else
                 throw new Exception("Creature trop grande");
         } else {

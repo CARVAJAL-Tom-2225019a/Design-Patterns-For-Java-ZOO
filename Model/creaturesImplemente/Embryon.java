@@ -20,7 +20,7 @@ public class Embryon {
         this.dureeAvantNaissance = parent1.getDureeGestation();
 
     }
-    public void DecrementerDureeIncubationRestante() {
+    public void decrementerDureeIncubationRestante() {
         dureeAvantNaissance--;
         if (dureeAvantNaissance<0)
             dureeAvantNaissance=0;

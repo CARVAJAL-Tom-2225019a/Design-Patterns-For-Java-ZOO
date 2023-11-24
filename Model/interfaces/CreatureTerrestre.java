@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface CreatureTerrestre {
-	public String Courrir () throws Exception ;
+	public String courrir () throws Exception ;
 }

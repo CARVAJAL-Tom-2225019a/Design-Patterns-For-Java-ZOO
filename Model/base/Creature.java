@@ -48,7 +48,7 @@ public abstract class Creature {
      * Constructeur de la classe Creature par defaut. créature completement aléatoire.
      */
     public Creature (){
-        this.sexe= SexeAleatoire();
+        this.sexe= sexeAleatoire();
         this.age = ZooFantastique.getIntAleatoire(CONSTANTES.MAX_AGE/2);
         this.categorieAge = Enum_CategorieAge.getCategorieByAge(age);
         this.bonheur = ZooFantastique.getIntAleatoire(100);
@@ -68,7 +68,7 @@ public abstract class Creature {
         }
         else
             this.prenom = Enum_PrenomFeminin.getRandomName().name() ;
-        this.force = CalculerForce();
+        this.force = calculerForce();
         
         // c'est abstrait comme classe donc pas grave si : 
         this.status = Enum_RangDomination.ALPHA ; //a surcharger plus tard
@@ -96,7 +96,7 @@ public abstract class Creature {
         this.dureeGestation = Parent1.getDureeGestation();
         this.listeParents.add(Parent1);
         this.listeParents.add(Parent2);
-        this.force = CalculerForce();
+        this.force = calculerForce();
     }
     
     
@@ -203,7 +203,7 @@ public abstract class Creature {
      * @param num Le nombre de points de faim que la créature gagne en mangeant.
      * @throws Exception Si la créature n'est pas vivante ou est en train de dormir.
      */
-    public void Manger(int num) throws Exception {
+    public void manger(int num) throws Exception {
         if (vivant && !enTrainDeDormir) {
             indicateurFaim += num;
             // Vérification pas de dépassement
@@ -223,10 +223,10 @@ public abstract class Creature {
      * @return Le bruit de la créature.
      * @throws Exception Si la créature n'est pas vivante.
      */
-    public String FaireBruit() throws Exception {
+    public String faireBruit() throws Exception {
         if (vivant) {
-        	PerdreNourriture();
-        	PerdreSommeil();
+        	perdreNourriture();
+        	perdreSommeil();
             return bruit;
         }
         else
@@ -239,7 +239,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante.
      */
-    public void Soigner() throws Exception {
+    public void soigner() throws Exception {
         if (vivant) {
             indicateurSante = CONSTANTES.MAX_INDICATEUR;
         } else {
@@ -253,7 +253,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante ou est déjà en train de dormir.
      */
-    public void Dormir() throws Exception {
+    public void dormir() throws Exception {
         if (vivant) {
         	if (!enTrainDeDormir) {
         		if (indicateurSommeil < CONSTANTES.MAX_INDICATEUR) {
@@ -275,7 +275,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante ou n'est pas en train de dormir.
      */
-    public void SeReveiller() throws Exception {
+    public void seReveiller() throws Exception {
         if (vivant) {
         	if (enTrainDeDormir) {
         		enTrainDeDormir = false;
@@ -293,14 +293,14 @@ public abstract class Creature {
      * Méthode pour faire vieillir la créature d'un an.
      *
      */
-    public void Vieillir() throws Exception {
+    public void vieillir() throws Exception {
         if (vivant && age < CONSTANTES.MAX_AGE) {
         	age++;
         	categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
         }
         else if (vivant && age == CONSTANTES.MAX_AGE) {
         	categorieAge = Enum_CategorieAge.getCategorieByAge(this.getAge());
-            Mourir();
+            mourir();
         }
     }
 
@@ -308,7 +308,7 @@ public abstract class Creature {
     /**
      * Méthode pour faire mourir la créature.
      */
-    public void Mourir() {
+    public void mourir() {
         vivant = false;
     }
 
@@ -318,7 +318,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
      */
-    public void PerdreSommeil() throws Exception {
+    public void perdreSommeil() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurSommeil -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
@@ -333,7 +333,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
      */
-    public void PerdreNourriture() throws Exception {
+    public void perdreNourriture() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurFaim -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
@@ -348,7 +348,7 @@ public abstract class Creature {
      * 
      * @throws Exception Si la créature n'est pas vivante ou est dans un état invalide.
      */
-    public void PerdreSante() throws Exception {
+    public void perdreSante() throws Exception {
         // Vérification de l'état de la créature
         if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
             indicateurSante -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
@@ -379,7 +379,7 @@ public abstract class Creature {
     /**
      * Methode pour remettre a 0 les proprietes d'une creature
      */
-    public void ReinitialiserCreature() {
+    public void reinitialiserCreature() {
         age = 1;
         this.indicateurFaim = CONSTANTES.MAX_INDICATEUR;
         this.indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
@@ -393,7 +393,7 @@ public abstract class Creature {
      * Méthode pour générer un sexe aléatoire
      * @return Le sexe choisi aleatoirement
      */
-    public static Enum_Sexe SexeAleatoire() {
+    public static Enum_Sexe sexeAleatoire() {
     	Random random = new Random();
         int r = 1+ random.nextInt(2);
         if (r == 1)
@@ -409,14 +409,14 @@ public abstract class Creature {
      * selon la force
      * @return Creature gagnante
      */
-    public Creature Combattre(Creature other){
+    public Creature combattre(Creature other){
         if (this.force > other.force)
             return this;
         else
             return other;
     }
 
-    public double CalculerForce () {
+    public double calculerForce () {
         int facteurBonus = 0;
         if (sexe == Enum_Sexe.Male){
             facteurBonus += 50;
