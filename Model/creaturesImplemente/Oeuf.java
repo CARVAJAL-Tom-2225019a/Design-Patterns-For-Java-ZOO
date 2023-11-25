@@ -8,7 +8,8 @@ import references.*;
  *
  */
 public class Oeuf {
-	
+	private Ovipare parent1;
+    private Ovipare parent2;
     private Enum_Especes espece;
     private int dureeIncubation;
     private int dureeIncubationRestante;
@@ -17,17 +18,16 @@ public class Oeuf {
     
     /**
      * Constructeur de la classe Oeuf.
-     * 
-     * @param espece          L'espèce de l'œuf.
-     * @param dureeIncubation La durée d'incubation spécifique de l'espèce.
      */
-    public Oeuf(Enum_Especes espece, int dureeIncubation) {
-        this.espece = espece;
-        this.dureeIncubation = dureeIncubation;
-        this.dureeIncubationRestante = dureeIncubation;
+    public Oeuf(Ovipare parent1, Ovipare parent2) {
+        this.parent1 = parent1;
+        this.parent2 = parent2;
+        this.espece = parent1.getNomEspece();
+        this.dureeIncubation = parent1.getDureeGestation();
+        this.dureeIncubationRestante =  parent1.getDureeGestation();
         isOpen = false;
     }
-    
+
     /**
      * Getters
      */
@@ -48,7 +48,7 @@ public class Oeuf {
 	/**
 	 * Methode permettant de decrementer la duree d'incubation restante
 	 */
-	public void DecrementerDureeIncubationRestante() {
+	public void decrementerDureeIncubationRestante() {
 		dureeIncubationRestante--;
 		if (dureeIncubationRestante<0)
 			dureeIncubationRestante=0;
@@ -64,7 +64,7 @@ public class Oeuf {
      * @return Une instance de la classe Creature.
      * @throws Exception Si la durée d'incubation n'est pas terminée ou si l'œuf est déjà éclos.
      */
-    public Creature Eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    public Creature eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
         if (!isOpen) {
             // Vérification si la durée d'incubation est dépassée
             if (dureeIncubationRestante == 0 ) {
@@ -72,7 +72,7 @@ public class Oeuf {
                 isOpen = true;
 
                 // Création de la créature
-                return FactoryCreature.newCreature(espece, sexe, poids, taille);
+                return FactoryCreature.newCreature(espece);
             } else {
                 throw new Exception("Durée d'incubation non terminée");
             }

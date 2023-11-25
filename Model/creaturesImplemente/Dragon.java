@@ -12,6 +12,8 @@ import references.*;
  */
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
 
+    private final int dureeIncubation = 1;
+
     /**
      * Constructeur de la classe Dragon.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -21,9 +23,22 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @param poids            Le poids du dragon.
      * @param taille           La taille du dragon.
      */
-    protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
+    public Dragon(Dragon parent1,Dragon parent2,String bruit) {
+        super(parent1, parent2);
+        this.setAgressivite(Enum_Aggressivite.cannibale);
+        this.setNomEspece(parent1.getNomEspece());
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
     }
+
+    public Dragon (String bruit) {
+        super();
+        this.setAgressivite(Enum_Aggressivite.cannibale);
+        this.setNomEspece(Enum_Especes.Dragon);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
+    }
+
     
     
     /**
@@ -34,10 +49,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de courir.
      */
     @Override
-    public String Courrir() throws Exception {
+    public String courrir() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon est en mouvement";
         } else {
             throw new Exception("Dragon pas en etat de courir");
@@ -53,10 +68,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de nager.
      */
     @Override
-    public String Nager() throws Exception {
+    public String nager() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon nage";
         } else {
             throw new Exception("Dragon pas en etat de nager");
@@ -72,10 +87,10 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * @throws Exception Si le dragon n'est pas en état de voler.
      */
     @Override
-    public String Voler() throws Exception {
+    public String voler() throws Exception {
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le dragon vole";
         } else {
             throw new Exception("Dragon pas en etat de voler");
@@ -88,18 +103,9 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      * Implémente la logique de renaissance du dragon.
      */
     @Override
-    public void Mourrir() {
-        ReinitialiserCreature();
+    public void mourrir() {
+        reinitialiserCreature(); //TODO changer ca en un oeuf
     }
     
-    
-    /**
-     * Méthode pour pondre un œuf.
-     * 
-     * @param dateNaissance     La date de naissance de l'œuf.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     */
-    public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, super.getDureePourEnfant());
-    }
+
 }

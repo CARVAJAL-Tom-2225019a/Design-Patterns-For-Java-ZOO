@@ -1,7 +1,7 @@
 package controllerApplication;
 
 import base.Creature;
-import enclosImplemente.Enclos;
+import base.Enclos;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
@@ -11,8 +11,8 @@ import zoo.ZooFantastique;
  */
 public class ControllerUserInterface {
 	private ZooFantastique zoo = ZooFantastique.getInstance();
-    private final VueGlobale VueGlobale;
-    private final VueUtilisateur VueUtilisateur;
+    private final VueGlobale vueGlobale;
+    private final VueUtilisateur vueUtilisateur;
     private final ControllerZoo zooController;
 
     
@@ -20,8 +20,8 @@ public class ControllerUserInterface {
      * Constructeur
      */
     public ControllerUserInterface() {
-        this.VueGlobale = new VueGlobale();
-        this.VueUtilisateur = new VueUtilisateur();
+        this.vueGlobale = new VueGlobale();
+        this.vueUtilisateur = new VueUtilisateur();
         this.zooController = new ControllerZoo();
     }
 
@@ -35,19 +35,17 @@ public class ControllerUserInterface {
         try {
         	zooController.init();
             while (run) {
-            	VueUtilisateur.proposerAction(zooController.getAnnee(), zooController.getActionRestante());
-                choix = VueUtilisateur.RecupererChoixAction();
+            	vueUtilisateur.proposerAction();
+                choix = vueUtilisateur.RecupererChoixAction();
                 run = zooController.effectuerAction(choix);
-                // Appel de la méthode run pour gérer le passage d'année
-                zooController.runYear();
                 // Si plus de creature
                 if (zoo.getNbCreaturesTotales() == 0)
                 	run = false;
             }
-            VueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
+            vueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
         }
         catch (Exception e) {
-    		VueGlobale.Afficher(e.getMessage());
+    		vueGlobale.Afficher(e.getMessage());
     	}
     }
     
@@ -55,13 +53,19 @@ public class ControllerUserInterface {
     /**
      * Methode permettant de selectionner une creature dans un enclos
      */
-    public Creature SelectionCreatureDansEnclos(Enclos enclos) {
+    public Creature selectionCreatureDansEnclos(Enclos enclos) {
     	String indexCreatureString;
     	int indexCreature;
-    	VueGlobale.Afficher(enclos.toString());
-    	indexCreatureString = VueUtilisateur.DemandeUtilisateur("Index creature : ");
+    	vueGlobale.Afficher(enclos.toString());
+    	indexCreatureString = vueUtilisateur.DemandeUtilisateur("Index creature : ");
     	indexCreature = Integer.parseInt(indexCreatureString);
     	return enclos.getListeCreatures().get(indexCreature);
+    }
+    
+    
+    public Enclos RecupererEnclosParNom() throws Exception {
+    	String nomEnclos = vueUtilisateur.DemandeUtilisateur("Nom de l'enclos : ");
+        return zoo.trouverEnclosParNom(nomEnclos);
     }
 
 
