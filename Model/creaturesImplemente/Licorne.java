@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature licorne
+ * qui est un vivipare
+ * et qui est terrestre
+ *
+ */
 public class Licorne extends Vivipare implements CreatureTerrestre {
 
     /**

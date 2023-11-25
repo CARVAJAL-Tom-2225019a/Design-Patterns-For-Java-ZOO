@@ -55,7 +55,7 @@ class TestCreatureConception {
 	@Test
 	void testConcevoirEnfantOvipare() throws Exception {
 		ZooFantastique zoo = ZooFantastique.getInstance();
-    	Enclos enclos = new Enclos ("TestE", 100, 15);
+    	Enclos enclos = new Enclos ("TestE", 100);
     	zoo.AddEnclos(enclos);
     	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Femelle, 10, 10));
     	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Dragon, Enum_Sexe.Male, 10, 10));
@@ -77,7 +77,7 @@ class TestCreatureConception {
 	@Test
 	void testConcevoirEnfantVivipare() throws Exception {
 		ZooFantastique zoo = ZooFantastique.getInstance();
-    	Enclos enclos = new Enclos ("TestE", 100, 15);
+    	Enclos enclos = new Enclos ("TestE", 100);
     	zoo.AddEnclos(enclos);
     	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Sirene, Enum_Sexe.Femelle, 10, 10));
     	enclos.AjouterCreature(FactoryCreature.newCreature(Enum_Especes.Sirene, Enum_Sexe.Male, 10, 10));

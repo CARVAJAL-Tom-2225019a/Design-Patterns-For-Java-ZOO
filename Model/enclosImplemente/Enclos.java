@@ -5,13 +5,16 @@ import java.util.*;
 import base.*;
 import references.*;
 
+/**
+ * Cette classe correspond a un enclos classique
+ *
+ */
 public class Enclos {
 	
 	private Enum_Especes nomEspece;
 	
 	private String nom;
 	private double superficie;
-	private int nbMaxCreatures;
 	private int nbCreatures;
 	private TreeMap<Integer, Creature> listeCreatures;
 	private Enum_DegrePropreteEnclos degreProprete;
@@ -23,17 +26,17 @@ public class Enclos {
 	 * @param superficie
 	 * @param nbMaxCreatures
 	 */
-	public Enclos(String nom, double superficie, int nbMaxCreatures) {
+	public Enclos(String nom, double superficie) {
 		this.nomEspece = null;
 		this.nom = nom;
 		this.superficie = superficie;
-		this.nbMaxCreatures = nbMaxCreatures;
 		this.nbCreatures = 0;
 		// Tri des creatures par age
 		this.listeCreatures = new TreeMap<>();
 		this.degreProprete = Enum_DegrePropreteEnclos.bon;
 	}
 
+	
 	/**
 	 * Getters
 	 */
@@ -47,7 +50,7 @@ public class Enclos {
 		return superficie;
 	}
 	public int getNbMaxCreatures() {
-		return nbMaxCreatures;
+		return CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX;
 	}
 	public int getNbCreatures() {
 		return nbCreatures;
@@ -68,7 +71,7 @@ public class Enclos {
 	 */
 	public String toString() {
 		String chaine = "Enclos "+nom+" de superficie "+superficie+" m^2 pouvant contenir au "
-				+ "plus "+nbMaxCreatures+" creatures.\n Il y a actuellement "+nbCreatures+" creatures.\n"
+				+ "plus "+CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX+" creatures.\n Il y a actuellement "+nbCreatures+" creatures.\n"
 				+ "Degre de proprete : "+degreProprete+"\n";
 		for (Creature creature : listeCreatures.values()) {
 			// si la creature est vivante
@@ -79,6 +82,101 @@ public class Enclos {
 		return chaine;
 	}
 	
+	
+	/**
+	 * Methode pour avoir le nom de l'enclos et son etat
+	 */
+	public String VoirInfoEnclos() {
+		return " -Enclos "+getNom()+" avec "+getNbCreatures()
+        +" creatures.\n          Degre proprete : "+getDegreProprete()+"\n";
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
+	 */
+	public String voirCreaturesAyantUnBesoin() {
+		String chaine = "";
+		boolean isValue = false;
+		String temp = voirCreaturesMauvaiseSante();
+		if (temp != null) {
+			chaine+= temp+"\n";
+			isValue = true;
+		}
+		temp = voirCreaturesSommeil();
+		if (temp != null) {
+			chaine+= temp+"\n";
+			isValue = true;
+		}
+		temp = voirCreaturesFaim();
+		if (temp != null) {
+			chaine+= temp+"\n";
+			isValue = true;
+		}
+		if (isValue)
+			return chaine+"\n";
+		else
+			return null;
+	}	
+	
+	
+	/**
+	 * Methode permettant de recuperer les creatures qui ont faim
+	 */
+	private String voirCreaturesFaim() {
+		boolean isValue = false;
+		String chaine = "Les creatures qui ont faim dans "+nom+" :\n";
+		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+			if (entry.getValue().getIndicateurFaim() < 5) {
+				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurFaim()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				isValue = true;
+			}
+		}
+		if (isValue)
+			return chaine;
+		else
+			return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les creatures qui ont sommeil
+	 */
+	private String voirCreaturesSommeil() {
+		boolean isValue = false;
+		String chaine = "Les creatures qui ont sommeil dans "+nom+" :\n";
+		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+			if (entry.getValue().getIndicateurSommeil() < 5) {
+				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurSommeil()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				isValue = true;
+			}
+		}
+		if (isValue)
+			return chaine;
+		else
+			return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les creatures qui sont en mauavaise sante
+	 */
+	private String voirCreaturesMauvaiseSante() {
+		boolean isValue = false;
+		String chaine = "Les creatures qui sont en mauvaise sante dans "+nom+" :\n";
+		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+			if (entry.getValue().getIndicateurSante() < 5) {
+				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurSante()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				isValue = true;
+			}
+		}
+		if (isValue)
+			return chaine;
+		else
+			return null;
+	}
+	
+	
 	/**
 	 * Methode permettant d'afficher les creatures qui ne sont plus en vie
 	 * et de les supprimer de l'enclos
@@ -88,18 +186,15 @@ public class Enclos {
 	 */
 	public String creaturesMortes() throws Exception {
         String chaine = "Les creatures mortes dans " + nom + " :\n";
-        Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, Creature> entry = iterator.next();
-            Creature creature = entry.getValue();
-            // Si la créature est morte
-            if (!creature.isVivant()) {
-                chaine += creature.toString();
-                SupprimerCreature(creature);
+        for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+        	if (!entry.getValue().isVivant()) {
+                chaine += entry.getValue().toString();
+                SupprimerCreature(entry.getValue());
             }
         }
         return chaine;
     }	
+	
 	
 	/**
 	 * Methode pour ajouter une creature dans l'enclos
@@ -113,7 +208,7 @@ public class Enclos {
 		if (nbCreatures==0)
 			nomEspece = creature.getNomEspece();
 		// Verification qu'il reste de la place, et que meme espece
-		if (nbCreatures < nbMaxCreatures && nomEspece==creature.getNomEspece()) {
+		if (nbCreatures < CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX && nomEspece==creature.getNomEspece()) {
 			nbCreatures++;
 			listeCreatures.put(nbCreatures, creature);
 		}
@@ -137,6 +232,8 @@ public class Enclos {
         	// si enclos vide
         	if(nbCreatures==0)
         		nomEspece = null;
+        	else
+        		reorganiserCles();
 		}
 		else 
 			throw new Exception ("Creature introuvable");
@@ -169,14 +266,19 @@ public class Enclos {
 				degreProprete = Enum_DegrePropreteEnclos.bon;
 			}
 			else
-				throw new Exception ("Il y a des creatures dans l'enclos, impossible de le nettoyer");
+				throw new Exception ("Il y a des creatures dans "+nom+", impossible de le nettoyer");
 		}
 		else 
-			throw new Exception ("Enclos n'a pas besoin d etre nettoye");
+			throw new Exception ("Enclos "+nom+" n'a pas besoin d etre nettoye");
 	}
 	
 	
-	
+	/**
+	 * Methode permettant de recuperer une creature selon sa cle
+	 * dans la liste des creatures de l'enclos
+	 * @param creature	L'instance de la creature recherche
+	 * @return	La cle de la creature trouve, sinon -1
+	 */
 	public int trouverCleParCreature(Creature creature) {
         for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
             if (entry.getValue().equals(creature)) {
@@ -187,6 +289,11 @@ public class Enclos {
     }
 	
 	
+	/**
+	 * Methode permettant de reorganiser les cles de la liste des
+	 * creatures de l'enclos
+	 * Tri des creatures selon leur age (ordre croissant)
+	 */
 	public void reorganiserCles() {
 		// Copier les créatures dans une liste
         List<Creature> creaturesList = new ArrayList<>(listeCreatures.values());
@@ -201,10 +308,13 @@ public class Enclos {
         }
         // Mettre à jour la listeCreatures et nbCreatures
         listeCreatures = nouvelleMap;
-        nbCreatures = nouvelleCle - 1;
+        nbCreatures = nouvelleMap.size();
 	}
 	
 	
+	/**
+	 * Methode permettant de degrader la proprete de l'enclos
+	 */
 	public void DegradationDegreProprete() {
 		if (degreProprete == Enum_DegrePropreteEnclos.bon)
 			degreProprete = Enum_DegrePropreteEnclos.correct;

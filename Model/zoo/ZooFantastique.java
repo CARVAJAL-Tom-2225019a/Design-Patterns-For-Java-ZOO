@@ -10,7 +10,11 @@ import base.*;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.*;
 import references.CONSTANTES;
+import references.Enum_DegrePropreteEnclos;
 
+/**
+ * Classe representant l'instance unique du zoo (singleton)
+ */
 public class ZooFantastique {
 
     // Instance singleton du zoo fantastique
@@ -23,6 +27,7 @@ public class ZooFantastique {
     private Set<Oeuf> listeOeufs;
     private Set<Creature> listeFemelleEnceinte;
 
+    
     // Constructeur privé pour empêcher l'instanciation directe
     private ZooFantastique() {
         this.nom = "Le Zoo Fantastique";
@@ -104,12 +109,11 @@ public class ZooFantastique {
      * Méthode pour afficher les informations sur l'ensemble du zoo
      */
     public String AfficherEnsembleZoo() {
-        StringBuilder chaine = new StringBuilder("\n==== VOICI " + nom + " ==== \n\n");
+        String chaine ="\n==== VOICI " + nom + " ==== \n\n";
         for (Enclos e : listeEnclos) {
-            chaine.append(" - ").append(e.getNom()).append(" avec ").append(e.getNbCreatures())
-                    .append(" creatures. Degre proprete : ").append(e.getDegreProprete()).append("\n");
+        		chaine+=e.VoirInfoEnclos();
         }
-        return chaine.toString();
+        return chaine;
     }
     
     
@@ -124,6 +128,7 @@ public class ZooFantastique {
     	return chaine;
     }
     
+    
     /**
      * Methode pour afficher la liste des oeufs
      */
@@ -133,6 +138,31 @@ public class ZooFantastique {
     		chaine += o.toString();
     	}
     	return chaine;
+    }
+    
+    
+    /**
+     * Methode pour recuperer la liste des enclos en mauvais etat
+     */
+    public String AfficherEnclosMauvaisEtat() {
+    	String chaine = "LES ENCLOS A NETTOYER : \n";
+    	for (Enclos e : listeEnclos) {
+    		if (e instanceof Voliere) {
+    			if ( ((Voliere) e).getEtatToit()==Enum_DegrePropreteEnclos.mauvais
+    					|| e.getDegreProprete()==Enum_DegrePropreteEnclos.mauvais)
+    				chaine+="  - "+e.getNom()+"\n";
+    		}
+    		else if (e instanceof Aquarium) {
+    			if ( ((Aquarium) e).getNiveauEau()< ((Aquarium) e).getProfondeurBassin()/3 ||
+    					((Aquarium) e).getSaliniteEau() < 2 )
+    				chaine+="  - "+e.getNom()+"\n";
+    		}
+    		else {
+    			if (e.getDegreProprete()==Enum_DegrePropreteEnclos.mauvais)
+    				chaine+="  - "+e.getNom()+"\n";
+    		}
+    	}
+    	return chaine+"\n";
     }
 
     
@@ -233,6 +263,17 @@ public class ZooFantastique {
                 enclos.DegradationDegreProprete();
             }
         }
+    }
+    
+    
+    /**
+     * Methode permetant de generer un entier aleatoire entre 0 et max
+     * @param max	Entier maximal
+     * @return	Le nombre aleatoire
+     */
+    public static int getIntAleatoire(int max) {
+    	Random random = new Random();
+    	return random.nextInt(max);
     }
 
 }

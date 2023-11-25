@@ -5,6 +5,9 @@ import creaturesImplemente.Humain;
 import enclosImplemente.*;
 import references.*;
 
+/**
+ * Classe representant l'unique maitre Zoo (singleton)
+ */
 public class MaitreZoo extends Humain{
     // Instance unique de la classe MaitreZoo
     private static MaitreZoo instance;
@@ -85,7 +88,6 @@ public class MaitreZoo extends Humain{
     		if (enclosSource.getListeCreatures().containsValue(creature)) {
     			enclosSource.SupprimerCreature(creature);
             	enclosDest.AjouterCreature(creature);
-            	enclosSource.reorganiserCles();
             	enclosDest.reorganiserCles();
     		}
     		else

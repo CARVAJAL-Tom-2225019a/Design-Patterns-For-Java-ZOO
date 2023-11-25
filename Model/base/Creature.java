@@ -4,6 +4,11 @@ import java.util.Random;
 
 import references.*;
 
+
+/**
+ * Cette classe abstraite représente une entité vivante dans le zoo fantastique
+ *
+ */
 public abstract class Creature {
 
     private Enum_Especes nomEspece;
@@ -26,12 +31,13 @@ public abstract class Creature {
 
     /**
      * Constructeur de la classe Creature.
-     * 
-     * @param nomEspece L'espèce de la créature.
-     * @param sexe      Le sexe de la créature.
-     * @param poids     Le poids de la créature.
-     * @param taille    La taille de la créature.
-     * @param bruit     Le bruit que fait la créature.
+     *
+     * @param nomEspece         L'espèce de la créature.
+     * @param sexe              Le sexe de la créature.
+     * @param poids             Le poids de la créature.
+     * @param taille            La taille de la créature.
+     * @param bruit             Le bruit que fait la créature.
+     * @param dureePourEnfant   La durée d'incubation / de gestation
      */
     public Creature(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureePourEnfant) {
         this.nomEspece = nomEspece;
@@ -47,6 +53,7 @@ public abstract class Creature {
         this.bruit = bruit;
         this.dureePourEnfant = dureePourEnfant;
     }
+    
     
     /**
      * Getters
@@ -102,7 +109,7 @@ public abstract class Creature {
             if (indicateurFaim > CONSTANTES.MAX_INDICATEUR)
                 indicateurFaim = CONSTANTES.MAX_INDICATEUR;
         } else {
-            throw new Exception("Etat de la créature invalide, impossible de manger");
+            throw new Exception("Etat de la creature invalide, impossible de manger");
         }
     }
 
@@ -114,10 +121,13 @@ public abstract class Creature {
      * @throws Exception Si la créature n'est pas vivante.
      */
     public String FaireBruit() throws Exception {
-        if (vivant)
+        if (vivant) {
+        	PerdreNourriture();
+        	PerdreSommeil();
             return bruit;
+        }
         else
-            throw new Exception("Etat de la créature invalide, impossible de faire un bruit");
+            throw new Exception("Etat de la creature invalide, impossible de faire un bruit");
     }
 
     
@@ -127,12 +137,9 @@ public abstract class Creature {
      * @param num Le nombre de points de santé que la créature gagne en se soignant.
      * @throws Exception Si la créature n'est pas vivante.
      */
-    public void Soigner(int num) throws Exception {
+    public void Soigner() throws Exception {
         if (vivant) {
-            indicateurSante += num;
-            // Vérification pas de dépassement
-            if (indicateurSante > CONSTANTES.MAX_INDICATEUR)
-                indicateurSante = CONSTANTES.MAX_INDICATEUR;
+            indicateurSante += CONSTANTES.MAX_INDICATEUR;
         } else {
             throw new Exception("La creature n'est plus vivante, impossible de la soigner");
         }
@@ -145,24 +152,38 @@ public abstract class Creature {
      * @throws Exception Si la créature n'est pas vivante ou est déjà en train de dormir.
      */
     public void Dormir() throws Exception {
-        if (vivant && !enTrainDeDormir && indicateurSommeil < CONSTANTES.MAX_INDICATEUR)
-            enTrainDeDormir = true;
+        if (vivant) {
+        	if (!enTrainDeDormir) {
+        		if (indicateurSommeil < CONSTANTES.MAX_INDICATEUR) {
+        			enTrainDeDormir = true;
+        		}
+        		else
+        			throw new Exception("Insomnie, impossible de dormir");
+        	}
+        	else
+        		throw new Exception ("La creature est deja en train de dormir");
+        }
         else
-            throw new Exception("État de la créature invalide, impossible de dormir");
+            throw new Exception("Creature morte, impossible de dormir");
     }
 
+    
     /**
      * Méthode pour que la créature se réveille.
      * 
      * @throws Exception Si la créature n'est pas vivante ou n'est pas en train de dormir.
      */
     public void SeReveiller() throws Exception {
-        if (vivant && enTrainDeDormir) {
-            enTrainDeDormir = false;
-            indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
-        } else {
-            throw new Exception("Etat de la créature invalide, impossible de se reveiller");
-        }
+        if (vivant) {
+        	if (enTrainDeDormir) {
+        		enTrainDeDormir = false;
+                indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
+        	}
+        	else
+        		throw new Exception("La creature ne dort pas");
+        } 
+        else
+            throw new Exception("La creature ne peut pas se reveiller, elle est morte a jamais");
     }
 
     
@@ -171,8 +192,11 @@ public abstract class Creature {
      *
      */
     public void Vieillir() throws Exception {
-        if (vivant && age < CONSTANTES.MAX_AGE)
-            age++;
+        if (vivant && age < CONSTANTES.MAX_AGE) {
+        	PerdreNourriture();
+        	PerdreSommeil();
+        	age++;
+        }
         else if (vivant && age == CONSTANTES.MAX_AGE)
             Mourir();
     }
@@ -263,6 +287,7 @@ public abstract class Creature {
     
     /**
      * Méthode pour générer un sexe aléatoire
+     * @return Le sexe choisi aleatoirement
      */
     public static Enum_Sexe SexeAleatoire() {
     	Random random = new Random();

@@ -2,17 +2,30 @@ package creaturesImplemente;
 
 import references.Enum_Sexe;
 
+/**
+ * Cette classe correspond a un humain
+ * soit pour le maitre zoo
+ * soit pour la transformation d'un lycanthrope
+ *
+ */
 public class Humain {
 	
 	private String nom;
     private Enum_Sexe sexe;
     private int age;
     
+    /**
+     * Constructeur
+     * @param nom
+     * @param sexe
+     * @param age
+     */
     public Humain(String nom, Enum_Sexe sexe, int age) {
         this.nom = nom;
         this.sexe = sexe;
         this.age = age;
     }
+    
     
     /**
      * Methode pour afficher les informations du maitre zoo

@@ -6,12 +6,16 @@ import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
+/**
+ * Classe representant le controleur de la gestion manuel du zoo
+ */
 public class ControllerUserInterface {
 	private ZooFantastique zoo = ZooFantastique.getInstance();
     private final VueGlobale VueGlobale;
     private final VueUtilisateur VueUtilisateur;
     private final ControllerZoo zooController;
 
+    
     /**
      * Constructeur
      */
@@ -46,6 +50,7 @@ public class ControllerUserInterface {
     		VueGlobale.Afficher(e.getMessage());
     	}
     }
+    
     
     /**
      * Methode permettant de selectionner une creature dans un enclos

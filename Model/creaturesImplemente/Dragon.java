@@ -4,6 +4,12 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+/**
+ * Cette classe correspond à la crature du dragon
+ * qui est un ovipare
+ * et qui est terrestre, aquatique, aerien et immortel
+ *
+ */
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
 
     /**
@@ -18,6 +24,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
     protected Dragon(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
         super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
     }
+    
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.

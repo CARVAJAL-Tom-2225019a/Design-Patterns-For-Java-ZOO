@@ -3,6 +3,10 @@ package creaturesImplemente;
 import base.*;
 import references.*;
 
+/**
+ * Cette classe correspond a un oeuf qui sera pondu par un ovipare
+ *
+ */
 public class Oeuf {
 	
     private Enum_Especes espece;
@@ -80,6 +84,7 @@ public class Oeuf {
     
     /**
      * Methode pour afficher les informations sur l'oeuf
+     * @return la chaine contenant les informations
      */
     public String toString() {
     	return "Oeuf contenant un(e) "+ espece + " qui va eclore dans "+dureeIncubationRestante+" ans\n";

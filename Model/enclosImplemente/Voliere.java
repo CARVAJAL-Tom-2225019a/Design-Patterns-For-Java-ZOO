@@ -5,7 +5,8 @@ import interfaces.CreatureVolante;
 import references.*;
 
 /**
- * La classe Voliere représente une volière, une extension spécifique de la classe Enclos,
+ * La classe Voliere représente une volière, 
+ * une extension spécifique de la classe Enclos,
  * destinée à accueillir des créatures volantes.
  */
 public class Voliere extends Enclos {
@@ -13,6 +14,7 @@ public class Voliere extends Enclos {
     private double hauteur;
     private Enum_DegrePropreteEnclos etatToit;
 
+    
     /**
      * Constructeur de la classe Voliere.
      *
@@ -22,12 +24,24 @@ public class Voliere extends Enclos {
      * @param nbMaxCreatures  Le nombre maximum de créatures que la volière peut accueillir.
      * @param hauteur         La hauteur de la volière.
      */
-    public Voliere(String nom, double superficie, int nbMaxCreatures, double hauteur) {
-        super(nom, superficie, nbMaxCreatures);
+    public Voliere(String nom, double superficie, double hauteur) {
+        super(nom, superficie);
         this.hauteur = hauteur;
         etatToit = Enum_DegrePropreteEnclos.bon;
     }
-
+    
+    
+    /*
+     * Getters
+     */
+    public double getHauteur() {
+    	return hauteur;
+    }
+    public Enum_DegrePropreteEnclos getEtatToit() {
+    	return etatToit;
+    }
+    
+    
     /**
      * Ajoute une créature à la volière en vérifiant si elle est volante et si sa taille est
      * compatible avec la hauteur de la volière.
@@ -48,6 +62,7 @@ public class Voliere extends Enclos {
         }
     }
 
+    
     /**
      * Effectue l'entretien de la volière en vérifiant l'état du toit et en réalisant l'entretien
      * classique de l'enclos.
@@ -82,6 +97,19 @@ public class Voliere extends Enclos {
 	}
 	
 	
+	/**
+	 * Methode pour avoir le nom de l'enclos et son etat
+	 */
+	public String VoirInfoEnclos() {
+		return " -Voliere "+getNom()+" avec "+getNbCreatures()
+        +" creatures.\n          Degre proprete : "+getDegreProprete()
+        +"\n          Etat toit : "+etatToit+"\n";
+	}
+	
+	
+	/**
+	 * Methode permettant de degrader l'etat du toit de la voliere
+	 */
 	public void DegradationEtatToit() {
 		if (etatToit == Enum_DegrePropreteEnclos.bon)
 			etatToit = Enum_DegrePropreteEnclos.correct;

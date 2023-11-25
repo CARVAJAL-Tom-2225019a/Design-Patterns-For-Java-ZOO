@@ -2,6 +2,9 @@ package viewApplication;
 
 import controllerApplication.ControllerPrincipal;
 
+/**
+ * Classe permettant l'affichage d'informations
+ */
 public class VueGlobale {
 	// Instance du contrôleur principal
 	private static ControllerPrincipal control = new ControllerPrincipal();

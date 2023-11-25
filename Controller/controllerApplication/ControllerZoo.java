@@ -19,6 +19,10 @@ import references.Enum_Sexe;
 import viewApplication.*;
 import zoo.ZooFantastique;
 
+/**
+ * Classe representant le controleur du zoo
+ * Permet d'effectuer toutes les actions relatives a vie du zoo
+ */
 public class ControllerZoo {
 	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
 	private static ControllerUserInterface controlUser = new ControllerUserInterface();
@@ -184,6 +188,7 @@ public class ControllerZoo {
      * Passe à la nouvelle année si le nombre d'actions atteint le maximum.
      */
     public void PassageAnnee() {
+    	String temp = null;
     	try {
     		VueGlobale.PassageAnnee();
             controlPrincipal.VerificationNaissances();
@@ -192,6 +197,12 @@ public class ControllerZoo {
             for (Enclos e : zoo.GetListeEnclos())
             	e.reorganiserCles();
             VueGlobale.Afficher("\n ====== NOUVELLE ANNEE ====== \n");
+            //Affichage des informations préoccupantes
+            VueGlobale.Afficher(zoo.AfficherEnclosMauvaisEtat());
+            for (Enclos e : zoo.GetListeEnclos())
+            	temp = e.voirCreaturesAyantUnBesoin();
+            if (temp != null)
+            	 VueGlobale.Afficher(temp);
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());
@@ -350,15 +361,15 @@ public class ControllerZoo {
 
             // creation enclos
             if ("Classique".equals(typeEnclos)) {
-                Enclos e = new Enclos(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+                Enclos e = new Enclos(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
                 zoo.AddEnclos(e);
             } 
             else if ("Voliere".equals(typeEnclos)) {
-                Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+                Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
                 zoo.AddEnclos(e);
             } 
             else if ("Aquatique".equals(typeEnclos)) {
-                Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+                Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
                 zoo.AddEnclos(e);
             } 
             else {
@@ -388,7 +399,7 @@ public class ControllerZoo {
         		enclos = ControllerGestionAuto.RecuperationEnclosAleatoire();
         		int i = zoo.GetListeEnclos().size() + 1;
         		nomEnclos="Enclos"+i;
-        		Enclos e = new Enclos (nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+        		Enclos e = new Enclos (nomEnclos, CONSTANTES.TAILLE_ENCLOS);
         		zoo.AddEnclos(e);
         		enclosDest = e;
         	}
@@ -399,7 +410,7 @@ public class ControllerZoo {
     	        maitreZoo.TransfererCreature(c, enclos, enclosDest);
     	    }
         	VueGlobale.Afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
-        			"effectue\n");
+        			" effectue\n");
     	}
     	catch (Exception e) {
     		VueGlobale.Afficher(e.getMessage());

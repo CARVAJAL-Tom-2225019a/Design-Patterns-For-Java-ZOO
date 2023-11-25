@@ -10,6 +10,9 @@ import references.*;
 import viewApplication.*;
 import zoo.ZooFantastique;
 
+/**
+ * Classe representant le controleur principal de l'application
+ */
 public class ControllerPrincipal {
 	private int numPourNom = 0;
 	VueGlobale VueGlobale = new VueGlobale();
@@ -18,6 +21,7 @@ public class ControllerPrincipal {
     private static ZooFantastique zoo = ZooFantastique.getInstance();
     // Âge maximum aléatoire pour la création d'une créature
     private static int MaxAgeAleatoire = CONSTANTES.MAX_AGE / 2;
+    
     
     /**
      * Méthode pour passer à la nouvelle année dans le zoo
@@ -41,6 +45,7 @@ public class ControllerPrincipal {
     	}
     	return chaine.toString();
     }
+    
     
     /**
      * Methodes permettant de verifier les enfants qui doivent naitre
@@ -107,6 +112,7 @@ public class ControllerPrincipal {
         	for (Enclos e : zoo.GetListeEnclos()) {
         		if (e.getNbCreatures()<e.getNbMaxCreatures() && e.getNomEspece()==c.getNomEspece()) {
         			e.AjouterCreature(c);
+        			e.reorganiserCles();
         			return;
         		}
         	}
@@ -117,7 +123,7 @@ public class ControllerPrincipal {
         		numPourNom++;
         		nom = "Enclos"+numPourNom;
         	}
-        	Enclos newEnclos = new Enclos (nom, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+        	Enclos newEnclos = new Enclos (nom, CONSTANTES.TAILLE_ENCLOS);
         	zoo.AddEnclos(newEnclos);
         	newEnclos.AjouterCreature(c);
     	}
@@ -149,6 +155,7 @@ public class ControllerPrincipal {
 				for (int y=0; y<age; y++)
 					d.Vieillir();
 			}
+			enclos.reorganiserCles();
 		}
 		catch (Exception e) {
 			VueGlobale.Afficher(e.getMessage());
@@ -162,47 +169,47 @@ public class ControllerPrincipal {
 	public void creerDonneesJeu() {
 		try {
 			// Dragons
-			Voliere enclosDragons = new Voliere("DragonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+			Voliere enclosDragons = new Voliere("DragonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosDragons, Enum_Especes.Dragon);
 			zoo.AddEnclos(enclosDragons);
 
 			// Kraken
-			Aquarium enclosKraken = new Aquarium("KrakenLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+			Aquarium enclosKraken = new Aquarium("KrakenLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosKraken, Enum_Especes.Kraken);
 			zoo.AddEnclos(enclosKraken);
 			
 			// Licorne
-			Enclos enclosLicorne = new Enclos("LicorneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosLicorne = new Enclos("LicorneLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosLicorne, Enum_Especes.Licorne);
 			zoo.AddEnclos(enclosLicorne);
 			
 			// Lycanthrope
-			Enclos enclosLycanthrope = new Enclos("LycanthropeLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosLycanthrope = new Enclos("LycanthropeLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosLycanthrope, Enum_Especes.Lycanthrope);
 			zoo.AddEnclos(enclosLycanthrope);
 			
 			// Megalodon
-			Aquarium enclosMegalodon = new Aquarium("MegalodonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+			Aquarium enclosMegalodon = new Aquarium("MegalodonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 			zoo.AddEnclos(enclosMegalodon);
 			
 			// Nymphe
-			Enclos enclosNymphe = new Enclos("NympheLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosNymphe = new Enclos("NympheLand", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
 			zoo.AddEnclos(enclosNymphe);
 			
 			// Phenix
-			Voliere enclosPhenix = new Voliere("PhenixLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+			Voliere enclosPhenix = new Voliere("PhenixLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosPhenix, Enum_Especes.Phenix);
 			zoo.AddEnclos(enclosPhenix);
 			
 			//Sirene
-			Aquarium enclosSirene = new Aquarium("SireneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, CONSTANTES.TAILLE_ENCLOS);
+			Aquarium enclosSirene = new Aquarium("SireneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosSirene, Enum_Especes.Sirene);
 			zoo.AddEnclos(enclosSirene);
 			
 			//Enclos vide
-			Enclos enclosVide = new Enclos("OtherLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX);
+			Enclos enclosVide = new Enclos("OtherLand", CONSTANTES.TAILLE_ENCLOS);
 			zoo.AddEnclos(enclosVide);
 		}
 		catch (Exception e) {
