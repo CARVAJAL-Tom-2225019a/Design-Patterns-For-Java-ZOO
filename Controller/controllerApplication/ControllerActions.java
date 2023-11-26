@@ -8,15 +8,19 @@ import base.Creature;
 import base.Enclos;
 import base.Ovipare;
 import controllerTemps.Enum_ActionsPossibles;
+import controllerTemps.GestionnaireTemps;
+import creaturesImplemente.Lycanthrope;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.Aquarium;
 import enclosImplemente.EnclosClassique;
+import enclosImplemente.EnclosLycanthrope;
 import enclosImplemente.Voliere;
 import interfaces.CreatureMarine;
 import interfaces.CreatureTerrestre;
 import interfaces.CreatureVolante;
 import main.Run;
 import maitreZoo.MaitreZoo;
+import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
 import references.Enum_Sexe;
 import viewApplication.VueGlobale;
@@ -31,8 +35,11 @@ public class ControllerActions {
     private static VueUtilisateur vueUtilisateur;
     // Instance du gestionnaire du zoo (Singleton)
     private MaitreZoo maitreZoo = MaitreZoo.getInstance();
+    private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     // Instance du zoo fantastique (Singleton)
     private ZooFantastique zoo = ZooFantastique.getInstance();
+    // Instance du temps
+    private GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
     public ControllerActions() {
@@ -139,12 +146,12 @@ public class ControllerActions {
             if (Run.utilisateurControle) {
                 nomEnclos = vueUtilisateur.DemandeUtilisateur("Nom enclos : ");
                 while (!valeurOk) {
-                    typeEnclos = vueUtilisateur.DemandeUtilisateur("Type enclos (Classique, Aquatique, Voliere) : ");
-                    if ("Classique".equals(typeEnclos) || "Aquatique".equals(typeEnclos) || "Voliere".equals(typeEnclos)) {
+                    typeEnclos = vueUtilisateur.DemandeUtilisateur("Type enclos (Classique, Aquatique, Voliere, Lycanthrope) : ");
+                    if ("Classique".equals(typeEnclos) || "Aquatique".equals(typeEnclos) || "Voliere".equals(typeEnclos) || "Lycanthrope".equals(typeEnclos)) {
                         valeurOk = true;
                     } 
                     else {
-                        vueGlobale.Afficher("Veuillez entrer Classique, Voliere ou Aquatique");
+                        vueGlobale.Afficher("Veuillez entrer Classique, Voliere, Aquatique ou Lycanthrope");
                     }
                 }
             }
@@ -166,7 +173,11 @@ public class ControllerActions {
             else if ("Aquatique".equals(typeEnclos)) {
                 Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
                 zoo.addEnclos(e);
-            } 
+            }
+            else if ("Lycanthrope".equals(typeEnclos)) {
+            	EnclosLycanthrope e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+            	zoo.addEnclos(e);
+            }
             else {
                 throw new Exception("Erreur type enclos lors de la creation");
             }
@@ -421,4 +432,48 @@ public class ControllerActions {
     		vueGlobale.Afficher(e.getMessage());
     	}
     }
+
+	public void casVoirLycanthropes() {
+		try {
+	    	vueGlobale.Afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+	    	vueGlobale.Afficher(colonie.voirLycanthropes());
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+    	}
+    	catch (Exception e) {
+    		vueGlobale.Afficher(e.getMessage());
+    	}
+	}
+
+	public void casSaisonAmourLycanthropes() {
+		try {
+	    	vueGlobale.Afficher("\n ---- Verification saison amour pour lycanthropes ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+") ---- ");
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+	    	Set<Lycanthrope> listeFemelleEnceinte =  colonie.verificationSaisonAmour(temps.getDateActuelle());
+	    	if (!listeFemelleEnceinte.isEmpty()) {
+	    		for (Lycanthrope l : listeFemelleEnceinte) {
+	    			zoo.addFemelleEnceinte(l);
+		    		vueGlobale.Afficher(l.getPrenom()+" est enceinte\n");
+	    		}
+	    	}
+	    	else
+	    		vueGlobale.Afficher("Pas de bebe pour le moment...");
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+    	}
+    	catch (Exception e) {
+    		vueGlobale.Afficher(e.getMessage());
+    	}
+	}
+
+	public void casVoirMeutes() {
+		try {
+	    	vueGlobale.Afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+	    	vueGlobale.Afficher(colonie.voirMeutes());
+	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+    	}
+    	catch (Exception e) {
+    		vueGlobale.Afficher(e.getMessage());
+    	}
+	}
 }

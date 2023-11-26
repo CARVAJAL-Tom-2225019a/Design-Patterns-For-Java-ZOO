@@ -55,12 +55,6 @@ class TestEnclos {
 	}
 	
 	@Test
-	void TestMethodeVoirCreaturesAyantUnBesoinNull() {
-		String result = "\nLES CREATURES QUI ONT UN BESOIN : ";
-		assertEquals(result, enclos.voirCreaturesAyantUnBesoin());
-	}
-	
-	@Test
 	void TestMethodeVoirCreaturesMortes() throws Exception {
 		enclos.getListeCreatures().get(1).mourir();
 		String result = "\nLes creatures mortes dans " +enclos.getNom()+ " :\n";

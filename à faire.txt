@@ -1,0 +1,23 @@
+Dossier Spécification
+	Page de garde
+	UML
+	Cloture du travail
+
+Dossier Manuel d'utilisation
+	Page de garde
+	Actions supplémentaires
+	Scénarios
+	Erreurs
+
+Documentation complète générée par Javadoc
+
+Fichier Read-Me
+
+
+Pour l'application
+	Amélioration gestion automatique (selon état du zoo, des creatures...)
+	Ajout fonctionnalités générales
+	Ajout fonctionnalités pour les lycanthropes
+	Amélioration lycanthropes
+	Modification sante / faim / sommeil selon etat enclos
+	Etat sante faim sommeil a consequence sur creature

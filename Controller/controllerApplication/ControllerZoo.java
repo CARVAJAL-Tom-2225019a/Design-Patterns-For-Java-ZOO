@@ -168,6 +168,29 @@ public class ControllerZoo {
             	CasChanterEnclos();
             	retour= true;
             	break;
+            // Voir les meutes
+            case 15 : 
+            	action.casVoirMeutes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_MEUTES))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir les lycanthropes
+            case 16 : 
+            	action.casVoirLycanthropes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_LOUPS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Saison amour pour les lycanthropes
+            case 17 : 
+            	action.casSaisonAmourLycanthropes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.SAISON_AMOUR_LOUPS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            //TODO : suite actions pour Lycanthropes (defier male alpha, jurler...)
+            //TODO : autres actions pour creatures (par rapport sante notamment)
             // Exit
             case 99:
                 retour= false;

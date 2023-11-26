@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import base.Creature;
+import base.Enclos;
+import base.Vivipare;
 import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
 import references.CONSTANTES;
@@ -12,8 +14,6 @@ import references.Enum_RangDomination;
 import references.Enum_Sexe;
 
 public class EnclosLycanthrope extends Enclos {
-	
-	// TODO : passage année lycanthrope
 	
 	
 	private Meute meutePresente;
@@ -41,14 +41,14 @@ public class EnclosLycanthrope extends Enclos {
 	}
 	
 	
-	public void PassageAnneLycanthrope() {
+	public void passageAnneLycanthrope() {
 		if (meutePresente != null)
-			meutePresente.VerificationSeuilFacteurDominationMeute();
+			meutePresente.verificationSeuilFacteurDominationMeute();
 		isNecessiteNouvelleMeute();
 	}
 	
 	
-	private boolean isNecessiteNouvelleMeute() {
+	public Meute isNecessiteNouvelleMeute() {
 		Lycanthrope maleA = null;
 		Lycanthrope femelleA = null;
 		if (meutePresente == null) {
@@ -67,21 +67,39 @@ public class EnclosLycanthrope extends Enclos {
 				Meute m = new Meute(femelleA, maleA, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, rangPossible);
 				meutePresente = m;
 				m.setEnclosReference(this);
-				return true;
+				return m;
 			}
 		}
-		return false;
+		return null;
 	}
 
 
 	
-	public String ExpressionAppartenanceCollective () throws Exception {
+	public String expressionAppartenanceCollective () throws Exception {
 		String chaine = "";
 		for (Creature l : super.getListeCreatures().values()) {
-			chaine += ((Lycanthrope)l).Hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l);
+			chaine += ((Lycanthrope)l).hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l);
 		}
 		return chaine;
 	}
+	
+	
+	/**
+     * Methode permettant de concevoir un enfant pour
+     * les lycanthrope
+     * @throws Exception 
+     */
+    public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
+    	if (meutePresente!=null && femelle == meutePresente.getCoupleAlpha().getFemelleAlpha() && male != meutePresente.getCoupleAlpha().getMaleAlpha()) {
+    		if (femelle.isVivant() && femelle instanceof Vivipare) {
+        		((Vivipare)femelle).concevoirUnEnfant((Vivipare)male, femelle.getDureeGestation());
+        		return 1;
+        	}
+    	}
+    	else throw new Exception ("Chez les lycanthropes, seul le couple alpha peut se reproduire");
+
+    	return -1;
+    }
 	
 	
 }

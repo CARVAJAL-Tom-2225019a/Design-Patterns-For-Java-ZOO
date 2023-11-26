@@ -107,6 +107,10 @@ public class VueUtilisateur {
 						+ "\n  11 : Organiser une seance de sport pour un enclos"
 						+ "\n  12 : Organiser un concert prive avec les creatures"
 						+ "\n"
+						+ "\n  15 : Voir l'ensemble des meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+")"
+						+ "\n  16 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
+						+ "\n  17 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
+						+ "\n"
 						+ "\n  99 : Exit" 
 						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
 						+ "\n\n Votre choix = ");

@@ -15,7 +15,10 @@ public enum Enum_ActionsPossibles {
     METTRE_ENCLOS_EN_MOUVEMENT(0, 1, 0),
     FAIRE_CHANTER_ENCLOS(0, 1, 0),
 	DORMIR_ENCLOS(0,0,2),
-	REVEILLER_ENCLOS(0,0,2);
+	REVEILLER_ENCLOS(0,0,2),
+	VOIR_LOUPS(0,0,2),
+	SAISON_AMOUR_LOUPS(0,1,20),
+	VOIR_MEUTES(0,0,3);
 
     private final int dureeEnAnnees;
     private final int dureeEnMois;
