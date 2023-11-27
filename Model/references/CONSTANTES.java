@@ -26,7 +26,7 @@ public class CONSTANTES {
 	public static int TAILLE_MAX_CREATURE=50;
 	
 	
-	public static int NUM_CHOIX_MAX = 12;
+	public static int NUM_CHOIX_MAX = 17;
 	
 	// Pour lycanthrope
 	public static int MAX_FORCE = 100;

@@ -254,6 +254,17 @@ public class Enclos {
 	
 	
 	/**
+	 * Methode pour soigner les creatures d'un enclos
+	 * @throws Exception 
+	 */
+	public void soignerCreatures() throws Exception {
+		for (Creature creature : listeCreatures.values()) {
+			creature.soigner();
+		}
+	}
+	
+	
+	/**
 	 * Methode pour entrenir l'enclos
 	 * 
 	 * @throws Exception si l'enclos n'est pas sale ou s'il est vide
@@ -394,5 +405,17 @@ public class Enclos {
 		}
 	}
     
+	
+	/**
+	 * Methode pour degrader l'etat de l'ensemble des creatures de l'enclos
+	 * @throws Exception 
+	 */
+	public void degradationEtatCreatures() throws Exception {
+		for (Creature c : listeCreatures.values()) {
+			c.perdreNourriture();
+			c.perdreSommeil();
+			c.perdreSante();
+		}
+	}
 	
 }

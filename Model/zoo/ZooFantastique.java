@@ -2,7 +2,6 @@ package zoo;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -179,90 +178,6 @@ public class ZooFantastique {
             }
         }
         throw new Exception ("Nom enclos inccorrect");
-    }
-    
-
-    /**
-     * Methode pour modification aleatoire a intervalles
-     * regulires de l'etat du zoo
-     * @throws Exception 
-     * 
-     */
-    public void ModificationEtatAleatoire() throws Exception {
-    	ModifAleatoireStatutCreature();
-    	ModifAleatoireEtatEnclos();
-    }
-    
-    
-    /**
-     * Méthode pour modifier aléatoirement l'état des créatures dans le zoo.
-     * @throws Exception 
-     */
-    public void ModifAleatoireStatutCreature() throws Exception {
-    	Random random = new Random(System.currentTimeMillis());
-        // Nombre aléatoire d'enclos à modifier
-        int nombreEnclosAModifier = random.nextInt(listeEnclos.size()-3) + 2;
-        // Parcourir un nombre aléatoire d'enclos
-        for (int i = 0; i < nombreEnclosAModifier; i++) {
-            // Sélectionner un enclos au hasard
-            int randomIndexEnclos = random.nextInt(listeEnclos.size());
-            Enclos enclos = (Enclos) listeEnclos.toArray()[randomIndexEnclos];
-         // Nombre aléatoire de créatures à modifier dans cet enclos
-            int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
-            int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;
-
-            // Obtenir la liste des créatures dans cet enclos
-            Map<Integer, Creature> creatures = enclos.getListeCreatures();
-            // Modifier aléatoirement l'état du nombre aléatoire de créatures
-            for (int j = 0; j < nombreCreaturesAModifier; j++) {
-                // Sélectionner une clé au hasard dans la Map
-                int randomKeyCreature = (int) creatures.keySet().toArray()[random.nextInt(creatures.size())];
-                Creature creature = creatures.get(randomKeyCreature);
-                // Choisir aléatoirement le critère (sommeil, sante ou faim)
-                int critereAleatoire = random.nextInt(3);
-                switch (critereAleatoire) {
-                    case 0:
-                        creature.perdreSommeil();
-                        break;
-                    case 1:
-                        creature.perdreSante();
-                        break;
-                    case 2:
-                        creature.perdreNourriture();
-                        break;
-                }
-            }
-        }
-    }
-
-    
-    /**
-     * Méthode pour effectuer des modifications aléatoires sur l'état des enclos
-     */
-    private void ModifAleatoireEtatEnclos() {
-    	Random random = new Random(System.currentTimeMillis());
-        // Nombre aléatoire d'enclos à modifier
-        int nombreEnclosAModifier = random.nextInt(listeEnclos.size()-3) + 2;
-        // Parcourir un nombre aléatoire d'enclos
-        for (int i = 0; i < nombreEnclosAModifier; i++) {
-            // Sélectionner un enclos au hasard
-            int randomIndexEnclos = random.nextInt(listeEnclos.size());
-            Enclos enclos = (Enclos) listeEnclos.toArray()[randomIndexEnclos];
-            if (enclos instanceof Aquarium) {
-                // Si c'est un Aquarium, modifier NiveauEau et SaliniteEau
-                Aquarium aquarium = (Aquarium) enclos;
-                aquarium.degradationNiveauEau();
-                aquarium.degradationSaliniteEau();
-            } else if (enclos instanceof Voliere) {
-                // Si c'est une Voliere, modifier degreProprete et etatToit
-                Voliere voliere = (Voliere) enclos;
-                voliere.degradationDegreProprete();
-                voliere.degradationEtatToit();
-            } else {
-                // Sinon (enclos classique), modifier degreProprete
-                enclos.degradationDegreProprete();
-            }
-        }
     }
     
     

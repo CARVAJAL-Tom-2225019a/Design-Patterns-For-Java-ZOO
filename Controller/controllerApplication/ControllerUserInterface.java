@@ -13,7 +13,7 @@ public class ControllerUserInterface {
 	private ZooFantastique zoo = ZooFantastique.getInstance();
     private final VueGlobale vueGlobale;
     private final VueUtilisateur vueUtilisateur;
-    private final ControllerZoo zooController;
+    private final ControllerActions zooController;
 
     
     /**
@@ -22,7 +22,7 @@ public class ControllerUserInterface {
     public ControllerUserInterface() {
         this.vueGlobale = new VueGlobale();
         this.vueUtilisateur = new VueUtilisateur();
-        this.zooController = new ControllerZoo();
+        this.zooController = new ControllerActions();
     }
 
     

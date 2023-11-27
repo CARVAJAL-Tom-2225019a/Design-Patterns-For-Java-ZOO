@@ -71,6 +71,14 @@ public class MaitreZoo extends Humain{
     	enclos.nourrirCreatures();
     }
     
+    /**
+     * Methode pour soigner un enclos
+     * @throws Exception 
+     */
+    public void soignerCreaturesEnclos (Enclos enclos) throws Exception {
+    	enclos.soignerCreatures();
+    }
+    
     
     /**
      * Methode pour transferer une creature d'un enclos a un autre

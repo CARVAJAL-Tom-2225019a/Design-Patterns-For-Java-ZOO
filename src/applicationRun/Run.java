@@ -2,7 +2,7 @@ package applicationRun;
 
 import controllerApplication.ControllerPrincipal;
 import controllerApplication.ControllerUserInterface;
-import controllerApplication.ControllerZoo;
+import controllerApplication.ControllerActions;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
@@ -19,7 +19,7 @@ public class Run {
 	static VueUtilisateur vueUtilisateur = new VueUtilisateur();
 	static VueGlobale vueGlobale = new VueGlobale();
     static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
-    ControllerZoo zooController = new ControllerZoo();
+    ControllerActions zooController = new ControllerActions();
     ControllerUserInterface userInterfaceController = new ControllerUserInterface();
 
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
@@ -31,7 +31,7 @@ public class Run {
         // Point d'entrée de la simulation
 
         // Crée les données de jeu nécessaires à la simulation
-    	controllerPrincipal.creerDonneesJeu();
+    	Donnees.creerDonneesJeu();
     	
     	//Choix du mode de simulation
     	int choix = 0;

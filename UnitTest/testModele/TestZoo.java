@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import base.Creature;
 import base.Enclos;
+import controllerTemps.Evenements;
 import creaturesImplemente.FactoryCreature;
 import enclosImplemente.Aquarium;
 import maitreZoo.MaitreZoo;
@@ -66,7 +67,7 @@ class TestZoo {
 	@Test
 	void TestMethodeModifAleatoireStatutCreature() throws Exception {
 		boolean fait = false;
-		zoo.ModifAleatoireStatutCreature();
+		Evenements.modifAleatoireStatutCreature();
 		for (Enclos e : zoo.getListeEnclos()) {
 			for (Creature c : e.getListeCreatures().values()) {
 				if(c.getIndicateurFaim()<CONSTANTES.MAX_INDICATEUR
@@ -83,7 +84,8 @@ class TestZoo {
 	@Test
 	void TestMethodeModifAleatoireEtatEnclos() throws Exception {
 		boolean fait = false;
-		zoo.ModificationEtatAleatoire();
+		Evenements.modifAleatoireStatutCreature();
+		Evenements.modifAleatoireEtatEnclos();
 		for (Enclos e : zoo.getListeEnclos()) {
 			if ( ((Aquarium)e).getNiveauEau()<((Aquarium)e).getProfondeurBassin() 
 					|| ((Aquarium)e).getSaliniteEau()<CONSTANTES.SALINITE_CORRECT) {

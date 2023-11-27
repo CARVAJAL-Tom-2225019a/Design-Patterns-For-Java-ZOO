@@ -14,10 +14,15 @@ Documentation complète générée par Javadoc
 Fichier Read-Me
 
 
-Pour l'application
+Pour l'application (code)
 	Amélioration gestion automatique (selon état du zoo, des creatures...)
-	Ajout fonctionnalités pour les creatures (soigner...)
-	Ajout fonctionnalités pour les lycanthropes
-	Amélioration lycanthropes
-	Modification sante / faim / sommeil selon etat enclos
-	Etat sante faim sommeil a consequence sur creature
+	Ajout fonctionnalités pour les lycanthropes (defier male alpha...)
+	Amélioration lycanthropes (voir TD5)
+	Durée de vie du zoo ?
+
+
+
+Les problèmes dans le code
+	Naissance Automatique (femelle is null)
+	Affichage erreur pour 1 creature --> indiquer que les autres c'est ok
+	

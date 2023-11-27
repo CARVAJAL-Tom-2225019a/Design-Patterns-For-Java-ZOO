@@ -1,479 +1,239 @@
 package controllerApplication;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import applicationRun.Run;
-import base.Creature;
-import base.Enclos;
-import base.Ovipare;
 import controllerTemps.Enum_ActionsPossibles;
+import controllerTemps.Evenements;
 import controllerTemps.GestionnaireTemps;
-import creaturesImplemente.Lycanthrope;
-import creaturesImplemente.Oeuf;
-import enclosImplemente.Aquarium;
-import enclosImplemente.EnclosClassique;
-import enclosImplemente.EnclosLycanthrope;
-import enclosImplemente.Voliere;
-import interfaces.CreatureMarine;
-import interfaces.CreatureTerrestre;
-import interfaces.CreatureVolante;
-import maitreZoo.MaitreZoo;
-import meuteLycanthrope.ColonieLycanthrope;
-import references.CONSTANTES;
-import references.Enum_Sexe;
-import viewApplication.VueGlobale;
-import viewApplication.VueUtilisateur;
+import base.Enclos;
+import viewApplication.*;
 import zoo.ZooFantastique;
 
+/**
+ * Classe representant le controleur du zoo avec les differentes actions disponibles
+ * Permet d'effectuer toutes les actions relatives a vie du zoo
+ */
 public class ControllerActions {
-	private static ControllerUserInterface controlUser = new ControllerUserInterface();
-	private static ControllerGestionAuto controllerGestionAuto = new ControllerGestionAuto();
-	// Instance de Vues
-	private static VueGlobale vueGlobale;
-    private static VueUtilisateur vueUtilisateur;
-    // Instance du gestionnaire du zoo (Singleton)
-    private MaitreZoo maitreZoo = MaitreZoo.getInstance();
-    private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
+	private static VueGlobale VueGlobale;
+    private static VueUtilisateur VueUtilisateur;
+    private static VueAutomatique VueAutomatique;
     // Instance du zoo fantastique (Singleton)
-    private ZooFantastique zoo = ZooFantastique.getInstance();
-    // Instance du temps
+    private static ZooFantastique zoo = ZooFantastique.getInstance();
+    private Actions action = new Actions();
     private GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
-    public ControllerActions() {
-    	vueGlobale = new VueGlobale();
-    	vueUtilisateur = new VueUtilisateur();
-    }
-
-	/**
-     * Methodes appellé par le switch case
+    /**
+     * Constrcuteur
      */
-    protected void casExaminerEnclos() {
-    	Enclos enclos;
-    	try {
-    		vueGlobale.afficher("\n ---- Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        	}
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}	
-            vueGlobale.afficher(maitreZoo.examinerEnclos(enclos));
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
+    public ControllerActions() {
+    	VueGlobale = new VueGlobale();
+    	VueUtilisateur = new VueUtilisateur();
+    	VueAutomatique = new VueAutomatique();
+        new ControllerPrincipal();
     }
-    
-    protected void casNettoyerEnclos() {
-    	Enclos enclos;
-    	try {
-    		vueGlobale.afficher("\n ---- Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}
-            maitreZoo.nettoyerEnclos(enclos);
-            vueGlobale.afficher("Nettoyage fait dans " + enclos+"\n");
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}	
-    }
-    
-    protected void casNourrirEnclos() {
-    	Enclos enclos;
-    	try {
-    		vueGlobale.afficher("\n ---- Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}
-            maitreZoo.nourrirCreaturesEnclos(enclos);
-            vueGlobale.afficher("Les creatures ont ete nourries dans "+enclos.getNom());
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casTransfererCreature() {
-    	Enclos enclos;
-    	Enclos enclosDest;
-    	Creature creature;
-    	try {
-    		vueGlobale.afficher("\n ---- Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        		creature = controlUser.selectionCreatureDansEnclos(enclos);
-        		enclosDest = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        		enclosDest = controllerGestionAuto.recuperationEnclosAleatoire();
-        		creature = enclos.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
-        	}
-        	maitreZoo.transfererCreature(creature, enclos, enclosDest);
-        	vueGlobale.afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
-        			"pour \n"+creature);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casCreerEnclos() {
-        String nomEnclos;
-        String typeEnclos = "Classique";
-        boolean valeurOk = false;
 
+    
+    /**
+     * Initialise les variables du jeu.
+     *
+     */
+    public void init() {
+        // Initialisation des variables
+    	temps.setDate(2024, 1, 1);
         try {
-            vueGlobale.afficher("\n ---- Creation d'un enclos ("+Enum_ActionsPossibles.CREER_ENCLOS.getDureeTotale()+") ---- ");
-            // GESTION MANUEL
-            if (Run.utilisateurControle) {
-                nomEnclos = vueUtilisateur.demandeUtilisateur("Nom enclos : ");
-                while (!valeurOk) {
-                    typeEnclos = vueUtilisateur.demandeUtilisateur("Type enclos (Classique, Aquatique, Voliere, Lycanthrope) : ");
-                    if ("Classique".equals(typeEnclos) || "Aquatique".equals(typeEnclos) || "Voliere".equals(typeEnclos) || "Lycanthrope".equals(typeEnclos)) {
-                        valeurOk = true;
-                    } 
-                    else {
-                        vueGlobale.afficher("Veuillez entrer Classique, Voliere, Aquatique ou Lycanthrope");
-                    }
-                }
-            }
-            // GESTION AUTOMATIQUE
-            else {
-                int i = zoo.getListeEnclos().size() + 1;
-                nomEnclos = "Enclos" + i;
-            }
-
-            // creation enclos
-            if ("Classique".equals(typeEnclos)) {
-                Enclos e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } 
-            else if ("Voliere".equals(typeEnclos)) {
-                Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } 
-            else if ("Aquatique".equals(typeEnclos)) {
-                Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            }
-            else if ("Lycanthrope".equals(typeEnclos)) {
-            	EnclosLycanthrope e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
-            	zoo.addEnclos(e);
-            }
-            else {
-                throw new Exception("Erreur type enclos lors de la creation");
-            }
-        } catch (Exception e) {
-            vueGlobale.afficher(e.getMessage());
+        	// Affiche le message de bienvenue
+            if (Run.utilisateurControle) // gestion manuel
+            	VueUtilisateur.bienvenue();
+            else
+            	VueAutomatique.bienvenue();
+            VueGlobale.afficher(controlPrincipal.getInformationsDebut());
         }
-    }
-
-    
-    protected void casTransfererEnclos() {
-    	Enclos enclos;
-    	Enclos enclosDest;
-    	String nomEnclos;
-    	try {
-    		vueGlobale.afficher("\n ---- Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        		enclosDest = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        		int i = zoo.getListeEnclos().size() + 1;
-        		nomEnclos="Enclos"+i;
-        		Enclos e = new EnclosClassique (nomEnclos, CONSTANTES.TAILLE_ENCLOS);
-        		zoo.addEnclos(e);
-        		enclosDest = e;
-        	}
-        	 // Créez une copie de la liste des créatures
-    	    Set<Creature> creaturesACopier = new HashSet<>(enclos.getListeCreatures().values());
-    	    // Transférez les créatures de la copie vers enclos2
-    	    for (Creature c : creaturesACopier) {
-    	        maitreZoo.transfererCreature(c, enclos, enclosDest);
-    	    }
-        	vueGlobale.afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
-        			" effectue\n");
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casConcevoirEnfant() {
-    	Enclos enclos;
-    	Creature femelle;
-    	Creature male;
-    	try {
-    		vueGlobale.afficher("\n ---- Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+") ---- ");
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-            	vueGlobale.afficher(enclos.toString() + "\n\nVeuillez selectionner une femelle puis un male\n");
-            	// Femelle
-            	femelle = controlUser.selectionCreatureDansEnclos(enclos);
-            	// Male
-            	male = controlUser.selectionCreatureDansEnclos(enclos);
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        		femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
-        		male = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Male);
-        	}
-        	//Conception
-        	int naitre = enclos.concevoirEnfant(femelle, male);
-        	if (naitre==1) {
-        		zoo.addFemelleEnceinte(femelle);
-        		vueGlobale.afficher("Enfant en cours de type "+femelle.getNomEspece());
-        	}
-        	else if (naitre==2) {
-        		ArrayList<Oeuf> oeufs = ((Ovipare)femelle).pondreOeuf();
-        		for (Oeuf o : oeufs) {
-					zoo.addOeuf(o);
-        		vueGlobale.afficher("Oeuf(s) pondu de type "+o.getEspece());
-				}
-        	}
-        	else if (naitre==-1)
-        		vueGlobale.afficher("Impossible de concevoir");
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casEnclosEnMouvement() {
-    	Enclos enclos;
-    	boolean peutCourrir = false;
-    	boolean peutNager = false;
-    	boolean peutVoler = false;
-    	boolean ActionEffectue = false;
-    	String choix = "";
-    	String chaine = "";
-    	try {
-    		vueGlobale.afficher("\n ---- Seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+") ---- ");
-    		
-    		// Choix enclos
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}
-        	
-    		// Proposition des actions selon type creature
-        	if (enclos.getListeCreatures().get(1) instanceof CreatureMarine && enclos instanceof Aquarium) {
-        		vueGlobale.afficher("Les creature peuvent nager");
-        		peutNager = true;
-        	}
-        	if (enclos.getListeCreatures().get(1) instanceof CreatureTerrestre) {
-        		vueGlobale.afficher("Les creature peuvent courir");
-        		peutCourrir = true;
-        	}
-        	if (enclos.getListeCreatures().get(1) instanceof CreatureVolante && enclos instanceof Voliere) {
-        		vueGlobale.afficher("Les creature peuvent voler");
-        		peutVoler = true;
-        	}
-        	
-        	// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		while (!"nager".equals(choix) && !"courir".equals(choix) && !"voler".equals(choix))
-        			choix = vueUtilisateur.demandeUtilisateur("Veuillez entrer votre choix (nager, courir, voler): ");
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-    			if (peutNager) {
-    				choix = "nager";
-    				ActionEffectue=true;
-    			}
-    			if (peutCourrir && !ActionEffectue) {
-    				choix = "courir";
-    				ActionEffectue=true;
-    			}
-    			if (peutVoler && !ActionEffectue) {
-    				choix = "voler";
-    				ActionEffectue=true;
-    			}
-    			if (!ActionEffectue)
-    				throw new Exception ("Impossible de faire du sport pour eux... en esperant qu'ils ne grossisent pas trop du coup\n");
-        	}
-    		// Mouvement de l'enclos
-        	if ("nager".equals(choix) && peutNager == true) {
-        		vueGlobale.afficher("ALLEZ ! On nage les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
-        		for (Creature c : enclos.getListeCreatures().values()) {
-        			Thread.sleep(1000);
-        			if (!c.isEnTrainDeDormir() && c.isVivant())
-        				chaine = ((CreatureMarine)c).nager();
-        			vueGlobale.afficher(chaine);
-        		}
-        	}
-        	else if ("courir".equals(choix) && peutCourrir == true) {
-        		vueGlobale.afficher("ALLEZ ! On court les "+enclos.getNomEspece()+"s. ALLEZ !\n");
-        		for (Creature c : enclos.getListeCreatures().values()) {
-        			Thread.sleep(1000);
-        			if (!c.isEnTrainDeDormir() && c.isVivant())
-        				chaine = ((CreatureTerrestre)c).courrir();
-        			vueGlobale.afficher(chaine);
-        		}
-        	}
-        	else if ("voler".equals(choix) && peutVoler == true) {
-        		vueGlobale.afficher("ALLEZ ! On vole les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
-        		for (Creature c : enclos.getListeCreatures().values()) {
-        			Thread.sleep(1000);
-        			if (!c.isEnTrainDeDormir() && c.isVivant())
-        				chaine = ((CreatureVolante)c).voler();
-        			vueGlobale.afficher(chaine);
-        		}
-        	}
-        	else
-        		throw new Exception ("Assurez vous que l'enclos soit adapte et que les"
-        				+ " animaux ont la bonne categorie pour faire cette action");
-        	vueGlobale.afficher("\nFelicitation mes petites creatures !");
-        	Thread.sleep(1000);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    
-    protected void casChanterEnclos() {
-    	Enclos enclos;
-    	try {
-    		vueGlobale.afficher("\n ---- Concert prive pour un enclos ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+") ---- ");
-    		// Choix enclos
-    		// GESTION MANUEL
-        	if (Run.utilisateurControle) {
-        		enclos = controlUser.recupererEnclosParNom();
-        	}
-        	// GESTION AUTOMATIQUE
-        	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}
-        	vueGlobale.afficher("\nAllez les "+enclos.getNomEspece()+"s.\n"
-        			+ "On chante l'un apres l'autre !\n");
-        	Thread.sleep(1000);
-        	for (Creature c : enclos.getListeCreatures().values()) {
-        		if (!c.isEnTrainDeDormir() && c.isVivant())
-        			vueGlobale.afficher(c.faireBruit());
-        		Thread.sleep(1000);
-        	}
-        	vueGlobale.afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");
-        	Thread.sleep(1000);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casDormirEnclos() {
-    	Enclos enclos;
-    	try {
-	    	vueGlobale.afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.DORMIR_ENCLOS.getDureeTotale()+") ---- ");
-			// Choix enclos
-			// GESTION MANUEL
-	    	if (Run.utilisateurControle) {
-	    		enclos = controlUser.recupererEnclosParNom();
-	    	}
-	    	// GESTION AUTOMATIQUE
-	    	else {
-	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-	    	}
-	    	enclos.faireDormirCreatures();
-	    	vueGlobale.afficher("Les creatures se sont endormis dans "+enclos.getNom()+"\n ATTENTION DE NE PAS LES REVEILLER...\n");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-    }
-    
-    protected void casReveillerEnclos() {
-    	Enclos enclos;
-    	try {
-	    	vueGlobale.afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+") ---- ");
-			// Choix enclos
-			// GESTION MANUEL
-	    	if (Run.utilisateurControle) {
-	    		enclos = controlUser.recupererEnclosParNom();
-	    	}
-	    	// GESTION AUTOMATIQUE
-	    	else {
-	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-	    	}
-	    	enclos.reveillerCreatures();
-	    	vueGlobale.afficher("Les creatures se reveillent dans "+enclos.getNom()+"\n J'espere qu'elles sont de bonne humeur...\n");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
+        catch (Exception e) {
+    		VueGlobale.afficher(e.getMessage());
     	}
     }
 
-	public void casVoirLycanthropes() {
-		try {
-	    	vueGlobale.afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.afficher(colonie.voirLycanthropes());
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+    
+    /**
+     * Effectue l'action correspondant au choix de l'utilisateur.
+     *
+     * @param choix Le choix de l'utilisateur.
+     * @return true si l'action a été effectuée avec succès, false sinon.
+     */
+    public boolean effectuerAction(int choix) {
+        boolean retour = false;
+        try {
+        	switch (choix) {
+            // Ne pas effectuer d'action
+            case 0:
+            	VueGlobale.afficher("\n ---- Pas d'action effectue "+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+" ---- ");
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.PAS_D_ACTION))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir les enclos
+            case 1:
+            	VueGlobale.afficher("\n ---- Voir les enclos existants "+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher(zoo.afficherEnsembleZoo());
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir nombre total de créatures
+            case 2:
+            	VueGlobale.afficher("\n ---- Voir le nombre de creatures totales "+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher("Il y a " + zoo.getNbCreaturesTotales() + " creatures.");
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Creer enclos
+            case 3 : 
+            	action.casCreerEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.CREER_ENCLOS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            	
+            // Examiner un enclos
+            case 4:
+            	action.casExaminerEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.EXAMINER_ENCLOS))
+            		passageAnnee();
+                retour= true;
+                break;
+            // Nettoyer un enclos
+            case 5:
+            	action.casNettoyerEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.NETTOYER_ENCLOS))
+            		passageAnnee();
+                retour= true;
+                break;
+            // Nourrir les créatures d'un enclos
+            case 6:
+            	action.casNourrirEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.NOURRIR_CREATURES))
+            		passageAnnee();
+                retour= true;
+                break;
+            // Soigner les creatures d'un enclos
+            case 7:
+            	action.casSoignerEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.SOIGNER_ENCLOS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Transférer une créature
+            case 8:
+            	action.casTransfererCreature();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.TRANSFERER_CREATURE))
+            		passageAnnee();
+            	retour= true;
+            	break;
+           // Transferer un enclos
+            case 9 : 
+            	action.casTransfererEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.TRANSFERER_ENCLOS))
+            		passageAnnee();
+            	retour = true;
+            	break;
+           // Concevoir un enfant
+            case 10 :
+            	action.casConcevoirEnfant();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.CONCEVOIR_ENFANT))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir liste bebes en cosntruction
+            case 11 :
+            	VueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre "+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher(zoo.afficherFemellesEnceinte());
+            	VueGlobale.afficher(zoo.afficherOeufs());
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Mettre un enclos en mouvement
+            case 12 :
+            	action.casEnclosEnMouvement();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Faire chanter un enclos
+            case 13 : 
+            	action.casChanterEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir les meutes
+            case 14 : 
+            	action.casVoirMeutes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_MEUTES))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir les lycanthropes
+            case 15 : 
+            	action.casVoirLycanthropes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_LOUPS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Saison amour pour les lycanthropes
+            case 16 : 
+            	action.casSaisonAmourLycanthropes();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.SAISON_AMOUR_LOUPS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            //TODO : suite actions pour Lycanthropes (defier male alpha, jurler...)
+            //TODO : autres actions pour creatures (par rapport sante notamment)
+            // Exit
+            case 99:
+                retour= false;
+                break;
+            default:
+            	VueGlobale.afficher("Choix invalide");
+            	retour= true;
+            }
+        }
+        catch (Exception e) {
+    		VueGlobale.afficher(e.getMessage());
     	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-	}
+        return retour;
+    }
+    
+    
+    /**
+     * Passe à la nouvelle année si le nombre d'actions atteint le maximum.
+     */
+    public static void passageAnnee() {
+    	String temp = null;
+    	try {
+    		VueGlobale.afficher("\n ====== FIN ANNEE ====== \n");
+    		Evenements.evenementAnnuel();
+			String chaine = controlPrincipal.nouvelleAnnee();
+			if (chaine != null)
+				VueGlobale.afficher(chaine);
 
-	public void casSaisonAmourLycanthropes() {
-		try {
-	    	vueGlobale.afficher("\n ---- Verification saison amour pour lycanthropes ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+") ---- ");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	Set<Lycanthrope> listeFemelleEnceinte =  colonie.verificationSaisonAmour(temps.getDateActuelle());
-	    	if (!listeFemelleEnceinte.isEmpty()) {
-	    		for (Lycanthrope l : listeFemelleEnceinte) {
-	    			zoo.addFemelleEnceinte(l);
-		    		vueGlobale.afficher(l.getPrenom()+" est enceinte\n");
-	    		}
-	    	}
-	    	else
-	    		vueGlobale.afficher("Pas de bebe pour le moment... \n(saison des amours est de mai a juin)");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+            controlPrincipal.verificationEnfants();
+            // Tri des clés
+            for (Enclos e : zoo.getListeEnclos())
+            	e.reorganiserCles();
+            VueGlobale.afficher("\n ====== NOUVELLE ANNEE ====== \n");
+            //Affichage des informations préoccupantes
+            VueGlobale.afficher(zoo.AfficherEnclosMauvaisEtat());
+            for (Enclos e : zoo.getListeEnclos())
+            	temp = e.voirCreaturesAyantUnBesoin();
+            if (temp != null)
+            	 VueGlobale.afficher(temp);
     	}
     	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
+    		VueGlobale.afficher(e.getMessage());
     	}
-	}
+    }
 
-	public void casVoirMeutes() {
-		try {
-	    	vueGlobale.afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.afficher(colonie.voirMeutes());
-	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-    	}
-    	catch (Exception e) {
-    		vueGlobale.afficher(e.getMessage());
-    	}
-	}
 }

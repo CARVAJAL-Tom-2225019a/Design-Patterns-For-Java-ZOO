@@ -32,7 +32,6 @@ public class VueUtilisateur {
 		// Message de bienvenue
 		System.out.println("\nVous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! \nBonne chance " + nom);
-		System.out.println("\n INFORMATION : La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE+" ans.");
 		// Initialisation du gestionnaire du zoo
 		return MaitreZoo.getInstance(nom, sexe, age);
 	}
@@ -100,19 +99,20 @@ public class VueUtilisateur {
 						+ "\n"
 						+ "\n  5 : Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+")"
 						+ "\n  6 : Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+")"
+						+ "\n  7 : Soigner un enclos ("+Enum_ActionsPossibles.SOIGNER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  7 : Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+")"
-						+ "\n  8 : Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+")"
+						+ "\n  8 : Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+")"
+						+ "\n  9 : Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  9 : Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+")"
-						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre ("+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+")"
+						+ "\n  10 : Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+")"
+						+ "\n  11 : Voir la liste des creatures qui vont bientot naitre ("+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  11 : Organiser une seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+")"
-						+ "\n  12 : Organiser un concert prive avec les creatures ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+")"
+						+ "\n  12 : Organiser une seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+")"
+						+ "\n  13 : Organiser un concert prive avec les creatures ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  15 : Voir l'ensemble des meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+")"
-						+ "\n  16 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
-						+ "\n  17 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
+						+ "\n  14 : Voir l'ensemble des meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+")"
+						+ "\n  15 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
+						+ "\n  16 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  99 : Exit" 
 						+ "\n\n Nous somme le "+temps.getDateActuelle()+"." 

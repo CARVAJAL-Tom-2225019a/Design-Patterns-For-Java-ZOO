@@ -8,6 +8,7 @@ public enum Enum_ActionsPossibles {
     EXAMINER_ENCLOS(0, 0, 20),
     NETTOYER_ENCLOS(0, 4, 0),
     NOURRIR_CREATURES(0, 1, 0),
+    SOIGNER_ENCLOS(0,1,0),
     TRANSFERER_CREATURE(0, 0, 20),
     TRANSFERER_ENCLOS(0, 2, 10),
     CONCEVOIR_ENFANT(0, 0, 15),

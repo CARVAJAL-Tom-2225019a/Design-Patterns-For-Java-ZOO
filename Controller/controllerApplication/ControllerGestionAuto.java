@@ -15,7 +15,7 @@ import viewApplication.*;
  */
 public class ControllerGestionAuto {
 
-	private static ControllerZoo zooController;
+	private static ControllerActions zooController;
 	private static VueGlobale VueGlobale;
 	private ZooFantastique zoo;
 	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
@@ -28,7 +28,7 @@ public class ControllerGestionAuto {
         VueGlobale = new VueGlobale();
         new VueAutomatique();
         new ControllerPrincipal();
-        zooController = new ControllerZoo();
+        zooController = new ControllerActions();
         zoo = ZooFantastique.getInstance();
     }
 	
@@ -58,14 +58,10 @@ public class ControllerGestionAuto {
         while (run) {
         	choixActionAleatoire ();
         	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-        	zooController.runYear();
         	VueGlobale.afficher("\nNous sommes le "+temps.getDateActuelle()+"\n");
         	
         	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
-            	run = false;
-            // Si duree de vie zoo fini
-            if (zooController.getAnnee() == CONSTANTES.DUREE_VIE_ZOO)
             	run = false;
             
         }
