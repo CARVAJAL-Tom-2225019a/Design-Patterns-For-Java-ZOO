@@ -16,7 +16,7 @@ Fichier Read-Me
 
 Pour l'application
 	Amélioration gestion automatique (selon état du zoo, des creatures...)
-	Ajout fonctionnalités générales
+	Ajout fonctionnalités pour les creatures (soigner...)
 	Ajout fonctionnalités pour les lycanthropes
 	Amélioration lycanthropes
 	Modification sante / faim / sommeil selon etat enclos
