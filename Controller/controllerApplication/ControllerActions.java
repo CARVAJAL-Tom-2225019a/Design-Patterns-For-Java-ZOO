@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import applicationRun.Run;
 import base.Creature;
 import base.Enclos;
 import base.Ovipare;
@@ -18,7 +19,6 @@ import enclosImplemente.Voliere;
 import interfaces.CreatureMarine;
 import interfaces.CreatureTerrestre;
 import interfaces.CreatureVolante;
-import main.Run;
 import maitreZoo.MaitreZoo;
 import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
@@ -53,58 +53,58 @@ public class ControllerActions {
     protected void casExaminerEnclos() {
     	Enclos enclos;
     	try {
-    		vueGlobale.Afficher("\n ---- Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         	}
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}	
-            vueGlobale.Afficher(maitreZoo.examinerEnclos(enclos));
+            vueGlobale.afficher(maitreZoo.examinerEnclos(enclos));
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
     protected void casNettoyerEnclos() {
     	Enclos enclos;
     	try {
-    		vueGlobale.Afficher("\n ---- Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.nettoyerEnclos(enclos);
-            vueGlobale.Afficher("Nettoyage fait dans " + enclos+"\n");
+            vueGlobale.afficher("Nettoyage fait dans " + enclos+"\n");
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}	
     }
     
     protected void casNourrirEnclos() {
     	Enclos enclos;
     	try {
-    		vueGlobale.Afficher("\n ---- Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.nourrirCreaturesEnclos(enclos);
-            vueGlobale.Afficher("Les creatures ont ete nourries dans "+enclos.getNom());
+            vueGlobale.afficher("Les creatures ont ete nourries dans "+enclos.getNom());
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -113,12 +113,12 @@ public class ControllerActions {
     	Enclos enclosDest;
     	Creature creature;
     	try {
-    		vueGlobale.Afficher("\n ---- Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         		creature = controlUser.selectionCreatureDansEnclos(enclos);
-        		enclosDest = controlUser.RecupererEnclosParNom();
+        		enclosDest = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -127,11 +127,11 @@ public class ControllerActions {
         		creature = enclos.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
         	}
         	maitreZoo.transfererCreature(creature, enclos, enclosDest);
-        	vueGlobale.Afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
+        	vueGlobale.afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
         			"pour \n"+creature);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -141,17 +141,17 @@ public class ControllerActions {
         boolean valeurOk = false;
 
         try {
-            vueGlobale.Afficher("\n ---- Creation d'un enclos ("+Enum_ActionsPossibles.CREER_ENCLOS.getDureeTotale()+") ---- ");
+            vueGlobale.afficher("\n ---- Creation d'un enclos ("+Enum_ActionsPossibles.CREER_ENCLOS.getDureeTotale()+") ---- ");
             // GESTION MANUEL
             if (Run.utilisateurControle) {
-                nomEnclos = vueUtilisateur.DemandeUtilisateur("Nom enclos : ");
+                nomEnclos = vueUtilisateur.demandeUtilisateur("Nom enclos : ");
                 while (!valeurOk) {
-                    typeEnclos = vueUtilisateur.DemandeUtilisateur("Type enclos (Classique, Aquatique, Voliere, Lycanthrope) : ");
+                    typeEnclos = vueUtilisateur.demandeUtilisateur("Type enclos (Classique, Aquatique, Voliere, Lycanthrope) : ");
                     if ("Classique".equals(typeEnclos) || "Aquatique".equals(typeEnclos) || "Voliere".equals(typeEnclos) || "Lycanthrope".equals(typeEnclos)) {
                         valeurOk = true;
                     } 
                     else {
-                        vueGlobale.Afficher("Veuillez entrer Classique, Voliere, Aquatique ou Lycanthrope");
+                        vueGlobale.afficher("Veuillez entrer Classique, Voliere, Aquatique ou Lycanthrope");
                     }
                 }
             }
@@ -182,7 +182,7 @@ public class ControllerActions {
                 throw new Exception("Erreur type enclos lors de la creation");
             }
         } catch (Exception e) {
-            vueGlobale.Afficher(e.getMessage());
+            vueGlobale.afficher(e.getMessage());
         }
     }
 
@@ -192,11 +192,11 @@ public class ControllerActions {
     	Enclos enclosDest;
     	String nomEnclos;
     	try {
-    		vueGlobale.Afficher("\n ---- Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
-        		enclosDest = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
+        		enclosDest = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -213,11 +213,11 @@ public class ControllerActions {
     	    for (Creature c : creaturesACopier) {
     	        maitreZoo.transfererCreature(c, enclos, enclosDest);
     	    }
-        	vueGlobale.Afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
+        	vueGlobale.afficher("Transfert de "+enclos.getNom()+" a "+enclosDest.getNom()+
         			" effectue\n");
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -226,11 +226,11 @@ public class ControllerActions {
     	Creature femelle;
     	Creature male;
     	try {
-    		vueGlobale.Afficher("\n ---- Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
-            	vueGlobale.Afficher(enclos.toString() + "\n\nVeuillez selectionner une femelle puis un male\n");
+        		enclos = controlUser.recupererEnclosParNom();
+            	vueGlobale.afficher(enclos.toString() + "\n\nVeuillez selectionner une femelle puis un male\n");
             	// Femelle
             	femelle = controlUser.selectionCreatureDansEnclos(enclos);
             	// Male
@@ -246,20 +246,20 @@ public class ControllerActions {
         	int naitre = enclos.concevoirEnfant(femelle, male);
         	if (naitre==1) {
         		zoo.addFemelleEnceinte(femelle);
-        		vueGlobale.Afficher("Enfant en cours de type "+femelle.getNomEspece());
+        		vueGlobale.afficher("Enfant en cours de type "+femelle.getNomEspece());
         	}
         	else if (naitre==2) {
         		ArrayList<Oeuf> oeufs = ((Ovipare)femelle).pondreOeuf();
         		for (Oeuf o : oeufs) {
 					zoo.addOeuf(o);
-        		vueGlobale.Afficher("Oeuf(s) pondu de type "+o.getEspece());
+        		vueGlobale.afficher("Oeuf(s) pondu de type "+o.getEspece());
 				}
         	}
         	else if (naitre==-1)
-        		vueGlobale.Afficher("Impossible de concevoir");
+        		vueGlobale.afficher("Impossible de concevoir");
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -272,12 +272,12 @@ public class ControllerActions {
     	String choix = "";
     	String chaine = "";
     	try {
-    		vueGlobale.Afficher("\n ---- Seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+") ---- ");
     		
     		// Choix enclos
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -286,22 +286,22 @@ public class ControllerActions {
         	
     		// Proposition des actions selon type creature
         	if (enclos.getListeCreatures().get(1) instanceof CreatureMarine && enclos instanceof Aquarium) {
-        		vueGlobale.Afficher("Les creature peuvent nager");
+        		vueGlobale.afficher("Les creature peuvent nager");
         		peutNager = true;
         	}
         	if (enclos.getListeCreatures().get(1) instanceof CreatureTerrestre) {
-        		vueGlobale.Afficher("Les creature peuvent courir");
+        		vueGlobale.afficher("Les creature peuvent courir");
         		peutCourrir = true;
         	}
         	if (enclos.getListeCreatures().get(1) instanceof CreatureVolante && enclos instanceof Voliere) {
-        		vueGlobale.Afficher("Les creature peuvent voler");
+        		vueGlobale.afficher("Les creature peuvent voler");
         		peutVoler = true;
         	}
         	
         	// GESTION MANUEL
         	if (Run.utilisateurControle) {
         		while (!"nager".equals(choix) && !"courir".equals(choix) && !"voler".equals(choix))
-        			choix = vueUtilisateur.DemandeUtilisateur("Veuillez entrer votre choix (nager, courir, voler): ");
+        			choix = vueUtilisateur.demandeUtilisateur("Veuillez entrer votre choix (nager, courir, voler): ");
         	}
         	// GESTION AUTOMATIQUE
         	else {
@@ -322,40 +322,40 @@ public class ControllerActions {
         	}
     		// Mouvement de l'enclos
         	if ("nager".equals(choix) && peutNager == true) {
-        		vueGlobale.Afficher("ALLEZ ! On nage les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
+        		vueGlobale.afficher("ALLEZ ! On nage les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
         			if (!c.isEnTrainDeDormir() && c.isVivant())
         				chaine = ((CreatureMarine)c).nager();
-        			vueGlobale.Afficher(chaine);
+        			vueGlobale.afficher(chaine);
         		}
         	}
         	else if ("courir".equals(choix) && peutCourrir == true) {
-        		vueGlobale.Afficher("ALLEZ ! On court les "+enclos.getNomEspece()+"s. ALLEZ !\n");
+        		vueGlobale.afficher("ALLEZ ! On court les "+enclos.getNomEspece()+"s. ALLEZ !\n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
         			if (!c.isEnTrainDeDormir() && c.isVivant())
         				chaine = ((CreatureTerrestre)c).courrir();
-        			vueGlobale.Afficher(chaine);
+        			vueGlobale.afficher(chaine);
         		}
         	}
         	else if ("voler".equals(choix) && peutVoler == true) {
-        		vueGlobale.Afficher("ALLEZ ! On vole les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
+        		vueGlobale.afficher("ALLEZ ! On vole les "+enclos.getNomEspece()+"s. ALLEZ ! \n");
         		for (Creature c : enclos.getListeCreatures().values()) {
         			Thread.sleep(1000);
         			if (!c.isEnTrainDeDormir() && c.isVivant())
         				chaine = ((CreatureVolante)c).voler();
-        			vueGlobale.Afficher(chaine);
+        			vueGlobale.afficher(chaine);
         		}
         	}
         	else
         		throw new Exception ("Assurez vous que l'enclos soit adapte et que les"
         				+ " animaux ont la bonne categorie pour faire cette action");
-        	vueGlobale.Afficher("\nFelicitation mes petites creatures !");
+        	vueGlobale.afficher("\nFelicitation mes petites creatures !");
         	Thread.sleep(1000);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -363,117 +363,117 @@ public class ControllerActions {
     protected void casChanterEnclos() {
     	Enclos enclos;
     	try {
-    		vueGlobale.Afficher("\n ---- Concert prive pour un enclos ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+") ---- ");
+    		vueGlobale.afficher("\n ---- Concert prive pour un enclos ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+") ---- ");
     		// Choix enclos
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
-        		enclos = controlUser.RecupererEnclosParNom();
+        		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
-        	vueGlobale.Afficher("\nAllez les "+enclos.getNomEspece()+"s.\n"
+        	vueGlobale.afficher("\nAllez les "+enclos.getNomEspece()+"s.\n"
         			+ "On chante l'un apres l'autre !\n");
         	Thread.sleep(1000);
         	for (Creature c : enclos.getListeCreatures().values()) {
         		if (!c.isEnTrainDeDormir() && c.isVivant())
-        			vueGlobale.Afficher(c.faireBruit());
+        			vueGlobale.afficher(c.faireBruit());
         		Thread.sleep(1000);
         	}
-        	vueGlobale.Afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");
+        	vueGlobale.afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");
         	Thread.sleep(1000);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
     protected void casDormirEnclos() {
     	Enclos enclos;
     	try {
-	    	vueGlobale.Afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.DORMIR_ENCLOS.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.DORMIR_ENCLOS.getDureeTotale()+") ---- ");
 			// Choix enclos
 			// GESTION MANUEL
 	    	if (Run.utilisateurControle) {
-	    		enclos = controlUser.RecupererEnclosParNom();
+	    		enclos = controlUser.recupererEnclosParNom();
 	    	}
 	    	// GESTION AUTOMATIQUE
 	    	else {
 	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
 	    	}
 	    	enclos.faireDormirCreatures();
-	    	vueGlobale.Afficher("Les creatures se sont endormis dans "+enclos.getNom()+"\n ATTENTION DE NE PAS LES REVEILLER...\n");
+	    	vueGlobale.afficher("Les creatures se sont endormis dans "+enclos.getNom()+"\n ATTENTION DE NE PAS LES REVEILLER...\n");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
     protected void casReveillerEnclos() {
     	Enclos enclos;
     	try {
-	    	vueGlobale.Afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+") ---- ");
 			// Choix enclos
 			// GESTION MANUEL
 	    	if (Run.utilisateurControle) {
-	    		enclos = controlUser.RecupererEnclosParNom();
+	    		enclos = controlUser.recupererEnclosParNom();
 	    	}
 	    	// GESTION AUTOMATIQUE
 	    	else {
 	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
 	    	}
 	    	enclos.reveillerCreatures();
-	    	vueGlobale.Afficher("Les creatures se reveillent dans "+enclos.getNom()+"\n J'espere qu'elles sont de bonne humeur...\n");
+	    	vueGlobale.afficher("Les creatures se reveillent dans "+enclos.getNom()+"\n J'espere qu'elles sont de bonne humeur...\n");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
 
 	public void casVoirLycanthropes() {
 		try {
-	    	vueGlobale.Afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.Afficher(colonie.voirLycanthropes());
+	    	vueGlobale.afficher(colonie.voirLycanthropes());
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
 	}
 
 	public void casSaisonAmourLycanthropes() {
 		try {
-	    	vueGlobale.Afficher("\n ---- Verification saison amour pour lycanthropes ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Verification saison amour pour lycanthropes ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+") ---- ");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
 	    	Set<Lycanthrope> listeFemelleEnceinte =  colonie.verificationSaisonAmour(temps.getDateActuelle());
 	    	if (!listeFemelleEnceinte.isEmpty()) {
 	    		for (Lycanthrope l : listeFemelleEnceinte) {
 	    			zoo.addFemelleEnceinte(l);
-		    		vueGlobale.Afficher(l.getPrenom()+" est enceinte\n");
+		    		vueGlobale.afficher(l.getPrenom()+" est enceinte\n");
 	    		}
 	    	}
 	    	else
-	    		vueGlobale.Afficher("Pas de bebe pour le moment...");
+	    		vueGlobale.afficher("Pas de bebe pour le moment... \n(saison des amours est de mai a juin)");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
 	}
 
 	public void casVoirMeutes() {
 		try {
-	    	vueGlobale.Afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.Afficher(colonie.voirMeutes());
+	    	vueGlobale.afficher(colonie.voirMeutes());
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
 	}
 }

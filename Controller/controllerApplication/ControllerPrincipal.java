@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import applicationRun.Run;
 import base.*;
 import creaturesImplemente.*;
 import enclosImplemente.*;
-import main.Run;
 import meuteLycanthrope.ColonieLycanthrope;
 import meuteLycanthrope.Meute;
 import references.*;
@@ -52,7 +52,7 @@ public class ControllerPrincipal {
             return chaine;
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     	return "erreur";
     }
@@ -63,30 +63,27 @@ public class ControllerPrincipal {
      */
     public void verificationNaissances () {
     	try {
-    		vueGlobale.Afficher("VERIFICATION DES NAISSANCES : ");
+    		vueGlobale.afficher("VERIFICATION DES NAISSANCES : ");
         	VerificationOeufs();
         	verificationEnfants();
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}	
     }
     public void VerificationOeufs() {
-    	Random random = new Random(System.currentTimeMillis());
     	try {
     		for (Oeuf o : zoo.getlLsteOeufs()) {
         		if (o.getDureeIncubationRestante() == 0) {
-        			double poids = 1 + (random.nextDouble() * CONSTANTES.MAX_TAILLE);
-        			double taille = 1 + (random.nextDouble() * CONSTANTES.MAX_POIDS);
-        			Creature enfant = o.eclore(Creature.sexeAleatoire(), poids, taille);
-        			vueGlobale.Afficher("Naissance "+enfant.getNomEspece());
+        			Creature enfant = o.eclore();
+        			vueGlobale.afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
         			zoo.removeOeuf(o);
         		}
         	}
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     	
     }
@@ -97,14 +94,14 @@ public class ControllerPrincipal {
         		nbJour = ((Vivipare)c).decrementerNombreJourRestantAvantNaissance();
         		if (nbJour == 0) {
         			Creature enfant = ((Vivipare)c).mettreBas();
-        			vueGlobale.Afficher("Naissance "+enfant.getNomEspece());
+        			vueGlobale.afficher("Naissance "+enfant.getNomEspece());
         			rangerCreature(enfant);
         			zoo.addFemelleEnceinte(c);
         		}
         	}
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -126,7 +123,7 @@ public class ControllerPrincipal {
         	}
         	// Si aucun enclos pret a acceuiller, nouvel enclos
         	if (Run.utilisateurControle)
-        		nom = vueUtilisateur.DemandeUtilisateur("Nom pour nouvel enclos :");
+        		nom = vueUtilisateur.demandeUtilisateur("Nom pour nouvel enclos :");
         	else {
         		numPourNom++;
         		nom = "Enclos"+numPourNom;
@@ -136,7 +133,7 @@ public class ControllerPrincipal {
         	newEnclos.ajouterCreature(c);
     	}
     	catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     	
     }
@@ -160,7 +157,7 @@ public class ControllerPrincipal {
 			enclos.reorganiserCles();
 		}
 		catch (Exception e) {
-			vueGlobale.Afficher(e.getMessage());
+			vueGlobale.afficher(e.getMessage());
 		}
     }
     
@@ -186,6 +183,7 @@ public class ControllerPrincipal {
     		m.addLoup((Lycanthrope)l);
     	}
     	colonie.addMeute(m);
+    	m.setEnclosReference(enclos);
     }
 
     
@@ -250,7 +248,7 @@ public class ControllerPrincipal {
 			zoo.addEnclos(voliereVide);
 		}
 		catch (Exception e) {
-			vueGlobale.Afficher(e.getMessage());
+			vueGlobale.afficher(e.getMessage());
 		}
 	}
 	
@@ -264,7 +262,7 @@ public class ControllerPrincipal {
             menuUtilisateur.runUserMenu();
     	}
     	catch (Exception e) {
-			vueGlobale.Afficher(e.getMessage());
+			vueGlobale.afficher(e.getMessage());
 		}
     }
     
@@ -277,7 +275,7 @@ public class ControllerPrincipal {
         	menuAuto.run();
     	}
     	catch (Exception e) {
-			vueGlobale.Afficher(e.getMessage());
+			vueGlobale.afficher(e.getMessage());
 		}
     }
 

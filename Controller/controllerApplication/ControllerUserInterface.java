@@ -36,16 +36,16 @@ public class ControllerUserInterface {
         	zooController.init();
             while (run) {
             	vueUtilisateur.proposerAction();
-                choix = vueUtilisateur.RecupererChoixAction();
+                choix = vueUtilisateur.recupererChoixAction();
                 run = zooController.effectuerAction(choix);
                 // Si plus de creature
                 if (zoo.getNbCreaturesTotales() == 0)
                 	run = false;
             }
-            vueGlobale.Afficher("\n =====  FIN DE LA SIMULATION  ======\n");
+            vueGlobale.afficher("\n =====  FIN DE LA SIMULATION  ======\n");
         }
         catch (Exception e) {
-    		vueGlobale.Afficher(e.getMessage());
+    		vueGlobale.afficher(e.getMessage());
     	}
     }
     
@@ -56,15 +56,15 @@ public class ControllerUserInterface {
     public Creature selectionCreatureDansEnclos(Enclos enclos) {
     	String indexCreatureString;
     	int indexCreature;
-    	vueGlobale.Afficher(enclos.toString());
-    	indexCreatureString = vueUtilisateur.DemandeUtilisateur("Index creature : ");
+    	vueGlobale.afficher(enclos.toString());
+    	indexCreatureString = vueUtilisateur.demandeUtilisateur("Index creature : ");
     	indexCreature = Integer.parseInt(indexCreatureString);
     	return enclos.getListeCreatures().get(indexCreature);
     }
     
     
-    public Enclos RecupererEnclosParNom() throws Exception {
-    	String nomEnclos = vueUtilisateur.DemandeUtilisateur("Nom de l'enclos : ");
+    public Enclos recupererEnclosParNom() throws Exception {
+    	String nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
         return zoo.trouverEnclosParNom(nomEnclos);
     }
 

@@ -55,7 +55,7 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature mettreBas() throws Exception {
+    public Creature mettreBas(Enum_Sexe sexe) throws Exception {
     	return super.mettreBas();
     }
 }

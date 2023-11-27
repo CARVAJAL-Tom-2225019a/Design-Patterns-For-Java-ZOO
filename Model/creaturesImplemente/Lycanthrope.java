@@ -362,11 +362,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * Methode permettant au loup de se transofrmer en humain
      * @return l'instance de l'humain créé
      */
-    public Humain SeTransformerEnHumain() {
+    public Humain seTransformerEnHumain() {
     	//TODO : changer pour le nom de l'humain
     	//TODO : selon niveau
     	//TODO : boulverse organisation meute
     	return new Humain("Humain", super.getSexe(), super.getAge());
     }
+
     
 }

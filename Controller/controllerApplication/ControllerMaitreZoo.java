@@ -1,8 +1,8 @@
-package ControllerApplication;
+package controllerApplication;
 
-import application.VuePrincipale;
-import base.Creature;
-import enclosImplemente.Enclos;
+import viewApplication.VueGlobale;
+import viewApplication.VueUtilisateur;
+import base.*;
 import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
 import zoo.ZooFantastique;
@@ -11,7 +11,8 @@ public class ControllerMaitreZoo {
     // Instance de CONSTANTES pour les références constantes
     CONSTANTES constantes = new CONSTANTES();
     // Instance de VuePrincipale pour l'interaction avec l'utilisateur
-    VuePrincipale vue = new VuePrincipale();
+    VueGlobale vue = new VueGlobale();
+    VueUtilisateur vueUtilisateur = new VueUtilisateur();
     // Instance du gestionnaire du zoo (Singleton)
     MaitreZoo maitreZoo;
     // Instance du zoo fantastique (Singleton)
@@ -45,59 +46,59 @@ public class ControllerMaitreZoo {
         switch (choix) {
             // Ne pas effectuer d'action
             case 0:
-            	vue.Afficher("\n ---- Vous avez choisi de ne pas effectuer d'action ---- ");
+            	vue.afficher("\n ---- Vous avez choisi de ne pas effectuer d'action ---- ");
                 return true;
 
             // Voir les enclos
             case 1:
-            	vue.Afficher("\n ---- Vous avez choisi de voir les enclos existants ---- ");
-            	vue.Afficher(zoo.AfficherEnsembleZoo());
+            	vue.afficher("\n ---- Vous avez choisi de voir les enclos existants ---- ");
+            	vue.afficher(zoo.afficherEnsembleZoo());
                 return true;
 
             // Voir nombre total de créatures
             case 2:
-            	vue.Afficher("\n ---- Vous avez choisi de voir le nombre de creatures totales ---- ");
-            	vue.Afficher("Il y a " + zoo.getNbCreaturesTotales() + " créatures.");
+            	vue.afficher("\n ---- Vous avez choisi de voir le nombre de creatures totales ---- ");
+            	vue.afficher("Il y a " + zoo.getNbCreaturesTotales() + " créatures.");
                 return true;
 
             // Examiner un enclos
             case 3:
-            	vue.Afficher("\n ---- Vous avez choisi d'examiner un enclos ---- ");
-                nomEnclos = vue.DemandeUtilisateur("Nom de l'enclos : ");
+            	vue.afficher("\n ---- Vous avez choisi d'examiner un enclos ---- ");
+                nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
                 enclos = zoo.trouverEnclosParNom(nomEnclos);
-                vue.Afficher(maitreZoo.ExaminerEnclos(enclos));
+                vue.afficher(maitreZoo.examinerEnclos(enclos));
                 return true;
 
             // Nettoyer un enclos
             case 4:
-            	vue.Afficher("\n ---- Vous avez choisi de nettoyer un enclos ---- ");
-                nomEnclos = vue.DemandeUtilisateur("Nom de l'enclos : ");
+            	vue.afficher("\n ---- Vous avez choisi de nettoyer un enclos ---- ");
+                nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
                 enclos = zoo.trouverEnclosParNom(nomEnclos);
-                maitreZoo.NettoyerEnclos(enclos);
-                vue.Afficher("NETTOYAGE FAIT\n" + enclos);
+                maitreZoo.nettoyerEnclos(enclos);
+                vue.afficher("NETTOYAGE FAIT\n" + enclos);
                 return true;
 
             // Nourrir les créatures d'un enclos
             case 5:
-            	vue.Afficher("\n ---- Vous avez choisi de nourrir les creatures d'un enclos ---- ");
-                nomEnclos = vue.DemandeUtilisateur("Nom de l'enclos : ");
+            	vue.afficher("\n ---- Vous avez choisi de nourrir les creatures d'un enclos ---- ");
+                nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
                 enclos = zoo.trouverEnclosParNom(nomEnclos);
-                maitreZoo.NourrirCreaturesEnclos(enclos);
-                vue.Afficher("CRÉATURES ONT ÉTÉ NOURRIES");
+                maitreZoo.nourrirCreaturesEnclos(enclos);
+                vue.afficher("CRÉATURES ONT ÉTÉ NOURRIES");
                 return true;
 
             // Transférer une créature
             case 6:
-            	vue.Afficher("\n ---- Vous avez choisi de transferer une creature ---- ");
-            	String nomE = vue.DemandeUtilisateur("Nom enclos source : ");
+            	vue.afficher("\n ---- Vous avez choisi de transferer une creature ---- ");
+            	String nomE = vueUtilisateur.demandeUtilisateur("Nom enclos source : ");
             	Enclos enclosSource = zoo.trouverEnclosParNom(nomE);
-            	vue.Afficher(enclosSource.toString());
-            	String indexCreatureString = vue.DemandeUtilisateur("Index creature : ");
+            	vue.afficher(enclosSource.toString());
+            	String indexCreatureString = vueUtilisateur.demandeUtilisateur("Index creature : ");
             	int indexCreature = Integer.parseInt(indexCreatureString);
             	Creature creature = enclosSource.getListeCreatures().get(indexCreature);
-            	nomE = vue.DemandeUtilisateur("Nom enclos destination : ");
+            	nomE = vueUtilisateur.demandeUtilisateur("Nom enclos destination : ");
             	Enclos enclosDest = zoo.trouverEnclosParNom(nomE);
-            	maitreZoo.TransfererCreature(creature, enclosSource, enclosDest);
+            	maitreZoo.transfererCreature(creature, enclosSource, enclosDest);
             	enclosSource.reorganiserCles();
             	enclosDest.reorganiserCles();
                 return true;
@@ -107,7 +108,7 @@ public class ControllerMaitreZoo {
                 return false;
 
             default:
-            	vue.Afficher("Choix invalide");
+            	vue.afficher("Choix invalide");
                 return true;
         }
     }
@@ -121,18 +122,16 @@ public class ControllerMaitreZoo {
         nbActionMax = 6;
         nbAction = 0;
         annee = 1;
-        int actionRestante = 0;
         this.zoo = zoo;
         int choix = 0;
         boolean run = true;
 
         // Affiche le message de bienvenue
-        maitreZoo = vue.Bienvenue();
+        maitreZoo = vueUtilisateur.bienvenue();
         // Boucle principale du menu utilisateur
         while (run) {
-            actionRestante = nbActionMax - nbAction;
-            vue.proposerAction(annee, actionRestante);
-            choix = vue.RecupererChoixAction();
+            vueUtilisateur.proposerAction();
+            choix = vueUtilisateur.recupererChoixAction();
             run = effectuerAction(choix);
             nbAction++;
 
@@ -140,7 +139,7 @@ public class ControllerMaitreZoo {
             if (nbAction == nbActionMax) {
                 annee++;
                 nbAction = 0;
-                vue.PassageAnnee();
+                ControllerZoo.passageAnnee();
                 zoo.ModificationEtatAleatoire();
             }
         }

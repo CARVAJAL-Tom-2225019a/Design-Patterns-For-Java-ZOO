@@ -40,7 +40,6 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
     }
 
     
-    
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.
      * Permet au dragon de courir sous certaines conditions.
@@ -106,6 +105,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
     public void mourrir() {
         reinitialiserCreature(); //TODO changer ca en un oeuf
     }
+
     
 
 }

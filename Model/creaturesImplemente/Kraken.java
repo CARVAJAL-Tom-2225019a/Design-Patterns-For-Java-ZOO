@@ -12,6 +12,7 @@ import references.*;
  */
 public class Kraken extends Ovipare implements CreatureMarine {
 
+    private final int dureeIncubation = 1;
     /**
      * Constructeur de la classe Kraken.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -23,10 +24,22 @@ public class Kraken extends Ovipare implements CreatureMarine {
      * @param bruit            Le bruit que fait le kraken.
      * @param dureeIncubation  La durée d'incubation spécifique du Kraken.
      */
-    protected Kraken(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeIncubation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeIncubation);
+    protected Kraken(Kraken parent1,Kraken parent2, String bruit) {
+        super(parent1, parent2);
+        this.setAgressivite(Enum_Aggressivite.agressif);
+        this.setNomEspece(Enum_Especes.Kraken);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
     }
-    
+    protected Kraken( String bruit) {
+        super();
+        this.setAgressivite(Enum_Aggressivite.agressif);
+        this.setNomEspece(Enum_Especes.Kraken);
+        this.setDureeGestation(dureeIncubation);
+        this.setBruit( bruit);
+    }
+
+
 
     /**
      * Méthode de l'interface CreatureMarine : Nager.
@@ -37,24 +50,14 @@ public class Kraken extends Ovipare implements CreatureMarine {
      *        
      */
     @Override
-    public String Nager() throws Exception {
+    public String nager() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "Le Kraken nage";
         } else {
             throw new Exception("Kraken pas en etat de nager");
         }
     }
-    
-    
-    /**
-     * Méthode pour pondre un œuf.
-     * 
-     * @param dateNaissance     La date de naissance de l'œuf.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     */
-    public Oeuf PondreOeuf(Creature papa) throws Exception {
-    	return super.PondreOeuf(papa, super.getDureePourEnfant());
-    }
+
 }

@@ -107,7 +107,7 @@ class TestCreature {
 	
 	@Test
 	void testMethodeCombattre() {
-		Dragon gagnant = (Dragon) dragon1.combattre(dragon2);
+		Dragon gagnant = (Dragon) dragon1.combatre(dragon2);
 		 if (dragon1.getForce() > dragon2.getForce())
 			 assertEquals(gagnant, dragon1);
 		 else

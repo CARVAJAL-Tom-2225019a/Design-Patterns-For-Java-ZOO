@@ -1,4 +1,4 @@
-package main;
+package applicationRun;
 
 import controllerApplication.ControllerPrincipal;
 import controllerApplication.ControllerUserInterface;
@@ -37,7 +37,7 @@ public class Run {
     	int choix = 0;
 		while (true) {
 		    try {
-		        String input = vueUtilisateur.DemandeUtilisateur("CHOIX MODE SIMULATION\n 1 : Automatique\n"
+		        String input = vueUtilisateur.demandeUtilisateur("CHOIX MODE SIMULATION\n 1 : Automatique\n"
 		    			+ " 2 : Manuel\n");
 		        choix = Integer.parseInt(input);
 		        // Si la conversion en entier réussit, sortir de la boucle

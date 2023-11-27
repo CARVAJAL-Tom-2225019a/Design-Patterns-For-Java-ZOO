@@ -12,6 +12,7 @@ import references.*;
  */
 public class Licorne extends Vivipare implements CreatureTerrestre {
 
+    private final int dureeGestation = 1;
     /**
      * Constructeur de la classe Licorne.
      * Protected afin que la création se fasse essentiellement depuis le factory
@@ -23,10 +24,22 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * @param bruit           Le bruit que fait la licorne.
      * @param dureeGestation  La durée de gestation spécifique pour les licornes.
      */
-    protected Licorne(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int dureeGestation) {
-        super(nomEspece, sexe, poids, taille, bruit, dureeGestation);
-    }
 
+
+    protected Licorne(Licorne parent1,Licorne parent2, String bruit) {
+        super(parent1, parent2, parent1.getDureeGestation());
+        this.setAgressivite(Enum_Aggressivite.pacifique);
+        this.setNomEspece(Enum_Especes.Licorne);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
+    }
+    protected Licorne( String bruit) {
+        super();
+        this.setAgressivite(Enum_Aggressivite.pacifique);
+        this.setNomEspece(Enum_Especes.Licorne);
+        this.setDureeGestation(dureeGestation);
+        this.setBruit( bruit);
+    }
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.
@@ -37,10 +50,10 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * 
      */
     @Override
-    public String Courrir() throws Exception {
+    public String courrir() throws Exception {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
-            super.PerdreNourriture();
-            super.PerdreSommeil();
+            super.perdreNourriture();
+            super.perdreSommeil();
             return "La licorne est en mouvement";
         } else {
             throw new Exception("Licorne pas en etat de courir");
@@ -54,7 +67,8 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
      * 
      * @return Une instance de la classe Creature qui né.
      */
-    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return super.MettreBas(sexe, poids, taille);
+    public Creature mettreBas() throws Exception {
+    	return super.mettreBas();
     }
+
 }

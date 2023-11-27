@@ -45,6 +45,7 @@ class TestConceptionVivipare {
 	@Test
 	void TestMethodeVerificationEnfantEnConception() throws Exception {
 		sireneFemelle.concevoirUnEnfant(sireneMale, 2);
+		sireneFemelle.decrementerNombreJourRestantAvantNaissance();
 		assertEquals(null, sireneFemelle.verificationEnfantEnConception());
 		
 	}

@@ -64,20 +64,19 @@ public class Oeuf {
      * @return Une instance de la classe Creature.
      * @throws Exception Si la durée d'incubation n'est pas terminée ou si l'œuf est déjà éclos.
      */
-    public Creature eclore(Enum_Sexe sexe, double poids, double taille) throws Exception {
+    public Creature eclore() throws Exception {
         if (!isOpen) {
             // Vérification si la durée d'incubation est dépassée
             if (dureeIncubationRestante == 0 ) {
                 // Changement d'état de l'oeuf
                 isOpen = true;
-
                 // Création de la créature
                 return FactoryCreature.newCreature(espece);
             } else {
-                throw new Exception("Durée d'incubation non terminée");
+                throw new Exception("Duree d'incubation non terminee");
             }
         } else {
-            throw new Exception("Oeuf déjà éclos");
+            throw new Exception("Oeuf deje eclos");
         }
     }
     

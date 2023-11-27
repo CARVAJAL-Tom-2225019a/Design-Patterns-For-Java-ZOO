@@ -40,8 +40,8 @@ class TestConceptionOvipare {
 		Exception thrown = assertThrows(
                 Exception.class,
                 () -> MegalodonMale.creerBebe(MegalodonMale),
-                "Statut creature invalide");
-        assertTrue(thrown.getMessage().contains("Statut creature invalide"));
+                "Statut de la creature invalide");
+        assertTrue(thrown.getMessage().contains("Statut de la creature invalide"));
 	}
 	
 	@Test
@@ -53,19 +53,32 @@ class TestConceptionOvipare {
 	
 	@Test
 	void TestMethodeEclore() throws Exception {
-		MegalodonFemelle.creerBebe(MegalodonMale);
-		ArrayList<Oeuf> oeufs = MegalodonFemelle.pondreOeuf();
-		ArrayList<Creature> creatures = new ArrayList<Creature>();
-		for (Oeuf o : oeufs) {
-			for (int i=0; i<o.getDureeIncubation(); i++) {
-				o.decrementerDureeIncubationRestante();
-			}
-			if (o.getDureeIncubationRestante()==0) {
-				Creature c = o.eclore(null, 0, 0);
-				creatures.add(c);
-			}
-		}
-		assertEquals(Enum_Especes.Megalodon, creatures.get(0).getNomEspece());
+	    MegalodonFemelle.creerBebe(MegalodonMale);
+	    System.out.println("Nombre d'œufs dans le ventre avant : " + MegalodonFemelle.getVentre().size());
+	    ArrayList<Oeuf> oeufs = MegalodonFemelle.pondreOeuf();
+	    System.out.println("Nombre d'œufs dans le ventre apres : " + MegalodonFemelle.getVentre().size());
+	    ArrayList<Creature> creatures = new ArrayList<Creature>();
+	    //log pour voir combien d'œufs sont présents initialement
+	    System.out.println("Nombre d'œufs initiaux : " + oeufs.size());
+	    for (Oeuf o : oeufs) {
+	        for (int i = 0; i < o.getDureeIncubation(); i++) {
+	            o.decrementerDureeIncubationRestante();
+	        }
+	        //log pour voir la durée d'incubation restante après la boucle
+	        System.out.println("Duree d'incubation restante : " + o.getDureeIncubationRestante());
+	        if (o.getDureeIncubationRestante() == 0) {
+	            Creature c = o.eclore();
+	            creatures.add(c);
+	        }
+	    }
+
+	    // Ajoutez un log pour voir combien de créatures ont été ajoutées à la liste
+	    System.out.println("Nombre de creatures ajoutees : " + creatures.size());
+	    if (!creatures.isEmpty()) {
+	        assertEquals(Enum_Especes.Megalodon, creatures.get(0).getNomEspece());
+	    } else {
+	        fail("La liste de créatures est vide");
+	    }
 	}
 
 }

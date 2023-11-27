@@ -1,6 +1,7 @@
 package enclosImplemente;
 
 import base.Creature;
+import base.Enclos;
 import interfaces.*;
 import references.*;
 
@@ -54,12 +55,12 @@ public class Aquarium extends Enclos {
      * @param creature La créature à ajouter dans l'aquarium.
      * @throws Exception Si la créature n'est pas aquatique ou si elle est trop grande pour le bassin.
      */
-    public void AjouterCreature(Creature creature) throws Exception {
+    public void ajouterCreature(Creature creature) throws Exception {
         // Vérification si la créature est une créature marine
         if (creature instanceof CreatureMarine) {
             // Vérification si la créature n'est pas trop grande pour le bassin de l'aquarium
             if (creature.getTaille() < profondeurBassin)
-                super.AjouterCreature(creature);
+                super.ajouterCreature(creature);
             else
                 throw new Exception("Creature trop grande");
         } else {
@@ -73,7 +74,7 @@ public class Aquarium extends Enclos {
      *
      * @throws Exception Si le niveau d'eau est inférieur à la profondeur du bassin.
      */
-    public void EntretenirEnclos() throws Exception {
+    public void entretenirEnclos() throws Exception {
         // Vérification du niveau d'eau
         if (niveauEau < profondeurBassin)
             // Ajout d'eau pour atteindre la profondeur du bassin
@@ -110,7 +111,7 @@ public class Aquarium extends Enclos {
 	/**
 	 * Methode pour avoir le nom de l'enclos et son etat
 	 */
-	public String VoirInfoEnclos() {
+	public String voirInfoEnclos() {
 		return " -Aquarium "+getNom()+" avec "+getNbCreatures()
         +" creatures.\n          Niveau eau : "+niveauEau+"/"+profondeurBassin
         +"\n          Salinite eau : "+saliniteEau+"/"+CONSTANTES.SALINITE_CORRECT+"\n";
@@ -120,7 +121,7 @@ public class Aquarium extends Enclos {
 	/**
 	 * Methode permettant la degradation du niveau d'eau
 	 */
-	public void DegradationNiveauEau () {
+	public void degradationNiveauEau () {
 		double perte = profondeurBassin/10;
 		niveauEau -= perte;
 		if (niveauEau<= 0)
@@ -131,7 +132,7 @@ public class Aquarium extends Enclos {
 	/**
 	 * Methode permettant la degradation de la salinite de l'eau
 	 */
-	public void DegradationSaliniteEau () {
+	public void degradationSaliniteEau () {
 		saliniteEau--;
 		if (saliniteEau<=0)
 			saliniteEau=1;

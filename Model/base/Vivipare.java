@@ -1,7 +1,9 @@
 package base;
 
+import java.util.ArrayList;
 import java.util.Random;
 
+import creaturesImplemente.Embryon;
 import creaturesImplemente.FactoryCreature;
 import references.*;
 
@@ -10,35 +12,41 @@ import references.*;
  *
  */
 public abstract class Vivipare extends Creature {
-	
-	private  int nbJourConceptionRestant;
+
+	private ArrayList<Embryon> ventre;
+
+	private int nbJourConceptionRestantAvantMiseABas;
 	
 	
     /**
      * Constructeur de la classe Vivipare.
      * 
-     * @param nomEspece      L'espèce de la créature.
-     * @param sexe           Le sexe de la créature.
-     * @param poids          Le poids de la créature.
-     * @param taille         La taille de la créature.
-     * @param bruit          Le bruit que fait la créature.
-     * @param duree			 Duree de conception pour un enfant
+     * @param parent1 Le premiere parent de la créature (celui qui lui a donné naissance)
+	 * @param parent2 le deuxieme parent de la créature
      */
-    public Vivipare(Enum_Especes nomEspece, Enum_Sexe sexe, double poids, double taille, String bruit, int duree) {
-        super(nomEspece, sexe, poids, taille, bruit, duree);
-        nbJourConceptionRestant=0;
+    public Vivipare(Vivipare parent1, Vivipare parent2, int dureeGestation) {
+        super(parent1, parent2);
+        super.setDureeGestation(dureeGestation);
+		this.ventre = new ArrayList<Embryon>();
+
+        nbJourConceptionRestantAvantMiseABas = 0;
     }
-    
+
+	public Vivipare() {
+		super();
+		this.ventre = new ArrayList<Embryon>();
+		nbJourConceptionRestantAvantMiseABas = 0;
+	}
     
     /**
      * Getters
      */
-    public int getNbJourConceptionRestant() {
-		return nbJourConceptionRestant;
+    public int getNbJourConceptionRestantAvantMiseABas() {
+		return nbJourConceptionRestantAvantMiseABas;
 	}
     
-    public void RemiseAZeroApresNaissance() {
-    	nbJourConceptionRestant=0;
+    public void remiseAZeroApresNaissance() {
+    	nbJourConceptionRestantAvantMiseABas = 0;
     }
     
 
@@ -50,25 +58,31 @@ public abstract class Vivipare extends Creature {
      * 
      */
     // TODO : gestion sauvegarde généalogie
-    public void concevoirUnEnfant (Creature papa, int duree) throws Exception {
-    	// Verification du statut des creatures
-    	if (super.isVivant() && !super.isEnTrainDeDormir() && papa.isVivant() && !papa.isEnTrainDeDormir()) {
-    		// Verification femelle et male, et meme espece
-    		if (super.getSexe() == Enum_Sexe.Femelle  &&  papa.getSexe() == Enum_Sexe.Male  && super.getNomEspece()==papa.getNomEspece()) {
-        		// Verification qu'un enfant n'est pas deja en cours
-    			if (getNbJourConceptionRestant()==0) {
-    				nbJourConceptionRestant = duree;
-    			}
-    			else
-    				throw new Exception ("Un ou plusieurs enfants sont deja en construction");
-        	}
-        	else
-        		throw new Exception ("La nature autorise seulement une femelle de concevoir un enfant avec un male de la meme espece");
-    	}
-    	else 
-    		throw new Exception ("Les deux creatures doivent etre vivante et reveille pour concevoir un enfant");
-    	
+    public void concevoirUnEnfant(Vivipare papa, int duree) throws Exception {
+        // Vérification du statut des créatures
+        if (super.isVivant() && !super.isEnTrainDeDormir() && papa.isVivant() && !papa.isEnTrainDeDormir()) {
+            // Vérification femelle et mâle, et même espèce
+            if (super.getSexe() == Enum_Sexe.Femelle && papa.getSexe() == Enum_Sexe.Male && super.getNomEspece().equals(papa.getNomEspece())) {
+                // Vérification qu'un enfant n'est pas déjà en cours
+                if (getNbJourConceptionRestantAvantMiseABas() == 0) {
+                    // Ajout de n embryons dans le ventre avec n entre 0 et EMBRYON_MAX
+                    Random random = new Random(System.currentTimeMillis());
+                    int nbEmbryon = 1+ random.nextInt(2);
+                    for (int i = 0; i < nbEmbryon; i++) {
+                        ventre.add(new Embryon(this, papa));
+                    }
+                    nbJourConceptionRestantAvantMiseABas = duree;
+                } else {
+                    throw new Exception("Un ou plusieurs enfants sont deja en construction");
+                }
+            } else {
+                throw new Exception("La nature autorise seulement une femelle de concevoir un enfant avec un male de la meme espece");
+            }
+        } else {
+            throw new Exception("Les deux creatures doivent etre vivantes et eveillees pour concevoir un enfant");
+        }
     }
+
     
     
     /**
@@ -77,12 +91,9 @@ public abstract class Vivipare extends Creature {
      * @return La creature mise au monde ou null
      * @throws Exception
      */
-    public Creature VerificationEnfantEnConception() throws Exception {
-    	Random random = new Random(System.currentTimeMillis());
-    	double poids = 1 + (random.nextDouble() * 49);
-		double taille = 1 + (random.nextDouble() * 49);
-    	if (DecrementerNombreJourRestantAvantNaissance() == 0)
-			return MettreBas(Creature.SexeAleatoire(), poids, taille);
+    public Creature verificationEnfantEnConception() throws Exception {
+    	if (decrementerNombreJourRestantAvantNaissance() == 0)
+			return mettreBas();
 		return null;
     }
     
@@ -93,12 +104,12 @@ public abstract class Vivipare extends Creature {
      * @param sexe   Le sexe de la nouvelle créature.
      * @param poids  Le poids de la nouvelle créature.
      * @param taille La taille de la nouvelle créature.
-     * @param duree  La durée de gestation spécifique de l'espèce.
      * @return Une instance de la classe Creature qui né.
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
-    public Creature MettreBas(Enum_Sexe sexe, double poids, double taille) throws Exception {
-    	return FactoryCreature.newCreature(super.getNomEspece(), sexe, poids, taille);
+    public Creature mettreBas() throws Exception {
+    	remiseAZeroApresNaissance();
+    	return FactoryCreature.newCreature(super.getNomEspece());
     }
     
     
@@ -106,9 +117,9 @@ public abstract class Vivipare extends Creature {
      * Methode pour decrementer le nombre de jour restant
      * @throws Exception 
      */
-    public int DecrementerNombreJourRestantAvantNaissance (){
-    	if (nbJourConceptionRestant > 0) {
-    		return nbJourConceptionRestant--;
+    public int decrementerNombreJourRestantAvantNaissance (){
+    	if (nbJourConceptionRestantAvantMiseABas > 0) {
+    		return nbJourConceptionRestantAvantMiseABas--;
     	}
     	else
     		return 0;

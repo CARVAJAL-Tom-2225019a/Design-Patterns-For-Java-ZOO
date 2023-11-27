@@ -47,13 +47,13 @@ public class ZooFantastique {
     /**
      * Getters
      */
-    public Set<Enclos> GetListeEnclos() {
+    public Set<Enclos> getListeEnclos() {
         return listeEnclos;
     }
-    public Set<Oeuf> GetlLsteOeufs() {
+    public Set<Oeuf> getlLsteOeufs() {
         return listeOeufs;
     }
-    public Set<Creature> GetListeFemelleEnceinte() {
+    public Set<Creature> getListeFemelleEnceinte() {
         return listeFemelleEnceinte;
     }
 
@@ -62,7 +62,7 @@ public class ZooFantastique {
      * Méthode pour ajouter un enclos au zoo
      * @throws Exception 
      */
-    public void AddEnclos(Enclos enclos) throws Exception {
+    public void addEnclos(Enclos enclos) throws Exception {
         if (listeEnclos.size() < CONSTANTES.NB_MAX_ENCLOS) {
             listeEnclos.add(enclos);
         }
@@ -74,10 +74,10 @@ public class ZooFantastique {
     /**
      * Methodes pour ajouter un enfant dans la liste
      */
-    public void AddFemelleEnceinte(Creature c) {
+    public void addFemelleEnceinte(Creature c) {
     	listeFemelleEnceinte.add(c);
     }
-    public void AddOeuf(Oeuf o) {
+    public void addOeuf(Oeuf o) {
     	listeOeufs.add(o);
     }
     
@@ -85,10 +85,10 @@ public class ZooFantastique {
     /**
      * Methodes pour supprimer oeuf ou enfant apres sa naissance
      */
-    public void RemoveFemelleEnceinte (Creature c) {
+    public void removeFemelleEnceinte (Creature c) {
     	listeFemelleEnceinte.remove(c);
     }
-    public void RemoveOeuf (Oeuf o) {
+    public void removeOeuf (Oeuf o) {
     	listeOeufs.remove(o);
     }
 
@@ -108,10 +108,10 @@ public class ZooFantastique {
     /**
      * Méthode pour afficher les informations sur l'ensemble du zoo
      */
-    public String AfficherEnsembleZoo() {
+    public String afficherEnsembleZoo() {
         String chaine ="\n==== VOICI " + nom + " ==== \n\n";
         for (Enclos e : listeEnclos) {
-        		chaine+=e.VoirInfoEnclos();
+        		chaine+=e.voirInfoEnclos();
         }
         return chaine;
     }
@@ -120,10 +120,10 @@ public class ZooFantastique {
     /**
      * Methode pour afficher la liste des femelles qui attendent un bebe
      */
-    public String AfficherFemellesEnceinte() {
+    public String afficherFemellesEnceinte() {
     	String chaine = "LES FEMELLES ENCEINTES :\n";
     	for (Creature c : listeFemelleEnceinte) {
-    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestant();
+    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestantAvantMiseABas();
     	}
     	return chaine;
     }
@@ -132,7 +132,7 @@ public class ZooFantastique {
     /**
      * Methode pour afficher la liste des oeufs
      */
-    public String AfficherOeufs() {
+    public String afficherOeufs() {
     	String chaine = "LES OEUFS :\n";
     	for (Oeuf o : listeOeufs) {
     		chaine += o.toString();
@@ -222,13 +222,13 @@ public class ZooFantastique {
                 int critereAleatoire = random.nextInt(3);
                 switch (critereAleatoire) {
                     case 0:
-                        creature.PerdreSommeil();
+                        creature.perdreSommeil();
                         break;
                     case 1:
-                        creature.PerdreSante();
+                        creature.perdreSante();
                         break;
                     case 2:
-                        creature.PerdreNourriture();
+                        creature.perdreNourriture();
                         break;
                 }
             }
@@ -251,16 +251,16 @@ public class ZooFantastique {
             if (enclos instanceof Aquarium) {
                 // Si c'est un Aquarium, modifier NiveauEau et SaliniteEau
                 Aquarium aquarium = (Aquarium) enclos;
-                aquarium.DegradationNiveauEau();
-                aquarium.DegradationSaliniteEau();
+                aquarium.degradationNiveauEau();
+                aquarium.degradationSaliniteEau();
             } else if (enclos instanceof Voliere) {
                 // Si c'est une Voliere, modifier degreProprete et etatToit
                 Voliere voliere = (Voliere) enclos;
-                voliere.DegradationDegreProprete();
-                voliere.DegradationEtatToit();
+                voliere.degradationDegreProprete();
+                voliere.degradationEtatToit();
             } else {
                 // Sinon (enclos classique), modifier degreProprete
-                enclos.DegradationDegreProprete();
+                enclos.degradationDegreProprete();
             }
         }
     }

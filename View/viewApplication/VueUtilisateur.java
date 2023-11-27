@@ -2,6 +2,8 @@ package viewApplication;
 
 import java.util.Scanner;
 
+import controllerTemps.Enum_ActionsPossibles;
+import controllerTemps.GestionnaireTemps;
 import maitreZoo.MaitreZoo;
 import references.*;
 
@@ -12,20 +14,21 @@ import references.*;
 public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
+	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
 
 	/**
 	 * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
 	 * du zoo lorsque l'utilisateur a le controle
 	 */
-	public MaitreZoo Bienvenue() {
+	public MaitreZoo bienvenue() {
 		System.out.println("======  BIENVENUE DANS VOTRE ZOO FANTASTIQUE  ======");
 
 		// Saisie des informations du joueur
-		String nom = DemandeUtilisateur("Votre nom : ");
+		String nom = demandeUtilisateur("Votre nom : ");
 		// Recuperation sexe
-		Enum_Sexe sexe = RecupererSexe();
+		Enum_Sexe sexe = recupererSexe();
 		// Recuperation age
-		int age = RecupererAge();
+		int age = recupererAge();
 		// Message de bienvenue
 		System.out.println("\nVous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! \nBonne chance " + nom);
@@ -39,11 +42,11 @@ public class VueUtilisateur {
 	 * Methode permettant de recuperer l'age tant que ce n'est pas un entier
 	 * @return entier entre par l'utilisateur
 	 */
-	private int RecupererAge() {
+	private int recupererAge() {
 		int age;
 		while (true) {
 		    try {
-		        String input = DemandeUtilisateur("Votre age : ");
+		        String input = demandeUtilisateur("Votre age : ");
 		        age = Integer.parseInt(input);
 		        // Si la conversion en entier réussit, sortir de la boucle
 		        break;
@@ -61,11 +64,11 @@ public class VueUtilisateur {
 	 * et de traduire selon l'enumeration sexe
 	 * @return	le sexe choisi par l'utilisateur
 	 */
-	private Enum_Sexe RecupererSexe() {
+	private Enum_Sexe recupererSexe() {
 		Enum_Sexe sexe = null;
 		while (sexe == null) {
 		    try {
-		        String input = DemandeUtilisateur("Votre sexe (F ou M) : ");
+		        String input = demandeUtilisateur("Votre sexe (F ou M) : ");
 		        if (input.equalsIgnoreCase("F")) {
 		            sexe = Enum_Sexe.Femelle;
 		        } else if (input.equalsIgnoreCase("M")) {
@@ -85,34 +88,34 @@ public class VueUtilisateur {
 	/**
 	 * Méthode pour afficher les actions disponibles à l'utilisateur
 	 */
-	public void proposerAction(int annee, int actionRestante) {
+	public void proposerAction() {
 		System.out.println(
-				"\nLES ACTIONS DISPONIBLES (annee " + annee + "):" 
-						+ "\n\n  0 : Pas d'action" 
+				"\nLES ACTIONS DISPONIBLES (annee " + temps.getAnnee() + "):" 
+						+ "\n\n  0 : Pas d'action ("+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  1 : Voir les enclos"
-						+ "\n  2 : Voir le nombre de creatures totales"
-						+ "\n  3 : Creer un nouvel enclos" 
-						+ "\n  4 : Examiner un enclos"
+						+ "\n  1 : Voir les enclos ("+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+")"
+						+ "\n  2 : Voir le nombre de creatures totales ("+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+")"
+						+ "\n  3 : Creer un nouvel enclos ("+Enum_ActionsPossibles.CREER_ENCLOS.getDureeTotale()+")"
+						+ "\n  4 : Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  5 : Nettoyer un enclos" 
-						+ "\n  6 : Nourrir les creatures d'un enclos"
+						+ "\n  5 : Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+")"
+						+ "\n  6 : Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  7 : Transferer une creature"
-						+ "\n  8 : Transferer un enclos"
+						+ "\n  7 : Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+")"
+						+ "\n  8 : Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  9 : Concevoir un enfant"
-						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre"
+						+ "\n  9 : Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+")"
+						+ "\n  10 : Voir la liste des creatures qui vont bientot naitre ("+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  11 : Organiser une seance de sport pour un enclos"
-						+ "\n  12 : Organiser un concert prive avec les creatures"
+						+ "\n  11 : Organiser une seance de sport pour un enclos ("+Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT.getDureeTotale()+")"
+						+ "\n  12 : Organiser un concert prive avec les creatures ("+Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  15 : Voir l'ensemble des meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+")"
 						+ "\n  16 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
 						+ "\n  17 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  99 : Exit" 
-						+ "\n\n Il vous reste " + actionRestante+" action(s) a effectuer avant de changer d'annee" 
+						+ "\n\n Nous somme le "+temps.getDateActuelle()+"." 
 						+ "\n\n Votre choix = ");
 	}
 
@@ -120,7 +123,7 @@ public class VueUtilisateur {
 	/**
 	 * Méthode pour récupérer le choix de l'utilisateur
 	 */
-	public int RecupererChoixAction() {
+	public int recupererChoixAction() {
 		int choix = -1; // Valeur par défaut ou valeur impossible pour indiquer une erreur
 	    do {
 	        try {
@@ -137,7 +140,7 @@ public class VueUtilisateur {
 	/**
 	 * Méthode pour demander une saisie utilisateur avec un message donné
 	 */
-	public String DemandeUtilisateur(String chaine) {
+	public String demandeUtilisateur(String chaine) {
 		System.out.println(chaine);
 		return scanner.nextLine();
 	}

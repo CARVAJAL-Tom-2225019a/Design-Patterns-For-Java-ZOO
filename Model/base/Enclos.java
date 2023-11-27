@@ -1,8 +1,7 @@
-package enclosImplemente;
+package base;
 
 import java.util.*;
 
-import base.*;
 import references.*;
 
 /**
@@ -86,7 +85,7 @@ public class Enclos {
 	/**
 	 * Methode pour avoir le nom de l'enclos et son etat
 	 */
-	public String VoirInfoEnclos() {
+	public String voirInfoEnclos() {
 		return " -Enclos "+getNom()+" avec "+getNbCreatures()
         +" creatures.\n          Degre proprete : "+getDegreProprete()+"\n";
 	}
@@ -185,15 +184,18 @@ public class Enclos {
 	 * @throws Exception 
 	 */
 	public String creaturesMortes() throws Exception {
-        String chaine = "Les creatures mortes dans " + nom + " :\n";
-        for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-        	if (!entry.getValue().isVivant()) {
-                chaine += entry.getValue().toString();
-                SupprimerCreature(entry.getValue());
-            }
-        }
-        return chaine;
-    }	
+	    String chaine = "Les créatures mortes dans " + nom + " :\n";
+	    // Utilisation d'un itérateur pour éviter les modifications concurrentes
+	    Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
+	    while (iterator.hasNext()) {
+	        Map.Entry<Integer, Creature> entry = iterator.next();
+	        if (!entry.getValue().isVivant()) {
+	            chaine+= entry.getValue().toString();
+	            iterator.remove(); // Suppression après la boucle
+	        }
+	    }
+	    return chaine.toString();
+	}
 	
 	
 	/**
@@ -203,7 +205,7 @@ public class Enclos {
 	 * @throws Exception si l'enclos est plein
 	 * 
 	 */
-	public void AjouterCreature (Creature creature) throws Exception {
+	public void ajouterCreature (Creature creature) throws Exception {
 		// si 1er animal
 		if (nbCreatures==0)
 			nomEspece = creature.getNomEspece();
@@ -224,7 +226,7 @@ public class Enclos {
 	 * @throws Exception si la creature n'est pas trouve
 	 * 
 	 */
-	public void SupprimerCreature (Creature creature) throws Exception {
+	public void supprimerCreature (Creature creature) throws Exception {
 		// Vérification de la présence de la creature
         if (listeCreatures.containsValue(creature)) {
         	listeCreatures.remove(trouverCleParCreature(creature));
@@ -244,9 +246,9 @@ public class Enclos {
 	 * Methode pour nourrir les creatures
 	 * 
 	 */
-	public void NourrirCreatures () throws Exception {
+	public void nourrirCreatures () throws Exception {
 		for (Creature creature : listeCreatures.values()) {
-			creature.Manger(CONSTANTES.MAX_INDICATEUR);
+			creature.manger(CONSTANTES.MAX_INDICATEUR);
 		}
 	}
 	
@@ -257,7 +259,7 @@ public class Enclos {
 	 * @throws Exception si l'enclos n'est pas sale ou s'il est vide
 	 * 
 	 */
-	public void EntretenirEnclos () throws Exception {
+	public void entretenirEnclos () throws Exception {
 		// Verification enclos sale
 		if (degreProprete != Enum_DegrePropreteEnclos.bon) {
 			// Verification enclos vide
@@ -315,7 +317,7 @@ public class Enclos {
 	/**
 	 * Methode permettant de degrader la proprete de l'enclos
 	 */
-	public void DegradationDegreProprete() {
+	public void degradationDegreProprete() {
 		if (degreProprete == Enum_DegrePropreteEnclos.bon)
 			degreProprete = Enum_DegrePropreteEnclos.correct;
 		else if (degreProprete == Enum_DegrePropreteEnclos.correct)
@@ -355,9 +357,9 @@ public class Enclos {
      * Methode permettant de concevoir un enfant selon le type de creature
      * @throws Exception 
      */
-    public int ConcevoirEnfant(Creature femelle, Creature male) throws Exception {
+    public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (femelle.isVivant() && femelle instanceof Vivipare) {
-    		((Vivipare)femelle).concevoirUnEnfant(male, femelle.getDureePourEnfant());
+    		((Vivipare)femelle).concevoirUnEnfant((Vivipare)male, femelle.getDureeGestation());
     		return 1;
     	}
     	else if (femelle.isVivant() && femelle instanceof Ovipare) {
@@ -367,6 +369,30 @@ public class Enclos {
     	}
     	return -1;
     }
+
+
+	public void reveillerCreatures() throws Exception {
+		for (Creature e : listeCreatures.values()) {
+			if (e.isVivant() && e.isEnTrainDeDormir())
+				e.seReveiller();
+			else
+				throw new Exception ("La creature "+e.getPrenom()+" ne se reveillera jamais... elle est morte");
+		}
+	}
+
+
+	public void faireDormirCreatures() throws Exception {
+		for (Creature e : listeCreatures.values()) {
+			if (e.isVivant()) {
+				if (e.getIndicateurSommeil()<CONSTANTES.MAX_INDICATEUR)
+					e.dormir();
+				else
+					throw new Exception ("Creature "+e.getPrenom()+" pas fatigue et fait une insomnie");
+			}
+			else
+				throw new Exception ("Creature "+e.getPrenom()+" dort a jamais... elle est morte");
+		}
+	}
     
 	
 }
