@@ -420,11 +420,18 @@ public class Enclos {
 
 
 	public Creature getCreatureDominante() {
+		Creature creatureDominante = null;
+
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-			if (entry.getValue().getStatus() == Enum_RangDomination.ALPHA)
-				return entry.getValue();
+			Creature currentCreature = entry.getValue();
+
+			// Si aucune créature dominante n'est définie ou si la force de la créature actuelle est plus grande
+			if (creatureDominante == null || currentCreature.getForce() > creatureDominante.getForce()) {
+				creatureDominante = currentCreature;
+			}
 		}
-		return null;
+
+		return creatureDominante;
 	}
 
 	public Enum_Aggressivite getAmbiance() {

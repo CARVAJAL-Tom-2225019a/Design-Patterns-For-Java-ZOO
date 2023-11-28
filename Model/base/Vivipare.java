@@ -13,6 +13,7 @@ import references.*;
  */
 public abstract class Vivipare extends Creature {
 
+
 	private ArrayList<Embryon> ventre;
 
 	private int nbJourConceptionRestantAvantMiseABas;
@@ -48,7 +49,10 @@ public abstract class Vivipare extends Creature {
     public void remiseAZeroApresNaissance() {
     	nbJourConceptionRestantAvantMiseABas = 0;
     }
-    
+
+    public boolean isEnceinte() {
+    	return nbJourConceptionRestantAvantMiseABas > 0;
+    }
 
     /**
      * Méthode pour construire un enfant

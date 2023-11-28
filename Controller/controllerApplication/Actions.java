@@ -62,6 +62,7 @@ public class Actions {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
 			vueGlobale.afficherEnclos(maitreZoo.examinerEnclos(enclos));
+
     	}
     	catch (Exception e) {
     		vueGlobale.afficher(e.getMessage());
@@ -400,7 +401,7 @@ public class Actions {
         	Thread.sleep(1000);
         	for (Creature c : enclos.getListeCreatures().values()) {
         		if (!c.isEnTrainDeDormir() && c.isVivant())
-        			vueGlobale.afficher(c.faireBruit());
+        			vueGlobale.afficher(c.getPrenom()+" : "+c.faireBruit());
         		Thread.sleep(1000);
         	}
         	vueGlobale.afficher("\nBon.. Il y a encore du travail, mais c'est un debut...\n");

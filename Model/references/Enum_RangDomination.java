@@ -2,38 +2,40 @@ package references;
 
 public enum Enum_RangDomination {
 	// Liste des rangs de domination avec leur valeur associe
-	ALPHA("Alpha",23),
-    BETA("Beta",22),
-    GAMMA("Gamma",21),
-    DELTA("Delta",20),
-    EPSILON("Epsilon",19),
-    ZETA("Zeta",18),
-    ETA("Eta",17),
-    THETA("Theta",16),
-    IOTA("Iota",15),
-    KAPPA("Kappa",14),
-    LAMBDA("Lambda",13),
-    MU("Mu",12),
-    NU("Nu",11),
-    XI("Xi",10),
-    OMICRON("Omicron",9),
-    PI("Pi",8),
-    RHO("Rho",7),
-    SIGMA("Sigma",6),
-    TAU("Tau",5),
-    UPSILON("Upsilon",4),
-    PHI("Phi",3),
-    CHI("Chi",2),
-    PSI("Psi",1),
-    OMEGA("Omega",0);
+	ALPHA("Alpha",23,'α'),
+    BETA("Beta",22,'β'),
+    GAMMA("Gamma",21,'γ'),
+    DELTA("Delta",20,'δ'),
+    EPSILON("Epsilon",19,'ε'),
+    ZETA("Zeta",18,'ζ'),
+    ETA("Eta",17,'η'),
+    THETA("Theta",16,'θ'),
+    IOTA("Iota",15,'ι'),
+    KAPPA("Kappa",14,'κ'),
+    LAMBDA("Lambda",13,'λ'),
+    MU("Mu",12,'μ'),
+    NU("Nu",11,'ν'),
+    XI("Xi",10,'ξ'),
+    OMICRON("Omicron",9,'ο'),
+    PI("Pi",8,'π'),
+    RHO("Rho",7,'ρ'),
+    SIGMA("Sigma",6,'σ'),
+    TAU("Tau",5,'τ'),
+    UPSILON("Upsilon",4,'υ'),
+    PHI("Phi",3,'φ'),
+    CHI("Chi",2,'χ'),
+    PSI("Psi",1,'ψ'),
+    OMEGA("Omega",0,'ω');
 	
 	private String description;
     private int valeur;
+    private char charRang;
 
     // Constructeur de l'énumération avec des paramètres
-    Enum_RangDomination(String description, int valeur) {
+    Enum_RangDomination(String description, int valeur, char charRang) {
         this.description = description;
         this.valeur = valeur;
+        this.charRang = charRang;
     }
 
     // Méthode pour obtenir la description associée à un rang
@@ -45,6 +47,7 @@ public enum Enum_RangDomination {
     public int getValeur() {
         return valeur;
     }
+
     
     // Methode pour avoirLeRangInferieur
     public Enum_RangDomination getRangInferieur() {
@@ -59,5 +62,9 @@ public enum Enum_RangDomination {
             // Si le rang courant est déjà le plus bas.
             return OMEGA;
         }
+    }
+
+    public char getChar() {
+        return charRang;
     }
 }
