@@ -114,6 +114,7 @@ public class VueUtilisateur {
 						+ "\n  15 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
 						+ "\n  16 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
 						+ "\n"
+						+ "\n  98 : Passer en mode automatique"
 						+ "\n  99 : Exit" 
 						+ "\n\n Nous somme le "+temps.getDateActuelle()+"." 
 						+ "\n\n Votre choix = ");

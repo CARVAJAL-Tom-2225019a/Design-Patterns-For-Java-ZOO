@@ -47,9 +47,9 @@ public class Megalodon extends Ovipare implements CreatureMarine {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "Le megalodon nage";
+            return "Le megalodon "+getPrenom()+" nage";
         } else {
-            throw new Exception("Megalodon pas en etat de nager");
+            throw new Exception("Megalodon "+getPrenom()+" pas en etat de nager");
         }
     }
 }

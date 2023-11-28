@@ -48,9 +48,9 @@ public class Sirene extends Vivipare implements CreatureMarine {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "La sirene nage";
+            return "La sirene "+getPrenom()+" nage";
         } else {
-            throw new Exception("Sirene pas en etat de nager");
+            throw new Exception("Sirene "+getPrenom()+" pas en etat de nager");
         }
     }
     

@@ -190,7 +190,13 @@ public class ControllerActions {
             	retour= true;
             	break;
             //TODO : suite actions pour Lycanthropes (defier male alpha, jurler...)
-            //TODO : autres actions pour creatures (par rapport sante notamment)
+            // Passer en mode automatique
+            case 98 :
+            	VueGlobale.afficher("=== PASSAGE EN MODE AUTOMATIQUE ===");
+            	Run.utilisateurControle=false;
+            	ControllerGestionAuto.run(false);
+            	retour = true;
+            	break;
             // Exit
             case 99:
                 retour= false;

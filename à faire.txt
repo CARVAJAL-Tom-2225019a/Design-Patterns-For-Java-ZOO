@@ -25,4 +25,5 @@ Pour l'application (code)
 Les problèmes dans le code
 	Naissance Automatique (femelle is null)
 	Affichage erreur pour 1 creature --> indiquer que les autres c'est ok
+	Il y en a qui sont mort dès le debut... ou qui dorme... bizzare
 	

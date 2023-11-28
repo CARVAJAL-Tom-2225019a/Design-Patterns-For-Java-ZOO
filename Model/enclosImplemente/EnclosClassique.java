@@ -17,9 +17,9 @@ public class EnclosClassique extends Enclos {
             if (creature.getTaille() < getSuperficie())
                 super.ajouterCreature(creature);
             else
-                throw new Exception("Creature trop grande");
+                throw new Exception("Creature "+creature.getPrenom()+" trop grande pour "+getNom());
         } else {
-            throw new Exception("Un enclos classique ne peut contenir que des créatures terrestres");
+            throw new Exception("Un enclos classique ne peut contenir que des créatures terrestres ("+getNom()+")");
         }
     }
 

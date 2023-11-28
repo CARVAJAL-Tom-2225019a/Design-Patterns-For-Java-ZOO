@@ -81,10 +81,10 @@ public class Meute {
 				return true;
 			}
 			else 
-				throw new Exception ("Le loup a deja une meute");
+				throw new Exception ("Le loup "+loup.getPrenom()+" a deja une meute");
 		}
 		else
-			throw new Exception ("La meute est pleine, impossible de rajouter un loup");
+			throw new Exception ("La meute est pleine, impossible de rajouter loup "+loup.getPrenom());
 	}
 	
 	
@@ -117,7 +117,7 @@ public class Meute {
 				throw new Exception ("Un membre du couple alpha ne peut pas quitter la meute");
 		}
 		else
-			throw new Exception ("Le loup n'appartient pas a cette meute");
+			throw new Exception ("Le loup "+loup.getPrenom()+" n'appartient pas a cette meute");
 	}
 	
 	

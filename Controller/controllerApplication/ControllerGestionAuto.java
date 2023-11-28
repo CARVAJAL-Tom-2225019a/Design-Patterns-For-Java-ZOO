@@ -14,11 +14,14 @@ import viewApplication.*;
  * gestion automatique du zoo
  */
 public class ControllerGestionAuto {
-
-	private static ControllerActions zooController;
+	// Instance du contrôleur du zoo (où les différentes actions possibles sont stockées)
+	private static ControllerActions zooController = new ControllerActions();
+	// Instance de la vue globale
 	private static VueGlobale VueGlobale;
-	private ZooFantastique zoo;
-	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+	// Instance unique du zoo fantastique
+	private static ZooFantastique zoo = ZooFantastique.getInstance();
+	// Instance unique de la classe permettant la gestion du temp
+	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
 	
 	/**
@@ -28,8 +31,6 @@ public class ControllerGestionAuto {
         VueGlobale = new VueGlobale();
         new VueAutomatique();
         new ControllerPrincipal();
-        zooController = new ControllerActions();
-        zoo = ZooFantastique.getInstance();
     }
 	
     
@@ -40,9 +41,9 @@ public class ControllerGestionAuto {
      * Methode permettant d'effectuer un choix aleatoire 
      * @throws Exception
      */
-	public void choixActionAleatoire () throws Exception {
+	public static void choixActionAleatoire () throws Exception {
 		Random random = new Random();
-		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX);
+		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		zooController.effectuerAction(choix);
 	}
 	
@@ -51,9 +52,10 @@ public class ControllerGestionAuto {
 	 * Point d'entree de la gestion automatique
 	 * @throws Exception
 	 */
-	public void run() throws Exception {
+	public static void run(boolean debut) throws Exception {
 		boolean run = true;
-        zooController.init();
+		if (debut)
+			zooController.init();
         Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {
         	choixActionAleatoire ();
@@ -83,6 +85,69 @@ public class ControllerGestionAuto {
         int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
         // Retournez l'enclos correspondant à l'indice aléatoire
         return (Enclos) zoo.getListeEnclos().toArray()[indiceAleatoire];
+	}
+	
+	
+	
+	/**
+	 * Methode permettant de recuperer les enclos qui sont en mauvais etat
+	 * @throws Exception 
+	 */
+	public Enclos getFirstEnclosMauvaisEtat() throws Exception {
+		for (Enclos e : zoo.getListeEnclos()) {
+			if (e.isEnclosMauvaisEtat())
+				return e;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les enclos où les creatures ont faim
+	 */
+	public Enclos getFirstEnclosCreatureFaim() {
+		for (Enclos e : zoo.getListeEnclos()) {
+			if (e.isCreatureOntFaim())
+				return e;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les enclos où les creatures ont sommeil
+	 */
+	public Enclos getFirstEnclosCreatureSommeil() {
+		for (Enclos e : zoo.getListeEnclos()) {
+			if (e.isCreatureOntSommeil())
+				return e;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les enclos où les creatures sont
+	 * en mauvaise sante
+	 */
+	public Enclos getFirstEnclosCreatureMauvaiseSante() {
+		for (Enclos e : zoo.getListeEnclos()) {
+			if (e.isCreatureOntSommeil())
+				return e;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer les enclos où les creatures dorment
+	 */
+	public Enclos getFirstEnclosCreatureDort() {
+		for (Enclos e : zoo.getListeEnclos()) {
+			if (e.isCreaturesDorment())
+				return e;
+		}
+		return null;
 	}
 	
 }

@@ -54,9 +54,9 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "La "+super.getPrenom()+" est en mouvement";
+            return "La licorne "+ getPrenom()+" est en mouvement";
         } else {
-            throw new Exception(super.getPrenom()+" pas en etat de courir, la créature est trop fatigué ou a faim");
+            throw new Exception("Licorne pas en etat de courir, la créature est trop fatigué ou a faim\"");
         }
     }
     

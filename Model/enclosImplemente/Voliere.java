@@ -56,9 +56,9 @@ public class Voliere extends Enclos {
             if (creature.getTaille() < hauteur)
                 super.ajouterCreature(creature);
             else
-                throw new Exception("Creature trop grande pour enclos");
+                throw new Exception("Creature "+creature.getPrenom()+" trop grande pour enclos "+getNom());
         } else {
-            throw new Exception("Une voliere ne peut contenir que des cretaures volantes");
+            throw new Exception("Une voliere ne peut contenir que des cretaures volantes ("+getNom()+")");
         }
     }
 
@@ -128,5 +128,11 @@ public class Voliere extends Enclos {
 			return 0;
 		}
 		return 0;
+	}
+	public boolean isEnclosMauvaisEtat () {
+		if (super.getDegreProprete() == Enum_DegrePropreteEnclos.mauvais || etatToit == Enum_DegrePropreteEnclos.mauvais)
+			return true;
+		else
+			return false;
 	}
 }

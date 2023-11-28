@@ -56,7 +56,7 @@ public class Kraken extends Ovipare implements CreatureMarine {
             super.perdreSommeil();
             return "Le Kraken nage";
         } else {
-            throw new Exception("Kraken pas en etat de nager");
+            throw new Exception("Kraken "+getPrenom()+" pas en etat de nager");
         }
     }
 
