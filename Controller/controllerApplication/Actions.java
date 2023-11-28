@@ -263,6 +263,8 @@ public class Actions {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         		femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
         		male = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Male);
+        		if (femelle == null || male == null)
+        			throw new Exception ("impossible d'avoir un male et une femelle");
         	}
         	//Conception
         	int naitre = enclos.concevoirEnfant(femelle, male);

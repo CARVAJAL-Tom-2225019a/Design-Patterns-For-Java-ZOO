@@ -2,6 +2,7 @@ package references;
 
 public enum Enum_RangDomination {
 	// Liste des rangs de domination avec leur valeur associe
+	// Nom, force
 	ALPHA("Alpha",23),
     BETA("Beta",22),
     GAMMA("Gamma",21),

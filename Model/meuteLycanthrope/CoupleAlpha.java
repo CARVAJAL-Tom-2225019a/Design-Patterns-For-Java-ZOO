@@ -1,7 +1,6 @@
 package meuteLycanthrope;
 
 import creaturesImplemente.Lycanthrope;
-import references.Enum_RangDomination;
 
 public class CoupleAlpha {
 	private Lycanthrope femelleAlpha;
