@@ -116,4 +116,17 @@ public class Voliere extends Enclos {
 		else if (etatToit == Enum_DegrePropreteEnclos.correct)
 			etatToit = Enum_DegrePropreteEnclos.mauvais;
 	}
+
+	public int getEtatToitNumber(){
+		if (etatToit == Enum_DegrePropreteEnclos.bon ){
+			return 2;
+		}
+		if (etatToit==Enum_DegrePropreteEnclos.correct){
+			return 1;
+		}
+		if (etatToit==Enum_DegrePropreteEnclos.mauvais){
+			return 0;
+		}
+		return 0;
+	}
 }

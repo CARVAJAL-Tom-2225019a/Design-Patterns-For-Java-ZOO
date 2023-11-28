@@ -417,5 +417,93 @@ public class Enclos {
 			c.perdreSante();
 		}
 	}
-	
+
+
+	public Creature getCreatureDominante() {
+		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+			if (entry.getValue().getStatus() == Enum_RangDomination.ALPHA)
+				return entry.getValue();
+		}
+		return null;
+	}
+
+	public Enum_Aggressivite getAmbiance() {
+		// on cherche l'ambiance qui apparait le plus dans la liste de creature
+		Map<Enum_Aggressivite, Integer> ambianceOccurrences = new TreeMap<>();
+
+		// Parcourir les valeurs de la TreeMap et compter les occurrences d'ambiance
+		for (Creature creature : listeCreatures.values()) {
+			Enum_Aggressivite ambiance = creature.getAgressivite();
+			ambianceOccurrences.put(ambiance, ambianceOccurrences.getOrDefault(ambiance, 0) + 1);
+		}
+
+		// Trouver l'ambiance avec le plus d'occurrences
+		Enum_Aggressivite mostFrequentAmbiance = null;
+		int maxOccurrences = 0;
+
+		for (Map.Entry<Enum_Aggressivite, Integer> entry : ambianceOccurrences.entrySet()) {
+			if (entry.getValue() > maxOccurrences) {
+				mostFrequentAmbiance = entry.getKey();
+				maxOccurrences = entry.getValue();
+			}
+		}
+
+		return mostFrequentAmbiance;
+	}
+	public int getBonheurMoyen(){ // todo Factoriser getter Moyen
+		int valBonheurMoyen = 0;
+		for (Creature creature : listeCreatures.values()){
+			valBonheurMoyen += creature.getBonheur();
+		}
+		if (!listeCreatures.isEmpty()) return valBonheurMoyen/listeCreatures.size();
+		return 0;
+	}
+
+	public int getAgeMoyen() {
+		int valAgeMoyen = 0;
+		for (Creature creature : listeCreatures.values()){
+			valAgeMoyen += creature.getAge();
+		}
+		if (!listeCreatures.isEmpty()) return valAgeMoyen/listeCreatures.size();
+		return 0 ;
+	}
+	public int getFaimMoyen() {
+		int valFaimMoyen = 0;
+		for (Creature creature : listeCreatures.values()){
+			valFaimMoyen += creature.getIndicateurFaim();
+		}
+		if (!listeCreatures.isEmpty()) return valFaimMoyen/listeCreatures.size();
+		return 0 ;
+	}
+
+	public int getSommeilMoyen() {
+		int valSommeilMoyen = 0;
+		for (Creature creature : listeCreatures.values()){
+			valSommeilMoyen += creature.getIndicateurSommeil();
+		}
+		if (!listeCreatures.isEmpty()) return valSommeilMoyen/listeCreatures.size();
+		return 0 ;
+	}
+
+	public int getSanteMoyen() {
+		int valSanteMoyen = 0;
+		for (Creature creature : listeCreatures.values()){
+			valSanteMoyen += creature.getIndicateurSante();
+		}
+		if (!listeCreatures.isEmpty()) return valSanteMoyen/listeCreatures.size();
+		return 0 ;
+	}
+
+	public int getDegrePropreteNumber(){
+		if (degreProprete == Enum_DegrePropreteEnclos.bon) {
+			return 2;
+		}
+		if (degreProprete == Enum_DegrePropreteEnclos.correct) {
+			return 1;
+		}
+		if (degreProprete == Enum_DegrePropreteEnclos.mauvais) {
+			return 0;
+		}
+		return 0;
+	}
 }

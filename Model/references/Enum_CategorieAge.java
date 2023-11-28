@@ -6,8 +6,8 @@ public enum Enum_CategorieAge {
 	ENFANT("Enfant", BEBE.getAgeMax() + 1, BEBE.getAgeMax() + 5),
 	JEUNE("Jeune", ENFANT.getAgeMax() + 1, ENFANT.getAgeMax() + 10),
 	ADULTE("Adulte", JEUNE.getAgeMax() + 1, JEUNE.getAgeMax() + 20),
-	VIEUX("Vieux", ADULTE.getAgeMax() + 1, ADULTE.getAgeMax() + 40),
-	MORT("Mort", VIEUX.getAgeMax() + 1, Integer.MAX_VALUE);
+	VIEUX("Vieux", ADULTE.getAgeMax() + 1, CONSTANTES.MAX_AGE),
+	MORT("Mort", CONSTANTES.MAX_AGE +1, Integer.MAX_VALUE);
 
 	private final String libelle;
 	private final int ageMin;

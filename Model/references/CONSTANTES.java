@@ -12,11 +12,11 @@ public class CONSTANTES {
 	
 	public static int NB_ACTION_MAX_USER = 6;
 	
-	public static int MAX_INDICATEUR = 16;
-	public static int VALEUR_PERTE_INDICATEUR = 2;
+	public static int MAX_INDICATEUR = 100;
+	public static int VALEUR_PERTE_INDICATEUR = 8;
 	public static int VALEUR_INDICATEUR_MAUVAIS = 5;
 	
-	public static int MAX_AGE = 8;
+	public static int MAX_AGE = 100;
 	
 	public static int SALINITE_CORRECT = 5;
 	public static int NB_CREATURE_PAR_ENCLOS = 10;
