@@ -40,12 +40,12 @@ public class MaitreZoo extends Humain{
      * Methode pour examiner un enclos
      * 
      * @param enclos	Enclos a examiner
-     * @return La chaine de caractere contenant les informations de l'enclos
+     * @return l'enclos du maitre du zoo si il est pas null
      * @throws Exception 
      */
-    public String examinerEnclos (Enclos enclos) throws Exception {
+    public Enclos examinerEnclos (Enclos enclos) throws Exception {
     	if (enclos != null)
-    		return enclos.toString();
+    		return enclos;
     	else
     		throw new Exception ("Erreur enclos");
     }

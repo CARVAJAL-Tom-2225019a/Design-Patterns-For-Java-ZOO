@@ -60,8 +60,8 @@ public class Actions {
         	}
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
-        	}	
-            vueGlobale.afficher(maitreZoo.examinerEnclos(enclos));
+        	}
+			vueGlobale.afficherEnclos(maitreZoo.examinerEnclos(enclos));
     	}
     	catch (Exception e) {
     		vueGlobale.afficher(e.getMessage());
