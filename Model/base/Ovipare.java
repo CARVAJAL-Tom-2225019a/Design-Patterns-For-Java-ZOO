@@ -45,7 +45,7 @@ public abstract class Ovipare extends Creature {
                 this.ventre.add(new Oeuf(this, Objects.requireNonNull(partenaire, "Le partenaire ne peut pas etre null")));
             }
         } else {
-            throw new Exception("Statut de la creature invalide");
+            throw new Exception("Statut de la creature "+getNomEspece()+" "+getPrenom()+" invalide");
         }
     }
 
@@ -72,7 +72,7 @@ public abstract class Ovipare extends Creature {
             ventre.clear();
             return oeufs;
         } else {
-            throw new Exception("Ventre vide");
+            throw new Exception("Ventre de "+getNomEspece()+" "+getPrenom()+" vide");
         }
     }
 }

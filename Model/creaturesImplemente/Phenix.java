@@ -55,9 +55,9 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
     	if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "Le phenix vole";
+            return "Le phenix "+getPrenom()+" vole";
         } else {
-            throw new Exception("Phenix pas en etat de voler");
+            throw new Exception("Phenix "+getPrenom()+" pas en etat de voler");
         }
     }
 

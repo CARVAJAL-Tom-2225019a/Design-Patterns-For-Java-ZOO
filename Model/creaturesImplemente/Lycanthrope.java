@@ -136,7 +136,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     public String courrir() throws Exception {
         super.perdreNourriture();
         super.perdreSommeil();
-        return "Le lycanthrope court";
+        return "Le lycanthrope "+getPrenom()+" court";
     }
     
     
@@ -157,6 +157,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      */
     public String toString() {
     	return "-- Lycanthrope ="
+    				+"\n   prenom : "+getPrenom()
     				+"\n   sexe : "+getSexe()
     				+"\n   age : "+getAge()
     				+"\n   vivant : "+isVivant()
@@ -208,12 +209,12 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     			chaine = super.toString()+"\n"+exprimerAgressivite (loup);
     		}
     		else
-    			throw new Exception ("Choix hurlement lycanthrope invalide\n");
+    			throw new Exception ("Choix hurlement lycanthrope "+getPrenom()+" invalide\n");
     		chaine += loup.entendreHurlement(action, this);
     		return chaine;
     	}
     	else
-    		throw new Exception("Le lycanthrope n'est pas en etat d'hurler\n");
+    		throw new Exception("Le lycanthrope "+getPrenom()+" n'est pas en etat d'hurler\n");
     }
     
     
@@ -222,19 +223,19 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      */
     private String exprimerAppartenance() {
     	if (meute == null)
-    		return "Je suis un loup solitaire, et je n'ai peur peur de rien\n";
+    		return "Je suis "+getPrenom()+", un loup solitaire, et je n'ai peur peur de rien\n";
     	else
-    		return "Ma meute, la meilleure, est "+meute+"\n";
+    		return "Je suis "+getPrenom()+"\nMa meute, la meilleure, est "+meute+"\n";
     }
     
     private String exprimerDomination (Lycanthrope loup) throws Exception {
     	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
     		if (meute==null || meute.getCoupleAlpha().getFemelleAlpha()!= loup) {
     			facteurDomination++;
-            	return "Je suis un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription()+"\n";
+            	return "Je suis "+getPrenom()+", un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription()+"\n";
     		}
     		else
-    			throw new Exception ("Domination impossible");
+    			throw new Exception ("Domination impossible pour "+getPrenom());
     	}
     	else {
     		loup.facteurDomination++;
@@ -250,11 +251,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     private String exprimerAgressivite (Lycanthrope loup) throws Exception {
-    	String chaine =  "Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
+    	String chaine =  "Je suis "+getPrenom()+", agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
     	if (isPlusFort(loup))
     		chaine+=agresser(loup);
     	else
-    		chaine+="Je ne suis pas asses fort pour te defier...\n";
+    		chaine+="Je suis "+getPrenom()+".\nJe ne suis pas asses fort pour te defier"+loup.getPrenom()+"\n";
     	return chaine;
     }
     
@@ -307,7 +308,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     private String entendreHurlement(Enum_ActionHurlement action, Lycanthrope loupOrigine) throws Exception {
     	if (super.isVivant() && !super.isEnTrainDeDormir()) {
     		if (action == Enum_ActionHurlement.Appartenance) {
-    			return "Je ne te crois pas superieur a moi !\n";
+    			return "Je ne te crois pas superieur a moi "+getPrenom()+" !\n";
     		}
     		// Exprimer domination
     		else if (action == Enum_ActionHurlement.Domination) {
@@ -321,13 +322,13 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		}
         	// Exprimer aggresivite
     		else if (action == Enum_ActionHurlement.Agressivite) {
-    			return "Tu ne me fais pas peur !\n";
+    			return "Tu ne me fais pas peur "+getPrenom()+" !\n";
     		}
     		else
     			throw new Exception ("Choix hurlement lycanthrope invalide\n");
     	}
     	else
-    		throw new Exception("Le lycanthrope n'est pas en etat d'entendre le hurlement\n");
+    		throw new Exception("Le lycanthrope "+getPrenom()+" n'est pas en etat d'entendre le hurlement\n");
     }
     
     
@@ -339,7 +340,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (meute.addLoup(this))
     		meute = m;
     	else
-    		throw new Exception ("Impossible de rejoindre cette meute");
+    		throw new Exception ("Impossible pour "+getPrenom()+" de rejoindre cette meute");
     }
     
     
@@ -354,7 +355,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		meute = null;
     	}
     	else
-    		throw new Exception ("Le loup ne peut pas quitter sa meute");
+    		throw new Exception ("Le loup "+getPrenom()+" ne peut pas quitter sa meute");
     }
     
     

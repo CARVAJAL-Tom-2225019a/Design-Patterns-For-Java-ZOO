@@ -101,7 +101,7 @@ public class MaitreZoo extends Humain{
         		throw new Exception ("Creature introuvable");
     	}
     	else
-    		throw new Exception ("Enclos de destination est plein");
+    		throw new Exception ("Enclos de destination est plein ("+enclosDest.getNom()+")");
     	
     }
 }

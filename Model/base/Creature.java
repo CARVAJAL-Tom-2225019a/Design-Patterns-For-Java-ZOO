@@ -197,7 +197,7 @@ public abstract class Creature {
             if (indicateurFaim > CONSTANTES.MAX_INDICATEUR)
                 indicateurFaim = CONSTANTES.MAX_INDICATEUR;
         } else {
-            throw new Exception("Etat de la creature invalide, impossible de manger");
+            throw new Exception("Etat du "+nomEspece+" "+prenom+" invalide, impossible de manger");
         }
     }
 
@@ -217,7 +217,7 @@ public abstract class Creature {
             return bruit;
         }
         else
-            throw new Exception("Etat de la creature invalide, impossible de faire un bruit");
+            throw new Exception("Etat du"+nomEspece+" "+prenom+" invalide, impossible de faire un bruit");
     }
 
     
@@ -232,7 +232,7 @@ public abstract class Creature {
             if (indicateurSante>CONSTANTES.MAX_INDICATEUR)
             	indicateurSante = CONSTANTES.MAX_INDICATEUR;
         } else {
-            throw new Exception("La creature n'est plus vivante, impossible de la soigner");
+            throw new Exception(nomEspece+" "+prenom+" n'est plus vivante, impossible de la soigner");
         }
     }
 
@@ -249,13 +249,13 @@ public abstract class Creature {
         			enTrainDeDormir = true;
         		}
         		else
-        			throw new Exception("Insomnie, impossible de dormir");
+        			throw new Exception("Insomnie, impossible de dormir pour "+nomEspece+" "+prenom);
         	}
         	else
-        		throw new Exception ("La creature est deja en train de dormir");
+        		throw new Exception (nomEspece+" "+prenom+" est deja en train de dormir");
         }
         else
-            throw new Exception("Creature morte, impossible de dormir");
+            throw new Exception("Creature "+nomEspece+" "+prenom+" morte, impossible de dormir");
     }
 
     
@@ -271,10 +271,10 @@ public abstract class Creature {
                 indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
         	}
         	else
-        		throw new Exception("La creature ne dort pas");
+        		throw new Exception("La creature "+nomEspece+" "+prenom+" ne dort pas");
         } 
         else
-            throw new Exception("La creature ne peut pas se reveiller, elle est morte a jamais");
+            throw new Exception("La creature "+nomEspece+" "+prenom+" ne peut pas se reveiller, elle est morte a jamais");
     }
 
     

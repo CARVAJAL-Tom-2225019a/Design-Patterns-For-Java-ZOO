@@ -215,7 +215,7 @@ public class Enclos {
 			listeCreatures.put(nbCreatures, creature);
 		}
 		else 
-			throw new Exception ("Ajout impossible si enclos plein ou si une autre espece est presente");
+			throw new Exception ("Ajout impossible dans "+nom+" : enclos plein ou si une autre espece est presente");
 	}
 	
 	
@@ -238,7 +238,7 @@ public class Enclos {
         		reorganiserCles();
 		}
 		else 
-			throw new Exception ("Creature introuvable");
+			throw new Exception ("Creature introuvable dans "+nom);
 	}
 	
 	
@@ -510,4 +510,65 @@ public class Enclos {
 		}
 		return 0;
 	}
+	
+	
+	public boolean isCreatureOntFaim() {
+		int compteur = 0;
+		for (Creature c : listeCreatures.values()) {
+			if (c.getIndicateurFaim() < CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
+				compteur++;
+			}
+		}
+		if (compteur >= listeCreatures.size()/2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isCreatureOntSommeil() {
+		int compteur = 0;
+		for (Creature c : listeCreatures.values()) {
+			if (c.getIndicateurSommeil() < CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
+				compteur++;
+			}
+		}
+		if (compteur >= listeCreatures.size()/2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isCreatureSontMalade() {
+		int compteur = 0;
+		for (Creature c : listeCreatures.values()) {
+			if (c.getIndicateurSante() < CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
+				compteur++;
+			}
+		}
+		if (compteur >= listeCreatures.size()/2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isEnclosMauvaisEtat () {
+		if (degreProprete == Enum_DegrePropreteEnclos.mauvais)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isCreaturesDorment () {
+		int compteur = 0;
+		for (Creature c : listeCreatures.values()) {
+			if (c.isEnTrainDeDormir()) {
+				compteur++;
+			}
+		}
+		if (compteur >= listeCreatures.size()/2)
+			return true;
+		else
+			return false;
+	}
+
 }

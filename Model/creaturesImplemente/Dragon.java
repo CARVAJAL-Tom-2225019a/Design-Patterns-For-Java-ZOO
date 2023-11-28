@@ -52,9 +52,9 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "Le dragon est en mouvement";
+            return "Le dragon "+getPrenom()+" est en mouvement";
         } else {
-            throw new Exception("Dragon pas en etat de courir");
+            throw new Exception("Dragon "+getPrenom()+" pas en etat de courir");
         }
     }
 
@@ -71,9 +71,9 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "Le dragon nage";
+            return "Le dragon "+getPrenom()+" nage";
         } else {
-            throw new Exception("Dragon pas en etat de nager");
+            throw new Exception("Dragon "+getPrenom()+" pas en etat de nager");
         }
     }
 
@@ -90,9 +90,9 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
         if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
             super.perdreNourriture();
             super.perdreSommeil();
-            return "Le dragon vole";
+            return "Le dragon "+getPrenom()+" vole";
         } else {
-            throw new Exception("Dragon pas en etat de voler");
+            throw new Exception("Dragon "+getPrenom()+" pas en etat de voler");
         }
     }
 

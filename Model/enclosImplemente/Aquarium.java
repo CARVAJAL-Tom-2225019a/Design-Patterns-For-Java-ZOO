@@ -62,9 +62,9 @@ public class Aquarium extends Enclos {
             if (creature.getTaille() < profondeurBassin)
                 super.ajouterCreature(creature);
             else
-                throw new Exception("Creature trop grande");
+                throw new Exception("Creature "+creature.getPrenom()+" trop grande pour "+getNom());
         } else {
-            throw new Exception("Un aquarium ne peut contenir que des créatures aquatiques");
+            throw new Exception("Un aquarium ne peut contenir que des créatures aquatiques ("+getNom()+")");
         }
     }
 
@@ -136,5 +136,13 @@ public class Aquarium extends Enclos {
 		saliniteEau--;
 		if (saliniteEau<=0)
 			saliniteEau=1;
+	}
+	
+	
+	public boolean isEnclosMauvaisEtat () {
+		if (saliniteEau <= 2 && niveauEau/2<profondeurBassin)
+			return true;
+		else
+			return false;
 	}
 }

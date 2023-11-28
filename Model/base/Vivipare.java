@@ -73,7 +73,7 @@ public abstract class Vivipare extends Creature {
                     }
                     nbJourConceptionRestantAvantMiseABas = duree;
                 } else {
-                    throw new Exception("Un ou plusieurs enfants sont deja en construction");
+                    throw new Exception("Un ou plusieurs enfants sont deja en construction pour "+getNomEspece()+" "+getPrenom());
                 }
             } else {
                 throw new Exception("La nature autorise seulement une femelle de concevoir un enfant avec un male de la meme espece");

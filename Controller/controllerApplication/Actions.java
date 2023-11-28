@@ -78,7 +78,9 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.getFirstEnclosMauvaisEtat();
+        		if (enclos == null)
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.nettoyerEnclos(enclos);
             vueGlobale.afficher("Nettoyage fait dans " + enclos+"\n");
@@ -98,7 +100,9 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.getFirstEnclosCreatureFaim();
+        		if (enclos == null)
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.nourrirCreaturesEnclos(enclos);
             vueGlobale.afficher("Les creatures ont ete nourries dans "+enclos.getNom());
@@ -119,7 +123,9 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.getFirstEnclosCreatureMauvaiseSante();
+        		if (enclos == null)
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.soignerCreaturesEnclos(enclos);
             vueGlobale.afficher("Les creatures ont ete soignees dans "+enclos.getNom());
@@ -424,7 +430,9 @@ public class Actions {
 	    	}
 	    	// GESTION AUTOMATIQUE
 	    	else {
-	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+	    		enclos = controllerGestionAuto.getFirstEnclosCreatureSommeil();
+        		if (enclos == null)
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
 	    	}
 	    	enclos.faireDormirCreatures();
 	    	vueGlobale.afficher("Les creatures se sont endormis dans "+enclos.getNom()+"\n ATTENTION DE NE PAS LES REVEILLER...\n");
@@ -446,7 +454,9 @@ public class Actions {
 	    	}
 	    	// GESTION AUTOMATIQUE
 	    	else {
-	    		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+	    		enclos = controllerGestionAuto.getFirstEnclosCreatureDort();
+        		if (enclos == null)
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
 	    	}
 	    	enclos.reveillerCreatures();
 	    	vueGlobale.afficher("Les creatures se reveillent dans "+enclos.getNom()+"\n J'espere qu'elles sont de bonne humeur...\n");
