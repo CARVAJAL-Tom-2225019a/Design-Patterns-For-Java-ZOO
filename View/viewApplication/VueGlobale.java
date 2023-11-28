@@ -31,7 +31,8 @@ public class VueGlobale {
     public void afficher(String texte) {
         System.out.println(texte);
     }
-
+    
+    @SuppressWarnings("serial")
     public void afficherCreature(Creature creature) {
         VueCreature vueCreature;
         VueCreature parchemin = VueCreature.PARCHEMIN;
