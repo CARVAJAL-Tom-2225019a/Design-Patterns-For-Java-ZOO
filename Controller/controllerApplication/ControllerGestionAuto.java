@@ -17,8 +17,8 @@ public class ControllerGestionAuto {
 
 	private static ControllerActions zooController;
 	private static VueGlobale VueGlobale;
-	private ZooFantastique zoo;
-	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+	private static ZooFantastique zoo;
+	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
 	
 	/**
@@ -40,7 +40,7 @@ public class ControllerGestionAuto {
      * Methode permettant d'effectuer un choix aleatoire 
      * @throws Exception
      */
-	public void choixActionAleatoire () throws Exception {
+	public static void choixActionAleatoire () throws Exception {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX);
 		zooController.effectuerAction(choix);
@@ -51,9 +51,10 @@ public class ControllerGestionAuto {
 	 * Point d'entree de la gestion automatique
 	 * @throws Exception
 	 */
-	public void run() throws Exception {
+	public static void run(boolean debut) throws Exception {
 		boolean run = true;
-        zooController.init();
+		if (debut)
+			zooController.init();
         Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {
         	choixActionAleatoire ();

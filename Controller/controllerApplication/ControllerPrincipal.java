@@ -162,8 +162,7 @@ public class ControllerPrincipal {
      */
     public void gestionAuto() {
     	try {
-    		ControllerGestionAuto menuAuto = new ControllerGestionAuto();
-        	menuAuto.run();
+    		ControllerGestionAuto.run(true);
     	}
     	catch (Exception e) {
 			vueGlobale.afficher(e.getMessage());

@@ -2,8 +2,10 @@ package viewApplication;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public enum VueEnclos {
-    TERRAIN("Terrain", new ArrayList<String>() {
+  
+	TERRAIN("Terrain", new ArrayList<String>() {
         {
             add("+---------------------------------------+");
             add("|     *                   *             |");

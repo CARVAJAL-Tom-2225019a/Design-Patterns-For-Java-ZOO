@@ -419,11 +419,15 @@ public class Enclos {
 	}
 
 
-	public Creature getCreatureDominante() {
-		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-			if (entry.getValue().getStatus() == Enum_RangDomination.ALPHA)
-				return entry.getValue();
+	public Creature getCreatureDominante() throws Exception {
+		if (!listeCreatures.isEmpty()) {
+			for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+				if (entry.getValue().getStatus() == Enum_RangDomination.ALPHA)
+					return entry.getValue();
+			}
 		}
+		else
+			throw new Exception ("L'enclos est vide");
 		return null;
 	}
 

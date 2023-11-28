@@ -28,7 +28,8 @@ public class VueGlobale {
 	}
 
 
-	public void afficherEnclos(Enclos enclos) {
+	@SuppressWarnings("serial")
+	public void afficherEnclos(Enclos enclos) throws Exception {
 		VueEnclos vueEnclos;
 		ArrayList<String> complementLignes ;
 		if (enclos instanceof Voliere) {
@@ -65,16 +66,16 @@ public class VueGlobale {
 					add("  # "+vueEnclos+ " contient :" + enclos.getNbCreatures() + " " + enclos.getNomEspece() );
 					add("  # Il peut encore accueillir "+ (enclos.getNbMaxCreatures()-enclos.getNbCreatures()) +"/"+enclos.getNbMaxCreatures()+" créature(s) ");
 					add("  # L'enclos a une superficie de : "+enclos.getSuperficie()+" m²" );
-					add("  # La Salinité est de : "+ (   (Aquarium) enclos).getSaliniteEau() + " & La profondeur est de : " +((Aquarium)enclos).getProfondeurBassin());
-					add("  # La créature dominante de l'enclos est : "+enclos.getCreatureDominante().getPrenom() );
+					add("  # La Salinite est de : "+ (   (Aquarium) enclos).getSaliniteEau() + " & La profondeur est de : " +((Aquarium)enclos).getProfondeurBassin());
+					add("  # La creature dominante de l'enclos est : "+enclos.getCreatureDominante().getPrenom() );
 					add("  # L'ambiance globale est : "+enclos.getAmbiance().name() );
 					add("  #");
 					add("  # Age moyen       : " + afficherStatBar(enclos.getAgeMoyen(),CONSTANTES.MAX_AGE)+" "+enclos.getAgeMoyen()+" ans");;
 					add("  # Bonheur moyen   : " + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) +" "+enclos.getBonheurMoyen() + "%"); //TODO envisager changement maxindicateur
 					add("  # Faim moyenne    : " + afficherStatBar(enclos.getFaimMoyen(),CONSTANTES.MAX_INDICATEUR) +" "+enclos.getFaimMoyen()+"%");
 					add("  # Sommeil moyen   : " + afficherStatBar(enclos.getSommeilMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSommeilMoyen()+"%");
-					add("  # Santé moyenne   : " + afficherStatBar(enclos.getSanteMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSanteMoyen()+"%");
-					add("  # Propreté enclos : " + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete());
+					add("  # Sante moyenne   : " + afficherStatBar(enclos.getSanteMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSanteMoyen()+"%");
+					add("  # Proprete enclos : " + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete());
 					add("  #");
 					add("  # Nombre individu par classe d'ages :");
 					add("  # "+afficherClassesAgesEnclos(enclos)); // # Oeuf(s) 1 | nouveau né 2 | enfant 3 | Jeune 4 | Adulte 5 | Vieux 9
@@ -89,15 +90,15 @@ public class VueGlobale {
 					add("  # "+vueEnclos+ " contient :" + enclos.getNbCreatures() + " " + enclos.getNomEspece() );
 					add("  # Il peut encore accueillir "+ (enclos.getNbMaxCreatures()-enclos.getNbCreatures()) +"/"+enclos.getNbMaxCreatures()+" créature(s) ");
 					add("  # L'enclos a une superficie de : "+enclos.getSuperficie()+" m²" );
-					add("  # La créature dominante de l'enclos est : "+enclos.getCreatureDominante().getPrenom() );
+					add("  # La creature dominante de l'enclos est : "+enclos.getCreatureDominante().getPrenom() );
 					add("  #");
 					add("  # L'ambiance globale est : "+enclos.getAmbiance().name() );
 					add("  # Age moyen       : " + afficherStatBar(enclos.getAgeMoyen(),CONSTANTES.MAX_AGE)+" "+enclos.getAgeMoyen()+" ans");;
 					add("  # Bonheur moyen   : " + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) +" "+enclos.getBonheurMoyen() + "%"); //TODO envisager changement maxindicateur
 					add("  # Faim moyenne    : " + afficherStatBar(enclos.getFaimMoyen(),CONSTANTES.MAX_INDICATEUR) +" "+enclos.getFaimMoyen()+"%");
 					add("  # Sommeil moyen   : " + afficherStatBar(enclos.getSommeilMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSommeilMoyen()+"%");
-					add("  # Santé moyenne   : " + afficherStatBar(enclos.getSanteMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSanteMoyen()+"%");
-					add("  # Propreté enclos : " + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete());
+					add("  # Sante moyenne   : " + afficherStatBar(enclos.getSanteMoyen(),CONSTANTES.MAX_INDICATEUR)+" "+enclos.getSanteMoyen()+"%");
+					add("  # Proprete enclos : " + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete());
 					add("  #");
 					add("  # Nombre individu par classe d'ages :");
 					add("  # "+afficherClassesAgesEnclos(enclos)); // # Oeuf(s) 1 | nouveau né 2 | enfant 3 | Jeune 4 | Adulte 5 | Vieux 9
