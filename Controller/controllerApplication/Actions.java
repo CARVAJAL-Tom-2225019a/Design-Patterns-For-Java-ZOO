@@ -61,7 +61,7 @@ public class Actions {
         	else {
         		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
-			vueGlobale.afficherEnclos(maitreZoo.examinerEnclos(enclos));
+			vueGlobale.afficherEnclos(maitreZoo.examinerEnclos(enclos), true);
 
     	}
     	catch (Exception e) {
@@ -472,7 +472,14 @@ public class Actions {
 		try {
 	    	vueGlobale.afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.afficher(colonie.voirLycanthropes());
+	    	vueGlobale.afficher("VOICI LES LYCANTHROPES :\n");
+	    	for (Enclos e : zoo.getListeEnclos()) {
+	    		if (e instanceof EnclosLycanthrope) {
+	    			for (Creature l : e.getListeCreatures().values()) {
+	    				vueGlobale.afficherCreature(l);
+	    			}
+	    		}
+	    	}
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {

@@ -98,18 +98,6 @@ public class ColonieLycanthrope {
     }
 
     /**
-     * Voir l'ensemble des lycanthropes
-     */
-    public String voirLycanthropes() {
-        String chaine = "VOICI LES LYCANTHROPES :\n";
-        for (Meute m : listeMeutes) {
-            for (Lycanthrope l : m.getListeLoup())
-                chaine += l.toStringReduit();
-        }
-        return chaine;
-    }
-
-    /**
      * Verification si besoin nouvelle meute
      */
     public String verificationBesoinNouvelleMeute() {

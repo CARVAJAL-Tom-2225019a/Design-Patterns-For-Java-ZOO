@@ -1,7 +1,6 @@
 package applicationRun;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 import base.Creature;
@@ -30,16 +29,10 @@ public class Donnees {
      * Methode pour remplir un enclos
      */
     public static void remplirEnclos(Enclos enclos, Enum_Especes espece) {
-    	Random random = new Random();
-		int age;
 		try {
 			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
 				Creature d = FactoryCreature.newCreature(espece);
 				enclos.ajouterCreature(d);
-				// age aleatoire
-				age = 1 + random.nextInt(CONSTANTES.MAX_AGE);
-				for (int y=0; y<age; y++)
-					d.vieillir();
 			}
 			enclos.reorganiserCles();
 		}

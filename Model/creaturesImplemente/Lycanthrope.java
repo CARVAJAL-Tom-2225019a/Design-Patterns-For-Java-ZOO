@@ -25,7 +25,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 
 	private int facteurDomination;
 	
-	private Enum_RangDomination rangDomination;
+	public Enum_RangDomination rangDomination;
 	private int niveau;
 	private int facteurImpetuosite;
 	
@@ -90,6 +90,13 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return meute;
     }
     
+    
+    /**
+     * Setters
+     */
+    public void setMeute (Meute m) {
+    	this.meute = m;
+    }
     
     
     public void calculNiveau() {
@@ -192,21 +199,21 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (super.isVivant() && !super.isEnTrainDeDormir() && super.getIndicateurSante()>CONSTANTES.VALEUR_INDICATEUR_MAUVAIS) {
     		// Exprimer appartenance
     		if (action == Enum_ActionHurlement.Appartenance) {
-    			chaine =  super.toString()+" \n "+exprimerAppartenance();
+    			chaine =  exprimerAppartenance();
     		}
     		// Exprimer domination
     		else if (action == Enum_ActionHurlement.Domination) {
-    			chaine = super.toString()+"\n"+exprimerDomination(loup);
+    			chaine = exprimerDomination(loup);
     			chaine +="\n"+hurler(Enum_ActionHurlement.Agressivite, loup);
     		}
         	// Exprimer soumission
     		else if (action == Enum_ActionHurlement.Soumission) {
-    			chaine = super.toString()+"\n"+exprimerSoumission (loup);
+    			chaine = exprimerSoumission (loup);
     		}
         	// Exprimer aggresivite
     		else if (action == Enum_ActionHurlement.Agressivite) {
     			// TODO : if souffre douleur
-    			chaine = super.toString()+"\n"+exprimerAgressivite (loup);
+    			chaine = exprimerAgressivite (loup);
     		}
     		else
     			throw new Exception ("Choix hurlement lycanthrope "+getPrenom()+" invalide\n");
@@ -232,7 +239,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
     		if (meute==null || meute.getCoupleAlpha().getFemelleAlpha()!= loup) {
     			facteurDomination++;
-            	return "Je suis "+getPrenom()+", un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription()+"\n";
+            	return "Je suis "+getPrenom()+", un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription();
     		}
     		else
     			throw new Exception ("Domination impossible pour "+getPrenom());
@@ -308,7 +315,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     private String entendreHurlement(Enum_ActionHurlement action, Lycanthrope loupOrigine) throws Exception {
     	if (super.isVivant() && !super.isEnTrainDeDormir()) {
     		if (action == Enum_ActionHurlement.Appartenance) {
-    			return "Je ne te crois pas superieur a moi "+getPrenom()+" !\n";
+    			return "Je suis "+getPrenom()+", et je ne te crois pas superieur a moi !\n";
     		}
     		// Exprimer domination
     		else if (action == Enum_ActionHurlement.Domination) {
@@ -337,7 +344,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception
      */
     public void rejoindreMeute(Meute m) throws Exception {
-    	if (meute.addLoup(this))
+    	if (m.addLoup(this))
     		meute = m;
     	else
     		throw new Exception ("Impossible pour "+getPrenom()+" de rejoindre cette meute");

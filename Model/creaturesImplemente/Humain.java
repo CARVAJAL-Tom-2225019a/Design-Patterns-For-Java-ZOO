@@ -28,6 +28,20 @@ public class Humain {
     
     
     /**
+     * Getters
+     */
+    public String getNom() {
+    	return nom;
+    }
+    public Enum_Sexe getSexe() {
+    	return sexe;
+    }
+    public int getAge() {
+    	return age;
+    }
+    
+    
+    /**
      * Methode pour afficher les informations du maitre zoo
      * 
      * @return une chaine de caractere avec les informations

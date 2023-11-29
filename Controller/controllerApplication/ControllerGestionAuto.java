@@ -54,8 +54,10 @@ public class ControllerGestionAuto {
 	 */
 	public static void run(boolean debut) throws Exception {
 		boolean run = true;
-		if (debut)
+		if (debut) {
 			zooController.init();
+			zooController.effectuerAction(1);
+		}
         Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {
         	choixActionAleatoire ();

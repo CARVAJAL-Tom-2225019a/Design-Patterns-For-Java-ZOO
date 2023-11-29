@@ -169,7 +169,8 @@ public class VueGlobale {
     }
 
 
-    public void afficherEnclos(Enclos enclos) {
+    @SuppressWarnings("serial")
+	public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
         VueEnclos vueEnclos;
         ArrayList<String> complementLignes;
         if (enclos instanceof Voliere) {
@@ -187,13 +188,24 @@ public class VueGlobale {
                     add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) + "\033[0m/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m créature(s) ");
                     add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²\033[0m");
                     add("  # La hauteur de l'enclos est de : \033[32m" + ((Voliere) enclos).getHauteur() + "m\033[0m");
-                    add("  # La créature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
-                    add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+ "\033[0m");
-                    add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + "ans\033[0m");
-                    add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%\033[0m"); //TODO envisager changement maxindicateur
-                    add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%\033[0m");
-                    add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%\033[0m");
-                    add("  # Santé moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%\033[0m");
+                    if (!enclos.getListeCreatures().values().isEmpty()) {
+                    	add("  # La créature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
+                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+ "\033[0m");
+                        add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + "ans\033[0m");
+                        add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%\033[0m"); //TODO envisager changement maxindicateur
+                        add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%\033[0m");
+                        add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%\033[0m");
+                        add("  # Santé moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%\033[0m");
+                    }
+                    else {
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    }
                     add("  # Propreté enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+ "\033[0m");
                     add("  # Etat toit       : \033[32m" + afficherStatBar(((Voliere) enclos).getEtatToitNumber(), 3) + " " + ((Voliere) enclos).getEtatToit()+ "\033[0m");
                     add("  # ");
@@ -215,19 +227,30 @@ public class VueGlobale {
                     add("  #========== \033[32m" + enclos.getNom() + "\033[0m ==========  ");
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m"+" contient : \033[32m" + enclos.getNbCreatures()  +" "+ enclos.getNomEspece()+"\033[0m");
-                    add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) +"\033[0m"+ "/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m créature(s) ");
+                    add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) +"\033[0m"+ "/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m creature(s) ");
                     add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²\033[0m");
-                    add("  # La Salinité est de : \033[32m" + ((Aquarium) enclos).getSaliniteEau() + "\033[0m & La profondeur est de : \033[32m" + ((Aquarium) enclos).getProfondeurBassin() + " m\033[0m");
-                    add("  # La créature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom() +"\033[0m" );
-                    add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+"\033[0m");
-                    add("  #");
-                    add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans"+"\033[0m");
-                    ;
-                    add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%"+"\033[0m"); //TODO envisager changement maxindicateur
-                    add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%"+"\033[0m");
-                    add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%"+"\033[0m");
-                    add("  # Santé moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%"+"\033[0m");
-                    add("  # Propreté enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+"\033[0m");
+                    add("  # La Salinite est de : \033[32m" + ((Aquarium) enclos).getSaliniteEau() + "\033[0m & La profondeur est de : \033[32m" + ((Aquarium) enclos).getProfondeurBassin() + " m\033[0m");
+                    if (!enclos.getListeCreatures().values().isEmpty()) {
+                    	add("  # La creature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom() +"\033[0m" );
+                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+"\033[0m");
+                        add("  #");
+                        add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans"+"\033[0m");;
+                        add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%"+"\033[0m"); //TODO envisager changement maxindicateur
+                        add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%"+"\033[0m");
+                        add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%"+"\033[0m");
+                        add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%"+"\033[0m");
+                    }
+                    else {
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    }
+                    add("  # Proprete enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+"\033[0m");
                     add("  #");
                     add("  # Nombre individu par classe d'ages :");
                     add("  # " + afficherClassesAgesEnclos(enclos)); // # Oeuf(s) 1 | nouveau né 2 | enfant 3 | Jeune 4 | Adulte 5 | Vieux 9
@@ -239,7 +262,6 @@ public class VueGlobale {
                 /**
 				 * 
 				 */
-				private static final long serialVersionUID = 1L;
 
 				{
                     add("  #========== \033[32m" + enclos.getNom()+"\033[0m" + " ==========  ");
@@ -247,16 +269,27 @@ public class VueGlobale {
                     add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() +"\033[0m");
                     add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures())+"\033[0m" + "/\033[32m" + enclos.getNbMaxCreatures() + " créature(s) "+"\033[0m");
                     add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²"+"\033[0m");
-                    add("  # La créature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom()+"\033[0m");
-                    add("  #");
-                    add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+"\033[0m");
-                    add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans"+"\033[0m");
-                    ;
-                    add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%"+"\033[0m"); //TODO envisager changement maxindicateur
-                    add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%"+"\033[0m");
-                    add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%"+"\033[0m");
-                    add("  # Santé moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%"+"\033[0m");
-                    add("  # Propreté enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+"\033[0m");
+                    if (!enclos.getListeCreatures().values().isEmpty()) {
+                    	add("  # La creature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom()+"\033[0m");
+                        add("  #");
+                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+"\033[0m");
+                        add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans"+"\033[0m");;
+                        add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%"+"\033[0m"); //TODO envisager changement maxindicateur
+                        add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%"+"\033[0m");
+                        add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%"+"\033[0m");
+                        add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%"+"\033[0m");
+                    }
+                    else {
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    	add("  #");
+                    }
+                    add("  # Proprete enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+"\033[0m");
                     add("  #");
                     add("  # Nombre individu par classe d'ages :");
                     add("  # " + afficherClassesAgesEnclos(enclos)); // # Oeuf(s) 1 | nouveau né 2 | enfant 3 | Jeune 4 | Adulte 5 | Vieux 9
@@ -272,12 +305,20 @@ public class VueGlobale {
             System.out.print(ligneComplete);
             i++;
         }
-        for (Creature creature : enclos.getListeCreatures().values()) {
-            afficherCreature(creature);
-        }
+        
+        if (besoinCreature) {
+        	if (!enclos.getListeCreatures().isEmpty()) {
+        		for (Creature creature : enclos.getListeCreatures().values()) {
+                    afficherCreature(creature);
+                }
+        	}
+        }  
     }
 
     private String afficherSexesEnclos(Enclos enclos) {
+    	if (enclos.getListeCreatures().isEmpty()) {
+        	return "Pas de creature";
+        }
         int[] counts = new int[enclos.getListeCreatures().values().size()];
         for (Creature creature : enclos.getListeCreatures().values()) {
             Enum_Sexe sexe = creature.getSexe();
@@ -296,8 +337,11 @@ public class VueGlobale {
     }
 
     public String afficherClassesAgesEnclos(Enclos enclos) {
+    	if (enclos.getListeCreatures().isEmpty()) {
+        	return "Pas de creature";
+        }
         int[] counts = new int[Enum_CategorieAge.values().length];
-
+        
         for (Creature creature : enclos.getListeCreatures().values()) {
             Enum_CategorieAge categorieAge = creature.getCategorieAge();
             counts[categorieAge.ordinal()]++;

@@ -34,12 +34,12 @@ import java.util.ArrayList;
 +--------+
 */
 
+@SuppressWarnings("serial")
 public enum VueCreature {
     PARCHEMIN(10,32,new ArrayList<String>(){
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("  _________________________     ");
@@ -71,7 +71,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[31;49m        ___         \033[39;49m");
@@ -85,7 +84,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add(" o ");
@@ -97,7 +95,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[35;49m         .-.        \033[39;49m");
@@ -113,7 +110,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[95;49m        \\           \033[39;49m");
@@ -125,7 +121,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[90;49m         --__       \033[39;49m");
@@ -138,7 +133,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[90;49m       __           \033[39;49m");
@@ -151,7 +145,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[32;49m          @         \033[39;49m");
@@ -163,17 +156,16 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("O");
         }
     }),
-    PHENIX(7,14,new ArrayList<String>() {
+    
+	PHENIX(7,14,new ArrayList<String>() {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[33;49m       .-.          \033[39;49m");
@@ -189,7 +181,6 @@ public enum VueCreature {
         /**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
 
 		{
             add("\033[33;49m          ~@        \033[39;49m");

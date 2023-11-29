@@ -356,11 +356,6 @@ public abstract class Creature {
     				+"\n   prenom : "+prenom
     				+"\n   sexe : "+sexe
     				+"\n   age : "+age
-    				+"\n   vivant : "+vivant
-    				+"\n   dort : "+enTrainDeDormir
-    				+"\n   faim : "+indicateurFaim+"/"+CONSTANTES.MAX_INDICATEUR
-    				+"\n   fatigue : "+indicateurSommeil+"/"+CONSTANTES.MAX_INDICATEUR
-    				+"\n   sante : "+indicateurSante+"/"+CONSTANTES.MAX_INDICATEUR
     				+"\n\n";
     }
     
