@@ -373,7 +373,6 @@ public abstract class Creature {
     				+"\n   sexe : "+sexe
     				+"\n   age : "+age
     				+"\n\n";
-
     }
 
     /**
