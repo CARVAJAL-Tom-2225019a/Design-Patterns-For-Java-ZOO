@@ -522,10 +522,17 @@ public class Actions {
 			// Choix enclos
 			// GESTION MANUEL
 			if (Run.utilisateurControle) {
+				vueGlobale.afficher("\nChoisir l'enclos de la premiere créature pour la bagarre : ");
+
 				enclos1 = controlUser.recupererEnclosParNom();
+				vueGlobale.afficher("\nChoisir la créature 1 pour la bagarre : ");
+
 				c1 = controlUser.selectionCreatureDansEnclos(enclos1);
+				vueGlobale.afficher("\nChoisir l'enclos de la seconde créature pour la bagarre : ");
 
 				enclos2 = controlUser.recupererEnclosParNom();
+				vueGlobale.afficher("\nChoisir la créature 2 pour la bagarre : ");
+
 				c2 = controlUser.selectionCreatureDansEnclos(enclos2);
 			}
 			// GESTION AUTOMATIQUE
@@ -536,8 +543,21 @@ public class Actions {
 				enclos2 = controllerGestionAuto.recuperationEnclosAleatoire();
 				c2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 			}
-			maitreZoo.lancerCombat(c1, c2);
+			vueGlobale.afficher("\n #============= Voici les candidats =================# ");
+			vueGlobale.afficherCreature(c1);
+			vueGlobale.afficherCreature(c2);
+			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+			vueGlobale.afficher("\n");
+			vueGlobale.afficher("\n#============= Que le combat commence ! =================# ");
+			Creature vainqueur = maitreZoo.lancerCombat(c1, c2);
 			vueGlobale.afficherCombat(c1,c2);
+			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+			vueGlobale.afficher("\n");
+
+			vueGlobale.afficher("\n#============= Le Combat est terminé... =================# ");
+			vueGlobale.afficher("\nLe vainqueur du combat est : ");
+			vueGlobale.afficherCreature(vainqueur);
+
 			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
 		}
 		catch (Exception e) {

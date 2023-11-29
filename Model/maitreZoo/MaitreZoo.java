@@ -105,8 +105,8 @@ public class MaitreZoo extends Humain{
     	
     }
 
-    public void lancerCombat(Creature creature1, Creature creature2) throws Exception {
-    	creature1.combattre(creature2);
+    public Creature lancerCombat(Creature creature1, Creature creature2) throws Exception {
+    	return creature1.combattre(creature2);
     }
 }
 

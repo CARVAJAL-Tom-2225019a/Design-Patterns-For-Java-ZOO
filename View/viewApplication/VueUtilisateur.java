@@ -114,7 +114,7 @@ public class VueUtilisateur {
 						+ "\n  15 : Voir l'ensemble des lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+")"
 						+ "\n  16 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
 						+ "\n"
-						+ "\n  17 : Lanncer un combat entre deux Créatures ("+Enum_ActionsPossibles.COMBAT.getDureeTotale()+")"
+						+ "\n  17 : Lancer un combat entre deux Créatures ("+Enum_ActionsPossibles.COMBAT.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  98 : Passer en mode automatique"
 						+ "\n  99 : Exit" 
