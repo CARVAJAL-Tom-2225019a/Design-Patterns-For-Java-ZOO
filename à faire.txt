@@ -20,10 +20,12 @@ Pour l'application (code)
 	Amélioration lycanthropes (voir TD5)
 	Durée de vie du zoo ?
 
+	Test Meute
+
 
 
 Les problèmes dans le code
-	Naissance Automatique (femelle is null)
-	Affichage erreur pour 1 creature --> indiquer que les autres c'est ok
-	Il y en a qui sont mort dès le debut... ou qui dorme... bizzare
+	Naissance Automatique (femelle is null)  (existe encore ?)
+	LES CREATURES QUI ONT UN BESOIN --->  Cannot invoke "java.util.HashSet.size()" because "temp" is null
+	
 	

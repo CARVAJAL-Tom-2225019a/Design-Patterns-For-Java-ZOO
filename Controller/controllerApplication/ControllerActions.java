@@ -79,8 +79,12 @@ public class ControllerActions {
             // Voir les enclos
             case 1:
             	VueGlobale.afficher("\n ---- Voir les enclos existants "+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+" ---- ");
-            	for (Enclos e : zoo.getListeEnclos())
-            		VueGlobale.afficherEnclos(e);
+            	VueGlobale.afficher("\nIl y a "+zoo.getListeEnclos().size()+" enclos dans le zoo\n");
+            	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            	for (Enclos e : zoo.getListeEnclos()) {
+            		VueGlobale.afficherEnclos(e, false);
+            		VueGlobale.afficher("\n");
+            	}
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS))
             		passageAnnee();
             	retour= true;
@@ -246,7 +250,7 @@ public class ControllerActions {
             //Affichage des informations préoccupantes
             VueGlobale.afficher("LES ENCLOS EN MAUVAIS ETAT :");
             for (Enclos e : zoo.getEnclosMauvaisEtat())
-            	VueGlobale.afficherEnclos(e);
+            	VueGlobale.afficherEnclos(e, false);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
             VueGlobale.afficher("\nLES CREATURES QUI ONT UN BESOIN :");
             for (Enclos e : zoo.getListeEnclos())

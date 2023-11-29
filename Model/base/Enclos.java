@@ -383,26 +383,46 @@ public class Enclos {
 
 
 	public void reveillerCreatures() throws Exception {
-		for (Creature e : listeCreatures.values()) {
-			if (e.isVivant() && e.isEnTrainDeDormir())
-				e.seReveiller();
-			else
-				throw new Exception ("La creature "+e.getPrenom()+" ne se reveillera jamais... elle est morte");
-		}
+		List<String> creaturesMortes = new ArrayList<>();
+	    for (Creature e : listeCreatures.values()) {
+	        if (e.isVivant() && e.isEnTrainDeDormir()) {
+	            e.seReveiller();
+	        } else if (!e.isVivant()) {
+	            creaturesMortes.add(e.getPrenom());
+	        }
+	    }
+	    if (!creaturesMortes.isEmpty()) {
+	        String message = "Les créatures suivantes ne se réveilleront jamais, car elles sont mortes : " 
+	        		+ String.join("\n- ", creaturesMortes);
+	        throw new Exception(message+"\n");
+	    }
 	}
 
 
 	public void faireDormirCreatures() throws Exception {
-		for (Creature e : listeCreatures.values()) {
-			if (e.isVivant()) {
-				if (e.getIndicateurSommeil()<CONSTANTES.MAX_INDICATEUR)
-					e.dormir();
-				else
-					throw new Exception ("Creature "+e.getPrenom()+" pas fatigue et fait une insomnie");
-			}
-			else
-				throw new Exception ("Creature "+e.getPrenom()+" dort a jamais... elle est morte");
-		}
+	    List<String> creaturesInsomniaques = new ArrayList<>();
+	    List<String> creaturesMortes = new ArrayList<>();
+	    for (Creature e : listeCreatures.values()) {
+	        if (e.isVivant()) {
+	            if (e.getIndicateurSommeil() < CONSTANTES.MAX_INDICATEUR) {
+	                e.dormir();
+	            } else {
+	                creaturesInsomniaques.add(e.getPrenom());
+	            }
+	        } else {
+	            creaturesMortes.add(e.getPrenom());
+	        }
+	    }
+	    if (!creaturesInsomniaques.isEmpty() || !creaturesMortes.isEmpty()) {
+	        StringBuilder message = new StringBuilder("Problèmes avec les créatures :");
+	        if (!creaturesInsomniaques.isEmpty()) {
+	            message.append("\nInsomniaques : ").append(String.join("\n", creaturesInsomniaques));
+	        }
+	        if (!creaturesMortes.isEmpty()) {
+	            message.append("\nMortes : ").append(String.join("\n", creaturesMortes));
+	        }
+	        throw new Exception(message.toString());
+	    }
 	}
     
 	
@@ -419,12 +439,14 @@ public class Enclos {
 	}
 
 
-	public Creature getCreatureDominante() {
+	public Creature getCreatureDominante() throws Exception {
 		Creature creatureDominante = null;
-
+		if (listeCreatures.entrySet().isEmpty()) {
+			return null;
+		}
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+			// si l'enclos est vide
 			Creature currentCreature = entry.getValue();
-
 			// Si aucune créature dominante n'est définie ou si la force de la créature actuelle est plus grande
 			if (creatureDominante == null || currentCreature.getForce() > creatureDominante.getForce()) {
 				creatureDominante = currentCreature;
@@ -443,7 +465,6 @@ public class Enclos {
 			Enum_Aggressivite ambiance = creature.getAgressivite();
 			ambianceOccurrences.put(ambiance, ambianceOccurrences.getOrDefault(ambiance, 0) + 1);
 		}
-
 		// Trouver l'ambiance avec le plus d'occurrences
 		Enum_Aggressivite mostFrequentAmbiance = null;
 		int maxOccurrences = 0;
@@ -457,6 +478,7 @@ public class Enclos {
 
 		return mostFrequentAmbiance;
 	}
+	
 	public int getBonheurMoyen(){ // todo Factoriser getter Moyen
 		int valBonheurMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
