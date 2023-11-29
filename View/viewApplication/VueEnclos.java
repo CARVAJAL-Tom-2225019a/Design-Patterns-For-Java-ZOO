@@ -73,7 +73,43 @@ public enum VueEnclos {
             add("|\033[37;104m         ` __.:'               .+(   ) \033[39;49m|");
             add("+---------------------------------------+");
         }
-    });
+    }),
+    ARENE("Arene",new ArrayList<String>(){{
+        add("+-----------------------------------------------------------------------------------------+");
+        add("|          <|  *         *    *              *                     *      ---.   *        |");
+        add("|  *        A                    *      *           *                      \\   \\      *   |");
+        add("|          /.\\        *                                                     )^  |         |");
+        add("|     <|  [\"\"M#                          *                                 <_,  |         |");
+        add("|      A   | #                                              *              ./  /    *     |");
+        add("|     /.\\ [\"\"M#            *                                              ---'            |");
+        add("|    [\"\"M# | #  U\"U#U                *                 *                                  |");
+        add("|     | #  | #  \\ .:/                                                    *                |");
+        add("|   * | #  | #___| #                                                                      |");
+        add("|     | \"--'     .-\"              WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|   |\"-\"-\"-\"-\"-#-#-##             WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|   |     # ## ######             WWWWWWWWWWWWWWWWWWWWWW    *  YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|    \\       .::::'/              WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|     \\      ::::'/      *        WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|   :8a|    # # ##                WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|   ::88a      ###                WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|  ::::888a  8a ##::.             WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|  ::::::888a88a[]::::            WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("| :::::::::FLOUKSAC8a::::. ..     WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("| :::::8::::888:Y8888:::::::::... WWWWWWWWWWWWWWWWWWWWWW       YYYYYYYYYYYYYYYYYYYYYY     |");
+        add("|::':::88::::888::Y88a        .-~~-.                       _______________________________|");
+        add("|:: ::::88a::::88a:Y88a      :     (.                  _-''         __---__-- __          |");
+        add("|' .: ::Y88a:::::8a:Y88a      \"._(  !    E====3      .'          _----_-- -------_-__     |");
+        add("|  :' ::::8P::::::::::88aa.       `uu              .'       ___-  -__--- ____  --   ---_  |");
+        add("| ::: :::::P:::::::::::888aaa                     /          _  --_ --- __  --- __--      |");
+        add("|.::  :::::::::::::::::::Y88as88a...s88aa.       /       ___------- ______ --__ ----__    |");
+        add("+-----------------------------------------------------------------------------------------+");
+
+
+
+
+
+    }})
+    ;
 
     private final String libelle;
     private final ArrayList<String> lignes;

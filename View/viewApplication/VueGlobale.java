@@ -119,7 +119,7 @@ public class VueGlobale {
 			{
                 add("  # Sexe  : \033[32m" + creature.getSexe() + "\033[0m         Age : \033[32m" + creature.getAge() + "ans \033[0m ");
                 add("  # Poids : \033[32m" + creature.getPoids() + " kg \033[0m    Taille : \033[32m" + creature.getTaille() + " m \033[0m ");
-                add("  #");
+                add("  # Vivant : \033[32m" + creature.isVivant() + "\033[0m       ");
                 add("  # Agressivité        : \033[32m" + creature.getAgressivite() + "\033[0m ");
                 add("  # Force              : \033[32m" + creature.getForce()+ "\033[0m ");
                 add("  # Combat(s) gagné(s) : \033[32m" + creature.getCombatVaincu()+ "\033[0m ");
@@ -326,7 +326,7 @@ public class VueGlobale {
         }
         StringBuilder str = new StringBuilder();
         for (Enum_Sexe sexe : Enum_Sexe.values()) {
-            str.append(sexe.name()).append(" ").append(counts[sexe.ordinal()]).append(" | ");
+            str.append(sexe.name()).append(" ").append("\033[32m").append(counts[sexe.ordinal()]).append("\033[0m").append(" | ");
 
         }
         if (!str.isEmpty()) {
