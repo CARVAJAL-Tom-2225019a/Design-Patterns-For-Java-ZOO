@@ -368,24 +368,12 @@ public abstract class Creature {
      * @return la chaine de caractere contenant les informations
      */
     public String toString() {
-<<<<<<< HEAD
     	return "-- Creature de type "+nomEspece+" ="
     				+"\n   prenom : "+prenom
     				+"\n   sexe : "+sexe
     				+"\n   age : "+age
     				+"\n\n";
-=======
-        return "-- Creature de type " + nomEspece + " ="
-                + "\n   prenom : " + prenom
-                + "\n   sexe : " + sexe
-                + "\n   age : " + age
-                + "\n   vivant : " + vivant
-                + "\n   dort : " + enTrainDeDormir
-                + "\n   faim : " + indicateurFaim + "/" + CONSTANTES.MAX_INDICATEUR
-                + "\n   fatigue : " + indicateurSommeil + "/" + CONSTANTES.MAX_INDICATEUR
-                + "\n   sante : " + indicateurSante + "/" + CONSTANTES.MAX_INDICATEUR
-                + "\n\n";
->>>>>>> df554c2c3522e3a914688c36e98b372c6252c1e6
+
     }
 
     /**
