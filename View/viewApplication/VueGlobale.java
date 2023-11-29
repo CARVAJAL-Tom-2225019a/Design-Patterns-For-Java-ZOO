@@ -342,4 +342,102 @@ public class VueGlobale {
         return statBar.toString();
     }
 
+
+    public void afficherCombat(Creature c1, Creature c2) {
+        ArrayList<String> strResultat = new ArrayList<>();
+        VueCreature vueCreature1;
+        VueCreature vueCreature2;
+
+        if (c1 instanceof Dragon) {
+            vueCreature1 = VueCreature.DRAGON;
+        } else if (c1 instanceof Kraken) {
+            vueCreature1 = VueCreature.KRAKEN;
+        } else if (c1 instanceof Licorne) {
+            vueCreature1 = VueCreature.LICORNE;
+        } else if (c1 instanceof Lycanthrope) {
+            vueCreature1 = VueCreature.LYCANTHROPE;
+        } else if (c1 instanceof Megalodon) {
+            vueCreature1 = VueCreature.MEGALODON;
+        } else if (c1 instanceof Nymphe) {
+            vueCreature1 = VueCreature.NYMPHE;
+        } else if (c1 instanceof Phenix) {
+            vueCreature1 = VueCreature.PHENIX;
+        } else if (c1 instanceof Sirene) {
+            vueCreature1 = VueCreature.SIRENE;
+        } else {
+            vueCreature1 = VueCreature.HUMAIN;
+        }
+
+        if (c2 instanceof Dragon){
+            vueCreature2 = VueCreature.DRAGON;
+        } else if (c2 instanceof Kraken){
+            vueCreature2 = VueCreature.KRAKEN;
+        } else if (c2 instanceof Licorne){
+            vueCreature2 = VueCreature.LICORNE;
+        } else if (c2 instanceof Lycanthrope){
+            vueCreature2 = VueCreature.LYCANTHROPE;
+        } else if (c2 instanceof Megalodon){
+            vueCreature2 = VueCreature.MEGALODON;
+        } else if (c2 instanceof Nymphe){
+            vueCreature2 = VueCreature.NYMPHE;
+        } else if (c2 instanceof Phenix){
+            vueCreature2 = VueCreature.PHENIX;
+        } else if (c2 instanceof Sirene){
+            vueCreature2 = VueCreature.SIRENE;
+        } else {
+            vueCreature2 = VueCreature.HUMAIN;
+        }
+
+            // on remplace les C avec l'ascii art de la créature.
+            // a ajouter n hauteur de creature la ligne courante.
+        int j = 0 ;
+        for (int i = VueEnclos.ARENE.getLignes().size() ; i >= 1 ; i--) {
+            strResultat.add(VueEnclos.ARENE.getLignes().get(i-1)); // IL FAUDRA INVERSE LA LISTE AVANT L'AFFICHAGE
+
+            if ( i <= 21 && i >= 11 ) { // lignes auquelles on va ajouter les creatures en ascii  a la place des W et Y
+                int nbOfW = (int) VueEnclos.ARENE.getLignes().get(i-1).chars().filter(c -> c == 'W').count();
+                int nbOfY = (int) VueEnclos.ARENE.getLignes().get(i-1).chars().filter(c -> c == 'Y').count();
+                // une fois qu'on connais le nombre D'W (le place holder)
+                // on va mettre au millieu des W le caracter ascii de l'animal et fill avec des espaces.
+                StringBuilder wString = new StringBuilder();
+                StringBuilder yString = new StringBuilder();
+                String ligneAsci1;
+                String ligneAsci2;
+                int wstartIndex = 0;
+                int ystartIndex = 0;
+                if ( vueCreature1.getHauteur()-j > 0 ){
+                    ligneAsci1 = vueCreature1.getLignes().get(vueCreature1.getHauteur()-j-1);
+                    wstartIndex = (nbOfW - (ligneAsci1.length()-16)) / 2;
+
+                } else {
+                    ligneAsci1 = " ".repeat(nbOfW);
+                    wstartIndex = (nbOfW - (ligneAsci1.length())) / 2;
+                }
+                if ( vueCreature2.getHauteur()-j > 0 ){
+                    ligneAsci2 = vueCreature2.getLignes().get(vueCreature2.getHauteur()-j-1);
+                    ystartIndex = (nbOfY - (ligneAsci2.length()-16)) / 2;
+
+                } else {
+                    ligneAsci2 =  " ".repeat(nbOfY);
+                    ystartIndex = (nbOfY - (ligneAsci2.length())) / 2;
+
+                }
+                j ++ ;
+                wString.append(" ".repeat(Math.max(0, nbOfW)));
+                yString.append(" ".repeat(Math.max(0, nbOfY)));
+                wString.replace(wstartIndex, wstartIndex + ligneAsci1.length(), ligneAsci1);
+                yString.replace(ystartIndex, ystartIndex + ligneAsci2.length(), ligneAsci2);
+                strResultat.set(strResultat.size()-1, strResultat.get(strResultat.size()-1).replace("W".repeat(nbOfW), wString.toString()));
+                strResultat.set(strResultat.size()-1, strResultat.get(strResultat.size()-1).replace("Y".repeat(nbOfW), yString.toString()));
+
+            }
+
+        }
+
+        // on inverse strResultat avant de l'affiché :
+        for (int i = strResultat.size()-1 ; i >= 0 ; i--) {
+            System.out.println(strResultat.get(i));
+        }
+
+    }
 }

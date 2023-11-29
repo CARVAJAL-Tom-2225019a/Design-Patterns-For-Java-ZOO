@@ -512,4 +512,36 @@ public class Actions {
     	}
 	}
 
+	public void casCombat() {
+		Enclos enclos1;
+		Enclos enclos2;
+		Creature c1;
+		Creature c2;
+		try {
+			vueGlobale.afficher("\n ---- C'est l'heure de la baston ---- ");
+			// Choix enclos
+			// GESTION MANUEL
+			if (Run.utilisateurControle) {
+				enclos1 = controlUser.recupererEnclosParNom();
+				c1 = controlUser.selectionCreatureDansEnclos(enclos1);
+
+				enclos2 = controlUser.recupererEnclosParNom();
+				c2 = controlUser.selectionCreatureDansEnclos(enclos2);
+			}
+			// GESTION AUTOMATIQUE
+			else {
+				enclos1 = controllerGestionAuto.recuperationEnclosAleatoire();
+				c1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+
+				enclos2 = controllerGestionAuto.recuperationEnclosAleatoire();
+				c2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+			}
+			maitreZoo.lancerCombat(c1, c2);
+			vueGlobale.afficherCombat(c1,c2);
+			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+		}
+		catch (Exception e) {
+			vueGlobale.afficher(e.getMessage());
+		}
+	}
 }

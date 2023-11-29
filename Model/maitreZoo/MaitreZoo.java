@@ -104,5 +104,9 @@ public class MaitreZoo extends Humain{
     		throw new Exception ("Enclos de destination est plein ("+enclosDest.getNom()+")");
     	
     }
+
+    public void lancerCombat(Creature creature1, Creature creature2) throws Exception {
+    	creature1.combattre(creature2);
+    }
 }
 

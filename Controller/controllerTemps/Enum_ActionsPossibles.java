@@ -19,7 +19,8 @@ public enum Enum_ActionsPossibles {
 	REVEILLER_ENCLOS(0,0,2),
 	VOIR_LOUPS(0,0,2),
 	SAISON_AMOUR_LOUPS(0,1,20),
-	VOIR_MEUTES(0,0,3);
+	VOIR_MEUTES(0,0,3),
+    COMBAT(0, 0, 1);
 
     private final int dureeEnAnnees;
     private final int dureeEnMois;

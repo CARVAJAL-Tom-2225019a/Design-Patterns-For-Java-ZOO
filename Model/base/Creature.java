@@ -424,7 +424,7 @@ public abstract class Creature {
      *
      * @return Creature gagnante
      */
-    public Creature combatre(Creature other) throws Exception {
+    public Creature combattre(Creature other) throws Exception {
         if (this.force > other.force) {
             if (this.force > 2 * other.force) {
                 other.mourir();

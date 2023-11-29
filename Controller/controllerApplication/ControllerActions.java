@@ -194,6 +194,14 @@ public class ControllerActions {
             		passageAnnee();
             	retour= true;
             	break;
+
+			case 17 :
+				action.casCombat();
+				if (temps.incrementerTemps(Enum_ActionsPossibles.COMBAT))
+					passageAnnee();
+				retour= true;
+				break;
+
             //TODO : suite actions pour Lycanthropes (defier male alpha, jurler...)
             // Passer en mode automatique
             case 98 :
