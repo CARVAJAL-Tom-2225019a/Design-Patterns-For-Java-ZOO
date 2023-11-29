@@ -50,8 +50,7 @@ class TestEnclos {
 	void TestMethodeVoirCreaturesAyantUnBesoin() throws Exception {
 		for (int i=0; i<10; i++)
 			enclos.getListeCreatures().get(1).perdreNourriture();
-		String result = "\\nLES CREATURES QUI ONT UN BESOIN : ";
-		assertTrue(result != enclos.voirCreaturesAyantUnBesoin());
+		assertTrue(enclos.getCreaturesAyantUnBesoin() == null);
 	}
 	
 	@Test

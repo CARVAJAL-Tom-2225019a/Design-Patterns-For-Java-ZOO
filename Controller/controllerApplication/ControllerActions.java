@@ -1,9 +1,13 @@
 package controllerApplication;
 
+import java.util.HashSet;
+
 import applicationRun.Run;
 import controllerTemps.Enum_ActionsPossibles;
 import controllerTemps.Evenements;
 import controllerTemps.GestionnaireTemps;
+import references.CONSTANTES;
+import base.Creature;
 import base.Enclos;
 import viewApplication.*;
 import zoo.ZooFantastique;
@@ -75,7 +79,8 @@ public class ControllerActions {
             // Voir les enclos
             case 1:
             	VueGlobale.afficher("\n ---- Voir les enclos existants "+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+" ---- ");
-            	VueGlobale.afficher(zoo.afficherEnsembleZoo());
+            	for (Enclos e : zoo.getListeEnclos())
+            		VueGlobale.afficherEnclos(e);
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS))
             		passageAnnee();
             	retour= true;
@@ -217,7 +222,7 @@ public class ControllerActions {
      * Passe à la nouvelle année si le nombre d'actions atteint le maximum.
      */
     public static void passageAnnee() {
-    	String temp = null;
+    	HashSet<Creature> temp = null;
     	try {
     		VueGlobale.afficher("\n ====== FIN ANNEE ====== \n");
     		Evenements.evenementAnnuel();
@@ -231,11 +236,17 @@ public class ControllerActions {
             	e.reorganiserCles();
             VueGlobale.afficher("\n ====== NOUVELLE ANNEE ====== \n");
             //Affichage des informations préoccupantes
-            VueGlobale.afficher(zoo.AfficherEnclosMauvaisEtat());
+            VueGlobale.afficher("LES ENCLOS EN MAUVAIS ETAT :");
+            for (Enclos e : zoo.getEnclosMauvaisEtat())
+            	VueGlobale.afficherEnclos(e);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+            VueGlobale.afficher("\nLES CREATURES QUI ONT UN BESOIN :");
             for (Enclos e : zoo.getListeEnclos())
-            	temp = e.voirCreaturesAyantUnBesoin();
-            if (temp != null)
-            	 VueGlobale.afficher(temp);
+            	temp = e.getCreaturesAyantUnBesoin();
+            if (temp.size()>0)
+            	for (Creature c : temp)
+            		VueGlobale.afficherCreature(c);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
     		VueGlobale.afficher(e.getMessage());

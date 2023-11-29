@@ -94,26 +94,26 @@ public class Enclos {
 	/**
 	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
 	 */
-	public String voirCreaturesAyantUnBesoin() {
-		String chaine = "";
+	public HashSet<Creature> getCreaturesAyantUnBesoin() {
+		HashSet<Creature> listeCreatureAvecBesoin = new HashSet<Creature>();
 		boolean isValue = false;
-		String temp = voirCreaturesMauvaiseSante();
+		HashSet<Creature> temp = voirCreaturesMauvaiseSante();
 		if (temp != null) {
-			chaine+= temp+"\n";
+			listeCreatureAvecBesoin.addAll(temp);
 			isValue = true;
 		}
 		temp = voirCreaturesSommeil();
 		if (temp != null) {
-			chaine+= temp+"\n";
+			listeCreatureAvecBesoin.addAll(temp);
 			isValue = true;
 		}
 		temp = voirCreaturesFaim();
 		if (temp != null) {
-			chaine+= temp+"\n";
+			listeCreatureAvecBesoin.addAll(temp);
 			isValue = true;
 		}
 		if (isValue)
-			return chaine+"\n";
+			return listeCreatureAvecBesoin;
 		else
 			return null;
 	}	
@@ -122,17 +122,17 @@ public class Enclos {
 	/**
 	 * Methode permettant de recuperer les creatures qui ont faim
 	 */
-	private String voirCreaturesFaim() {
+	private HashSet<Creature> voirCreaturesFaim() {
 		boolean isValue = false;
-		String chaine = "Les creatures qui ont faim dans "+nom+" :\n";
+		HashSet<Creature> liste = new HashSet<Creature>();
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurFaim() < 5) {
-				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurFaim()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				liste.add(entry.getValue());
 				isValue = true;
 			}
 		}
 		if (isValue)
-			return chaine;
+			return liste;
 		else
 			return null;
 	}
@@ -141,17 +141,17 @@ public class Enclos {
 	/**
 	 * Methode permettant de recuperer les creatures qui ont sommeil
 	 */
-	private String voirCreaturesSommeil() {
+	private HashSet<Creature> voirCreaturesSommeil() {
 		boolean isValue = false;
-		String chaine = "Les creatures qui ont sommeil dans "+nom+" :\n";
+		HashSet<Creature> liste = new HashSet<Creature>();
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurSommeil() < 5) {
-				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurSommeil()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				liste.add(entry.getValue());
 				isValue = true;
 			}
 		}
 		if (isValue)
-			return chaine;
+			return liste;
 		else
 			return null;
 	}
@@ -160,17 +160,17 @@ public class Enclos {
 	/**
 	 * Methode permettant de recuperer les creatures qui sont en mauavaise sante
 	 */
-	private String voirCreaturesMauvaiseSante() {
+	private HashSet<Creature> voirCreaturesMauvaiseSante() {
+		HashSet<Creature> liste = new HashSet<Creature>();
 		boolean isValue = false;
-		String chaine = "Les creatures qui sont en mauvaise sante dans "+nom+" :\n";
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurSante() < 5) {
-				chaine += "  - index "+entry.getKey()+" = "+entry.getValue().getIndicateurSante()+"/"+CONSTANTES.MAX_INDICATEUR+"\n";
+				liste.add(entry.getValue());
 				isValue = true;
 			}
 		}
 		if (isValue)
-			return chaine;
+			return liste;
 		else
 			return null;
 	}

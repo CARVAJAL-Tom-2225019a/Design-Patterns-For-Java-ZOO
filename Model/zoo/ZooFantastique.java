@@ -7,9 +7,7 @@ import java.util.Set;
 
 import base.*;
 import creaturesImplemente.Oeuf;
-import enclosImplemente.*;
 import references.CONSTANTES;
-import references.Enum_DegrePropreteEnclos;
 
 /**
  * Classe representant l'instance unique du zoo (singleton)
@@ -54,6 +52,9 @@ public class ZooFantastique {
     }
     public Set<Creature> getListeFemelleEnceinte() {
         return listeFemelleEnceinte;
+    }
+    public String getNom() {
+    	return nom;
     }
 
     
@@ -102,18 +103,6 @@ public class ZooFantastique {
         }
         return somme;
     }
-
-    
-    /**
-     * Méthode pour afficher les informations sur l'ensemble du zoo
-     */
-    public String afficherEnsembleZoo() {
-        String chaine ="\n==== VOICI " + nom + " ==== \n\n";
-        for (Enclos e : listeEnclos) {
-        		chaine+=e.voirInfoEnclos();
-        }
-        return chaine;
-    }
     
     
     /**
@@ -143,25 +132,13 @@ public class ZooFantastique {
     /**
      * Methode pour recuperer la liste des enclos en mauvais etat
      */
-    public String AfficherEnclosMauvaisEtat() {
-    	String chaine = "LES ENCLOS A NETTOYER : \n";
+    public HashSet<Enclos> getEnclosMauvaisEtat() {
+    	HashSet<Enclos> listeEnclosBesoinNettoyage = new HashSet<Enclos>();
     	for (Enclos e : listeEnclos) {
-    		if (e instanceof Voliere) {
-    			if ( ((Voliere) e).getEtatToit()==Enum_DegrePropreteEnclos.mauvais
-    					|| e.getDegreProprete()==Enum_DegrePropreteEnclos.mauvais)
-    				chaine+="  - "+e.getNom()+"\n";
-    		}
-    		else if (e instanceof Aquarium) {
-    			if ( ((Aquarium) e).getNiveauEau()< ((Aquarium) e).getProfondeurBassin()/3 ||
-    					((Aquarium) e).getSaliniteEau() < 2 )
-    				chaine+="  - "+e.getNom()+"\n";
-    		}
-    		else {
-    			if (e.getDegreProprete()==Enum_DegrePropreteEnclos.mauvais)
-    				chaine+="  - "+e.getNom()+"\n";
-    		}
+    		if (e.isEnclosMauvaisEtat())
+    			listeEnclosBesoinNettoyage.add(e);
     	}
-    	return chaine+"\n";
+    	return listeEnclosBesoinNettoyage;
     }
 
     

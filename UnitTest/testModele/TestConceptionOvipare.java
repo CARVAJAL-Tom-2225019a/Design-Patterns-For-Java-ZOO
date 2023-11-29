@@ -40,8 +40,8 @@ class TestConceptionOvipare {
 		Exception thrown = assertThrows(
                 Exception.class,
                 () -> MegalodonMale.creerBebe(MegalodonMale),
-                "Statut de la creature invalide");
-        assertTrue(thrown.getMessage().contains("Statut de la creature invalide"));
+                "Statut de la creature "+MegalodonMale.getNomEspece()+" "+MegalodonMale.getPrenom()+" invalide");
+        assertTrue(thrown.getMessage().contains("Statut de la creature "+MegalodonMale.getNomEspece()+" "+MegalodonMale.getPrenom()+" invalide"));
 	}
 	
 	@Test

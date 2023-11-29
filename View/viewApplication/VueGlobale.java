@@ -11,8 +11,6 @@ import references.Enum_CategorieAge;
 import references.Enum_Sexe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import static java.lang.Math.min;
 
 /**
@@ -32,7 +30,6 @@ public class VueGlobale {
         System.out.println(texte);
     }
     
-    @SuppressWarnings("serial")
     public void afficherCreature(Creature creature) {
         VueCreature vueCreature;
         VueCreature parchemin = VueCreature.PARCHEMIN;
@@ -114,7 +111,12 @@ public class VueGlobale {
             }
         }
         ArrayList<String> complementLigne = new ArrayList<>() {
-            {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			{
                 add("  # Sexe  : \033[32m" + creature.getSexe() + "\033[0m         Age : \033[32m" + creature.getAge() + "ans \033[0m ");
                 add("  # Poids : \033[32m" + creature.getPoids() + " kg \033[0m    Taille : \033[32m" + creature.getTaille() + " m \033[0m ");
                 add("  #");
@@ -173,7 +175,12 @@ public class VueGlobale {
         if (enclos instanceof Voliere) {
             vueEnclos = VueEnclos.VOLIERE;
             complementLignes = new ArrayList<String>() {
-                {
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				{
                     add("  #============= \033[32m" + enclos.getNom() + "\033[0m =============#  ");
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() +"\033[0m");
@@ -199,7 +206,12 @@ public class VueGlobale {
             vueEnclos = VueEnclos.AQUARIUM;
 
             complementLignes = new ArrayList<String>() {
-                {
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				{
                     add("  #========== \033[32m" + enclos.getNom() + "\033[0m ==========  ");
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m"+" contient : \033[32m" + enclos.getNbCreatures()  +" "+ enclos.getNomEspece()+"\033[0m");
@@ -224,7 +236,12 @@ public class VueGlobale {
         } else {
             vueEnclos = VueEnclos.TERRAIN;
             complementLignes = new ArrayList<String>() {
-                {
+                /**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				{
                     add("  #========== \033[32m" + enclos.getNom()+"\033[0m" + " ==========  ");
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() +"\033[0m");

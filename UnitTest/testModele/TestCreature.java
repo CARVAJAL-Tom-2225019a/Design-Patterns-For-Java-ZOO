@@ -77,8 +77,8 @@ class TestCreature {
 		Exception thrown = assertThrows(
                 Exception.class,
                 () -> dragon1.manger(CONSTANTES.VALEUR_PERTE_INDICATEUR),
-                "Etat de la creature invalide, impossible de manger");
-        assertTrue(thrown.getMessage().contains("Etat de la creature invalide, impossible de manger"));
+                "Etat du "+dragon1.getNomEspece()+" "+dragon1.getPrenom()+" invalide, impossible de manger");
+        assertTrue(thrown.getMessage().contains("Etat du "+dragon1.getNomEspece()+" "+dragon1.getPrenom()+" invalide, impossible de manger"));
 	}
 	
 	

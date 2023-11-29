@@ -36,7 +36,12 @@ import java.util.ArrayList;
 
 public enum VueCreature {
     PARCHEMIN(10,32,new ArrayList<String>(){
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("  _________________________     ");
             add(" / \\                       \\.   ");
             add("|   | XXXXXXXXXXXXXXXXXXXX |.   ");  // XXX correspond au place holder du prenom l3
@@ -63,7 +68,12 @@ public enum VueCreature {
         }
     }),
     DRAGON(5,18,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[31;49m        ___         \033[39;49m");
             add("\033[31;49m        )__\\\\ >O.__ \033[39;49m");
             add("\033[31;49m       _ )__\\/ /~ X \033[39;49m");
@@ -72,14 +82,24 @@ public enum VueCreature {
         }
     }),
     HUMAIN(3,3,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add(" o ");
             add("/|\\");
             add("/'\\");
         }
     }),
     KRAKEN(7,12,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[35;49m         .-.        \033[39;49m");
             add("\033[35;49m     .-. \\   _._    \033[39;49m");
             add("\033[35;49m     ` /  )_/_  '   \033[39;49m");
@@ -90,14 +110,24 @@ public enum VueCreature {
         }                //"                    "
     }),
     LICORNE(3,6,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[95;49m        \\           \033[39;49m");
             add("\033[37;49m       <°\\__        \033[39;49m");
             add("\033[37;49m         M=M\\       \033[39;49m");
         }                //"                    "
     }),
     LYCANTHROPE(4,6,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[90;49m         --__       \033[39;49m");
             add("\033[90;49m        |Ω°vv'      \033[39;49m");
             add("\033[90;49m        /|\\         \033[39;49m");
@@ -105,7 +135,12 @@ public enum VueCreature {
         }                //"                    "
     }),
     MEGALODON(4,20,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[90;49m       __           \033[39;49m");
             add("\033[90;49m  ___-/ (__       __\033[39;49m");
             add("\033[90;49m<\" o )))   \"\"--../ /\033[39;49m");
@@ -113,19 +148,34 @@ public enum VueCreature {
         }                //"                    "
     }),
     NYMPHE(3,3 , new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[32;49m          @         \033[39;49m");
             add("\033[32;49m         />>        \033[39;49m");
             add("\033[32;49m         /*\\       \033[39;49m");
         }                //"                    "
     }),
     OEUF(1,1,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("O");
         }
     }),
     PHENIX(7,14,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[33;49m       .-.          \033[39;49m");
             add("\033[33;49m     _%  '\"         \033[39;49m");
             add("\033[33;49m   <°/              \033[39;49m");
@@ -136,7 +186,12 @@ public enum VueCreature {
         }                //"                    "
     }),
     SIRENE(3,7,new ArrayList<String>() {
-        {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		{
             add("\033[33;49m          ~@        \033[39;49m");
             add("\033[37;49m         /|**       \033[39;49m");
             add("\033[34;49m      |><=_/        \033[39;49m");

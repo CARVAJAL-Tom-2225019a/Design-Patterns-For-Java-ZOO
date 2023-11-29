@@ -84,7 +84,7 @@ public class Actions {
         			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
         	}
             maitreZoo.nettoyerEnclos(enclos);
-            vueGlobale.afficher("Nettoyage fait dans " + enclos+"\n");
+            vueGlobale.afficher("Nettoyage fait dans " + enclos.getNom()+"\n");
     	}
     	catch (Exception e) {
     		vueGlobale.afficher(e.getMessage());
@@ -447,7 +447,7 @@ public class Actions {
     protected void casReveillerEnclos() {
     	Enclos enclos;
     	try {
-	    	vueGlobale.afficher("\n ---- Dodo Party pour un enclos ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+") ---- ");
+	    	vueGlobale.afficher("\n ---- Fin de la Dodo Party pour un enclos ("+Enum_ActionsPossibles.REVEILLER_ENCLOS.getDureeTotale()+") ---- ");
 			// Choix enclos
 			// GESTION MANUEL
 	    	if (Run.utilisateurControle) {
