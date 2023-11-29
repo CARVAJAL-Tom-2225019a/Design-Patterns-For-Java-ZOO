@@ -1,9 +1,5 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +7,8 @@ import creaturesImplemente.Dragon;
 import creaturesImplemente.FactoryCreature;
 import references.CONSTANTES;
 import references.Enum_Especes;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestCreature {
 	
@@ -86,7 +84,7 @@ class TestCreature {
 	void testMethodeSeReveiller() throws Exception {
 		dragon1.dormir();
 		dragon1.seReveiller();
-		assertEquals(false, dragon1.isEnTrainDeDormir());
+        assertFalse(dragon1.isEnTrainDeDormir());
 	}
 	
 	
@@ -106,14 +104,14 @@ class TestCreature {
 	
 	
 	@Test
-	void testMethodeCombattre() {
+	void testMethodeCombattre() throws Exception {
 		Dragon gagnant = (Dragon) dragon1.combatre(dragon2);
 		 if (dragon1.getForce() > dragon2.getForce())
 			 assertEquals(gagnant, dragon1);
 		 else
 			 assertEquals(gagnant, dragon2);
 	}
-	
+
 	
 	@Test
 	void testMethodeVieillirAvecMort() throws Exception {
@@ -121,7 +119,7 @@ class TestCreature {
 		for (int i = 0; i<=annee; i++) {
 			dragon1.vieillir();
 		}
-		assertEquals(false, dragon1.isVivant());
+        assertFalse(dragon1.isVivant());
 	}
 	
 	
