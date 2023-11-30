@@ -115,8 +115,13 @@ public class Donnees {
 			remplirEnclos(enclosSirene, Enum_Especes.Sirene);
 			zoo.addEnclos(enclosSirene);
 			
+			//Nymphe
+			EnclosClassique enclosNymphe = new EnclosClassique ("NympheLand", CONSTANTES.TAILLE_ENCLOS);
+			remplirEnclos(enclosNymphe, Enum_Especes.Nymphe);
+			zoo.addEnclos(enclosNymphe);
+			
 			//Enclos vide
-			Enclos enclosClassiqueVide = new EnclosClassique("ClassiqueLand", CONSTANTES.TAILLE_ENCLOS);
+			EnclosClassique enclosClassiqueVide = new EnclosClassique("ClassiqueLand", CONSTANTES.TAILLE_ENCLOS);
 			zoo.addEnclos(enclosClassiqueVide);
 			
 			//Enclos vide

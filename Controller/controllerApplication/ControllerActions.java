@@ -133,29 +133,43 @@ public class ControllerActions {
             		passageAnnee();
             	retour= true;
             	break;
-            // Transférer une créature
+            // Faire dormir un enclos
             case 8:
+            	action.casDormirEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.DORMIR_ENCLOS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Reveiller un enclos
+            case 9:
+            	action.casReveillerEnclos();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.REVEILLER_ENCLOS))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Transférer une créature
+            case 10:
             	action.casTransfererCreature();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.TRANSFERER_CREATURE))
             		passageAnnee();
             	retour= true;
             	break;
            // Transferer un enclos
-            case 9 : 
+            case 11 : 
             	action.casTransfererEnclos();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.TRANSFERER_ENCLOS))
             		passageAnnee();
             	retour = true;
             	break;
            // Concevoir un enfant
-            case 10 :
+            case 12 :
             	action.casConcevoirEnfant();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.CONCEVOIR_ENFANT))
             		passageAnnee();
             	retour= true;
             	break;
             // Voir liste bebes en cosntruction
-            case 11 :
+            case 13 :
             	VueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre "+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+" ---- ");
             	VueGlobale.afficher(zoo.afficherFemellesEnceinte());
             	VueGlobale.afficher(zoo.afficherOeufs());
@@ -164,49 +178,57 @@ public class ControllerActions {
             	retour= true;
             	break;
             // Mettre un enclos en mouvement
-            case 12 :
+            case 14 :
             	action.casEnclosEnMouvement();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.METTRE_ENCLOS_EN_MOUVEMENT))
             		passageAnnee();
             	retour= true;
             	break;
             // Faire chanter un enclos
-            case 13 : 
+            case 15 : 
             	action.casChanterEnclos();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.FAIRE_CHANTER_ENCLOS))
             		passageAnnee();
             	retour= true;
             	break;
+           // Organiser un combat
+           case 16 :
+				action.casCombat();
+				if (temps.incrementerTemps(Enum_ActionsPossibles.COMBAT))
+					passageAnnee();
+				retour= true;
+				break;
             // Voir les meutes
-            case 14 : 
+            case 17 : 
             	action.casVoirMeutes();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_MEUTES))
             		passageAnnee();
             	retour= true;
             	break;
             // Voir les lycanthropes
-            case 15 : 
+            case 18 : 
             	action.casVoirLycanthropes();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_LOUPS))
             		passageAnnee();
             	retour= true;
             	break;
             // Saison amour pour les lycanthropes
-            case 16 : 
+            case 19 : 
             	action.casSaisonAmourLycanthropes();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.SAISON_AMOUR_LOUPS))
             		passageAnnee();
             	retour= true;
             	break;
-
-			case 17 :
-				action.casCombat();
-				if (temps.incrementerTemps(Enum_ActionsPossibles.COMBAT))
-					passageAnnee();
-				retour= true;
-				break;
-
-            //TODO : suite actions pour Lycanthropes (defier male alpha, jurler...)
+            // Faire hurler loup
+            case 20 :
+            	action.casFaireHurlerLoup();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.FAIRE_HURLER_LOUP))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            	
+            //TODO : suite actions pour Lycanthropes (defier male alpha, )
+            	
             // Passer en mode automatique
             case 98 :
             	VueGlobale.afficher("=== PASSAGE EN MODE AUTOMATIQUE ===");

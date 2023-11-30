@@ -132,4 +132,9 @@ public class ColonieLycanthrope {
         }
         return listeFemelleEnceinte;
     }
+
+	public void clear() {
+		listeMeutes.clear();
+		listeEnclos.clear();
+	}
 }

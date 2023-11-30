@@ -2,6 +2,7 @@ package controllerApplication;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import applicationRun.Run;
@@ -22,6 +23,7 @@ import interfaces.CreatureVolante;
 import maitreZoo.MaitreZoo;
 import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
+import references.Enum_ActionHurlement;
 import references.Enum_Sexe;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
@@ -566,6 +568,73 @@ public class Actions {
 			vueGlobale.afficherCreature(vainqueur);
 
 			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+		}
+		catch (Exception e) {
+			vueGlobale.afficher(e.getMessage());
+		}
+	}
+	
+	
+	public void casFaireHurlerLoup() {
+		Enum_ActionHurlement action = null;
+		boolean choixActionOk = false;
+		Enclos enclos1;
+		Creature loup1;
+		Enclos enclos2;
+		Creature loup2;
+		try {
+			// GESTION MANUEL
+			if (Run.utilisateurControle) {
+				// choix action
+				String choixAction = "";
+				while (!choixActionOk) {
+					vueGlobale.afficher("LES TYPES DE HURLEMENT : appartenance, domination, soumission, agressivite");
+					choixAction = vueUtilisateur.demandeUtilisateur("Quelle action souhaitez vous transmettre : ");
+		            // Vérifier si l'action est valide
+		            if (choixAction.equals("appartenance")) {
+		            	action = Enum_ActionHurlement.Appartenance;
+		            	choixActionOk = true;
+		            }
+		            else if (choixAction.equals("domination")) {
+		            	action = Enum_ActionHurlement.Domination;
+		            	choixActionOk = true;
+		            }
+		            else if (choixAction.equals("soumission")) {
+		            	action = Enum_ActionHurlement.Soumission;
+		            	choixActionOk = true;
+		            }
+		            else if (choixAction.equals("agressivite")) {
+		            	action = Enum_ActionHurlement.Agressivite;
+		            	choixActionOk = true;
+		            }
+		            else
+		            	System.out.println("Action invalide. "
+		            	+ "Veuillez choisir parmi les options : appartenance, domination, soumission, agressivite");		
+		        }
+				// choix loup 1
+				enclos1 = controlUser.recupererEnclosParNom();
+            	vueGlobale.afficher(enclos1.toString() + "\n\nVeuillez selectionner le lycanthrope qui hurlee\n");
+            	loup1 = controlUser.selectionCreatureDansEnclos(enclos1);
+				// choix loup 2
+            	enclos2 = controlUser.recupererEnclosParNom();
+            	vueGlobale.afficher(enclos2.toString() + "\n\nVeuillez selectionner un lycanthrope qui entend\n");
+            	loup2 = controlUser.selectionCreatureDansEnclos(enclos2);
+			}
+			// GESTION AUTOMATIQUE
+			else {
+				// choix action
+				// Définir les actions possibles dans un tableau
+				Random random = new Random();
+				Enum_ActionHurlement[] listeActions = {Enum_ActionHurlement.Appartenance, Enum_ActionHurlement.Domination, Enum_ActionHurlement.Soumission, Enum_ActionHurlement.Agressivite};
+				action = listeActions[random.nextInt(listeActions.length)];
+				// choix loup source
+				enclos1 = controllerGestionAuto.recuperationEnclosAleatoire();
+        		loup1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+				// choix loup destination
+        		enclos2 = controllerGestionAuto.recuperationEnclosAleatoire();
+        		loup2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+			}
+			vueGlobale.afficher( ((Lycanthrope) loup1).hurler( action, (Lycanthrope)loup2) );
 		}
 		catch (Exception e) {
 			vueGlobale.afficher(e.getMessage());

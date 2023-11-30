@@ -7,6 +7,7 @@ import java.util.Set;
 
 import base.*;
 import creaturesImplemente.Oeuf;
+import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
 
 /**
@@ -16,6 +17,8 @@ public class ZooFantastique {
 
     // Instance singleton du zoo fantastique
     private static ZooFantastique instance;
+    // Instance singleton de la colonie de Lycanthrope
+    private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     // Nom du zoo
     private String nom;
     // Liste des enclos dans le zoo
@@ -166,6 +169,17 @@ public class ZooFantastique {
     public static int getIntAleatoire(int max) {
     	Random random = new Random();
     	return random.nextInt(max);
+    }
+    
+    
+    /**
+     * Methode pour vider le zoo
+     */
+    public void clear() {
+    	this.listeEnclos = new HashSet<>();
+        listeOeufs = new HashSet<>();
+        listeFemelleEnceinte = new HashSet<>();
+        colonie.clear();
     }
 
 }

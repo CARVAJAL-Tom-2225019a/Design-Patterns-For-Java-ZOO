@@ -10,7 +10,7 @@ import references.*;
  * et qui est immortel
  *
  */
-public class Nymphe extends Vivipare implements CreatureImmortel {
+public class Nymphe extends Vivipare implements CreatureTerrestre, CreatureImmortel {
 
     private final int dureeGestation = 1;
 
@@ -58,4 +58,14 @@ public class Nymphe extends Vivipare implements CreatureImmortel {
     public Creature mettreBas(Enum_Sexe sexe) throws Exception {
     	return super.mettreBas();
     }
+	@Override
+	public String courrir() throws Exception {
+		if (super.isVivant() && super.getIndicateurSommeil() > 0 && super.getIndicateurSante() > 0 && super.getIndicateurFaim() > 0) {
+            super.perdreNourriture();
+            super.perdreSommeil();
+            return "Nymphe "+getPrenom()+" est en mouvement";
+        } else {
+            throw new Exception("Nymphe "+getPrenom()+" pas en etat de courir");
+        }
+	}
 }

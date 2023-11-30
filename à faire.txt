@@ -24,6 +24,7 @@ Pour l'application (code)
 
 
 
+
 Les problèmes dans le code
 	Naissance Automatique (femelle is null)  (existe encore ?)
 	LES CREATURES QUI ONT UN BESOIN --->  Cannot invoke "java.util.HashSet.size()" because "temp" is null

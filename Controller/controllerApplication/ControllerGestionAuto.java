@@ -56,7 +56,7 @@ public class ControllerGestionAuto {
 		boolean run = true;
 		if (debut) {
 			zooController.init();
-			zooController.effectuerAction(1);
+			//zooController.effectuerAction(1);
 		}
         Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
         while (run) {

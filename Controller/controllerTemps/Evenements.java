@@ -36,7 +36,10 @@ public class Evenements {
         for (int i = 0; i < nombreEnclosAModifier; i++) {
             // Sélectionner un enclos au hasard
             int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size());
-            Enclos enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
+            Enclos enclos = null;
+            while (enclos==null || enclos.getNbCreatures()==0) {
+            	enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
+            }
          // Nombre aléatoire de créatures à modifier dans cet enclos
             int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
             int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;

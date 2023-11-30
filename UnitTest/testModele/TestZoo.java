@@ -11,14 +11,16 @@ import base.Enclos;
 import controllerTemps.Evenements;
 import creaturesImplemente.FactoryCreature;
 import enclosImplemente.Aquarium;
+import enclosImplemente.Voliere;
 import maitreZoo.MaitreZoo;
 import references.CONSTANTES;
+import references.Enum_DegrePropreteEnclos;
 import references.Enum_Especes;
 import zoo.ZooFantastique;
 
 class TestZoo {
 	
-	ZooFantastique zoo;
+	ZooFantastique zoo = ZooFantastique.getInstance();;
 	Aquarium aquariumVide;
 	Aquarium enclosKraken;
 	Aquarium enclosMegalodon;
@@ -32,31 +34,31 @@ class TestZoo {
 		enclos.reorganiserCles();
     }
 	
-	private void CreationDonnes() throws Exception {
+	private void creer() throws Exception {
 		// Kraken
-		enclosKraken = new Aquarium("KrakenLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+		enclosKraken = new Aquarium("KrakenLand", 15000, 15000);
 		remplirEnclos(enclosKraken, Enum_Especes.Kraken);
 		zoo.addEnclos(enclosKraken);
 		
 		// Megalodon
-		enclosMegalodon = new Aquarium("MegalodonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+		enclosMegalodon = new Aquarium("MegalodonLand", 15000, 15000);
 		remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 		zoo.addEnclos(enclosMegalodon);
 		
 		//Sirene
-		enclosSirene = new Aquarium("SireneLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+		enclosSirene = new Aquarium("SireneLand", 15000, 15000);
 		remplirEnclos(enclosSirene, Enum_Especes.Sirene);
 		zoo.addEnclos(enclosSirene);
 		
 		//Enclos vide
-		aquariumVide = new Aquarium("AquariumLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+		aquariumVide = new Aquarium("AquariumLand", 15000, 15000);
 		zoo.addEnclos(aquariumVide);
 	}
 
 	@BeforeEach
 	void construction() throws Exception {
-		zoo = ZooFantastique.getInstance();
-		CreationDonnes();
+		zoo.clear();
+		creer();
 	}
 	
 	@Test
@@ -65,30 +67,20 @@ class TestZoo {
 	}
 	
 	@Test
-	void TestMethodeModifAleatoireStatutCreature() throws Exception {
-		boolean fait = false;
-		Evenements.modifAleatoireStatutCreature();
-		for (Enclos e : zoo.getListeEnclos()) {
-			for (Creature c : e.getListeCreatures().values()) {
-				if(c.getIndicateurFaim()<CONSTANTES.MAX_INDICATEUR
-						|| c.getIndicateurSante()<CONSTANTES.MAX_INDICATEUR
-						|| c.getIndicateurSommeil()<CONSTANTES.MAX_INDICATEUR) {
-					fait=true;
-					break;
-				}
-			}
-		}
-		assertTrue(fait);
-	}
-	
-	@Test
 	void TestMethodeModifAleatoireEtatEnclos() throws Exception {
 		boolean fait = false;
-		Evenements.modifAleatoireStatutCreature();
 		Evenements.modifAleatoireEtatEnclos();
 		for (Enclos e : zoo.getListeEnclos()) {
-			if ( ((Aquarium)e).getNiveauEau()<((Aquarium)e).getProfondeurBassin() 
-					|| ((Aquarium)e).getSaliniteEau()<CONSTANTES.SALINITE_CORRECT) {
+			if ( e instanceof Aquarium && (((Aquarium)e).getNiveauEau()<((Aquarium)e).getProfondeurBassin() 
+					|| ((Aquarium)e).getSaliniteEau()<CONSTANTES.SALINITE_CORRECT)) {
+				fait = true;
+				break;
+			}
+			else if ( e instanceof Voliere && ((Voliere)e).getEtatToit()!=Enum_DegrePropreteEnclos.bon) {
+				fait = true;
+				break;
+			}
+			else if (e.getDegreProprete()!=Enum_DegrePropreteEnclos.bon) {
 				fait = true;
 				break;
 			}

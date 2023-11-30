@@ -15,12 +15,14 @@ public enum Enum_ActionsPossibles {
     VOIR_BEBES_EN_CONSTRUCTION(0, 0, 5),
     METTRE_ENCLOS_EN_MOUVEMENT(0, 1, 0),
     FAIRE_CHANTER_ENCLOS(0, 1, 0),
+    COMBAT(0, 0, 7),
 	DORMIR_ENCLOS(0,0,2),
 	REVEILLER_ENCLOS(0,0,2),
 	VOIR_LOUPS(0,0,2),
 	SAISON_AMOUR_LOUPS(0,1,20),
 	VOIR_MEUTES(0,0,3),
-    COMBAT(0, 0, 1);
+	FAIRE_HURLER_LOUP(0,0,10);
+    
 
     private final int dureeEnAnnees;
     private final int dureeEnMois;
