@@ -13,12 +13,16 @@ import java.util.Random;
  */
 public abstract class Ovipare extends Creature {
 
-    private ArrayList<Oeuf> ventre; // dans le ventre il y a n oeufs avec potentiellement aucun oeuf.
+    private ArrayList<Oeuf> ventre; // dans le ventre il y a n oeufs avec potentiellement aucun oeuf
     //TODO add gestion oeuf dans le ventre
     private int dureeAvantEclosion = 1; // un an avant de pondre un oeuf
 
+    
     /**
      * Constructeur de la classe Ovipare.
+     *
+     * @param parent1 Le premier parent ovipare.
+     * @param parent2 Le deuxième parent ovipare.
      */
     public Ovipare(Ovipare parent1, Ovipare parent2) {
         super(parent1, parent2);
@@ -26,16 +30,32 @@ public abstract class Ovipare extends Creature {
         this.setDureeGestation(dureeAvantEclosion);
     }
 
+    /**
+     * Constructeur par défaut de la classe Ovipare.
+     */
     public Ovipare(){
         super();
         this.ventre = new ArrayList<Oeuf>();
         this.setDureeGestation(dureeAvantEclosion);
     }
     
+    
+    /**
+     * Obtient la liste des œufs dans le ventre de l'ovipare.
+     *
+     * @return La liste des œufs dans le ventre.
+     */
     public ArrayList<Oeuf> getVentre() {
     	return ventre;
     }
 
+    
+    /**
+     * Crée un bébé ovipare en fonction d'un partenaire male
+     *
+     * @param partenaire Le partenaire ovipare.
+     * @throws Exception Si une ou deux creatures ne sont pas en etat
+     */
     public void creerBebe(Ovipare partenaire) throws Exception {
         if ( (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle) && (partenaire.isVivant() && partenaire.getSexe() == Enum_Sexe.Male) && this.getNomEspece().equals(partenaire.getNomEspece())) {
             // Création de n œufs dans le ventre
@@ -49,13 +69,12 @@ public abstract class Ovipare extends Creature {
         }
     }
 
+    
     /**
-     * Méthode pour pondre un œuf.
+     * Pond les œufs qui sont prêts à éclore.
      *
-     * @param dateNaissance   La date de naissance de l'œuf.
-     * @param dureeIncubation La durée d'incubation spécifique.
-     * @return Une instance de la classe Oeuf pondue par l'ovipare.
-     * @throws Exception 
+     * @return Une liste des œufs pondus par l'ovipare
+     * @throws Exception Si l'ovipare femelle n'attend pas d'enfant
      */
     public ArrayList<Oeuf> pondreOeuf() throws Exception {
     	if (!ventre.isEmpty()) {

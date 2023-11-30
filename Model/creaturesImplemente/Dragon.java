@@ -5,10 +5,9 @@ import interfaces.*;
 import references.*;
 
 /**
- * Cette classe correspond à la crature du dragon
- * qui est un ovipare
- * et qui est terrestre, aquatique, aerien et immortel
- *
+ * Cette classe correspond à la créature du dragon,
+ * qui est un ovipare et possède les caractéristiques
+ * terrestres, aquatiques, aériennes et l'immortalité
  */
 public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine, CreatureVolante, CreatureImmortel {
 
@@ -16,12 +15,11 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     /**
      * Constructeur de la classe Dragon.
-     * Protected afin que la création se fasse essentiellement depuis le factory
+     * Protected afin que la création se fasse essentiellement depuis la factory
      * 
-     * @param nomEspece        L'espèce du dragon.
-     * @param sexe             Le sexe du dragon.
-     * @param poids            Le poids du dragon.
-     * @param taille           La taille du dragon.
+     * @param parent1 Le premier parent dragon.
+     * @param parent2 Le deuxième parent dragon.
+     * @param bruit Le bruit émis par le dragon.
      */
     public Dragon(Dragon parent1,Dragon parent2,String bruit) {
         super(parent1, parent2);
@@ -31,6 +29,11 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
         this.setBruit( bruit);
     }
 
+    /**
+     * Constructeur par défaut de la classe Dragon.
+     * 
+     * @param bruit Le bruit émis par le dragon.
+     */
     public Dragon (String bruit) {
         super();
         this.setAgressivite(Enum_Aggressivite.cannibale);
@@ -41,11 +44,11 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     
     /**
-     * Méthode de l'interface CreatureTerrestre : Courrir.
-     * Permet au dragon de courir sous certaines conditions.
+     * Méthode de l'interface CreatureTerrestre : Courir
+     * Permet au dragon de courir sous certaines conditions
      * 
-     * @return Un message indiquant que le dragon est en mouvement.
-     * @throws Exception Si le dragon n'est pas en état de courir.
+     * @return Un message indiquant que le dragon est en mouvement
+     * @throws Exception Si le dragon n'est pas en état de courir
      */
     @Override
     public String courrir() throws Exception {
@@ -60,11 +63,11 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     
     /**
-     * Méthode de l'interface CreatureMarine : Nager.
-     * Permet au dragon de nager sous certaines conditions.
+     * Méthode de l'interface CreatureMarine : Nager
+     * Permet au dragon de nager sous certaines conditions
      * 
-     * @return Un message indiquant que le dragon nage.
-     * @throws Exception Si le dragon n'est pas en état de nager.
+     * @return Un message indiquant que le dragon nage
+     * @throws Exception Si le dragon n'est pas en état de nager
      */
     @Override
     public String nager() throws Exception {
@@ -79,11 +82,11 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     
     /**
-     * Méthode de l'interface CreatureVolante : Voler.
-     * Permet au dragon de voler sous certaines conditions.
+     * Méthode de l'interface CreatureVolante : Voler
+     * Permet au dragon de voler sous certaines conditions
      * 
-     * @return Un message indiquant que le dragon vole.
-     * @throws Exception Si le dragon n'est pas en état de voler.
+     * @return Un message indiquant que le dragon vole
+     * @throws Exception Si le dragon n'est pas en état de voler
      */
     @Override
     public String voler() throws Exception {
@@ -98,8 +101,9 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
 
     
     /**
-     * Méthode de l'interface CreatureImmortel : Renaitre.
-     * Implémente la logique de renaissance du dragon.
+     * Méthode de l'interface CreatureImmortel : Mourir 
+     * Surcharge d'une méthode de Créature
+     * Implémente la logique de renaissance du dragon
      */
     @Override
     public void mourrir() {

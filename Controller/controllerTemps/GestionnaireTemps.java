@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Cette classe implémente un gestionnaire de temps permettant de manipuler des dates.
+ * Cette classe implémente un gestionnaire de temps permettant de manipuler des dates
  */
 public class GestionnaireTemps {
     private Calendar calendrier;
@@ -13,10 +13,10 @@ public class GestionnaireTemps {
     private static GestionnaireTemps instance;
 
     /**
-     * Constructeur privé pour créer une instance du gestionnaire de temps.
-     * @param annee L'année initiale.
-     * @param mois Le mois initial.
-     * @param jour Le jour initial.
+     * Constructeur privé pour créer une instance du gestionnaire de temps
+     * @param annee L'année initiale
+     * @param mois Le mois initial
+     * @param jour Le jour initial
      */
     private GestionnaireTemps(int annee, int mois, int jour) {
         calendrier = Calendar.getInstance();
@@ -24,11 +24,11 @@ public class GestionnaireTemps {
     }
 
     /**
-     * Méthode statique pour obtenir une instance unique du gestionnaire de temps.
-     * @param annee L'année initiale.
-     * @param mois Le mois initial.
-     * @param jour Le jour initial.
-     * @return L'instance du gestionnaire de temps.
+     * Méthode statique pour obtenir une instance unique du gestionnaire de temps
+     * @param annee L'année initiale
+     * @param mois Le mois initial
+     * @param jour Le jour initial
+     * @return L'instance du gestionnaire de temps
      */
     public static GestionnaireTemps getInstance() {
         if (instance == null) {
@@ -38,9 +38,9 @@ public class GestionnaireTemps {
     }
 
     /**
-     * Avance le temps de la quantité spécifiée de jours.
-     * @param jours Le nombre de jours à avancer.
-     * @return Vrai si l'année a changé après le passage du temps, sinon faux.
+     * Avance le temps de la quantité spécifiée de jours
+     * @param jours Le nombre de jours à avancer
+     * @return Vrai si l'année a changé après le passage du temps, sinon faux
      */
     public boolean passerLeTemps(int jours) {
         int oldAnnee = getAnnee();
@@ -49,11 +49,11 @@ public class GestionnaireTemps {
     }
 
     /**
-     * Ajoute la quantité spécifiée d'années, de mois et de jours à la date actuelle.
-     * @param annees Le nombre d'années à ajouter.
-     * @param mois Le nombre de mois à ajouter.
-     * @param jours Le nombre de jours à ajouter.
-     * @return Vrai si l'année a changé après l'ajout du temps, sinon faux.
+     * Ajoute la quantité spécifiée d'années, de mois et de jours à la date actuelle
+     * @param annees Le nombre d'années à ajouter
+     * @param mois Le nombre de mois à ajouter
+     * @param jours Le nombre de jours à ajouter
+     * @return Vrai si l'année a changé après l'ajout du temps, sinon faux
      */
     public boolean ajouterTemps(int annees, int mois, int jours) {
         int oldAnnee = getAnnee();
@@ -80,17 +80,17 @@ public class GestionnaireTemps {
     }
 
     /**
-     * Vérifie si l'année a changé par rapport à l'année précédente.
-     * @param oldAnnee L'année précédente.
-     * @return Vrai si l'année a changé, sinon faux.
+     * Vérifie si l'année a changé par rapport à l'année précédente
+     * @param oldAnnee L'année précédente
+     * @return Vrai si l'année a changé, sinon faux
      */
     public boolean verifierChangementAnnee(int oldAnnee) {
         return oldAnnee != getAnnee();
     }
 
     /**
-     * Obtenir la date actuelle formatée selon le modèle "yyyy-MM-dd".
-     * @return La date actuelle formatée.
+     * Obtenir la date actuelle formatée selon le modèle "yyyy-MM-dd"
+     * @return La date actuelle formatée
      */
     public String getDateActuelle() {
         Date dateActuelle = calendrier.getTime();
@@ -100,25 +100,25 @@ public class GestionnaireTemps {
 
     /**
      * Setters pour changer la date
-     * @param annee L'année.
-     * @param mois Le mois.
-     * @param jour Le jour.
+     * @param annee L'année
+     * @param mois Le mois
+     * @param jour Le jour
      */
     public void setDate(int annee, int mois, int jour) {
         calendrier.set(annee, mois - 1, jour); // Attention : le mois commence à 0 dans Calendar
     }
 
     /**
-     * Methode pour obtenir l'année actuelle.
-     * @return L'année actuelle.
+     * Methode pour obtenir l'année actuelle
+     * @return L'année actuelle
      */
     public int getAnnee() {
         return calendrier.get(Calendar.YEAR);
     }
 
     /**
-     * Methode pour obtenir le mois actuel.
-     * @return Le mois actuel.
+     * Methode pour obtenir le mois actuel
+     * @return Le mois actuel
      */
     public int getMois() {
         return calendrier.get(Calendar.MONTH) + 1; // Ajoute 1 car le mois commence à 0

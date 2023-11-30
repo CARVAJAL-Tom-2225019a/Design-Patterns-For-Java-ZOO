@@ -5,18 +5,20 @@ import interfaces.*;
 import references.*;
 
 /**
- * Cette classe correspond à la crature megalodon
- * qui est un ovipare
- * et qui est aquatique
- *
+ * Cette classe correspond à la créature megalodon,
+ * qui est un ovipare et qui est aquatique
  */
 public class Megalodon extends Ovipare implements CreatureMarine {
+	
     private final int dureeIncubation = 1;
+    
     /**
-     * Constructeur de la classe Megalodon.
+     * Constructeur de la classe Megalodon
      * Protected afin que la création se fasse essentiellement depuis le factory
      * 
-     * @param bruit            Le bruit que fait le Megalodon.
+     * @param parent1 Parent 1 pour la reproduction
+     * @param parent2 Parent 2 pour la reproduction
+     * @param bruit Le bruit que fait le Megalodon
      */
     protected Megalodon(Kraken parent1,Kraken parent2, String bruit) {
         super(parent1, parent2);
@@ -25,6 +27,13 @@ public class Megalodon extends Ovipare implements CreatureMarine {
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
     }
+    
+    /**
+     * Constructeur de la classe Megalodon avec un seul parent
+     * Protected afin que la création se fasse essentiellement depuis le factory
+     * 
+     * @param bruit Le bruit que fait le Megalodon
+     */
     protected Megalodon( String bruit) {
         super();
         this.setAgressivite(Enum_Aggressivite.curieux);
@@ -35,12 +44,11 @@ public class Megalodon extends Ovipare implements CreatureMarine {
 
     
     /**
-     * Méthode de l'interface CreatureMarine : Nager.
-     * Permet au Megalodon de nager dans l'eau.
+     * Méthode de l'interface CreatureMarine : Nager
+     * Permet au Megalodon de nager dans l'eau
      * 
-     * @return Un message indiquant que le Megalodon nage.
-     * @throws Exception 
-     *        
+     * @return Un message indiquant que le Megalodon nage
+     * @throws Exception Si le megalodon n'est pas en etat de nager
      */
     @Override
     public String nager() throws Exception {

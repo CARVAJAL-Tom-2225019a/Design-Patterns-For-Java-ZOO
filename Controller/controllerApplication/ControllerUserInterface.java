@@ -27,7 +27,7 @@ public class ControllerUserInterface {
 
     
     /**
-     * Methode permeyttant de generer le menu utilisateur et de gerer l'application
+     * Méthode permettant de générer le menu utilisateur et de gérer l'application
      */
     public void runUserMenu() {
         int choix;
@@ -51,7 +51,10 @@ public class ControllerUserInterface {
     
     
     /**
-     * Methode permettant de selectionner une creature dans un enclos
+     * Méthode permettant de sélectionner une créature dans un enclos
+     *
+     * @param enclos L'enclos à partir duquel sélectionner une créature
+     * @return La créature sélectionnée
      */
     public Creature selectionCreatureDansEnclos(Enclos enclos) {
     	String indexCreatureString;
@@ -63,6 +66,12 @@ public class ControllerUserInterface {
     }
     
     
+    /**
+     * Méthode permettant de récupérer un enclos par son nom
+     *
+     * @return L'enclos trouvé
+     * @throws Exception En cas d'erreur lors de la recherche de l'enclos
+     */
     public Enclos recupererEnclosParNom() throws Exception {
     	String nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
         return zoo.trouverEnclosParNom(nomEnclos);

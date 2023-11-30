@@ -14,22 +14,25 @@ import java.util.ArrayList;
 import static java.lang.Math.min;
 
 /**
- * Classe permettant l'affichage d'informations
+ * Classe permettant l'affichage d'informations (à la fois pour la gestion auto ou manuelle)
  */
 public class VueGlobale {
 
     /**
-     * Méthode pour afficher le message de passage à la nouvelle année et apeller le
-     * controlleur qui effectuera les actions
-     */
-
-    /**
      * Méthode pour afficher un texte a utilisateur
+     * 
+     * @param texte Le texte à afficher
      */
     public void afficher(String texte) {
         System.out.println(texte);
     }
     
+    
+    /**
+     * Méthode pour afficher les détails d'une créature
+     *
+     * @param creature La créature à afficher
+     */
     public void afficherCreature(Creature creature) {
         VueCreature vueCreature;
         VueCreature parchemin = VueCreature.PARCHEMIN;
@@ -169,6 +172,13 @@ public class VueGlobale {
     }
 
 
+    /**
+     * Méthode pour afficher les détails d'un enclos
+     *
+     * @param enclos          L'enclos à afficher
+     * @param besoinCreature  Indique s'il est nécessaire d'afficher les créatures dans l'enclos
+     * @throws Exception      
+     */
     @SuppressWarnings("serial")
 	public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
         VueEnclos vueEnclos;
@@ -315,6 +325,13 @@ public class VueGlobale {
         }  
     }
 
+    
+    /**
+     * Méthode pour afficher les sexes des créatures dans un enclos
+     *
+     * @param enclos L'enclos à considérer
+     * @return Une chaîne de caractères représentant le nombre de créatures par sexe
+     */
     private String afficherSexesEnclos(Enclos enclos) {
     	if (enclos.getListeCreatures().isEmpty()) {
         	return "Pas de creature";
@@ -336,6 +353,13 @@ public class VueGlobale {
         return str.toString();
     }
 
+    
+    /**
+     * Méthode pour afficher les classes d'âges des créatures dans un enclos
+     *
+     * @param enclos L'enclos à considérer
+     * @return Une chaîne de caractères représentant le nombre de créatures par classe d'âge
+     */
     public String afficherClassesAgesEnclos(Enclos enclos) {
     	if (enclos.getListeCreatures().isEmpty()) {
         	return "Pas de creature";
@@ -363,6 +387,13 @@ public class VueGlobale {
     }
 
 
+    /**
+     * Méthode pour afficher une barre de statistiques
+     *
+     * @param val           La valeur actuelle
+     * @param denominateur  La valeur maximale possible
+     * @return Une chaîne de caractères représentant la barre de statistiques
+     */
     public String afficherStatBar(int val, int denominateur) {
         StringBuilder statBar = new StringBuilder("[");
         int tailleStatBar = 10;
@@ -387,6 +418,12 @@ public class VueGlobale {
     }
 
 
+    /**
+     * Méthode pour afficher un combat entre deux créatures
+     *
+     * @param c1 La première créature
+     * @param c2 La deuxième créature
+     */
     public void afficherCombat(Creature c1, Creature c2) {
         ArrayList<String> strResultat = new ArrayList<>();
         VueCreature vueCreature1;

@@ -22,7 +22,7 @@ public class ColonieLycanthrope {
     private Set<EnclosLycanthrope> listeEnclos;
 
     /**
-     * Constructor privé pour le singleton.
+     * Constructor privé pour le singleton
      */
     private ColonieLycanthrope() {
         listeMeutes = new HashSet<Meute>();
@@ -30,9 +30,9 @@ public class ColonieLycanthrope {
     }
 
     /**
-     * Méthode statique pour obtenir l'instance unique de ColonieLycanthrope.
+     * Méthode statique pour obtenir l'instance unique de ColonieLycanthrope
      * 
-     * @return L'instance de ColonieLycanthrope.
+     * @return L'instance de ColonieLycanthrope
      */
     public static ColonieLycanthrope getInstance() {
         if (instance == null) {
@@ -48,6 +48,7 @@ public class ColonieLycanthrope {
         return listeMeutes;
     }
 
+    
     /**
      * Ajouter une meute
      */
@@ -55,10 +56,11 @@ public class ColonieLycanthrope {
         listeMeutes.add(m);
     }
 
+    
     /**
      * Supprimer une meute
      * 
-     * @throws Exception
+     * @throws Exception si la meute n'existe pas
      */
     public void removeMeute(Meute m) throws Exception {
         if (listeMeutes.contains(m)) {
@@ -67,6 +69,7 @@ public class ColonieLycanthrope {
             throw new Exception("Impossible de trouver la meute dans la colonnie");
     }
 
+    
     /**
      * Ajouter un enclos
      */
@@ -74,10 +77,11 @@ public class ColonieLycanthrope {
         listeEnclos.add(e);
     }
 
+    
     /**
      * Supprimer un enclos
      * 
-     * @throws Exception
+     * @throws Exception si l'enclos n'existe pas
      */
     public void removeEnclos(EnclosLycanthrope e) throws Exception {
         if (listeEnclos.contains(e)) {
@@ -86,8 +90,10 @@ public class ColonieLycanthrope {
             throw new Exception("Impossible de trouver enclos dans la colonnie");
     }
 
+    
     /**
      * Voir les meutes
+     * @return la liste des meutes
      */
     public String voirMeutes() {
         String chaine = "VOICI LES MEUTES :\n";
@@ -97,8 +103,10 @@ public class ColonieLycanthrope {
         return chaine;
     }
 
+    
     /**
      * Verification si besoin nouvelle meute
+     * @return La chaine contenant les meutes créées
      */
     public String verificationBesoinNouvelleMeute() {
         String chaine = "";
@@ -111,11 +119,12 @@ public class ColonieLycanthrope {
         }
         return chaine;
     }
+    
 
     /**
      * Verification saison des amours
      * 
-     * @return
+     * @return La liste des femelles encceintes
      * @throws Exception
      */
     public Set<Lycanthrope> verificationSaisonAmour(String dateActuelle) throws Exception {
@@ -133,6 +142,10 @@ public class ColonieLycanthrope {
         return listeFemelleEnceinte;
     }
 
+    
+    /**
+     * Méthode pour vider la colonie.
+     */
 	public void clear() {
 		listeMeutes.clear();
 		listeEnclos.clear();

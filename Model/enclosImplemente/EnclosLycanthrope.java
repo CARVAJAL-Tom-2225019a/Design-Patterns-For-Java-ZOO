@@ -13,12 +13,21 @@ import references.Enum_ActionHurlement;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
 
+
+/**
+ * La classe EnclosLycanthrope représente un enclos spécifique destiné à accueillir des lycanthropes
+ */
 public class EnclosLycanthrope extends Enclos {
 	
 	
 	private Meute meutePresente;
 	
-	
+	/**
+	 * Constructeur de la classe EnclosLycanthrope.
+	 *
+	 * @param nom        Le nom de l'enclos 
+	 * @param superficie La superficie de l'enclos
+	 */
 	public EnclosLycanthrope(String nom, double superficie) {
 		super(nom, superficie);
 		meutePresente = null;
@@ -41,6 +50,9 @@ public class EnclosLycanthrope extends Enclos {
 	}
 	
 	
+	/**
+	 * Méthode permettant de passer à l'année pour les lycanthropes
+	 */
 	public void passageAnneLycanthrope() {
 		if (meutePresente != null)
 			meutePresente.verificationSeuilFacteurDominationMeute();
@@ -48,6 +60,10 @@ public class EnclosLycanthrope extends Enclos {
 	}
 	
 	
+	/**
+	 * Méthode permettant de vérifier s'il est nécessaire de créer une nouvelle meute
+	 * @return La nouvelle meute créée, ou null s'il n'y a pas de besoin
+	 */
 	public Meute isNecessiteNouvelleMeute() {
 		Lycanthrope maleA = null;
 		Lycanthrope femelleA = null;
@@ -74,7 +90,11 @@ public class EnclosLycanthrope extends Enclos {
 	}
 
 
-	
+	/**
+	 * Méthode permettant d'exprimer l'appartenance collective des lycanthropes
+	 * @return Une chaîne de caractères représentant l'expression d'appartenance
+	 * @throws Exception Si une erreur survient lors de l'hurlement
+	 */
 	public String expressionAppartenanceCollective () throws Exception {
 		String chaine = "";
 		for (Creature l : super.getListeCreatures().values()) {
@@ -85,9 +105,12 @@ public class EnclosLycanthrope extends Enclos {
 	
 	
 	/**
-     * Methode permettant de concevoir un enfant pour
-     * les lycanthrope
-     * @throws Exception 
+     * Méthode permettant de concevoir un enfant pour les lycanthropes
+     *
+     * @param femelle La femelle lycanthrope
+     * @param male    Le mâle lycanthrope
+     * @return 1 si la conception réussit, -1 sinon
+     * @throws Exception Si une erreur survient pendant la conception
      */
     public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (meutePresente!=null && femelle == meutePresente.getCoupleAlpha().getFemelleAlpha() && male != meutePresente.getCoupleAlpha().getMaleAlpha()) {

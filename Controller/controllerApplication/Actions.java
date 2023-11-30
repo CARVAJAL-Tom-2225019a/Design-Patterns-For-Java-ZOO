@@ -29,6 +29,11 @@ import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
+
+/**
+ * La classe Actions contient la liste des différentes actions possibles 
+ * dans le zoo fantastique
+ */
 public class Actions {
 	private static ControllerUserInterface controlUser = new ControllerUserInterface();
 	private static ControllerGestionAuto controllerGestionAuto = new ControllerGestionAuto();
@@ -44,13 +49,17 @@ public class Actions {
     private GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
+    /**
+     * Constructeur de la classe Actions
+     */
     public Actions() {
     	vueGlobale = new VueGlobale();
     	vueUtilisateur = new VueUtilisateur();
     }
 
-	/**
-     * Methodes appellé par le switch case
+    
+    /**
+     * Méthode appelée pour examiner un enclos
      */
     protected void casExaminerEnclos() {
     	Enclos enclos;
@@ -71,6 +80,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour nettoyer un enclos
+     */
     protected void casNettoyerEnclos() {
     	Enclos enclos;
     	try {
@@ -93,6 +106,10 @@ public class Actions {
     	}	
     }
     
+    
+    /**
+     * Méthode appelée pour nourrir un enclos
+     */
     protected void casNourrirEnclos() {
     	Enclos enclos;
     	try {
@@ -116,6 +133,9 @@ public class Actions {
     }
     
     
+    /**
+     * Méthode appelée pour soigner un enclos
+     */
     protected void casSoignerEnclos() {
     	Enclos enclos;
 		try {
@@ -139,6 +159,9 @@ public class Actions {
 	}
     
     
+    /**
+     * Méthode appelée pour transférer une créature
+     */
     protected void casTransfererCreature() {
     	Enclos enclos;
     	Enclos enclosDest;
@@ -166,6 +189,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour créer un enclos
+     */
     protected void casCreerEnclos() {
         String nomEnclos;
         String typeEnclos = "Classique";
@@ -218,6 +245,9 @@ public class Actions {
     }
 
     
+    /**
+     * Méthode appelée pour transférer un enclos
+     */
     protected void casTransfererEnclos() {
     	Enclos enclos;
     	Enclos enclosDest;
@@ -252,6 +282,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour concevoir un enfant
+     */
     protected void casConcevoirEnfant() {
     	Enclos enclos;
     	Creature femelle;
@@ -296,6 +330,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour mettre un enclos en mouvement
+     */
     protected void casEnclosEnMouvement() {
     	Enclos enclos;
     	boolean peutCourrir = false;
@@ -393,6 +431,9 @@ public class Actions {
     }
     
     
+    /**
+     * Methode pour faire chanter un enclos
+     */
     protected void casChanterEnclos() {
     	Enclos enclos;
     	try {
@@ -422,6 +463,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour endormir un enclos
+     */
     protected void casDormirEnclos() {
     	Enclos enclos;
     	try {
@@ -446,6 +491,10 @@ public class Actions {
     	}
     }
     
+    
+    /**
+     * Méthode appelée pour reveiller un enclos
+     */
     protected void casReveillerEnclos() {
     	Enclos enclos;
     	try {
@@ -470,6 +519,11 @@ public class Actions {
     	}
     }
 
+    
+    
+    /**
+     * Méthode appelée pour voir les lycanthropes du zoo
+     */
 	public void casVoirLycanthropes() {
 		try {
 	    	vueGlobale.afficher("\n ---- Voir les lycanthropes ("+Enum_ActionsPossibles.VOIR_LOUPS.getDureeTotale()+") ---- ");
@@ -488,7 +542,11 @@ public class Actions {
     		vueGlobale.afficher(e.getMessage());
     	}
 	}
-
+	
+	
+	/**
+     * Méthode appelée pour lancer la saison des amours des lycanthropes
+     */
 	public void casSaisonAmourLycanthropes() {
 		try {
 	    	vueGlobale.afficher("\n ---- Verification saison amour pour lycanthropes ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+") ---- ");
@@ -509,6 +567,10 @@ public class Actions {
     	}
 	}
 
+	
+	/**
+     * Méthode appelée pour voir les meutes du zoo
+     */
 	public void casVoirMeutes() {
 		try {
 	    	vueGlobale.afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
@@ -521,6 +583,10 @@ public class Actions {
     	}
 	}
 
+	
+	/**
+     * Méthode appelée pour lancer un combat
+     */
 	public void casCombat() {
 		Enclos enclos1;
 		Enclos enclos2;
@@ -575,6 +641,11 @@ public class Actions {
 	}
 	
 	
+	/**
+     * Méthode appelée pour faire hurler un loup
+     * à destination d'un autre loup peu importe
+     * l'endroit auquel il se toruve
+     */
 	public void casFaireHurlerLoup() {
 		Enum_ActionHurlement action = null;
 		boolean choixActionOk = false;

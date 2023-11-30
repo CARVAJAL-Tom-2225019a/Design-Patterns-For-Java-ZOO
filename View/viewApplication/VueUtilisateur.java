@@ -9,17 +9,21 @@ import references.*;
 
 /**
  * Classe permettant l'affichage et la recuperation d'infomration
- * pour la gestion manuel du zoo
+ * pour la gestion manuelle du zoo
  */
 public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
 	private Scanner scanner = new Scanner(System.in);
+	// Instance unique du gestionnaire de temps
 	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
 
+	
 	/**
-	 * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
-	 * du zoo lorsque l'utilisateur a le controle
-	 */
+     * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
+     * du zoo lorsque l'utilisateur a le contrôle
+     *
+     * @return Instance de MaitreZoo initialisée avec les informations de l'utilisateur
+     */
 	public MaitreZoo bienvenue() {
 		System.out.println("======  BIENVENUE DANS VOTRE ZOO FANTASTIQUE  ======");
 

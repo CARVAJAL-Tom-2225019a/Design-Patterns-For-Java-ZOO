@@ -7,10 +7,6 @@ import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
-	//TODO : ajout de fonctionnalités 
-	//TODO : mort si etat enclos plus adapte ou etat cretaure
-
-
 /**
  * Point d'entree de l'application
  */

@@ -39,12 +39,12 @@ public abstract class Creature {
     // status chef d'enclos (alpha) + nb comats vaincu
     private int combatVaincu;
     private double valeurNutrionelle;
-
     private Enum_RangDomination status;
 
 
     /**
-     * Constructeur de la classe Creature par defaut. créature completement aléatoire.
+     * Constructeur de la classe Creature par defaut. 
+     * créature completement aléatoire.
      */
     public Creature() {
         this.sexe = sexeAleatoire();
@@ -77,6 +77,7 @@ public abstract class Creature {
 
     }
 
+    
     /**
      * Constructeur de la classe Creature a partir de deux parents.
      *
@@ -209,7 +210,23 @@ public abstract class Creature {
     public void setStatus(Enum_RangDomination status) {
         this.status = status;
     }
+    
+    /**
+     * Setters
+     */
+    protected void setNomEspece(Enum_Especes enumEspeces) {
+        this.nomEspece = enumEspeces;
+    }
 
+    protected void setBruit(String bruit) {
+        this.bruit = bruit;
+    }
+    // METHODE POUR LES TETS
+    public void setSexe(Enum_Sexe sexe) {
+        this.sexe = sexe;
+    }
+
+    
     /**
      * Méthode pour que la créature mange.
      *
@@ -443,6 +460,10 @@ public abstract class Creature {
 
     }
 
+    /**
+     * Methode permettant de calculer la force selon l'etat actuel de la creature
+     * @return la nouvelle force calculée
+     */
     public double calculerForce() {
 
         int facteurBonus = 0;
@@ -467,18 +488,4 @@ public abstract class Creature {
         return force;
     }
 
-
-    protected void setNomEspece(Enum_Especes enumEspeces) {
-        this.nomEspece = enumEspeces;
-    }
-
-    protected void setBruit(String bruit) {
-        this.bruit = bruit;
-    }
-
-
-    // METHODE POUR LES TETS
-    public void setSexe(Enum_Sexe sexe) {
-        this.sexe = sexe;
-    }
 }

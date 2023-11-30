@@ -15,15 +15,12 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
     private final int dureeIncubation = 1;
 
     /**
-     * Constructeur de la classe Phenix.
+     * Constructeur de la classe Phenix
      * Protected afin que la création se fasse essentiellement depuis le factory
      * 
-     * @param nomEspece        L'espèce du phénix.
-     * @param sexe             Le sexe du phénix.
-     * @param poids            Le poids du phénix.
-     * @param taille           La taille du phénix.
-     * @param bruit            Le bruit que fait le phénix.
-     * @param dureeIncubation  La durée d'incubation spécifique pour les pehnixs.
+     * @param parent1          Parent 1
+     * @param parent2          Parent 2
+     * @param bruit            Le bruit que fait le phénix
      */
     public Phenix(Phenix parent1,Phenix parent2,String bruit) {
         super(parent1, parent2);
@@ -33,6 +30,12 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
         this.setBruit( bruit);
     }
 
+    /**
+     * Constructeur de la classe Phenix
+     * Protected afin que la création se fasse essentiellement depuis le factory
+     * 
+     * @param bruit            Le bruit que fait le phénix
+     */
     public Phenix (String bruit) {
         super();
         this.setAgressivite(Enum_Aggressivite.farouche);
@@ -63,8 +66,8 @@ public class Phenix extends Ovipare implements CreatureVolante, CreatureImmortel
 
     
     /**
-     * Méthode de l'interface CreatureImmortel : Mourrir.
-     * Implémente la logique de renaissance du phénix.
+     * Méthode de l'interface CreatureImmortel : Mourrir
+     * Implémente la logique de renaissance du phénix
      * 
      */
     @Override

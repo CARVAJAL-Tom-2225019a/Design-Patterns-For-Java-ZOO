@@ -22,11 +22,12 @@ public class Meute {
 	
 	
 	/**
-	 * Constructeur
-	 * @param femelleAlpha
-	 * @param maleAlpha
-	 * @param CapaciteMeute
-	 * @param rangPossible
+	 * Constructeur de la meute
+	 * 
+	 * @param femelleAlpha La lycanthrope femelle alpha du couple
+	 * @param maleAlpha    La lycanthrope mâle alpha du couple
+	 * @param capaciteMeute La capacité maximale de la meute
+	 * @param rangPossible Les rangs de domination possibles au sein de la meute
 	 */
 	public Meute(Lycanthrope femelleAlpha, Lycanthrope maleAlpha, int CapaciteMeute, 
 			Set<Enum_RangDomination> rangPossible) {
@@ -40,6 +41,7 @@ public class Meute {
 		this.rangPossible = rangPossible;
 		this.enclosReference = null;
 	}
+	
 	
 	/**
 	 * Getters
@@ -60,6 +62,7 @@ public class Meute {
 		return enclosReference;
 	}
 	
+	
 	/**
 	 * Setters
 	 */
@@ -69,9 +72,11 @@ public class Meute {
 	
 	
 	/**
-	 * Methode permettant d'ajouter un lycanthrope a la meute
-	 * @param loup	le lycanthrope a ajouter
-	 * @throws Exception si le lycanthrope a deja une meute ou s'il n'y a plus de place
+	 * Méthode permettant d'ajouter un lycanthrope à la meute
+	 * 
+	 * @param loup Le lycanthrope à ajouter
+	 * @return true si l'ajout est réussi, false sinon
+	 * @throws Exception Si le lycanthrope a déjà une meute ou s'il n'y a plus de place dans la meute
 	 */
 	public boolean addLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.size() < capaciteMeute) {
@@ -88,6 +93,13 @@ public class Meute {
 	}
 	
 	
+	/**
+	 * Méthode permettant d'affecter un rang de domination à un lycanthrope en fonction de sa force par rapport
+	 * aux autres membres de la meute
+	 * 
+	 * @param loup Le lycanthrope
+	 * @return Le rang de domination attribué au lycanthrope
+	 */
 	private Enum_RangDomination affecterRang(Lycanthrope loup) {
 		double forceLoup = loup.getForce();
 		double forceTemp = coupleAlpha.getFemelleAlpha().getForce();
@@ -102,9 +114,11 @@ public class Meute {
 	
 
 	/**
-	 * Methode permettant de supprimer un loup de la meute
-	 * @param loup	Le loup a supprimer
-	 * @throws Exception	SI le loup fait partie du couple alpha ou n'est pas dans la meute
+	 * Méthode permettant de supprimer un lycanthrope de la meute
+	 * 
+	 * @param loup Le lycanthrope à supprimer
+	 * @return true si la suppression est réussie, false sinon
+	 * @throws Exception Si le lycanthrope fait partie du couple alpha ou n'est pas dans la meute
 	 */
 	public boolean removeLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.contains(loup)) {	
@@ -121,6 +135,13 @@ public class Meute {
 	}
 	
 	
+	/**
+	 * Méthode permettant à un lycanthrope de défier le mâle alpha de la meute
+	 * 
+	 * @param loup1 Le lycanthrope défiant le mâle alpha
+	 * @return Une chaîne de caractères représentant le résultat du défi
+	 * @throws Exception Si le loup1 est plus fort que le mâle alpha
+	 */
 	public String defierMaleAlpha (Lycanthrope loup1) throws Exception {
 		boolean reussite = false;
 		if (loup1.isPlusFort(coupleAlpha.getMaleAlpha()))
@@ -138,6 +159,11 @@ public class Meute {
 	}
 	
 	
+	/**
+	 * Méthode de vérification du seuil de facteur de domination de la meute
+	 * 
+	 * @return Une chaîne de caractères représentant les loups qui perdent un rang de domination
+	 */
 	public String verificationSeuilFacteurDominationMeute() {
 		String chaine = "LES LOUPS QUI PERDENT UN RANG :\n";
 		for (Lycanthrope l : listeLoup) {
@@ -152,6 +178,13 @@ public class Meute {
 	}
 	
 	
+	/**
+	 * Méthode permettant de vérifier si un lycanthrope est le dernier de son rang
+	 * au sein de la meute
+	 * 
+	 * @param rang Le rang de domination à vérifier
+	 * @return true si le lycanthrope est le dernier de sa rangée, false sinon
+	 */
 	private boolean isDernierDuRang(Enum_RangDomination rang) {
 		int compteur = 0;
 		for (Lycanthrope l : listeLoup) {
@@ -166,7 +199,10 @@ public class Meute {
 	
 	
 	/**
-	 * Methode pour avoir les lycanthropes souffre douleur
+	 * Méthode pour obtenir les lycanthropes ayant le rang de domination OMEGA au sein de la meute
+	 * (souffre douleur)
+	 * 
+	 * @return Un ensemble de lycanthropes ayant le rang de domination OMEGA
 	 */
 	public Set<Lycanthrope> voirOmega() {
 		Set<Lycanthrope> listeOmega = new HashSet<Lycanthrope>();
@@ -180,7 +216,9 @@ public class Meute {
 	
 	
 	/**
-	 * Methode permettant de recuperer les informations sur une meute
+	 * Méthode permettant de récupérer les informations sur une meute sous forme de chaîne de caractères
+	 * 
+	 * @return Une chaîne de caractères représentant la meute
 	 */
 	public String toString() {
 		return "Meute se trouvant dans "+enclosReference
@@ -189,8 +227,10 @@ public class Meute {
 	
 	
 	/**
-	 * Methode permettant de voir les caracteristiques des
-	 * lycanthropes de la meute
+	 * Méthode permettant de voir les caractéristiques des lycanthropes de la meute sous 
+	 * forme de chaîne de caractères
+	 * 
+	 * @return Une chaîne de caractères représentant les lycanthropes de la meute
 	 */
 	public String voirLycanthropesMeute() {
 		String chaine = "LES LYCANTHROPES DE LA MEUTE : \n";

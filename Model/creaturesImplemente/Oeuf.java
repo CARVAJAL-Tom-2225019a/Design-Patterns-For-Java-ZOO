@@ -8,6 +8,9 @@ import references.*;
  *
  */
 public class Oeuf {
+	
+	//TODO : gestion genealogie
+	
 	private Ovipare parent1;
     private Ovipare parent2;
     private Enum_Especes espece;
@@ -18,6 +21,9 @@ public class Oeuf {
     
     /**
      * Constructeur de la classe Oeuf.
+     * 
+     * @param parent1 Parent 1 pour la reproduction.
+     * @param parent2 Parent 2 pour la reproduction.
      */
     public Oeuf(Ovipare parent1, Ovipare parent2) {
         this.parent1 = parent1;
@@ -56,13 +62,10 @@ public class Oeuf {
 
 
 	/**
-     * Méthode pour faire éclore l'œuf.
+     * Méthode pour faire éclore l'œuf
      * 
-     * @param sexe   Le sexe de la créature qui éclore.
-     * @param poids  Le poids de la créature qui éclore.
-     * @param taille La taille de la créature qui éclore.
-     * @return Une instance de la classe Creature.
-     * @throws Exception Si la durée d'incubation n'est pas terminée ou si l'œuf est déjà éclos.
+     * @return Une instance de la classe Creature
+     * @throws Exception Si la durée d'incubation n'est pas terminée ou si l'œuf est déjà éclos
      */
     public Creature eclore() throws Exception {
         if (!isOpen) {

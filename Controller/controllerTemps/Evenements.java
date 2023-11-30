@@ -8,10 +8,19 @@ import enclosImplemente.*;
 import references.Enum_DegrePropreteEnclos;
 import zoo.ZooFantastique;
 
+/**
+ * Classe représentant les événements liés au temps dans le zoo
+ */
 public class Evenements {
 	GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	static ZooFantastique zoo = ZooFantastique.getInstance();
 	
+	
+	/**
+     * Méthode pour déclencher les événements annuels dans le zoo
+     *
+     * @throws Exception En cas d'erreur lors de l'exécution des événements
+     */
 	public static void evenementAnnuel() throws Exception {
 		// Verification de l'etat des enclos --> degradation etat creature
 		degradationSanteCreatureSelonEtatEnclos();
@@ -24,9 +33,10 @@ public class Evenements {
 	}
     
     
-    /**
-     * Méthode pour modifier aléatoirement l'état des créatures dans le zoo.
-     * @throws Exception 
+	/**
+     * Méthode pour modifier aléatoirement l'état des créatures dans le zoo
+     *
+     * @throws Exception En cas d'erreur lors de la modification de l'état des créatures
      */
     public static void modifAleatoireStatutCreature() throws Exception {
     	Random random = new Random(System.currentTimeMillis());
@@ -100,8 +110,9 @@ public class Evenements {
     
     
     /**
-     * Methode permettant de degarder la sante des creatures si l'enclos est en mauvais etat
-     * @throws Exception 
+     * Méthode permettant de dégrader la santé des créatures si l'enclos est en mauvais état
+     *
+     * @throws Exception En cas d'erreur lors de la dégradation de la santé des créatures
      */
     private static void degradationSanteCreatureSelonEtatEnclos () throws Exception {
     	for (Enclos e : zoo.getListeEnclos()) {
@@ -126,7 +137,7 @@ public class Evenements {
     
     
     /**
-     * Mort d'une creature si elle ne va pas bien 
+     * Méthode pour vérifier l'état des créatures et provoquer la mort d'une créature si elle ne va pas bien
      */
     private static void verificationEtatCreature () {
     	int compteurIndicateurMauvais = 0;

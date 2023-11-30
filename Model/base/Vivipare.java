@@ -19,11 +19,12 @@ public abstract class Vivipare extends Creature {
 	private int nbJourConceptionRestantAvantMiseABas;
 	
 	
-    /**
-     * Constructeur de la classe Vivipare.
-     * 
-     * @param parent1 Le premiere parent de la créature (celui qui lui a donné naissance)
-	 * @param parent2 le deuxieme parent de la créature
+	/**
+     * Constructeur de la classe Vivipare
+     *
+     * @param parent1 Le premier parent vivipare
+     * @param parent2 Le deuxième parent vivipare
+     * @param dureeGestation La durée de gestation de la créature
      */
     public Vivipare(Vivipare parent1, Vivipare parent2, int dureeGestation) {
         super(parent1, parent2);
@@ -33,12 +34,16 @@ public abstract class Vivipare extends Creature {
         nbJourConceptionRestantAvantMiseABas = 0;
     }
 
+    /**
+     * Constructeur par défaut de la classe Vivipare.
+     */
 	public Vivipare() {
 		super();
 		this.ventre = new ArrayList<Embryon>();
 		nbJourConceptionRestantAvantMiseABas = 0;
 	}
     
+	
     /**
      * Getters
      */
@@ -54,6 +59,7 @@ public abstract class Vivipare extends Creature {
     	return nbJourConceptionRestantAvantMiseABas > 0;
     }
 
+    
     /**
      * Méthode pour construire un enfant
      * 

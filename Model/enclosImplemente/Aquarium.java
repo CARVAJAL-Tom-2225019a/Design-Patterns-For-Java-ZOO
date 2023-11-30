@@ -8,23 +8,23 @@ import references.*;
 /**
  * La classe Aquarium représente un aquarium, 
  * une extension spécifique de la classe Enclos,
- * destinée à accueillir des créatures marines.
+ * destinée à accueillir des créatures marines
  */
 public class Aquarium extends Enclos {
 
-    private double profondeurBassin; // Profondeur de l'aquarium.
-    private double niveauEau; // Niveau actuel de l'eau dans l'aquarium.
-    private double saliniteEau; // Niveau de salinité de l'eau dans l'aquarium.
+    private double profondeurBassin; // Profondeur de l'aquarium
+    private double niveauEau; // Niveau actuel de l'eau dans l'aquarium
+    private double saliniteEau; // Niveau de salinité de l'eau dans l'aquarium
 
     
     /**
-     * Constructeur de la classe Aquarium.
+     * Constructeur de la classe Aquarium
      *
-     * @param nom             Le nom de l'aquarium.
-     * @param superficie      La superficie de l'aquarium.
-     * @param nbMaxCreatures  Le nombre maximum de créatures que l'aquarium peut accueillir.
-     * @param profondeurBassin La profondeur du bassin de l'aquarium.
-     * @param saliniteEau     La salinité initiale de l'eau dans l'aquarium.
+     * @param nom             Le nom de l'aquarium
+     * @param superficie      La superficie de l'aquarium
+     * @param nbMaxCreatures  Le nombre maximum de créatures que l'aquarium peut accueillir
+     * @param profondeurBassin La profondeur du bassin de l'aquarium
+     * @param saliniteEau     La salinité initiale de l'eau dans l'aquarium
      */
     public Aquarium(String nom, double superficie, double profondeurBassin) {
         super(nom, superficie);
@@ -50,10 +50,10 @@ public class Aquarium extends Enclos {
 
     /**
      * Ajoute une créature dans l'aquarium en vérifiant si elle est aquatique et si sa taille est
-     * compatible avec la profondeur du bassin.
+     * compatible avec la profondeur du bassin
      *
-     * @param creature La créature à ajouter dans l'aquarium.
-     * @throws Exception Si la créature n'est pas aquatique ou si elle est trop grande pour le bassin.
+     * @param creature La créature à ajouter dans l'aquarium
+     * @throws Exception Si la créature n'est pas aquatique ou si elle est trop grande pour le bassin
      */
     public void ajouterCreature(Creature creature) throws Exception {
         // Vérification si la créature est une créature marine
@@ -70,9 +70,9 @@ public class Aquarium extends Enclos {
 
     
     /**
-     * Effectue l'entretien de l'aquarium en vérifiant le niveau d'eau et l'équilibre de la salinité.
+     * Effectue l'entretien de l'aquarium en vérifiant le niveau d'eau et l'équilibre de la salinité
      *
-     * @throws Exception Si le niveau d'eau est inférieur à la profondeur du bassin.
+     * @throws Exception Si le niveau d'eau est inférieur à la profondeur du bassin
      */
     public void entretenirEnclos() throws Exception {
         // Vérification du niveau d'eau
@@ -139,6 +139,11 @@ public class Aquarium extends Enclos {
 	}
 	
 	
+	/**
+	 * Methode permettant de savoir si un enclos est en mauvais etat
+	 * 
+	 * @return true si l'enclos est en mauvais etat et a besoin d'etre nettoye, sinon false
+	 */
 	public boolean isEnclosMauvaisEtat () {
 		if (saliniteEau <= 2 && niveauEau/2<profondeurBassin)
 			return true;

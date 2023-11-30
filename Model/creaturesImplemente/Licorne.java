@@ -5,27 +5,20 @@ import interfaces.*;
 import references.*;
 
 /**
- * Cette classe correspond à la crature licorne
- * qui est un vivipare
- * et qui est terrestre
- *
+ * Cette classe correspond à la créature Licorne, qui est un vivipare et terrestre.
  */
 public class Licorne extends Vivipare implements CreatureTerrestre {
 
     private final int dureeGestation = 1;
+
     /**
-     * Constructeur de la classe Licorne.
+     * Constructeur de la classe Licorne
      * Protected afin que la création se fasse essentiellement depuis le factory
-     * 
-     * @param nomEspece       L'espèce de la licorne.
-     * @param sexe            Le sexe de la licorne.
-     * @param poids           Le poids de la licorne.
-     * @param taille          La taille de la licorne.
-     * @param bruit           Le bruit que fait la licorne.
-     * @param dureeGestation  La durée de gestation spécifique pour les licornes.
+     *
+     * @param parent1          Le premier parent de la Licorne
+     * @param parent2          Le deuxième parent de la Licorne
+     * @param bruit            Le bruit que fait la Licorne
      */
-
-
     protected Licorne(Licorne parent1,Licorne parent2, String bruit) {
         super(parent1, parent2, parent1.getDureeGestation());
         this.setAgressivite(Enum_Aggressivite.pacifique);
@@ -33,6 +26,14 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
         this.setDureeGestation(dureeGestation);
         this.setBruit( bruit);
     }
+    
+    /**
+     * Constructeur de la classe Licorne
+     * Protected afin que la création se fasse essentiellement depuis le factory
+     *
+     * @param bruit            Le bruit que fait la Licorne
+     * @throws Exception       Si la création de la Licorne échoue
+     */
     protected Licorne( String bruit) {
         super();
         this.setAgressivite(Enum_Aggressivite.pacifique);
@@ -40,6 +41,7 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
         this.setDureeGestation(dureeGestation);
         this.setBruit( bruit);
     }
+    
     
     /**
      * Méthode de l'interface CreatureTerrestre : Courrir.
@@ -59,7 +61,6 @@ public class Licorne extends Vivipare implements CreatureTerrestre {
             throw new Exception("Licorne pas en etat de courir, la créature est trop fatigué ou a faim\"");
         }
     }
-    
     
     
     /**

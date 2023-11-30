@@ -11,7 +11,7 @@ import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
 
 /**
- * Classe representant l'instance unique du zoo (singleton)
+ * Classe représentant l'instance unique du zoo fantastique (Singleton)
  */
 public class ZooFantastique {
 
@@ -28,14 +28,20 @@ public class ZooFantastique {
     private Set<Creature> listeFemelleEnceinte;
 
     
-    // Constructeur privé pour empêcher l'instanciation directe
+    /**
+     * Constructeur privé pour empêcher l'instanciation directe
+     */
     private ZooFantastique() {
         this.nom = "Le Zoo Fantastique";
         this.listeEnclos = new HashSet<>();
         listeOeufs = new HashSet<>();
         listeFemelleEnceinte = new HashSet<>();
     }
-    // Méthode pour obtenir l'instance unique du zoo fantastique (Singleton)
+    
+    /**
+     *  Méthode pour obtenir l'instance unique du zoo fantastique (Singleton)
+     * @return l'instance du zoo
+     */
     public static ZooFantastique getInstance() {
         if (instance == null) {
             instance = new ZooFantastique();
@@ -63,7 +69,7 @@ public class ZooFantastique {
     
     /**
      * Méthode pour ajouter un enclos au zoo
-     * @throws Exception 
+     * @throws Exception si le nombre d'enclos max a ete atteind
      */
     public void addEnclos(Enclos enclos) throws Exception {
         if (listeEnclos.size() < CONSTANTES.NB_MAX_ENCLOS) {
@@ -75,22 +81,33 @@ public class ZooFantastique {
     
     
     /**
-     * Methodes pour ajouter un enfant dans la liste
+     * Methodes pour ajouter une femelle enciente dans la liste
+     * @param la femelle a ajouter dans la liste
      */
     public void addFemelleEnceinte(Creature c) {
     	listeFemelleEnceinte.add(c);
     }
+    
+    /**
+     * Methodes pour ajouterun oeuf dans la liste
+     * @param l'oeuf à ajouter
+     */
     public void addOeuf(Oeuf o) {
     	listeOeufs.add(o);
     }
     
     
     /**
-     * Methodes pour supprimer oeuf ou enfant apres sa naissance
+     * Methodes pour supprimer une femelle enceinte apres la naissance
      */
     public void removeFemelleEnceinte (Creature c) {
     	listeFemelleEnceinte.remove(c);
     }
+    
+    /**
+     * Methode pour supprimer l'oeuf de la lsite apres la naissance de la creature
+     * @param o
+     */
     public void removeOeuf (Oeuf o) {
     	listeOeufs.remove(o);
     }
@@ -98,6 +115,7 @@ public class ZooFantastique {
     
     /**
      * Méthode pour obtenir le nombre total de créatures dans le zoo
+     * @return le nombre de creatures dans le zoo
      */
     public int getNbCreaturesTotales() {
         int somme = 0;
@@ -109,7 +127,9 @@ public class ZooFantastique {
     
     
     /**
-     * Methode pour afficher la liste des femelles qui attendent un bebe
+     * Méthode pour afficher la liste des femelles qui attendent un bébé
+     *
+     * @return Chaîne de caractères représentant les femelles enceintes
      */
     public String afficherFemellesEnceinte() {
     	String chaine = "LES FEMELLES ENCEINTES :\n";
@@ -121,7 +141,9 @@ public class ZooFantastique {
     
     
     /**
-     * Methode pour afficher la liste des oeufs
+     * Méthode pour afficher la liste des œufs
+     *
+     * @return Chaîne de caractères représentant les œufs
      */
     public String afficherOeufs() {
     	String chaine = "LES OEUFS :\n";
@@ -133,7 +155,9 @@ public class ZooFantastique {
     
     
     /**
-     * Methode pour recuperer la liste des enclos en mauvais etat
+     * Méthode pour récupérer la liste des enclos en mauvais état
+     *
+     * @return Ensemble d'enclos qui sont en mauvais état et nécessitent un nettoyage
      */
     public HashSet<Enclos> getEnclosMauvaisEtat() {
     	HashSet<Enclos> listeEnclosBesoinNettoyage = new HashSet<Enclos>();
@@ -147,7 +171,10 @@ public class ZooFantastique {
     
     /**
      * Méthode pour trouver un enclos par son nom
-     * @throws Exception 
+     *
+     * @param nomRecherche Nom de l'enclos à rechercher
+     * @return L'enclos trouvé
+     * @throws Exception Si le nom de l'enclos est incorrect
      */
     public Enclos trouverEnclosParNom(String nomRecherche) throws Exception {
         Iterator<Enclos> iterator = listeEnclos.iterator();
@@ -162,9 +189,10 @@ public class ZooFantastique {
     
     
     /**
-     * Methode permetant de generer un entier aleatoire entre 0 et max
-     * @param max	Entier maximal
-     * @return	Le nombre aleatoire
+     * Méthode permettant de générer un entier aléatoire entre 0 et max
+     *
+     * @param max Entier maximal
+     * @return Le nombre aléatoire
      */
     public static int getIntAleatoire(int max) {
     	Random random = new Random();

@@ -13,8 +13,8 @@ import viewApplication.*;
 import zoo.ZooFantastique;
 
 /**
- * Classe representant le controleur du zoo avec les differentes actions disponibles
- * Permet d'effectuer toutes les actions relatives a vie du zoo
+ * Classe représentant le contrôleur du zoo avec les différentes actions disponibles
+ * Permet d'effectuer toutes les actions relatives à la vie du zoo
  */
 public class ControllerActions {
 	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
@@ -28,7 +28,7 @@ public class ControllerActions {
     
     
     /**
-     * Constrcuteur
+     * Constructeur de la classe ControllerActions
      */
     public ControllerActions() {
     	VueGlobale = new VueGlobale();
@@ -39,8 +39,7 @@ public class ControllerActions {
 
     
     /**
-     * Initialise les variables du jeu.
-     *
+     * Lancement de la simulation
      */
     public void init() {
         // Initialisation des variables
@@ -60,10 +59,10 @@ public class ControllerActions {
 
     
     /**
-     * Effectue l'action correspondant au choix de l'utilisateur.
+     * Effectue l'action correspondant au choix de l'action
      *
-     * @param choix Le choix de l'utilisateur.
-     * @return true si l'action a été effectuée avec succès, false sinon.
+     * @param choix Le choix de l'action
+     * @return true si la simulation doit continuer, sinon false
      */
     public boolean effectuerAction(int choix) {
         boolean retour = false;
@@ -253,7 +252,8 @@ public class ControllerActions {
     
     
     /**
-     * Passe à la nouvelle année si le nombre d'actions atteint le maximum.
+     * Effectue toutes les actions qui doivent s'effectuer
+     * lorsqu'on change d'année
      */
     public static void passageAnnee() {
     	HashSet<Creature> temp = null;

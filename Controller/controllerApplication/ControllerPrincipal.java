@@ -10,7 +10,7 @@ import viewApplication.*;
 import zoo.ZooFantastique;
 
 /**
- * Classe representant le controleur principal de l'application
+ * Classe représentant le contrôleur principal de l'application
  */
 public class ControllerPrincipal {
 	private int numPourNom = 0;
@@ -20,8 +20,11 @@ public class ControllerPrincipal {
     private static ZooFantastique zoo = ZooFantastique.getInstance();
     private GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
+    
     /**
      * Méthode pour passer à la nouvelle année dans le zoo
+     *
+     * @return Une chaîne contenant des informations sur les créatures mortes
      */
     public String nouvelleAnnee() {
     	String chaine = "";
@@ -51,7 +54,7 @@ public class ControllerPrincipal {
     
     
     /**
-     * Methodes permettant de verifier les enfants qui doivent naitre
+     * Méthodes permettant de vérifier les enfants qui doivent naître
      */
     public void verificationNaissances () {
     	try {
@@ -63,6 +66,11 @@ public class ControllerPrincipal {
     		vueGlobale.afficher(e.getMessage());
     	}	
     }
+    
+    
+    /**
+     * Méthode pour vérifier les œufs et les faire éclore
+     */
     public void VerificationOeufs() {
     	try {
     		for (Oeuf o : zoo.getlLsteOeufs()) {
@@ -79,6 +87,13 @@ public class ControllerPrincipal {
     	}
     	
     }
+    
+    
+    /**
+     * Méthode pour vérifier les femelles enceintes et faire naître les enfants
+     *
+     * @throws Exception En cas d'erreur lors de la vérification des enfants
+     */
     public void verificationEnfants() throws Exception {
     	int nbJour;
     	try {
@@ -99,8 +114,11 @@ public class ControllerPrincipal {
     
     
     
-    /** 
-     * Methode permettant de mettre la nouvelle creature dans enclos
+    /**
+     * Méthode permettant de mettre la nouvelle créature dans un enclos
+     *
+     * @param c La créature à ranger dans un enclos
+     * @throws Exception En cas d'erreur lors du rangement de la créature
      */
     public void rangerCreature (Creature c) throws Exception {
     	String nom;
@@ -132,7 +150,9 @@ public class ControllerPrincipal {
     
     
     /**
-     * Methode permettant d'obtenir les elements importants au debut du jeu
+     * Méthode permettant d'obtenir les éléments importants au début du jeu
+     *
+     * @return Une chaîne d'informations importantes au début du jeu
      */
     public String getInformationsDebut(){
     	return "\n INFORMATION : \n- La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE+" "
@@ -144,7 +164,7 @@ public class ControllerPrincipal {
     }
 
     
-	/**
+    /**
      * Méthode pour passer la main à l'utilisateur
      */
     public void passerLaMainUtilisateur() {

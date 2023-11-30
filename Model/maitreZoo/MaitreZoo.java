@@ -5,22 +5,30 @@ import creaturesImplemente.Humain;
 import references.*;
 
 /**
- * Classe representant l'unique maitre Zoo (singleton)
+ * Classe représentant l'unique maître du zoo (singleton)
  */
 public class MaitreZoo extends Humain{
     // Instance unique de la classe MaitreZoo
     private static MaitreZoo instance;
 
-    // Constructeur privé pour empêcher l'instanciation directe
+    /**
+     * Constructeur privé pour empêcher l'instanciation directe
+     * @param nom	du maitre du zoo
+     * @param sexe	du maitre du zoo
+     * @param age	du maitre du zoo
+     */
     private MaitreZoo (String nom, Enum_Sexe sexe, int age) {
     	super(nom, sexe, age);
     }
     
 
     /**
-     * Méthode statique pour obtenir l'instance unique de la classe MaitreZoo.
+     * Méthode statique pour obtenir l'instance unique de la classe MaitreZoo
      *
-     * @return L'instance unique de la classe MaitreZoo.
+     * @param nom  Le nom du maître du zoo
+     * @param sexe Le sexe du maître du zoo
+     * @param age  L'âge du maître du zoo
+     * @return L'instance unique de la classe MaitreZoo
      */
     public static synchronized MaitreZoo getInstance(String nom, Enum_Sexe sexe, int age) {
         if (instance == null) {
@@ -28,6 +36,12 @@ public class MaitreZoo extends Humain{
         }
         return instance;
     }
+    
+    /**
+     * Méthode statique pour obtenir l'instance unique de la classe MaitreZoo avec des valeurs par défaut
+     *
+     * @return L'instance unique de la classe MaitreZoo
+     */
     public static synchronized MaitreZoo getInstance() {
     	if (instance == null) {
     		instance = new MaitreZoo("nom", Enum_Sexe.Male, 20);
@@ -71,6 +85,7 @@ public class MaitreZoo extends Humain{
     	enclos.nourrirCreatures();
     }
     
+    
     /**
      * Methode pour soigner un enclos
      * @throws Exception 
@@ -105,6 +120,15 @@ public class MaitreZoo extends Humain{
     	
     }
 
+    
+    /**
+     * Méthode pour lancer un combat entre deux créatures
+     *
+     * @param creature1 La première créature
+     * @param creature2 La deuxième créature
+     * @return La créature gagnante du combat
+     * @throws Exception Si une erreur survient pendant le combat
+     */
     public Creature lancerCombat(Creature creature1, Creature creature2) throws Exception {
     	return creature1.combattre(creature2);
     }

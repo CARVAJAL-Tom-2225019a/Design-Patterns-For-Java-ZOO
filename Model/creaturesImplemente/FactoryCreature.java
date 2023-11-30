@@ -3,8 +3,19 @@ package creaturesImplemente;
 import base.Creature;
 import references.*;
 
+/**
+ * Cette classe implémente une fabrique de créatures, permettant de créer des instances
+ * en fonction du type d'espèce spécifié
+ */
 public class FactoryCreature {
-	// Méthode statique pour créer une instance en fonction du type d'espèce
+
+	/**
+     * Méthode statique pour créer une nouvelle instance de créature en fonction du type d'espèce
+     *
+     * @param nomEspece l'espèce de la créature à créer
+     * @return Une nouvelle instance de la creature correspondant à l'espèce spécifiée
+     * @throws Exception si l'espèce spécifiée est inconnue
+     */
 	@SuppressWarnings("unchecked")
 	public static <T extends Creature> T newCreature(Enum_Especes nomEspece) throws Exception {
         return switch (nomEspece) {

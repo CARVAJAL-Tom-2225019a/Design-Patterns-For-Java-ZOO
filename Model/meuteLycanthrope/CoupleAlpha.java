@@ -2,12 +2,20 @@ package meuteLycanthrope;
 
 import creaturesImplemente.Lycanthrope;
 
+/**
+ * Classe correspondant à un couple alpha d'une meute
+ * Comprend un male alpha et une femelle alpha
+ */
 public class CoupleAlpha {
+	
 	private Lycanthrope femelleAlpha;
 	private Lycanthrope maleAlpha;
 	
 	/**
-	 * Constructor
+	 * Constructeur
+	 * 
+	 * @param femelle La lycanthrope femelle du couple.
+	 * @param male    La lycanthrope mâle du couple.
 	 */
 	public CoupleAlpha (Lycanthrope femelle, Lycanthrope male) {
 		femelleAlpha = femelle;
@@ -38,6 +46,8 @@ public class CoupleAlpha {
 	
 	/**
 	 * Methode permettant d'afficher les informations du couple
+	 * 
+	 * @return Une chaine de caractere comprenant les informations
 	 */
 	public String toString() {
 		return "COUPLE ALPHA :\n\nFEMELLE :\n"+femelleAlpha.toString()

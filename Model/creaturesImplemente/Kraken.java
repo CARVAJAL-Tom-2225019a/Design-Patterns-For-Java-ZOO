@@ -4,25 +4,21 @@ import base.*;
 import interfaces.*;
 import references.*;
 
+
 /**
- * Cette classe correspond à la crature kraken
- * qui est un ovipare
- * et qui est aquatique
- *
+ * Cette classe correspond à la créature Kraken, qui est un ovipare et aquatique
  */
 public class Kraken extends Ovipare implements CreatureMarine {
 
     private final int dureeIncubation = 1;
+    
     /**
-     * Constructeur de la classe Kraken.
+     * Constructeur de la classe Kraken
      * Protected afin que la création se fasse essentiellement depuis le factory
-     * 
-     * @param nomEspece        L'espèce du kraken.
-     * @param sexe             Le sexe du kraken.
-     * @param poids            Le poids du kraken.
-     * @param taille           La taille du kraken.
-     * @param bruit            Le bruit que fait le kraken.
-     * @param dureeIncubation  La durée d'incubation spécifique du Kraken.
+     *
+     * @param parent1          Le premier parent du Kraken
+     * @param parent2          Le deuxième parent du Kraken
+     * @param bruit            Le bruit que fait le Kraken.
      */
     protected Kraken(Kraken parent1,Kraken parent2, String bruit) {
         super(parent1, parent2);
@@ -31,7 +27,14 @@ public class Kraken extends Ovipare implements CreatureMarine {
         this.setDureeGestation(dureeIncubation);
         this.setBruit( bruit);
     }
-    protected Kraken( String bruit) {
+    
+    /**
+     * Constructeur de la classe Kraken
+     * Protected afin que la création se fasse essentiellement depuis le factory
+     *
+     * @param bruit            Le bruit que fait le Kraken
+     */
+    protected Kraken(String bruit) {
         super();
         this.setAgressivite(Enum_Aggressivite.agressif);
         this.setNomEspece(Enum_Especes.Kraken);
@@ -42,11 +45,11 @@ public class Kraken extends Ovipare implements CreatureMarine {
 
 
     /**
-     * Méthode de l'interface CreatureMarine : Nager.
-     * Permet au kraken de nager dans l'eau.
+     * Méthode de l'interface CreatureMarine : Nager
+     * Permet au kraken de nager dans l'eau
      * 
-     * @return Un message indiquant que le kraken nage.
-     * @throws Exception 
+     * @return Un message indiquant que le kraken nage
+     * @throws Exception si le kraken n'est pas en etat de nager
      *        
      */
     @Override

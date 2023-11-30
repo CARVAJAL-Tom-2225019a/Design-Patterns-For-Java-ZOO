@@ -10,7 +10,7 @@ import references.CONSTANTES;
 import viewApplication.*;
 
 /**
- * Classe representant le controleur de la partie
+ * Classe représentant le contrôleur de la partie
  * gestion automatique du zoo
  */
 public class ControllerGestionAuto {
@@ -23,9 +23,10 @@ public class ControllerGestionAuto {
 	// Instance unique de la classe permettant la gestion du temp
 	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
+	//TODO : actions appropriés selon etat du zoo
 	
 	/**
-     * Constructeur
+     * Constructeur de la classe ControllerGestionAuto
      */
     public ControllerGestionAuto() {
         VueGlobale = new VueGlobale();
@@ -33,13 +34,11 @@ public class ControllerGestionAuto {
         new ControllerPrincipal();
     }
 	
-    
-	//TODO : actions appropriés selon etat du zoo
-	
-    
+
     /**
-     * Methode permettant d'effectuer un choix aleatoire 
-     * @throws Exception
+     * Méthode permettant d'effectuer un choix aléatoire
+     *
+     * @throws Exception En cas d'erreur lors de l'exécution de l'action aléatoire
      */
 	public static void choixActionAleatoire () throws Exception {
 		Random random = new Random();
@@ -49,9 +48,11 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-	 * Point d'entree de la gestion automatique
-	 * @throws Exception
-	 */
+     * Point d'entrée de la gestion automatique
+     *
+     * @param debut true si c'est le début de la gestion automatique, false sinon
+     * @throws Exception En cas d'erreur lors de l'exécution de l'action aléatoire
+     */
 	public static void run(boolean debut) throws Exception {
 		boolean run = true;
 		if (debut) {
@@ -74,9 +75,9 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-     * Méthode pour récupérer un enclos aléatoire dans le zoo.
+     * Méthode pour récupérer un enclos aléatoire dans le zoo
      *
-     * @return Un enclos choisi au hasard dans la liste des enclos du zoo.
+     * @return Un enclos choisi au hasard dans la liste des enclos du zoo
      */
 	public Enclos recuperationEnclosAleatoire() {
         // Vérifier s'il y a des enclos disponibles
@@ -90,11 +91,12 @@ public class ControllerGestionAuto {
 	}
 	
 	
-	
 	/**
-	 * Methode permettant de recuperer les enclos qui sont en mauvais etat
-	 * @throws Exception 
-	 */
+     * Méthode permettant de récupérer le premier enclos en mauvais état
+     *
+     * @return Le premier enclos en mauvais état, ou null s'il n'y en a aucun
+     * @throws Exception En cas d'erreur lors de la récupération de l'enclos
+     */
 	public Enclos getFirstEnclosMauvaisEtat() throws Exception {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isEnclosMauvaisEtat())
@@ -105,8 +107,10 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-	 * Methode permettant de recuperer les enclos où les creatures ont faim
-	 */
+     * Méthode permettant de récupérer le premier enclos où les créatures ont faim
+     *
+     * @return Le premier enclos où les créatures ont faim, ou null s'il n'y en a aucun
+     */
 	public Enclos getFirstEnclosCreatureFaim() {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isCreatureOntFaim())
@@ -117,8 +121,10 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-	 * Methode permettant de recuperer les enclos où les creatures ont sommeil
-	 */
+     * Méthode permettant de récupérer le premier enclos où les créatures ont sommeil
+     *
+     * @return Le premier enclos où les créatures ont sommeil, ou null s'il n'y en a aucun
+     */
 	public Enclos getFirstEnclosCreatureSommeil() {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isCreatureOntSommeil())
@@ -129,9 +135,10 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-	 * Methode permettant de recuperer les enclos où les creatures sont
-	 * en mauvaise sante
-	 */
+     * Méthode permettant de récupérer le premier enclos où les créatures ont une mauvaise santé
+     *
+     * @return Le premier enclos où les créatures ont une mauvaise santé, ou null s'il n'y en a aucun
+     */
 	public Enclos getFirstEnclosCreatureMauvaiseSante() {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isCreatureOntSommeil())
@@ -142,8 +149,10 @@ public class ControllerGestionAuto {
 	
 	
 	/**
-	 * Methode permettant de recuperer les enclos où les creatures dorment
-	 */
+     * Méthode permettant de récupérer le premier enclos où les créatures dorment
+     *
+     * @return Le premier enclos où les créatures dorment, ou null s'il n'y en a aucun
+     */
 	public Enclos getFirstEnclosCreatureDort() {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isCreaturesDorment())

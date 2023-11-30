@@ -7,10 +7,7 @@ import references.*;
 import zoo.ZooFantastique;
 
 /**
- * Cette classe correspond à la crature lycanthrope (loup-garou)
- * qui est un vivipare
- * et qui est terrestre
- *
+ * Cette classe correspond à la créature lycanthrope (loup-garou), qui est un vivipare et terrestre
  */
 public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	private final int dureeGestation = 1;
@@ -32,14 +29,15 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	private Meute meute;
 	
 	
-    /**
-     * Constructeur de la classe Lycanthrope.
+	/**
+     * Constructeur de la classe Lycanthrope
      * Protected afin que la création se fasse essentiellement depuis le factory
-     * 
-     * @param bruit           Le bruit que fait le lycanthrope.
+     *
+     * @param parent1 Le premier parent de la Lycanthrope
+     * @param parent2 Le deuxième parent de la Lycanthrope
+     * @param bruit   Le bruit que fait la Lycanthrope
+     * @throws Exception Si la création de la Lycanthrope échoue
      */
-
-
 	protected Lycanthrope(Licorne parent1,Licorne parent2, String bruit) {
 		super(parent1, parent2, parent1.getDureeGestation());
 		this.setAgressivite(Enum_Aggressivite.agressif);
@@ -53,6 +51,15 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
 		meute = null;
 	}
+	
+	
+	/**
+     * Constructeur de la classe Lycanthrope
+     * Protected afin que la création se fasse essentiellement depuis le factory
+     *
+     * @param bruit Le bruit que fait la Lycanthrope
+     * @throws Exception Si la création de la Lycanthrope échoue
+     */
 	protected Lycanthrope(  String bruit) {
 		super();
 		this.setAgressivite(Enum_Aggressivite.agressif);
@@ -99,6 +106,9 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
+    /**
+     * Methode permettant de calculer le niveau du Lycanthrope
+     */
     public void calculNiveau() {
     	niveau = 0;
     	//facteur domination, rang
@@ -123,6 +133,10 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     
     
+    /**
+     * Methode verifiant si le seuil de facteur de domination est atteind
+     * @return true s'il est atteint, sinon false
+     */
     public boolean seuilFacteurDominationAtteint () {
     	if (facteurDomination < CONSTANTES.SEUIL_FACTEUR_DOMINATION) {
     		return true;
@@ -182,6 +196,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     				+"\n\n";
     }
     
+    
+    /**
+     * Methode renvoyant quelques informations pour l'affichage d'une creature
+     * @return la chaine de caractere contenant les informations
+     */
     public String toStringReduit() {
     	return "-- Lycanthrope "+getPrenom()+", sexe : "+getSexe()
 				+", age : "+getAge()+"\n";  
@@ -226,7 +245,9 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     
     
     /**
-     * Methodes permettant d'effectuer une action correspondant a un hurlement
+     * Méthode permettant d'exprimer l'appartenance à une meute
+     *
+     * @return Le message exprimant l'appartenance
      */
     private String exprimerAppartenance() {
     	if (meute == null)
@@ -235,6 +256,14 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		return "Je suis "+getPrenom()+"\nMa meute, la meilleure, est "+meute+"\n";
     }
     
+    
+    /**
+     * Méthode permettant d'exprimer la domination sur un autre loup
+     *
+     * @param loup Le loup sur lequel la domination est exprimée
+     * @return Le message exprimant la domination
+     * @throws Exception Si la domination échoue
+     */
     private String exprimerDomination (Lycanthrope loup) throws Exception {
     	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
     		if (meute==null || meute.getCoupleAlpha().getFemelleAlpha()!= loup) {
@@ -250,6 +279,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	}
     }
     
+    
+    /**
+     * Méthode permettant d'exprimer la soumission face à un autre loup
+     * @param loup qui domine
+     */
     private String exprimerSoumission (Lycanthrope loup) {
     	facteurDomination--;
     	// rang inferieur
@@ -257,6 +291,13 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return "Je suis un "+rangDomination.getDescription()+", et je me soumet a toi "+loup.getRangDomination().getDescription()+"\n";
     }
     
+    
+    /**
+     * Méthode permettant d'exprimer l'aggressivite à un autre loup
+     * @param loup à agresser
+     * @return une chaine de caractere montrant l'aggressivite
+     * @throws Exception si le loup n'est pas assez fort pour aggresser l'autre
+     */
     private String exprimerAgressivite (Lycanthrope loup) throws Exception {
     	String chaine =  "Je suis "+getPrenom()+", agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
     	if (isPlusFort(loup))
@@ -292,6 +333,14 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		throw new Exception ("Impossible d'attaquer la femelle alpha\n");
     }
     
+    
+    /**
+     * Compare la force du Lycanthrope avec celle d'un autre Lycanthrope
+     * La comparaison est basée sur le rang de domination et le niveau
+     *
+     * @param loup2 Le loup-garou à comparer
+     * @return true si ce lycanthrope est plus fort que l'autre, sinon false
+     */
     public boolean isPlusFort(Lycanthrope loup2) {
     	if (rangDomination.getValeur() > loup2.getRangDomination().getValeur()) {
     		return true;

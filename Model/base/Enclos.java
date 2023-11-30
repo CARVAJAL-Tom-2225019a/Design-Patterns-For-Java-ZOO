@@ -5,10 +5,10 @@ import java.util.*;
 import references.*;
 
 /**
- * Cette classe correspond a un enclos classique
+ * Cette classe abstraite correspond a un enclos
  *
  */
-public class Enclos {
+public abstract class Enclos {
 	
 	private Enum_Especes nomEspece;
 	
@@ -84,6 +84,7 @@ public class Enclos {
 	
 	/**
 	 * Methode pour avoir le nom de l'enclos et son etat
+	 * @return la chaine de caractère contenant les informations de l'enclos
 	 */
 	public String voirInfoEnclos() {
 		return " -Enclos "+getNom()+" avec "+getNbCreatures()
@@ -93,6 +94,7 @@ public class Enclos {
 	
 	/**
 	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
+	 * @return L'ensemble des creatures qui ont un besoin dans l'enclos
 	 */
 	public HashSet<Creature> getCreaturesAyantUnBesoin() {
 		HashSet<Creature> listeCreatureAvecBesoin = new HashSet<Creature>();
@@ -121,6 +123,7 @@ public class Enclos {
 	
 	/**
 	 * Methode permettant de recuperer les creatures qui ont faim
+	 * @return L'ensemble des creatures qui ont faim dans l'enclos
 	 */
 	private HashSet<Creature> voirCreaturesFaim() {
 		boolean isValue = false;
@@ -140,6 +143,7 @@ public class Enclos {
 	
 	/**
 	 * Methode permettant de recuperer les creatures qui ont sommeil
+	 * @return L'ensemble des creatures qui ont sommeil dans l'enclos
 	 */
 	private HashSet<Creature> voirCreaturesSommeil() {
 		boolean isValue = false;
@@ -158,7 +162,8 @@ public class Enclos {
 	
 	
 	/**
-	 * Methode permettant de recuperer les creatures qui sont en mauavaise sante
+	 * Methode permettant de recuperer les creatures qui sont en mauvaise sanyte
+	 * @return L'ensemble des creatures qui sont en mauvaise sante dans l'enclos
 	 */
 	private HashSet<Creature> voirCreaturesMauvaiseSante() {
 		HashSet<Creature> liste = new HashSet<Creature>();
@@ -202,7 +207,7 @@ public class Enclos {
 	 * Methode pour ajouter une creature dans l'enclos
 	 * 
 	 * @param creature	la creature a ajouter
-	 * @throws Exception si l'enclos est plein
+	 * @throws Exception si l'enclos est plein ou si il y a deja une autre espèce
 	 * 
 	 */
 	public void ajouterCreature (Creature creature) throws Exception {
@@ -382,6 +387,13 @@ public class Enclos {
     }
 
 
+    /**
+     * Réveille les créatures endormies dans l'enclos. 
+     * Les créatures mortes sont identifiées et ne se reveillent pas
+     *
+     * @throws Exception Si des créatures ne peuvent pas se réveiller, généralement
+     *                   en raison de leur état (vivant ou mort)
+     */
 	public void reveillerCreatures() throws Exception {
 		List<String> creaturesMortes = new ArrayList<>();
 	    for (Creature e : listeCreatures.values()) {
@@ -399,6 +411,12 @@ public class Enclos {
 	}
 
 
+	/**
+	 * Fait dormir les créatures dans l'enclos. L
+	 * Les insomniaques et les créatures mortes sont identifiés
+	 *
+	 * @throws Exception Si des créatures ne peuvent pas dormir( mortes ou pas fatigues)
+	 */
 	public void faireDormirCreatures() throws Exception {
 	    List<String> creaturesInsomniaques = new ArrayList<>();
 	    List<String> creaturesMortes = new ArrayList<>();
@@ -439,6 +457,12 @@ public class Enclos {
 	}
 
 
+	/**
+	 * Récupère la créature dominante dans l'enclos en se basant sur leur force
+	 *
+	 * @return La créature dominante ou null si l'enclos est vide
+	 * @throws Exception Si une erreur survient lors de la recherche de la créature dominante
+	 */
 	public Creature getCreatureDominante() throws Exception {
 		Creature creatureDominante = null;
 		if (listeCreatures.entrySet().isEmpty()) {
@@ -456,6 +480,12 @@ public class Enclos {
 		return creatureDominante;
 	}
 
+	
+	/**
+	 * Récupère l'ambiance dominante dans l'enclos en se basant sur l'agressivité des créatures
+	 *
+	 * @return L'ambiance dominante ou null si l'enclos est vide
+	 */
 	public Enum_Aggressivite getAmbiance() {
 		// on cherche l'ambiance qui apparait le plus dans la liste de creature
 		Map<Enum_Aggressivite, Integer> ambianceOccurrences = new TreeMap<>();
@@ -479,6 +509,12 @@ public class Enclos {
 		return mostFrequentAmbiance;
 	}
 	
+	
+	/**
+	 * Calcule la valeur moyenne du bonheur de toutes les créatures dans l'enclos
+	 *
+	 * @return La valeur moyenne du bonheur des créatures ou 0 si l'enclos est vide
+	 */
 	public int getBonheurMoyen(){ // todo Factoriser getter Moyen
 		int valBonheurMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
@@ -488,6 +524,12 @@ public class Enclos {
 		return 0;
 	}
 
+	
+	/**
+	 * Calcule la valeur moyenne de l'âge de toutes les créatures dans l'enclos
+	 *
+	 * @return La valeur moyenne de l'âge des créatures ou 0 si l'enclos est vide
+	 */
 	public int getAgeMoyen() {
 		int valAgeMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
@@ -496,6 +538,13 @@ public class Enclos {
 		if (!listeCreatures.isEmpty()) return valAgeMoyen/listeCreatures.size();
 		return 0 ;
 	}
+	
+	
+	/**
+	 * Calcule la valeur moyenne de l'indicateur de faim de toutes les créatures dans l'enclos
+	 *
+	 * @return La valeur moyenne de l'indicateur de faim des créatures ou 0 si l'enclos est vide
+	 */
 	public int getFaimMoyen() {
 		int valFaimMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
@@ -505,6 +554,12 @@ public class Enclos {
 		return 0 ;
 	}
 
+	
+	/**
+	 * Calcule la valeur moyenne de l'indicateur de sommeil de toutes les créatures dans l'enclos
+	 *
+	 * @return La valeur moyenne de l'indicateur de sommeil des créatures ou 0 si l'enclos est vide
+	 */
 	public int getSommeilMoyen() {
 		int valSommeilMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
@@ -514,6 +569,12 @@ public class Enclos {
 		return 0 ;
 	}
 
+	
+	/**
+	 * Calcule la valeur moyenne de l'indicateur de santé de toutes les créatures dans l'enclos
+	 *
+	 * @return La valeur moyenne de l'indicateur de santé des créatures ou 0 si l'enclos est vide
+	 */
 	public int getSanteMoyen() {
 		int valSanteMoyen = 0;
 		for (Creature creature : listeCreatures.values()){
@@ -523,6 +584,12 @@ public class Enclos {
 		return 0 ;
 	}
 
+	
+	/**
+	 * Obtient le niveau de propreté de l'enclos transforme en un entier
+	 *
+	 * @return 2 pour "bon", 1 pour "correct", 0 pour "mauvais".
+	 */
 	public int getDegrePropreteNumber(){
 		if (degreProprete == Enum_DegrePropreteEnclos.bon) {
 			return 2;
@@ -535,6 +602,14 @@ public class Enclos {
 		}
 		return 0;
 	}
+	
+	
+	/**
+	 * Vérifie si au moins la moitié des créatures dans l'enclos ont faim
+	 * Utilisation pour la gestion automatique
+	 *
+	 * @return true si au moins la moitié des créatures ont faim, sinon false
+	 */
 	public boolean isCreatureOntFaim() {
 		int compteur = 0;
 		for (Creature c : listeCreatures.values()) {
@@ -548,6 +623,13 @@ public class Enclos {
 			return false;
 	}
 
+	
+	/**
+	 * Vérifie si au moins la moitié des créatures dans l'enclos ont besoin de sommeil
+	 * Utilisation pour la gestion automatique
+	 *
+	 * @return true si au moins la moitié des créatures ont besoin de sommeil, sinon false
+	 */
 	public boolean isCreatureOntSommeil() {
 		int compteur = 0;
 		for (Creature c : listeCreatures.values()) {
@@ -561,6 +643,13 @@ public class Enclos {
 			return false;
 	}
 
+	
+	/**
+	 * Vérifie si au moins la moitié des créatures dans l'enclos sont en mauvaise sante
+	 * Utilisation pour la gestion automatique
+	 *
+	 * @return true si au moins la moitié des créatures sont malades, sinon false
+	 */
 	public boolean isCreatureSontMalade() {
 		int compteur = 0;
 		for (Creature c : listeCreatures.values()) {
@@ -574,6 +663,12 @@ public class Enclos {
 			return false;
 	}
 
+	
+	/**
+	 * Vérifie si l'enclos est en mauvais état de propreté
+	 *
+	 * @return true si l'enclos est en mauvais état de propreté, sinon false
+	 */
 	public boolean isEnclosMauvaisEtat () {
 		if (degreProprete == Enum_DegrePropreteEnclos.mauvais)
 			return true;
@@ -581,6 +676,13 @@ public class Enclos {
 			return false;
 	}
 
+	
+	/**
+	 * Vérifie si au moins la moitié des créatures dans l'enclos sont en train de dormir
+	 * Utilisation pour la gestion automatique
+	 *
+	 * @return true si au moins la moitié des créatures sont en train de dormir, sinon false
+	 */
 	public boolean isCreaturesDorment () {
 		int compteur = 0;
 		for (Creature c : listeCreatures.values()) {
