@@ -20,14 +20,24 @@ import references.Enum_Sexe;
 import viewApplication.VueGlobale;
 import zoo.ZooFantastique;
 
+/**
+ * Classe permettant de creer les donnees de l'application
+ */
 public class Donnees {
 	static VueGlobale vueGlobale = new VueGlobale();
 	static private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
 	static private ZooFantastique zoo = ZooFantastique.getInstance();
 	
 	/**
-     * Methode pour remplir un enclos
-     */
+	 * Constructeur
+	 */
+	public Donnees() { }
+	
+	/**
+	 * Methode pour remplir un enclos
+	 * @param enclos à remplir
+	 * @param espece à mettre dans l'enclos
+	 */
     public static void remplirEnclos(Enclos enclos, Enum_Especes espece) {
 		try {
 			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
@@ -43,7 +53,10 @@ public class Donnees {
     
     /**
      * Methode pour creer les meutes
-     * @throws Exception 
+     * 
+     * @param nomMeute le nom de la meute qui va être créée
+     * @param enclos l'enclos où va se trouver la meute
+     * @throws Exception si probleme lors de la creation
      */
     public static void creerMeute(String nomMeute, EnclosLycanthrope enclos) throws Exception {
     	// rangs possibles

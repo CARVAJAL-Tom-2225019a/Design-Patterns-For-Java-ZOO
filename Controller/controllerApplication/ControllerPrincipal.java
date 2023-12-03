@@ -13,13 +13,22 @@ import zoo.ZooFantastique;
  * Classe représentant le contrôleur principal de l'application
  */
 public class ControllerPrincipal {
-	private int numPourNom = 0;
-	VueGlobale vueGlobale = new VueGlobale();
-	VueUtilisateur vueUtilisateur = new VueUtilisateur();
+	private int numPourNom;
+	VueGlobale vueGlobale;
+	VueUtilisateur vueUtilisateur;
     // Instance du zoo fantastique (Singleton)
     private static ZooFantastique zoo = ZooFantastique.getInstance();
     private GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
+    
+    /**
+     * Constructeur
+     */
+    public ControllerPrincipal() {
+    	numPourNom = 0;
+    	vueGlobale = new VueGlobale();
+    	vueUtilisateur = new VueUtilisateur();
+    }
     
     /**
      * Méthode pour passer à la nouvelle année dans le zoo
@@ -155,11 +164,18 @@ public class ControllerPrincipal {
      * @return Une chaîne d'informations importantes au début du jeu
      */
     public String getInformationsDebut(){
-    	return "\n INFORMATION : \n- La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE+" "
-    			+ "ans. \n - Nous somme le "+temps.getDateActuelle()+" \n- Chaque annee, l'etat des enclos et des creatures "
-    					+ "se degradent \n- Plus un enclos est en mauvais etat, plus les creatures iront mal"
-    					+ " \n - Une creature qui va trop mal risque de mourrir \n - Pour nettoyer un enclos, ce dernier doit etre vide"
-    					+ "\n\n Bon courage :)\n\n";
+    	return "\n INFORMATION : "
+    			+ "\n- La duree de vie d'une creature est de " + CONSTANTES.MAX_AGE+" "+ "ans. "
+    					+ "\n"
+    					+ "\n - Nous somme le "+temps.getDateActuelle()
+    					+ "\n - La duree de vie du zoo est de "+CONSTANTES.DUREE_VIE_ZOO
+    					+ "\n"
+    					+ "\n - Chaque annee, l'etat des enclos et des creatures se degradent "
+    					+ "\n - Plus un enclos est en mauvais etat, plus les creatures iront mal"
+    					+ "\n - Une creature qui va trop mal risque de mourrir "
+    					+ "\n - Pour nettoyer un enclos, ce dernier doit etre vide"
+    					+ "\n"
+    					+ "\n Bon courage :)\n\n";
     	
     }
 

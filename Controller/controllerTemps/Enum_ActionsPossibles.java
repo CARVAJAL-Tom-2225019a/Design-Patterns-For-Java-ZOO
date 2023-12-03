@@ -1,5 +1,9 @@
 package controllerTemps;
 
+/**
+ * Enumeration de l'ensemble des actions possibles dans le zoo
+ * Avec leur durée (années, mois, jours)
+ */
 public enum Enum_ActionsPossibles {
 	PAS_D_ACTION(0, 1, 0),
     VOIR_ENCLOS_EXISTANTS(0, 0, 7),
@@ -29,24 +33,44 @@ public enum Enum_ActionsPossibles {
     private final int dureeEnMois;
     private final int dureeEnJours;
 
+   
     Enum_ActionsPossibles(int dureeEnAnnees, int dureeEnMois, int dureeEnJours) {
         this.dureeEnAnnees = dureeEnAnnees;
         this.dureeEnMois = dureeEnMois;
         this.dureeEnJours = dureeEnJours;
     }
 
+    /**
+     * Methode permettant de recuperer le nombre d'année que 
+     * prend une action
+     * @return le nomnbre d'année de l'action
+     */
     public int getDureeEnAnnees() {
         return dureeEnAnnees;
     }
 
+    /**
+     * Methode permettant de recuperer le nombre de mois que 
+     * prend une action
+     * @return le nomnbre de mois de l'action
+     */
     public int getDureeEnMois() {
         return dureeEnMois;
     }
 
+    /**
+     * Methode permettant de recuperer le nombre de jours que 
+     * prend une action
+     * @return le nomnbre de jours de l'action
+     */
     public int getDureeEnJours() {
         return dureeEnJours;
     }
     
+    /**
+     * Methode permettant de recuperer la duree totale d'une action
+     * @return une chaine de caractère indiquant la duree de l'action
+     */
     public String getDureeTotale() {
     	String chaine = "";
     	if (dureeEnAnnees>0)

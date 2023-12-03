@@ -15,6 +15,10 @@ public class Evenements {
 	GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	static ZooFantastique zoo = ZooFantastique.getInstance();
 	
+	/**
+	 * Constructeur
+	 */
+	public Evenements() { }
 	
 	/**
      * Méthode pour déclencher les événements annuels dans le zoo
@@ -59,13 +63,12 @@ public class Evenements {
         // Parcourir un nombre aléatoire d'enclos
         for (int i = 0; i < nombreEnclosAModifier; i++) {
             // Sélectionner un enclos au hasard
-            
             Enclos enclos = null;
             while (enclos==null || enclos.getNbCreatures()==0) {
             	int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size())+1;
             	enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
             }
-         // Nombre aléatoire de créatures à modifier dans cet enclos
+            // Nombre aléatoire de créatures à modifier dans cet enclos
             int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
             int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;;
             // Obtenir la liste des créatures dans cet enclos
@@ -99,11 +102,16 @@ public class Evenements {
     public static void modifAleatoireEtatEnclos() {
     	Random random = new Random(System.currentTimeMillis());
         // Nombre aléatoire d'enclos à modifier
-        int nombreEnclosAModifier = random.nextInt(zoo.getListeEnclos().size()-3) + 2;
+        int nombreEnclosAModifier = 0;
+        while (nombreEnclosAModifier<=1)
+        	nombreEnclosAModifier = (random.nextInt(zoo.getListeEnclos().size()));
         // Parcourir un nombre aléatoire d'enclos
         for (int i = 0; i < nombreEnclosAModifier; i++) {
             // Sélectionner un enclos au hasard
-            int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size());
+            int randomIndexEnclos = -1;
+            while (randomIndexEnclos<0 || randomIndexEnclos>=zoo.getListeEnclos().size()) {
+            	randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size());
+            }
             Enclos enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
             if (enclos instanceof Aquarium) {
                 // Si c'est un Aquarium, modifier NiveauEau et SaliniteEau

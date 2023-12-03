@@ -751,6 +751,9 @@ public class Actions {
 	}
 
 
+	/**
+	 * Methode appellé lorsque l'action à effectuer est de defier un male alpha dans une meute
+	 */
 	public void casDefierAlpha() {
 		Meute m = null;
 		Lycanthrope loupVolontaire = null;

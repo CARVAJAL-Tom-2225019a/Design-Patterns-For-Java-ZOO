@@ -50,7 +50,7 @@ public class ControllerGestionAuto {
 	public static void choixActionAleatoire () throws Exception {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
-		zooController.effectuerAction(choix);
+		ControllerActions.effectuerAction(choix);
 	}
 	
 	
@@ -196,9 +196,9 @@ public class ControllerGestionAuto {
 	/**
 	 * Methode permettant de recuperer le loup le plus fort dans la meute
 	 * en dehors du couple alpha
-	 * @param m
+	 * @param m meute où l'on cherche le loup
 	 * @return le loup le plus fort en dehors du couple alpha
-	 * @throws Exception
+	 * @throws Exception si la meute ne contient que le couple alpha
 	 */
 	public Lycanthrope choixPlusFortLoupDansMeute(Meute m) throws Exception {
 		Lycanthrope loupPlusFort = m.choixPremierLoupPasCoupleAlpha();

@@ -17,6 +17,11 @@ public class VueUtilisateur {
 	// Instance unique du gestionnaire de temps
 	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
 
+	/**
+	 * Constructeur
+	 */
+	public VueUtilisateur() { }
+	
 	
 	/**
      * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
@@ -94,7 +99,8 @@ public class VueUtilisateur {
 	public void proposerAction() {
 		System.out.println(
 				"\nLES ACTIONS DISPONIBLES (annee " + temps.getAnnee() + "):" 
-						+ "\n\n  0 : Pas d'action ("+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+")"
+						+ "\n"
+						+ "\n  0 : Pas d'action ("+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  1 : Voir les enclos ("+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+")"
 						+ "\n  2 : Voir le nombre de creatures totales ("+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+")"
@@ -125,13 +131,17 @@ public class VueUtilisateur {
 						+ "\n"
 						+ "\n  98 : Passer en mode automatique"
 						+ "\n  99 : Exit" 
-						+ "\n\n Nous somme le "+temps.getDateActuelle()+"." 
-						+ "\n\n Votre choix = ");
+						+ "\n"
+						+ "\n   ***  Nous somme le "+temps.getDateActuelle()+"  ***  " 
+						+ "\n"
+						+ "\n Votre choix = ");
 	}
 
 	
 	/**
 	 * Méthode pour récupérer le choix de l'utilisateur
+	 * 
+	 * @return un entier correspond à une action
 	 */
 	public int recupererChoixAction() {
 		int choix = -1; // Valeur par défaut ou valeur impossible pour indiquer une erreur
@@ -149,6 +159,9 @@ public class VueUtilisateur {
 	
 	/**
 	 * Méthode pour demander une saisie utilisateur avec un message donné
+	 * 
+	 * @param chaine à afficher pour donner des indications à l'utilisateur
+	 * @return la chaine de caractère entrée par l'utilisateur
 	 */
 	public String demandeUtilisateur(String chaine) {
 		System.out.println(chaine);

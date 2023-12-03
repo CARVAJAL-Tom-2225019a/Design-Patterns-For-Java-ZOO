@@ -9,6 +9,11 @@ import references.Enum_Sexe;
 public class VueAutomatique {
 
 	/**
+	 * Constructeur
+	 */
+	public VueAutomatique() { }
+	
+	/**
      * Affiche un message de bienvenue pour la gestion automatique du zoo.
      *
      * @return L'instance de MaitreZoo initialisée avec des valeurs par défaut.

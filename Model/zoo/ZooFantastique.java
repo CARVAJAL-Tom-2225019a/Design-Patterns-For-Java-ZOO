@@ -52,17 +52,30 @@ public class ZooFantastique {
 
     
     /**
-     * Getters
+     * Methode permettant de recuperer la liste des enclos du zoo
+     * @return un ensemble contenant les enclos
      */
     public Set<Enclos> getListeEnclos() {
         return listeEnclos;
     }
+    /**
+     * Methode permettant de recuperer la liste des oeufs qui vont bientot eclore
+     * @return un ensemble contenant les oeufs
+     */
     public Set<Oeuf> getlLsteOeufs() {
         return listeOeufs;
     }
+    /**
+     * Methode permettant de recuperer les femelles enceintes
+     * @return un ensemble contenant les femelles
+     */
     public Set<Creature> getListeFemelleEnceinte() {
         return listeFemelleEnceinte;
     }
+    /**
+     * Methode permettant de recuperer le nom du zoo
+     * @return le nom du zoo
+     */
     public String getNom() {
     	return nom;
     }
@@ -83,7 +96,7 @@ public class ZooFantastique {
     
     /**
      * Methodes pour ajouter une femelle enciente dans la liste
-     * @param la femelle a ajouter dans la liste
+     * @param c la femelle a ajouter dans la liste
      */
     public void addFemelleEnceinte(Creature c) {
     	listeFemelleEnceinte.add(c);
@@ -91,7 +104,7 @@ public class ZooFantastique {
     
     /**
      * Methodes pour ajouterun oeuf dans la liste
-     * @param l'oeuf à ajouter
+     * @param o l'oeuf à ajouter
      */
     public void addOeuf(Oeuf o) {
     	listeOeufs.add(o);

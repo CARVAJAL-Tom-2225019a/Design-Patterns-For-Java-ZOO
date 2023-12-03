@@ -23,8 +23,8 @@ public class ControllerActions {
     private static VueAutomatique VueAutomatique;
     // Instance du zoo fantastique (Singleton)
     private static ZooFantastique zoo = ZooFantastique.getInstance();
-    private Actions action = new Actions();
-    private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+    private static Actions action = new Actions();
+    private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
     /**
@@ -43,7 +43,7 @@ public class ControllerActions {
      */
     public void init() {
         // Initialisation des variables
-    	temps.setDate(2024, 1, 1);
+    	temps.setDate(CONSTANTES.ANNEE_DEPART, CONSTANTES.MOIS_DEPART, CONSTANTES.JOUR_DEPART);
         try {
         	// Affiche le message de bienvenue
             if (Run.utilisateurControle) // gestion manuel
@@ -64,7 +64,7 @@ public class ControllerActions {
      * @param choix Le choix de l'action
      * @return true si la simulation doit continuer, sinon false
      */
-    public boolean effectuerAction(int choix) {
+    public static boolean effectuerAction(int choix) {
         boolean retour = false;
         try {
         	switch (choix) {
@@ -263,6 +263,12 @@ public class ControllerActions {
     	HashSet<Creature> temp = null;
     	try {
     		VueGlobale.afficher("\n ====== FIN ANNEE ====== \n");
+    		// Verification si fin de vie du zoo
+    		if (CONSTANTES.ANNEE_DEPART+CONSTANTES.DUREE_VIE_ZOO == temps.getAnnee()) {
+    			effectuerAction(99);
+    			return;
+    		}
+    		// Actions relatives au passage d'annee
     		Evenements.evenementAnnuel();
 			String chaine = controlPrincipal.nouvelleAnnee();
 			if (chaine != null)
@@ -284,6 +290,9 @@ public class ControllerActions {
             	for (Creature c : temp)
             		VueGlobale.afficherCreature(c);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+            int resteAnnee = CONSTANTES.DUREE_VIE_ZOO-(temps.getAnnee()-CONSTANTES.ANNEE_DEPART);
+            VueGlobale.afficher("\n   -- Il reste encore "+resteAnnee+" ans --   \n");
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
     	}
     	catch (Exception e) {
     		VueGlobale.afficher(e.getMessage());

@@ -20,6 +20,11 @@ import static java.lang.Math.min;
  */
 public class VueGlobale {
 
+	/**
+	 * Constructeur
+	 */
+	public VueGlobale() { }
+	
     /**
      * Méthode pour afficher un texte a utilisateur
      * 
@@ -29,6 +34,10 @@ public class VueGlobale {
         System.out.println(texte);
     }
     
+    /**
+     * Methode permettant d'afficher l'ensemble des creatures d'un enclos
+     * @param e enclos à afficher
+     */
     public void afficherCreatureEnclos(Enclos e) {
     	 for (Map.Entry<Integer, Creature> entry : e.getListeCreatures().entrySet()) {
     		afficherCreatureAvecIndex(entry.getValue(), entry.getKey());
@@ -179,6 +188,11 @@ public class VueGlobale {
     }
     
     
+    /**
+     * Methode permettant d'afficher une creature avec son index
+     * @param creature à afficher
+     * @param index de la creature
+     */
     public void afficherCreatureAvecIndex(Creature creature, int index) {
     	VueCreature vueCreature;
         VueCreature parchemin = VueCreature.PARCHEMIN;
@@ -324,7 +338,7 @@ public class VueGlobale {
      *
      * @param enclos          L'enclos à afficher
      * @param besoinCreature  Indique s'il est nécessaire d'afficher les créatures dans l'enclos
-     * @throws Exception      
+     * @throws Exception      si problème lors de la récupération d'une valeur
      */
     @SuppressWarnings("serial")
 	public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {

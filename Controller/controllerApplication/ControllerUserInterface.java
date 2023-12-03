@@ -41,7 +41,7 @@ public class ControllerUserInterface {
             while (run) {
             	vueUtilisateur.proposerAction();
                 choix = vueUtilisateur.recupererChoixAction();
-                run = zooController.effectuerAction(choix);
+                run = ControllerActions.effectuerAction(choix);
                 // Si plus de creature
                 if (zoo.getNbCreaturesTotales() == 0)
                 	run = false;
@@ -94,7 +94,7 @@ public class ControllerUserInterface {
     
     /**
      * Methode permettant de selectionner une creature dans une meute
-     * @param meute
+     * @param meute dans laquelle on cherche la creature
      * @return La creature sélectionnée
      * @throws InterruptedException si problème de thread
      */

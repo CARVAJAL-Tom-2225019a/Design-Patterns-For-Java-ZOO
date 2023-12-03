@@ -21,9 +21,8 @@ public abstract class Enclos {
 	
 	/**
 	 * CONSTRUCTEUR
-	 * @param nom
-	 * @param superficie
-	 * @param nbMaxCreatures
+	 * @param nom de l'enclos
+	 * @param superficie de l'enclos
 	 */
 	public Enclos(String nom, double superficie) {
 		this.nomEspece = null;
@@ -37,26 +36,51 @@ public abstract class Enclos {
 
 	
 	/**
-	 * Getters
+	 * Recuperer le nom de l'espece contenu dans l'enclos
+	 * @return le nom de l'espece
 	 */
 	public Enum_Especes getNomEspece() {
 		return nomEspece;
 	}
+	/**
+	 * Recuperer le nom de l'enclos
+	 * @return le nom de l'enclos
+	 */
 	public String getNom() {
 		return nom;
 	}
+	/**
+	 * Recuperer la superficie de l'enclos
+	 * @return la superficie en mètres²
+	 */
 	public double getSuperficie() {
 		return superficie;
 	}
+	/**
+	 * Recuperer le nombre maximum de creature qu'il peut y avoir dans l'enclos
+	 * @return le nombre max de créatures
+	 */
 	public int getNbMaxCreatures() {
 		return CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX;
 	}
+	/**
+	 * Recuperer le nombre de creature qu'il y a actuellement dans l'enclos
+	 * @return le nombre de créatures présentent
+	 */
 	public int getNbCreatures() {
 		return nbCreatures;
 	}
+	/**
+	 * Recuperer la liste des créatures présentent dans l'enclos
+	 * @return un dictionnaire contenant les créatures et leurs index
+	 */
 	public TreeMap<Integer, Creature> getListeCreatures() {
 		return listeCreatures;
 	}
+	/**
+	 * Recuperer le degré de propreté de l'enclos
+	 * @return le degré de propreté de l'enclos
+	 */
 	public Enum_DegrePropreteEnclos getDegreProprete() {
 		return degreProprete;
 	}
@@ -185,8 +209,8 @@ public abstract class Enclos {
 	 * Methode permettant d'afficher les creatures qui ne sont plus en vie
 	 * et de les supprimer de l'enclos
 	 * 
-	 * @return la chaine de caractère contenant les informations
-	 * @throws Exception 
+	 * @return la chaine de caractère contenant la liste des créatures mortes dans l'enclos
+	 * @throws Exception si problème lors de la recherche des créatures mortes
 	 */
 	public String creaturesMortes() throws Exception {
 	    String chaine = "Les créatures mortes dans " + nom + " :\n";
@@ -250,6 +274,7 @@ public abstract class Enclos {
 	/**
 	 * Methode pour nourrir les creatures
 	 * 
+	 * @throws Exception si il y a une ou plusieurs creatures mortes qui ne peuvent pas manger
 	 */
 	public void nourrirCreatures () throws Exception {
 		for (Creature creature : listeCreatures.values()) {
@@ -260,7 +285,7 @@ public abstract class Enclos {
 	
 	/**
 	 * Methode pour soigner les creatures d'un enclos
-	 * @throws Exception 
+	 * @throws Exception si une ou plusieurs créatures sont mortes
 	 */
 	public void soignerCreatures() throws Exception {
 		for (Creature creature : listeCreatures.values()) {
@@ -346,8 +371,9 @@ public abstract class Enclos {
      * 
      * @param sexe Le sexe de la créature souhaitée
      * @return La créature sélectionnée aléatoirement
+	 * @throws Exception s'il y a un problème lors de la recherche de créature
      */
-    public Creature selectionnerCreatureAleatoireParSexe(Enum_Sexe sexe) {
+    public Creature selectionnerCreatureAleatoireParSexe(Enum_Sexe sexe) throws Exception {
         // Créer une liste pour stocker les créatures correspondant au sexe spécifié
         List<Creature> creaturesDuSexe = new ArrayList<>();
         // Filtrer les créatures par sexe
@@ -366,16 +392,19 @@ public abstract class Enclos {
                 creat = creaturesDuSexe.get(indexAleatoire);
         	}
         	return creat;
-        } else {
-            // Aucune créature du sexe spécifié trouvée
-            return null;
-        }
+        } 
+        else 
+            throw new Exception ("Pas de creature de ce type dans l'enclos");
     }
     
     
     /**
      * Methode permettant de concevoir un enfant selon le type de creature
-     * @throws Exception 
+     * 
+     * @param femelle La mère de l'enfant qui va être créé
+     * @param male Le père de l'enfant qui va être créé
+     * @return un entier correspondant au type de la creature (1 pour Vivipare, 2 pour Ovipare)
+     * @throws Exception s'il y a un problème lors de la conception de l'enfant
      */
     public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (femelle.isVivant() && femelle instanceof Vivipare) {
@@ -450,7 +479,7 @@ public abstract class Enclos {
 	
 	/**
 	 * Methode pour degrader l'etat de l'ensemble des creatures de l'enclos
-	 * @throws Exception 
+	 * @throws Exception si l'une des créatures est morte dans l'enclos
 	 */
 	public void degradationEtatCreatures() throws Exception {
 		for (Creature c : listeCreatures.values()) {

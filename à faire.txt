@@ -1,27 +1,23 @@
 Dossier Spécification
-	Page de garde
 	UML
 	Cloture du travail
 
+
 Dossier Manuel d'utilisation
-	Page de garde
-	Actions supplémentaires
+	Actions supplémentaires (compléter les à faire)
 	Scénarios
 	Erreurs
 
-Documentation complète générée par Javadoc
+
+Documentation complète générée par Javadoc (à mettre à jour, dossier Les Documents/JavaDoc)
+
 
 Fichier Read-Me
 
 
-Pour l'application (code)
-	Durée de vie du zoo 
-	Modification Affecter rang Lycanthrope (au moins 1 par rang)
-
-
-
 
 Les problèmes dans le code
-	
+	Conception ovipare --> "ventre vide"
+	Selection aleatoire d'une creature dans un enclos
 	
 	

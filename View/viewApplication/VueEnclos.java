@@ -117,15 +117,27 @@ public enum VueEnclos {
     private final ArrayList<String> lignes;
 
 
+    /**
+     * Constructeur
+     * @param libelle de l'enclos
+     * @param lignes liste des lignes pour l'affichage de l'enclos
+     */
     VueEnclos(String libelle, ArrayList<String> lignes) {
         this.libelle = libelle;
         this.lignes = lignes;
     }
 
+    /**
+     * Methode permettant de recuperer le libelle pour l'affichage de l'enclos
+     * @return une chaine de caractère contenant le libelle
+     */
     public String getLibelle() {
         return libelle;
     }
-
+    /**
+     * Methode permettant de recuperer l'ensemble des lignes pour l'affichage de l'enclos
+     * @return uune liste contenant les lignes
+     */
     public ArrayList<String> getLignes() {
         return lignes;
     }

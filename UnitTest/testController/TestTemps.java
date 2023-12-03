@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import controllerTemps.GestionnaireTemps;
 import static org.junit.Assert.*;
 
+/**
+ * Classe de test pour la gestion du temps
+ */
 public class TestTemps {
 	
 	GestionnaireTemps gestionnaireTemps;

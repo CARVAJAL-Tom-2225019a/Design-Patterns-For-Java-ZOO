@@ -1,8 +1,17 @@
 package references;
 
+/**
+ * Classe contenant l'ensemble des constantes du programme
+ * 
+ * Constitue les pramaètres de la simulation qui peuvent être changé facilement
+ */
 public class CONSTANTES {
 
-	public static int TEMPS_APPLICATION_SLEEP = 6000;
+	public static int TEMPS_APPLICATION_SLEEP = 5000;
+	
+	public static int ANNEE_DEPART=2024;
+	public static int MOIS_DEPART=1;
+	public static int JOUR_DEPART=1;
 	
 	public static int DUREE_VIE_ZOO = 15;
 	
@@ -32,4 +41,10 @@ public class CONSTANTES {
 	public static int MAX_RANG_DOMINATION = 5;
 	public static int MAX_FACTEUR_IMPETUOSITE=5;
 	public static int SEUIL_FACTEUR_DOMINATION = -5;
+	
+	
+	/**
+	 * Constructeur
+	 */
+	public CONSTANTES() { }
 }

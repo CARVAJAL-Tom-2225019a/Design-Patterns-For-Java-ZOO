@@ -45,16 +45,26 @@ public abstract class Vivipare extends Creature {
     
 	
     /**
-     * Getters
+     * Recuperer le nombre de jour restant avant la mise au monde de
+     * l'enfant
+     * @return le nombre de jours correspondant
      */
     public int getNbJourConceptionRestantAvantMiseABas() {
 		return nbJourConceptionRestantAvantMiseABas;
 	}
     
+    /**
+     * Methode permettant de remettre a zero le compteur de jour restant
+     * avant la naissance (apres qu'un enfant soit mis au monde)
+     */
     public void remiseAZeroApresNaissance() {
     	nbJourConceptionRestantAvantMiseABas = 0;
     }
-
+    
+    /**
+     * Savoir si la creature est enceinte
+     * @return true si elle est enceinte, sinon false
+     */
     public boolean isEnceinte() {
     	return nbJourConceptionRestantAvantMiseABas > 0;
     }
@@ -64,8 +74,6 @@ public abstract class Vivipare extends Creature {
      * Méthode pour construire un enfant
      * 
      * @param papa	correspond a la deuxieme creature qui permettra de concevoir enfant
-     * @return String qui permet de notifier que l'enfant a ete concu
-     * 
      */
     // TODO : gestion sauvegarde généalogie
     public void concevoirUnEnfant(Vivipare papa, int duree) throws Exception {
@@ -111,9 +119,6 @@ public abstract class Vivipare extends Creature {
 	/**
      * Méthode pour mettre bas une nouvelle créature vivipare.
      * 
-     * @param sexe   Le sexe de la nouvelle créature.
-     * @param poids  Le poids de la nouvelle créature.
-     * @param taille La taille de la nouvelle créature.
      * @return Une instance de la classe Creature qui né.
      * @throws Exception Si le vivipare n'est pas vivant ou s'il n'est pas de sexe femelle.
      */
@@ -125,7 +130,6 @@ public abstract class Vivipare extends Creature {
     
     /**
      * Methode pour decrementer le nombre de jour restant
-     * @throws Exception 
      */
     public int decrementerNombreJourRestantAvantNaissance (){
     	if (nbJourConceptionRestantAvantMiseABas > 0) {

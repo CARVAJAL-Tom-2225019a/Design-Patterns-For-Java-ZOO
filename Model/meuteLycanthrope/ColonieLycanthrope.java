@@ -7,6 +7,9 @@ import java.util.Set;
 import creaturesImplemente.Lycanthrope;
 import enclosImplemente.EnclosLycanthrope;
 
+/**
+ * Classe représentatant l'unique colonie de lycanthrope du zoo
+ */
 public class ColonieLycanthrope {
 	
 	private static ColonieLycanthrope instance;
@@ -43,7 +46,8 @@ public class ColonieLycanthrope {
     }
 
     /**
-     * Getters
+     * Recuperer la liste des meutes de la colonie
+     * @return un ensemble contenant les meutes
      */
     public Set<Meute> getListeMeutes() {
         return listeMeutes;
@@ -51,7 +55,9 @@ public class ColonieLycanthrope {
 
     
     /**
-     * Ajouter une meute
+     * Ajouter une meute à la colonie
+     * 
+     * @param m la meute à ajouter
      */
     public void addMeute(Meute m) {
         listeMeutes.add(m);
@@ -61,6 +67,7 @@ public class ColonieLycanthrope {
     /**
      * Supprimer une meute
      * 
+     * @param m la meute à supprimer
      * @throws Exception si la meute n'existe pas
      */
     public void removeMeute(Meute m) throws Exception {
@@ -72,6 +79,8 @@ public class ColonieLycanthrope {
     
     /**
      * Ajouter un enclos
+     * 
+     * @param e L'enclos à ajouter à la colonie
      */
     public void addEnclos(EnclosLycanthrope e) {
         listeEnclos.add(e);
@@ -81,6 +90,7 @@ public class ColonieLycanthrope {
     /**
      * Supprimer un enclos
      * 
+     * @param e l'enclos à supprimer de la colonie
      * @throws Exception si l'enclos n'existe pas
      */
     public void removeEnclos(EnclosLycanthrope e) throws Exception {
@@ -107,7 +117,7 @@ public class ColonieLycanthrope {
     /**
      * Verification si besoin nouvelle meute
      * @return La chaine contenant les meutes créées
-     * @throws Exception 
+     * @throws Exception  si problème lors de la recherche
      */
     public String verificationBesoinNouvelleMeute() throws Exception {
         String chaine = "";
@@ -125,8 +135,9 @@ public class ColonieLycanthrope {
     /**
      * Verification saison des amours
      * 
+     * @param dateActuelle sous forme de chaine de caractère (YYY-MM-JJ)
      * @return La liste des femelles encceintes
-     * @throws Exception
+     * @throws Exception si problème lors de la vérification
      */
     public Set<Lycanthrope> verificationSaisonAmour(String dateActuelle) throws Exception {
         Set<Lycanthrope> listeFemelleEnceinte = new HashSet<Lycanthrope>();

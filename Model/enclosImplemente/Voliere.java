@@ -18,10 +18,8 @@ public class Voliere extends Enclos {
     /**
      * Constructeur de la classe Voliere.
      *
-     * @param nomEspece       Le nom de l'espèce hébergée dans la volière.
      * @param nom             Le nom de la volière.
      * @param superficie      La superficie de la volière.
-     * @param nbMaxCreatures  Le nombre maximum de créatures que la volière peut accueillir.
      * @param hauteur         La hauteur de la volière.
      */
     public Voliere(String nom, double superficie, double hauteur) {
@@ -31,12 +29,17 @@ public class Voliere extends Enclos {
     }
     
     
-    /*
-     * Getters
+    /**
+     * Methode permettant de recuperer la hauteur de la voliere
+     * @return la hauteur en mètres
      */
     public double getHauteur() {
     	return hauteur;
     }
+    /**
+	 * Methode permettant de recuperer l'etat du toit
+	 * @return l'etat du toit selon enum
+	 */
     public Enum_DegrePropreteEnclos getEtatToit() {
     	return etatToit;
     }

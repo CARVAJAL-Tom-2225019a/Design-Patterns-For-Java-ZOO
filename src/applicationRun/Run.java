@@ -22,7 +22,17 @@ public class Run {
     static ZooFantastique zoo = ZooFantastique.getInstance();
     
     public static boolean utilisateurControle;
+    
+    /**
+     * Constructeur
+     */
+    public Run() { }
 
+    /**
+     * Point d'entrée de l'application
+     * @param args vide
+     * @throws Exception si une erreur survient lors de l'éxécution de l'application
+     */
     public static void main(String[] args) throws Exception {
         // Point d'entrée de la simulation
 

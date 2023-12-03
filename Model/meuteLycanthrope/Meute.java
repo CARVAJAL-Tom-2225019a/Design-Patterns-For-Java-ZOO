@@ -32,7 +32,7 @@ public class Meute {
 	 * @param rangPossible Les rangs de domination possibles au sein de la meute
 	 * @throws Exception 
 	 */
-	public Meute(String nomMeute, Lycanthrope femelleAlpha, Lycanthrope maleAlpha, int CapaciteMeute, 
+	public Meute(String nomMeute, Lycanthrope femelleAlpha, Lycanthrope maleAlpha, int capaciteMeute, 
 			Set<Enum_RangDomination> rangPossible) throws Exception {
 		this.nomMeute = nomMeute;
 		this.rangPossible=rangPossible; 
@@ -44,7 +44,7 @@ public class Meute {
 		maleAlpha.setRangDomination(Enum_RangDomination.ALPHA);
 		maleAlpha.calculerForce();
 		coupleAlpha = new CoupleAlpha(femelleAlpha, maleAlpha);
-		this.capaciteMeute = CapaciteMeute;
+		this.capaciteMeute = capaciteMeute;
 		this.listeLoup = new HashSet<Lycanthrope>();
 		addLoup(femelleAlpha);
 		addLoup(maleAlpha);
@@ -53,30 +53,52 @@ public class Meute {
 	
 	
 	/**
-	 * Getters
+	 * Methode permettant de recuperer le couple alpha de la meute
+	 * @return le couple alpha de la meute
 	 */
 	public CoupleAlpha getCoupleAlpha() {
 		return coupleAlpha;
 	}
+	/**
+	 * Methode permettant de recuperer la capacite de la meute
+	 * @return la capacite de la meute
+	 */
 	public int getCapaciteMeute() {
 		return capaciteMeute;
 	}
+	/**
+	 * Methode permettant de recuperer les loups appartenant a la meute
+	 * @return un ensemble de loups de la meute
+	 */
 	public Set<Lycanthrope> getListeLoup() {
 		return listeLoup;
 	}
+	/**
+	 * Methode permettant de recuperer les rangs que peuvent prendre les loups dans la meute
+	 * @return un ensemble contenant les rangs possibles
+	 */
 	public Set<Enum_RangDomination> getRangPossible() {
 		return rangPossible;
 	}
+	/**
+	 * Methode permettant de recuperer l'enclos où se trouve la meute
+	 * @return l'enclos où se trouve la meute
+	 */
 	public Enclos getEnclosReference() {
 		return enclosReference;
 	}
+	/**
+	 * Methode permettant de recuperer le nom de la meute
+	 * @return le nom de la meute
+	 */
 	public String getNomMeute() {
 		return nomMeute;
 	}
 	
 	
 	/**
-	 * Setters
+	 * Modifier l'enclos de reference (là où se trouve la meute)
+	 * @param e l'enclos
 	 */
 	public void setEnclosReference (Enclos e) {
 		enclosReference = e;
@@ -106,48 +128,48 @@ public class Meute {
 	 * Méthode permettant d'affecter un rang de domination à un lycanthrope en fonction de sa force par rapport
 	 * aux autres membres de la meute
 	 * 
-	 * @param loup Le lycanthrope
+	 * @param loup Le lycanthrope auquel il faut attribuer le rang
 	 */
 	public void affecterRang(Lycanthrope loup) {
-	    double forceLoup = loup.getForce();
-	    double forceAlpha = coupleAlpha.getMaleAlpha().getForce();
-	    // Si la liste de loups est vide, le loup devient OMEGA
-	    if (listeLoup.isEmpty()) {
-	        loup.setRangDomination(Enum_RangDomination.OMEGA);
-	        return;
-	    }
-	    // Si le loup a une force supérieure au male alpha, il devient ALPHA
-	    if (forceLoup > forceAlpha) {
-	        loup.setRangDomination(Enum_RangDomination.ALPHA);
-	        return;
-	    }
-	    // Vérifier les rangs déjà attribués et attribuer le premier rang disponible
-	    for (Enum_RangDomination rang : rangPossible) {
-	        boolean rangPris = false;
-	        for (Lycanthrope l : listeLoup) {
-	            if (l.getRangDomination() == rang) {
-	                rangPris = true;
-	                break;
-	            }
-	        }
-	        if (!rangPris) {
-	            loup.setRangDomination(rang);
-	            return;
-	        }
-	    }
-	    // Si tous les rangs sont pris, comparer la force et attribuer le rang en conséquence
-	    Enum_RangDomination rangAttribue = Enum_RangDomination.OMEGA;
-	    for (Lycanthrope l : listeLoup) {
-	        if (forceLoup > l.getForce()) {
-	            rangAttribue = l.getRangDomination();
-	        }
-	    }
-	    // Attribution du rang après avoir parcouru la liste des loups
-	    loup.setRangDomination(rangAttribue);
-	}
-	
+		double forceLoup = loup.getForce();
+        double forceAlpha = coupleAlpha.getMaleAlpha().getForce();
+        // Si la liste de loups est vide, le loup devient OMEGA
+        if (listeLoup.isEmpty()) {
+            loup.setRangDomination(Enum_RangDomination.OMEGA);
+            listeLoup.add(loup);
+            return;
+        }
+        // Si le loup a une force supérieure au male alpha, il devient ALPHA
+        if (forceLoup > forceAlpha) {
+            loup.setRangDomination(Enum_RangDomination.ALPHA);
+            listeLoup.add(loup);
+            return;
+        }
+        // Initialisation d'un HashSet pour suivre les rangs déjà attribués
+        Set<Enum_RangDomination> rangsAttribues = new HashSet<>();
+        for (Lycanthrope l : listeLoup) {
+            rangsAttribues.add(l.getRangDomination());
+        }
+        // Vérifier les rangs déjà attribués et attribuer le premier rang disponible
+        for (Enum_RangDomination rang : rangPossible) {
+            if (!rangsAttribues.contains(rang)) {
+                loup.setRangDomination(rang);
+                listeLoup.add(loup);
+                return;
+            }
+        }
+        // Si tous les rangs sont pris, comparer la force et attribuer le rang en conséquence
+        Enum_RangDomination rangAttribue = Enum_RangDomination.OMEGA;
+        for (Lycanthrope l : listeLoup) {
+            if (forceLoup > l.getForce()) {
+                rangAttribue = l.getRangDomination();
+            }
+        }
+        // Attribution du rang après avoir parcouru la liste des loups
+        loup.setRangDomination(rangAttribue);
+        listeLoup.add(loup);
+    }
 
-	
 
 	/**
 	 * Méthode permettant de supprimer un lycanthrope de la meute

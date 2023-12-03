@@ -193,20 +193,36 @@ public enum VueCreature {
     private int largeur;
     private ArrayList<String> lignes;
 
+    /**
+     * Constructeur
+     * @param hauteur de la creature à afficher
+     * @param largeur de la creature à afficher
+     * @param lignes à afficher
+     */
     VueCreature( int hauteur,int largeur,ArrayList<String> lignes) {
         this.hauteur = hauteur;
         this.largeur = largeur;
         this.lignes = lignes;
     }
 
+	/**
+	 * Recuperer l'nesemble des lignes à afficher pour la creature
+	 * @return une liste contenant les lignes
+	 */
     public ArrayList<String> getLignes() {
         return lignes;
     }
-
+    /**
+     * Recuperer la largeur de la creature pour son affichage
+     * @return la largeur
+     */
     public int getLargeur() {
         return largeur;
     }
-
+    /**
+     * Recuperer la hauteur de la creature pour son affichage
+     * @return la hauteur
+     */
     public int getHauteur() {
         return hauteur;
     }

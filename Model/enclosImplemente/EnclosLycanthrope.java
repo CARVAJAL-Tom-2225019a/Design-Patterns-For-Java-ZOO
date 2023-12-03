@@ -53,7 +53,7 @@ public class EnclosLycanthrope extends Enclos {
 	
 	/**
 	 * Méthode permettant de passer à l'année pour les lycanthropes
-	 * @throws Exception 
+	 * @throws Exception si problème lors du passage d'année
 	 */
 	public void passageAnneLycanthrope() throws Exception {
 		if (meutePresente != null)
@@ -65,7 +65,7 @@ public class EnclosLycanthrope extends Enclos {
 	/**
 	 * Méthode permettant de vérifier s'il est nécessaire de créer une nouvelle meute
 	 * @return La nouvelle meute créée, ou null s'il n'y a pas de besoin
-	 * @throws Exception 
+	 * @throws Exception  si problème lors de la recherche
 	 */
 	public Meute isNecessiteNouvelleMeute() throws Exception {
 		Lycanthrope maleA = null;

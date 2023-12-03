@@ -25,9 +25,6 @@ public class GestionnaireTemps {
 
     /**
      * Méthode statique pour obtenir une instance unique du gestionnaire de temps
-     * @param annee L'année initiale
-     * @param mois Le mois initial
-     * @param jour Le jour initial
      * @return L'instance du gestionnaire de temps
      */
     public static GestionnaireTemps getInstance() {
@@ -65,7 +62,7 @@ public class GestionnaireTemps {
     
     /**
      * Ajoute la quantite d'année, de mois et de jours selon l'action choisi
-     * @param action
+     * @param action qui est réalisé
      */
     public boolean incrementerTemps(Enum_ActionsPossibles action) {
     	int oldAnnee = getAnnee();

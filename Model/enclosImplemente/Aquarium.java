@@ -22,9 +22,7 @@ public class Aquarium extends Enclos {
      *
      * @param nom             Le nom de l'aquarium
      * @param superficie      La superficie de l'aquarium
-     * @param nbMaxCreatures  Le nombre maximum de créatures que l'aquarium peut accueillir
      * @param profondeurBassin La profondeur du bassin de l'aquarium
-     * @param saliniteEau     La salinité initiale de l'eau dans l'aquarium
      */
     public Aquarium(String nom, double superficie, double profondeurBassin) {
         super(nom, superficie);
@@ -35,14 +33,23 @@ public class Aquarium extends Enclos {
     
     
     /**
-     * Getters
+     * Recuperer la salinite de l'eau de l'aquarium
+     * @return la salinite de l'eau
      */
     public double getSaliniteEau() {
     	return saliniteEau;
     }
+    /**
+     * Recuperer le niveau d'eau dans l'aquarium
+     * @return le niveau d'eau
+     */
     public double getNiveauEau() {
     	return niveauEau;
     }
+    /**
+     * Recuperer la profondeur de l'aquarium
+     * @return la profondeur du bassin
+     */
     public double getProfondeurBassin () {
     	return profondeurBassin;
     }

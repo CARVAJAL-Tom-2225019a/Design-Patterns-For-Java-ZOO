@@ -81,8 +81,8 @@ public abstract class Creature {
     /**
      * Constructeur de la classe Creature a partir de deux parents.
      *
-     * @param Parent1
-     * @param Parent2
+     * @param Parent1 le premier parent de la creature
+     * @param Parent2 le deuxieme parent de la creature
      */
     public Creature(Creature Parent1, Creature Parent2) {
         this();
@@ -101,130 +101,222 @@ public abstract class Creature {
 
 
     /**
-     * Getters
+     * Modifier la duree de gestation de la creature
+     * @param dureeGestation
      */
     protected void setDureeGestation(int dureeGestation) {
         this.dureeGestation = dureeGestation;
     }
-
+    /**
+     * Recuperer duree de gestation de la creature
+     * pour son enfant
+     * @return la duree de gestation pour cette creature
+     */
     public int getDureeGestation() {
         return dureeGestation;
     }
-
+    /**
+     * Recuperer le nom de l'espece de a creature
+     * @return le nom de l'espece selon l'enumeration
+     */
     public Enum_Especes getNomEspece() {
         return nomEspece;
     }
-
+    /**
+     * Recuperer le sexe de la creature
+     * @return le sexe selon l'enumeration
+     */
     public Enum_Sexe getSexe() {
         return sexe;
     }
-
+    /**
+     * Recuperer le poids de la creature
+     * @return le poids en kg
+     */
     public double getPoids() {
         return poids;
     }
-
+    /**
+     * Recuperer la taille de la creature
+     * @return la taille en mètres
+     */
     public double getTaille() {
         return taille;
     }
-
+    /**
+     * Recuperation de l'age de la creature
+     * @return l'age 
+     */
     public int getAge() {
         return age;
     }
-
+    /**
+     * Recuperer l'indicateur de faim de la creature
+     * @return une valeur basse si la creature a faim
+     */
     public int getIndicateurFaim() {
         return indicateurFaim;
     }
-
+    /**
+     * Recuperer l'indicateur de sommeil de la creature
+     * @return une valeur basse si la creature a sommeil
+     */
     public int getIndicateurSommeil() {
         return indicateurSommeil;
     }
-
+    /**
+     * Recuperer l'indicateur de sante de la creature
+     * @return une valeur basse si la creature est en mauvaise santé
+     */
     public int getIndicateurSante() {
         return indicateurSante;
     }
-
+    /**
+     * Savoir si la creature est en train de dormir
+     * @return true si elle dort, sinon false
+     */
     public boolean isEnTrainDeDormir() {
         return enTrainDeDormir;
     }
-
+    /**
+     * Savoir si la creature est vivante
+     * @return true si elle est vivante, sinon false
+     */
     public boolean isVivant() {
         return vivant;
     }
-
+    /**
+     * Recuperer le bruit que fait la creature
+     * @return la chaine de caractère correspondant au bruit
+     */
     public String getBruit() {
         return bruit;
     }
-
+    /**
+     * Recuperer la categorie d'age dans laquelle se trouve la creature
+     * @return sa categorie selon l'enumeration
+     */
     public Enum_CategorieAge getCategorieAge() {
         return categorieAge;
     }
-
+    /**
+     * Recuperer le niveau de bonheur de la creature
+     * @return une valeur basse si la creature est malheureuse
+     */
     public int getBonheur() {
         return bonheur;
     }
-
+    /**
+     * Recuperer le niveau d'agressivite de la creature
+     * @return son niveau d'aggressivite selon l'enum
+     */
     public Enum_Aggressivite getAgressivite() {
         return agressivite;
     }
-
+    /**
+     * Recuperer les enfants de la creature
+     * @return une liste contenant les enfants de la creature
+     */
     public ArrayList<Creature> getListeEnfants() {
         return listeEnfants;
     }
-
+    /**
+     * Recuperer les parents de la creature
+     * @return une liste contenant les parents de la creature
+     */
     public ArrayList<Creature> getListeParents() {
         return listeParents;
     }
-
+    /**
+     * Recuperer le prenom de la creature
+     * @return le prenom
+     */
     public String getPrenom() {
         return prenom;
     }
-
+    /**
+     * Recuperer la force de la creature
+     * @return une valeur correspondant à la force
+     */
     public double getForce() {
         return force;
     }
-
+    /**
+     * Recuperer le nombre de combat gagné par la creature
+     * @return un entier 
+     */
     public int getCombatVaincu() {
         return combatVaincu;
     }
-
+    /**
+     * Recuperer la valeur nutritionnelle de la creature si elle est mangée
+     * @return une valeur
+     */
     public double getValeurNutrionelle() {
         return valeurNutrionelle;
     }
-
+    /**
+     * Recuperer le statut de la creature
+     * @return le statut selon l'enum
+     */
     public Enum_RangDomination getStatus() {
         return status;
     }
-
+    /**
+     * Modifier le niveau de bonheur de la creature
+     * @param bonheur que va prendre la creature
+     */
     public void setBonheur(int bonheur) {
         this.bonheur = bonheur;
     }
-
+    /**
+     * Modifier le niveau d'aggressivite de la creature
+     * @param aggressivite selon l'enum 
+     */
     public void setAgressivite(Enum_Aggressivite aggressivite) {
         this.agressivite = aggressivite;
     }
-
+    /**
+     * Modifier le nombre de combat vaincu
+     * @param combatVaincu a mettre a jour
+     */
     public void setCombatVaincu(int combatVaincu) {
         this.combatVaincu = combatVaincu;
     }
-
+    /**
+     * Modifier le niveau d'aggressivite de la creature
+     * @param status aggressivite selon l'enum 
+     */
     public void setStatus(Enum_RangDomination status) {
         this.status = status;
     }
-    
     /**
-     * Setters
+     * Modifier le nom de l'espece de la creature
+     * @param enumEspeces qu'elle devra prendre 
      */
     protected void setNomEspece(Enum_Especes enumEspeces) {
         this.nomEspece = enumEspeces;
     }
-
+    /**
+     * Modifier le bruit que fait la creature
+     * @param bruit sous forme de chaine de caractère
+     */
     protected void setBruit(String bruit) {
         this.bruit = bruit;
     }
-    // METHODE POUR LES TETS
+    /**
+     * Modifier le sexe de la creature
+     * Methode utilisé pour les tests unitaires
+     * @param sexe que va prendre la creature
+     */
     public void setSexe(Enum_Sexe sexe) {
         this.sexe = sexe;
     }
+    /**
+     * Modifier la force de la creature
+     * Methode utilisé pour les tests unitaires
+     * @param force que va prendre la creature
+     */
     public void setForce(double force) {
     	this.force = force;
     }
@@ -318,6 +410,8 @@ public abstract class Creature {
 
     /**
      * Méthode pour faire vieillir la créature d'un an.
+     * 
+     * @throws Exception si la creature n'est plus vivante
      */
     public void vieillir() throws Exception {
         if (vivant && age < CONSTANTES.MAX_AGE) {
@@ -425,7 +519,9 @@ public abstract class Creature {
     /**
      * Méthode pour générer un nombre aléatoire dans une fourchette
      *
-     * @return int
+     * @param min la valeur minimale désirée
+     * @param max la valeur maximale désirée
+     * @return int aleatoirement choisi
      */
     public int intAleatoire(int min, int max) {
         Random random = new Random();
@@ -437,7 +533,9 @@ public abstract class Creature {
      * Renvoi le gagnant du combat entre deux creatures this et param,
      * selon la force
      *
+     * @param other la creature que l'on veut combattre
      * @return Creature gagnante
+     * @throws Exception si une creature n'est pas en etat de se battre
      */
     public Creature combattre(Creature other) throws Exception {
         if (this.force > other.force) {
@@ -465,7 +563,6 @@ public abstract class Creature {
 
     /**
      * Methode permettant de calculer la force selon l'etat actuel de la creature
-     * @return la nouvelle force calculée
      */
     public void calculerForce() {
     	int facteurBonus = 0;

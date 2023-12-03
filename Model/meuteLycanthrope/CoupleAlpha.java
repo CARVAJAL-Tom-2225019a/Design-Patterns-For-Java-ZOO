@@ -23,22 +23,33 @@ public class CoupleAlpha {
 	}
 	
 	/**
-	 * Getters
+	 * Recuperer la femelle alpha du couple
+	 * @return le lycanthrope qui est la femelle alpha
 	 */
 	public Lycanthrope getFemelleAlpha() {
 		return femelleAlpha;
 	}
+	/**
+	 * Recuperer le male alpha du couple
+	 * @return le lycanthrope qui est le male alpha
+	 */
 	public Lycanthrope getMaleAlpha() {
 		return maleAlpha;
 	}
 	
 	
 	/**
-	 * Setters
+	 * Modifier la femelle alpha du couple
+	 * @param l la nouvelle femelle alpha
 	 */
 	public void setFemelleAlpha(Lycanthrope l) {
 		femelleAlpha=l;
 	}
+	
+	/**
+	 * Modifier le male alpha du couple
+	 * @param l le nouveau male alpha du couple
+	 */
 	public void setMaleAlpha(Lycanthrope l) {
 		maleAlpha=l;
 	}
