@@ -66,7 +66,7 @@ public abstract class Creature {
             this.prenom = Enum_PrenomMasculin.getRandomName().name();
         } else
             this.prenom = Enum_PrenomFeminin.getRandomName().name();
-        this.force = calculerForce();
+        calculerForce();
 
         // c'est abstrait comme classe donc pas grave si : 
         this.status = Enum_RangDomination.ALPHA; //a surcharger plus tard
@@ -96,7 +96,7 @@ public abstract class Creature {
         this.dureeGestation = Parent1.getDureeGestation();
         this.listeParents.add(Parent1);
         this.listeParents.add(Parent2);
-        this.force = calculerForce();
+        calculerForce();
     }
 
 
@@ -224,6 +224,9 @@ public abstract class Creature {
     // METHODE POUR LES TETS
     public void setSexe(Enum_Sexe sexe) {
         this.sexe = sexe;
+    }
+    public void setForce(double force) {
+    	this.force = force;
     }
 
     
@@ -464,9 +467,8 @@ public abstract class Creature {
      * Methode permettant de calculer la force selon l'etat actuel de la creature
      * @return la nouvelle force calculée
      */
-    public double calculerForce() {
-
-        int facteurBonus = 0;
+    public void calculerForce() {
+    	int facteurBonus = 0;
         if (sexe == Enum_Sexe.Male) {
             facteurBonus += 50;
         }
@@ -484,8 +486,7 @@ public abstract class Creature {
         if (status == Enum_RangDomination.ALPHA) {
             facteurBonus += 100;
         }
-        force = age + poids + taille + indicateurSante + indicateurFaim + indicateurSommeil + combatVaincu + facteurBonus;
-        return force;
+        this.force = age + poids + taille + indicateurSante + indicateurFaim + indicateurSommeil + combatVaincu + facteurBonus;
     }
 
 }

@@ -1,5 +1,7 @@
 package creaturesImplemente;
 
+import java.util.Objects;
+
 import base.*;
 import interfaces.*;
 import meuteLycanthrope.Meute;
@@ -43,7 +45,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		this.setAgressivite(Enum_Aggressivite.agressif);
 		this.setNomEspece(Enum_Especes.Lycanthrope);
 		this.setDureeGestation(dureeGestation);
-		this.setBruit( bruit);
+		this.setBruit(bruit);
 		this.calculerForce();
 		facteurDomination = 0;
 		rangDomination=null;
@@ -95,14 +97,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
     public Meute getMeute() {
     	return meute;
-    }
-    
-    
-    /**
-     * Setters
-     */
-    public void setMeute (Meute m) {
-    	this.meute = m;
     }
     
     
@@ -251,9 +245,9 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      */
     private String exprimerAppartenance() {
     	if (meute == null)
-    		return "Je suis "+getPrenom()+", un loup solitaire, et je n'ai peur peur de rien\n";
+    		return getPrenom()+" : Je suis un loup solitaire, et je n'ai peur peur de rien\n";
     	else
-    		return "Je suis "+getPrenom()+"\nMa meute, la meilleure, est "+meute+"\n";
+    		return getPrenom()+" : Ma meute, la meilleure.\n";
     }
     
     
@@ -268,7 +262,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (rangDomination.getValeur() >= loup.getRangDomination().getValeur()) {
     		if (meute==null || meute.getCoupleAlpha().getFemelleAlpha()!= loup) {
     			facteurDomination++;
-            	return "Je suis "+getPrenom()+", un "+rangDomination.getDescription()+", et je te domine toi "+loup.getRangDomination().getDescription();
+            	return getPrenom()+" : Je suis un "+rangDomination.getDescription()+", et je te domine toi "+loup.getPrenom()+" "+loup.getRangDomination().getDescription();
     		}
     		else
     			throw new Exception ("Domination impossible pour "+getPrenom());
@@ -288,7 +282,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	facteurDomination--;
     	// rang inferieur
     	rangDomination = rangDomination.getRangInferieur();
-    	return "Je suis un "+rangDomination.getDescription()+", et je me soumet a toi "+loup.getRangDomination().getDescription()+"\n";
+    	return this.getPrenom()+" : Je suis un "+this.rangDomination.getDescription()+", et je me soumet a toi "+loup.getPrenom()+" "+loup.getRangDomination().getDescription()+"\n";
     }
     
     
@@ -299,11 +293,11 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception si le loup n'est pas assez fort pour aggresser l'autre
      */
     private String exprimerAgressivite (Lycanthrope loup) throws Exception {
-    	String chaine =  "Je suis "+getPrenom()+", agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
+    	String chaine = getPrenom()+" : Je suis agressif d'un niveau de "+facteurImpetuosite+"/"+CONSTANTES.MAX_FACTEUR_IMPETUOSITE+"\n";
     	if (isPlusFort(loup))
     		chaine+=agresser(loup);
     	else
-    		chaine+="Je suis "+getPrenom()+".\nJe ne suis pas asses fort pour te defier"+loup.getPrenom()+"\n";
+    		chaine+=getPrenom()+"Je ne suis pas asses fort pour te defier "+loup.getPrenom()+"\n";
     	return chaine;
     }
     
@@ -324,10 +318,10 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
             	this.perdreNourriture();
             	this.perdreSommeil();
             	this.facteurDomination++;
-            	return "ATTAQUE DU LYCANTHROPE !\n";
+            	return "ATTAQUE DU LYCANTHROPE "+getPrenom()+" !\n";
     		}
     		else
-    			throw new Exception ("Impossible d'attaquer ce lycanthrope");
+    			throw new Exception (getPrenom()+ " ne peut pas attaquer "+loup.getPrenom());
     	}
     	else
     		throw new Exception ("Impossible d'attaquer la femelle alpha\n");
@@ -364,7 +358,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     private String entendreHurlement(Enum_ActionHurlement action, Lycanthrope loupOrigine) throws Exception {
     	if (super.isVivant() && !super.isEnTrainDeDormir()) {
     		if (action == Enum_ActionHurlement.Appartenance) {
-    			return "Je suis "+getPrenom()+", et je ne te crois pas superieur a moi !\n";
+    			return getPrenom()+" :  Je ne te crois pas superieur a moi "+loupOrigine.getPrenom()+" !\n";
     		}
     		// Exprimer domination
     		else if (action == Enum_ActionHurlement.Domination) {
@@ -378,7 +372,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		}
         	// Exprimer aggresivite
     		else if (action == Enum_ActionHurlement.Agressivite) {
-    			return "Tu ne me fais pas peur "+getPrenom()+" !\n";
+    			return getPrenom()+" : Tu ne me fais pas peur "+loupOrigine.getPrenom()+" !\n";
     		}
     		else
     			throw new Exception ("Choix hurlement lycanthrope invalide\n");
@@ -393,10 +387,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception
      */
     public void rejoindreMeute(Meute m) throws Exception {
-    	if (m.addLoup(this))
-    		meute = m;
-    	else
-    		throw new Exception ("Impossible pour "+getPrenom()+" de rejoindre cette meute");
+    	meute = m;
     }
     
     
@@ -406,12 +397,8 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception
      */
     public void seSeparerDeSaMeute() throws Exception {
-    	if(meute.removeLoup(this)) {
     		rangDomination = null;
     		meute = null;
-    	}
-    	else
-    		throw new Exception ("Le loup "+getPrenom()+" ne peut pas quitter sa meute");
     }
     
     
@@ -427,4 +414,28 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     }
 
     
+    /**
+     * Methode permettant de comparer deux lycanthropes
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Lycanthrope other = (Lycanthrope) obj;
+        if (!Objects.equals(getPrenom(), other.getPrenom()))
+        		return false;
+        if (getAge() != other.getAge())
+        		return false;
+        if (getSexe() != other.getSexe())
+        	return false;
+        if (getPoids() != other.getPoids())
+        	return false;
+        if (getTaille()!=other.getTaille())
+        	return false;
+        return true;
+    }
 }

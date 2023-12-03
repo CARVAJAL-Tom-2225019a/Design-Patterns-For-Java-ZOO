@@ -107,8 +107,9 @@ public class ColonieLycanthrope {
     /**
      * Verification si besoin nouvelle meute
      * @return La chaine contenant les meutes créées
+     * @throws Exception 
      */
-    public String verificationBesoinNouvelleMeute() {
+    public String verificationBesoinNouvelleMeute() throws Exception {
         String chaine = "";
         for (EnclosLycanthrope e : listeEnclos) {
         	Meute m = e.isNecessiteNouvelleMeute();

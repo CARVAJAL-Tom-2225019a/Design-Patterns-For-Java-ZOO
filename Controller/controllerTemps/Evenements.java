@@ -30,9 +30,23 @@ public class Evenements {
     	modifAleatoireEtatEnclos();
     	// Verification etat creature
     	verificationEtatCreature();
+    	// Recalculer force des creatures
+    	recalculerForceCreatures();
 	}
     
-    
+    /**
+     * Methode permettant de recalculer la force de toutes les creatures de l'enlos
+     * chaque année
+     */
+	private static void recalculerForceCreatures() {
+		for (Enclos enclos : zoo.getListeEnclos() ) {
+			for (Creature creat : enclos.getListeCreatures().values()) {
+				creat.calculerForce();
+			}
+		}
+	}
+
+
 	/**
      * Méthode pour modifier aléatoirement l'état des créatures dans le zoo
      *
@@ -41,19 +55,19 @@ public class Evenements {
     public static void modifAleatoireStatutCreature() throws Exception {
     	Random random = new Random(System.currentTimeMillis());
         // Nombre aléatoire d'enclos à modifier
-        int nombreEnclosAModifier = random.nextInt(zoo.getListeEnclos().size()-3) + 2;
+        int nombreEnclosAModifier = random.nextInt(zoo.getListeEnclos().size()-4) + 1;
         // Parcourir un nombre aléatoire d'enclos
         for (int i = 0; i < nombreEnclosAModifier; i++) {
             // Sélectionner un enclos au hasard
-            int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size());
+            
             Enclos enclos = null;
             while (enclos==null || enclos.getNbCreatures()==0) {
+            	int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size())+1;
             	enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
             }
          // Nombre aléatoire de créatures à modifier dans cet enclos
             int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
-            int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;
-
+            int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;;
             // Obtenir la liste des créatures dans cet enclos
             Map<Integer, Creature> creatures = enclos.getListeCreatures();
             // Modifier aléatoirement l'état du nombre aléatoire de créatures

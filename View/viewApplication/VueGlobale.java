@@ -123,7 +123,7 @@ public class VueGlobale {
                 add("  # Sexe  : \033[32m" + creature.getSexe() + "\033[0m         Age : \033[32m" + creature.getAge() + "ans \033[0m ");
                 add("  # Poids : \033[32m" + creature.getPoids() + " kg \033[0m    Taille : \033[32m" + creature.getTaille() + " m \033[0m ");
                 add("  # Vivant : \033[32m" + creature.isVivant() + "\033[0m       ");
-                add("  # Agressivité        : \033[32m" + creature.getAgressivite() + "\033[0m ");
+                add("  # Agressivite        : \033[32m" + creature.getAgressivite() + "\033[0m ");
                 add("  # Force              : \033[32m" + creature.getForce()+ "\033[0m ");
                 add("  # Combat(s) gagné(s) : \033[32m" + creature.getCombatVaincu()+ "\033[0m ");
                 if (!creature.getListeParents().isEmpty()) {
@@ -205,7 +205,7 @@ public class VueGlobale {
                         add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%\033[0m"); //TODO envisager changement maxindicateur
                         add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%\033[0m");
                         add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%\033[0m");
-                        add("  # Santé moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%\033[0m");
+                        add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%\033[0m");
                     }
                     else {
                     	add("  #");
@@ -216,7 +216,7 @@ public class VueGlobale {
                     	add("  #");
                     	add("  #");
                     }
-                    add("  # Propreté enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+ "\033[0m");
+                    add("  # Proprete enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+ "\033[0m");
                     add("  # Etat toit       : \033[32m" + afficherStatBar(((Voliere) enclos).getEtatToitNumber(), 3) + " " + ((Voliere) enclos).getEtatToit()+ "\033[0m");
                     add("  # ");
                     add("  # Nombre individu par classe d'ages :");

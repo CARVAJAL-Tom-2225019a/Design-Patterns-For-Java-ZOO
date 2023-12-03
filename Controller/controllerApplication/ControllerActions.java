@@ -263,7 +263,6 @@ public class ControllerActions {
 			String chaine = controlPrincipal.nouvelleAnnee();
 			if (chaine != null)
 				VueGlobale.afficher(chaine);
-
             controlPrincipal.verificationEnfants();
             // Tri des clés
             for (Enclos e : zoo.getListeEnclos())
@@ -277,7 +276,7 @@ public class ControllerActions {
             VueGlobale.afficher("\nLES CREATURES QUI ONT UN BESOIN :");
             for (Enclos e : zoo.getListeEnclos())
             	temp = e.getCreaturesAyantUnBesoin();
-            if (temp.size()>0)
+            if (temp!=null && temp.size()>0)
             	for (Creature c : temp)
             		VueGlobale.afficherCreature(c);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);

@@ -84,10 +84,14 @@ public class ControllerGestionAuto {
         if (zoo.getListeEnclos().isEmpty()) {
             return null;
         }
-        // Obtenez un indice aléatoire
-        int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
+        Enclos enclos=null;
+        while (enclos == null) {
+        	 // Obtenez un enclos aléatoire
+            int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
+            enclos = (Enclos) zoo.getListeEnclos().toArray()[indiceAleatoire];
+        }
         // Retournez l'enclos correspondant à l'indice aléatoire
-        return (Enclos) zoo.getListeEnclos().toArray()[indiceAleatoire];
+        return enclos;
 	}
 	
 	
@@ -102,7 +106,7 @@ public class ControllerGestionAuto {
 			if (e.isEnclosMauvaisEtat())
 				return e;
 		}
-		return null;
+		return recuperationEnclosAleatoire();
 	}
 	
 	
@@ -113,10 +117,10 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureFaim() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.isCreatureOntFaim())
+			if (e.getListeCreatures().size()>0 && e.isCreatureOntFaim())
 				return e;
 		}
-		return null;
+		return recuperationEnclosAleatoire();
 	}
 	
 	
@@ -127,10 +131,10 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureSommeil() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.isCreatureOntSommeil())
+			if (e.getListeCreatures().size()>0 && e.isCreatureOntSommeil())
 				return e;
 		}
-		return null;
+		return recuperationEnclosAleatoire();
 	}
 	
 	
@@ -141,10 +145,10 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureMauvaiseSante() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.isCreatureOntSommeil())
+			if (e.getListeCreatures().size()>0 && e.isCreatureSontMalade())
 				return e;
 		}
-		return null;
+		return recuperationEnclosAleatoire();
 	}
 	
 	
@@ -155,10 +159,10 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureDort() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.isCreaturesDorment())
+			if (e.getListeCreatures().size()>0 && e.isCreaturesDorment())
 				return e;
 		}
-		return null;
+		return recuperationEnclosAleatoire();
 	}
 	
 }

@@ -52,8 +52,9 @@ public class EnclosLycanthrope extends Enclos {
 	
 	/**
 	 * Méthode permettant de passer à l'année pour les lycanthropes
+	 * @throws Exception 
 	 */
-	public void passageAnneLycanthrope() {
+	public void passageAnneLycanthrope() throws Exception {
 		if (meutePresente != null)
 			meutePresente.verificationSeuilFacteurDominationMeute();
 		isNecessiteNouvelleMeute();
@@ -63,8 +64,9 @@ public class EnclosLycanthrope extends Enclos {
 	/**
 	 * Méthode permettant de vérifier s'il est nécessaire de créer une nouvelle meute
 	 * @return La nouvelle meute créée, ou null s'il n'y a pas de besoin
+	 * @throws Exception 
 	 */
-	public Meute isNecessiteNouvelleMeute() {
+	public Meute isNecessiteNouvelleMeute() throws Exception {
 		Lycanthrope maleA = null;
 		Lycanthrope femelleA = null;
 		if (meutePresente == null) {

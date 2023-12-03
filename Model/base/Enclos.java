@@ -357,11 +357,15 @@ public abstract class Enclos {
             }
         }
         // Vérifier s'il y a des créatures du sexe spécifié
+        Creature creat = null;
         if (!creaturesDuSexe.isEmpty()) {
             // Sélectionner aléatoirement une créature
-            Random random = new Random();
-            int indexAleatoire = random.nextInt(creaturesDuSexe.size());
-            return creaturesDuSexe.get(indexAleatoire);
+        	while(creat==null) {
+        		Random random = new Random();
+                int indexAleatoire = random.nextInt(creaturesDuSexe.size());
+                creat = creaturesDuSexe.get(indexAleatoire);
+        	}
+        	return creat;
         } else {
             // Aucune créature du sexe spécifié trouvée
             return null;
