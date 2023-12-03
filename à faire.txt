@@ -15,13 +15,7 @@ Fichier Read-Me
 
 
 Pour l'application (code)
-	Amélioration gestion automatique (selon état du zoo, des creatures...)
 	Durée de vie du zoo 
-	Affichage des meutes à améliorer
-	Choix action hurlement
-	Choix action dominer male alpha
-
-	Test Meute
 	Modification Affecter rang Lycanthrope (au moins 1 par rang)
 
 

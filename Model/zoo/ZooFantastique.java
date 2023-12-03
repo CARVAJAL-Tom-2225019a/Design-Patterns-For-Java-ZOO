@@ -7,6 +7,7 @@ import java.util.Set;
 
 import base.*;
 import creaturesImplemente.Oeuf;
+import enclosImplemente.EnclosLycanthrope;
 import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
 
@@ -208,6 +209,52 @@ public class ZooFantastique {
         listeOeufs = new HashSet<>();
         listeFemelleEnceinte = new HashSet<>();
         colonie.clear();
+    }
+    
+    
+    /**
+     * Methode permettant de voir la liste de nom des enclos
+     * qui ne sont pas vide
+     * 
+     * @return La chaine contenant les informations
+     */
+    public String voirNomsEnclosPasVide() {
+    	String chaine = "LES ENCLOS QUI NE SONT PAS VIDE : \n";
+    	for (Enclos e : listeEnclos) {
+    		if (e.getListeCreatures().size() > 0)
+    			chaine+="  - "+e.getNom()+"\n";
+    	}
+    	return chaine;
+    }
+    
+    
+    /**
+     * Methode permettant de voir la liste de nom de tous les enclos
+     * 
+     * @return La chaine contenant les informations
+     */
+    public String voirNomsEnclos() {
+    	String chaine = "LES ENCLOS : \n";
+    	for (Enclos e : listeEnclos) {
+    		chaine+="  - "+e.getNom()+"\n";
+    	}
+    	return chaine;
+    }
+    
+    
+    /**
+     * Methode permettant de voir la liste de nom des enclos à
+     * lycanthropes
+     * 
+     * @return La chaine contenant les informations
+     */
+    public String voirNomEnclosLycanthropes() {
+    	String chaine = "LES ENCLOS DE LYCANTHROPE : \n";
+    	for (Enclos e : listeEnclos) {
+    		if (e instanceof EnclosLycanthrope)
+    			chaine+="  - "+e.getNom()+"\n";
+    	}
+    	return chaine;
     }
 
 }

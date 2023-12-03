@@ -225,9 +225,13 @@ public class ControllerActions {
             		passageAnnee();
             	retour= true;
             	break;
-            	
-            //TODO : suite actions pour Lycanthropes (defier male alpha, )
-            	
+            // Defier male Alpha dans meute
+            case 21 : 	
+            	action.casDefierAlpha();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.DEFIER_MALE_ALPHA))
+            		passageAnnee();
+            	retour= true;
+            	break;
             // Passer en mode automatique
             case 98 :
             	VueGlobale.afficher("=== PASSAGE EN MODE AUTOMATIQUE ===");

@@ -2,6 +2,9 @@ package controllerApplication;
 
 import base.Creature;
 import base.Enclos;
+import meuteLycanthrope.ColonieLycanthrope;
+import meuteLycanthrope.Meute;
+import references.CONSTANTES;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
@@ -11,6 +14,7 @@ import zoo.ZooFantastique;
  */
 public class ControllerUserInterface {
 	private ZooFantastique zoo = ZooFantastique.getInstance();
+	private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     private final VueGlobale vueGlobale;
     private final VueUtilisateur vueUtilisateur;
     private final ControllerActions zooController;
@@ -59,7 +63,6 @@ public class ControllerUserInterface {
     public Creature selectionCreatureDansEnclos(Enclos enclos) {
     	String indexCreatureString;
     	int indexCreature;
-    	vueGlobale.afficher(enclos.toString());
     	indexCreatureString = vueUtilisateur.demandeUtilisateur("Index creature : ");
     	indexCreature = Integer.parseInt(indexCreatureString);
     	return enclos.getListeCreatures().get(indexCreature);
@@ -75,6 +78,33 @@ public class ControllerUserInterface {
     public Enclos recupererEnclosParNom() throws Exception {
     	String nomEnclos = vueUtilisateur.demandeUtilisateur("Nom de l'enclos : ");
         return zoo.trouverEnclosParNom(nomEnclos);
+    }
+    
+    
+    /**
+     * Methode permettant de recuperer une meutr par son nom
+     * @return La meute trouvé
+     * @throws Exception En cas d'erreur lors de la recherche de la meute
+     */
+    public Meute recupererMeuteParNom() throws Exception {
+    	String nomMeute = vueUtilisateur.demandeUtilisateur("Nom de la meute : ");
+        return colonie.trouverMeuteParNom(nomMeute);
+    }
+    
+    
+    /**
+     * Methode permettant de selectionner une creature dans une meute
+     * @param meute
+     * @return La creature sélectionnée
+     * @throws InterruptedException si problème de thread
+     */
+    public Creature selectionCreatureDansMeute(Meute meute) throws InterruptedException {
+    	// Recuperation enclos où il y a la meute
+    	Enclos enclos = meute.getEnclosReference();
+    	// Choix creature
+    	vueGlobale.afficher("La meute "+meute.getNomMeute()+" se trouve dans l'enclos suivant.");
+    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+    	return selectionCreatureDansEnclos(enclos);
     }
 
 

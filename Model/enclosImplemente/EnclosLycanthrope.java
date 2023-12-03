@@ -10,6 +10,7 @@ import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
 import references.CONSTANTES;
 import references.Enum_ActionHurlement;
+import references.Enum_PrenomFeminin;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
 
@@ -82,7 +83,8 @@ public class EnclosLycanthrope extends Enclos {
 				rangPossible.add(Enum_RangDomination.BETA);
 				rangPossible.add(Enum_RangDomination.GAMMA);
 				rangPossible.add(Enum_RangDomination.OMEGA);
-				Meute m = new Meute(femelleA, maleA, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, rangPossible);
+				String nomMeute = "meute"+Enum_PrenomFeminin.getRandomName();
+				Meute m = new Meute(nomMeute, femelleA, maleA, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, rangPossible);
 				meutePresente = m;
 				m.setEnclosReference(this);
 				return m;

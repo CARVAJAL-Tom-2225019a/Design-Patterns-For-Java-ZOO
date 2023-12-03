@@ -1,6 +1,7 @@
 package meuteLycanthrope;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import creaturesImplemente.Lycanthrope;
@@ -68,7 +69,6 @@ public class ColonieLycanthrope {
         } else
             throw new Exception("Impossible de trouver la meute dans la colonnie");
     }
-
     
     /**
      * Ajouter un enclos
@@ -98,7 +98,7 @@ public class ColonieLycanthrope {
     public String voirMeutes() {
         String chaine = "VOICI LES MEUTES :\n";
         for (Meute m : listeMeutes) {
-            chaine += m.toString();
+            chaine += "   - "+m.getNomMeute()+"\n";
         }
         return chaine;
     }
@@ -150,5 +150,23 @@ public class ColonieLycanthrope {
 	public void clear() {
 		listeMeutes.clear();
 		listeEnclos.clear();
+	}
+
+	
+	/**
+	 * Methode permettant de chercher une meute grace à son nom
+	 * @param nomRecherche	Le nom de la meute recherché
+	 * @return	La meute trouvé
+	 * @throws Exception	Si la meute n'existe pas sous ce nom
+	 */
+	public Meute trouverMeuteParNom(String nomRecherche) throws Exception {
+		Iterator<Meute> iterator = listeMeutes.iterator();
+        while (iterator.hasNext()) {
+            Meute meute = iterator.next();
+            if (meute.getNomMeute().equals(nomRecherche)) {
+                return meute; // On a trouvé l'enclos
+            }
+        }
+        throw new Exception ("Nom meute inccorrect");
 	}
 }

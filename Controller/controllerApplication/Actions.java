@@ -22,6 +22,7 @@ import interfaces.CreatureTerrestre;
 import interfaces.CreatureVolante;
 import maitreZoo.MaitreZoo;
 import meuteLycanthrope.ColonieLycanthrope;
+import meuteLycanthrope.Meute;
 import references.CONSTANTES;
 import references.Enum_ActionHurlement;
 import references.Enum_Sexe;
@@ -67,6 +68,7 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Examiner un enclos ("+Enum_ActionsPossibles.EXAMINER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclos());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	else {
@@ -90,6 +92,7 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Nettoyer un enclos ("+Enum_ActionsPossibles.NETTOYER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclos());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -116,6 +119,7 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -142,6 +146,7 @@ public class Actions {
 	    	vueGlobale.afficher("\n ---- Soigner enclos ("+Enum_ActionsPossibles.SOIGNER_ENCLOS.getDureeTotale()+") ---- ");
 	    	// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -170,8 +175,11 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Transferer une creature ("+Enum_ActionsPossibles.TRANSFERER_CREATURE.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
+        		vueGlobale.afficherCreatureEnclos(enclos);
         		creature = controlUser.selectionCreatureDansEnclos(enclos);
+        		vueGlobale.afficher(zoo.voirNomsEnclos());
         		enclosDest = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -256,7 +264,10 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Transferer un enclos ("+Enum_ActionsPossibles.TRANSFERER_ENCLOS.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
+        		vueGlobale.afficher("\nSource");
         		enclos = controlUser.recupererEnclosParNom();
+        		vueGlobale.afficher("Destination");
         		enclosDest = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -294,8 +305,10 @@ public class Actions {
     		vueGlobale.afficher("\n ---- Concevoir un enfant ("+Enum_ActionsPossibles.CONCEVOIR_ENFANT.getDureeTotale()+") ---- ");
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
-            	vueGlobale.afficher(enclos.toString() + "\n\nVeuillez selectionner une femelle puis un male\n");
+        		vueGlobale.afficherCreatureEnclos(enclos);
+            	vueGlobale.afficher("\n\nVeuillez selectionner une femelle puis un male\n");
             	// Femelle
             	femelle = controlUser.selectionCreatureDansEnclos(enclos);
             	// Male
@@ -348,6 +361,7 @@ public class Actions {
     		// Choix enclos
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -441,6 +455,7 @@ public class Actions {
     		// Choix enclos
     		// GESTION MANUEL
         	if (Run.utilisateurControle) {
+        		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
         		enclos = controlUser.recupererEnclosParNom();
         	}
         	// GESTION AUTOMATIQUE
@@ -474,6 +489,7 @@ public class Actions {
 			// Choix enclos
 			// GESTION MANUEL
 	    	if (Run.utilisateurControle) {
+	    		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
 	    		enclos = controlUser.recupererEnclosParNom();
 	    	}
 	    	// GESTION AUTOMATIQUE
@@ -502,6 +518,7 @@ public class Actions {
 			// Choix enclos
 			// GESTION MANUEL
 	    	if (Run.utilisateurControle) {
+	    		vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
 	    		enclos = controlUser.recupererEnclosParNom();
 	    	}
 	    	// GESTION AUTOMATIQUE
@@ -575,7 +592,12 @@ public class Actions {
 		try {
 	    	vueGlobale.afficher("\n ---- Voir les meutes ("+Enum_ActionsPossibles.VOIR_MEUTES.getDureeTotale()+") ---- ");
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
-	    	vueGlobale.afficher(colonie.voirMeutes());
+	    	for (Meute m : colonie.getListeMeutes()) {
+	    		vueGlobale.afficher("MEUTE "+m.getNomMeute()+" ; \n");
+	    		for (Lycanthrope l : m.getListeLoup()) {
+	    			vueGlobale.afficherCreature(l);
+	    		}
+	    	}
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
     	}
     	catch (Exception e) {
@@ -600,13 +622,14 @@ public class Actions {
 				vueGlobale.afficher("\nChoisir l'enclos de la premiere créature pour la bagarre : ");
 
 				enclos1 = controlUser.recupererEnclosParNom();
-				vueGlobale.afficher("\nChoisir la créature 1 pour la bagarre : ");
+				vueGlobale.afficherCreatureEnclos(enclos1);
+				vueGlobale.afficher("\nChoisir la créature 1 pour la bagarre (index) : ");
 
 				c1 = controlUser.selectionCreatureDansEnclos(enclos1);
 				vueGlobale.afficher("\nChoisir l'enclos de la seconde créature pour la bagarre : ");
 
 				enclos2 = controlUser.recupererEnclosParNom();
-				vueGlobale.afficher("\nChoisir la créature 2 pour la bagarre : ");
+				vueGlobale.afficher("\nChoisir la créature 2 pour la bagarre (index) : ");
 
 				c2 = controlUser.selectionCreatureDansEnclos(enclos2);
 			}
@@ -654,6 +677,7 @@ public class Actions {
 		Enclos enclos2;
 		Creature loup2;
 		try {
+			vueGlobale.afficher("\n ---- Faire huerler un loup ("+Enum_ActionsPossibles.FAIRE_HURLER_LOUP.getDureeTotale()+") ---- ");
 			// GESTION MANUEL
 			if (Run.utilisateurControle) {
 				// choix action
@@ -683,12 +707,26 @@ public class Actions {
 		            	+ "Veuillez choisir parmi les options : appartenance, domination, soumission, agressivite");		
 		        }
 				// choix loup 1
+				vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
 				enclos1 = controlUser.recupererEnclosParNom();
-            	vueGlobale.afficher(enclos1.toString() + "\n\nVeuillez selectionner le lycanthrope qui hurlee\n");
+				while ( !(enclos1 instanceof EnclosLycanthrope) ) {
+					vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
+					vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
+					enclos1 = controlUser.recupererEnclosParNom();
+				}
+				vueGlobale.afficherCreatureEnclos(enclos1);
+            	vueGlobale.afficher("\n\nVeuillez selectionner le lycanthrope qui hurlee\n");
             	loup1 = controlUser.selectionCreatureDansEnclos(enclos1);
 				// choix loup 2
+            	vueGlobale.afficher("Choix de l'enclos où le loup doit entendre le hurlement (index) : ");
             	enclos2 = controlUser.recupererEnclosParNom();
-            	vueGlobale.afficher(enclos2.toString() + "\n\nVeuillez selectionner un lycanthrope qui entend\n");
+            	while ( !(enclos2 instanceof EnclosLycanthrope) ) {
+					vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
+					vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
+					enclos1 = controlUser.recupererEnclosParNom();
+				}
+            	vueGlobale.afficherCreatureEnclos(enclos2);
+            	vueGlobale.afficher("\n\nVeuillez selectionner un lycanthrope qui entend (index) : \n");
             	loup2 = controlUser.selectionCreatureDansEnclos(enclos2);
 			}
 			// GESTION AUTOMATIQUE
@@ -706,6 +744,39 @@ public class Actions {
         		loup2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 			}
 			vueGlobale.afficher( ((Lycanthrope) loup1).hurler( action, (Lycanthrope)loup2) );
+		}
+		catch (Exception e) {
+			vueGlobale.afficher(e.getMessage());
+		}
+	}
+
+
+	public void casDefierAlpha() {
+		Meute m = null;
+		Lycanthrope loupVolontaire = null;
+		try {
+			vueGlobale.afficher("\n ---- Defier un male alpha ("+Enum_ActionsPossibles.DEFIER_MALE_ALPHA.getDureeTotale()+") ---- ");
+			// GESTION MANUEL
+			if (Run.utilisateurControle) {
+				// Choix meute
+				vueGlobale.afficher("Choix de la meute où cela doit se passer");
+				vueGlobale.afficher(colonie.voirMeutes());
+				m = controlUser.recupererMeuteParNom();
+				// Choix loup volontaire
+				Enclos enclos = m.getEnclosReference();
+				vueGlobale.afficherCreatureEnclos(enclos);
+				vueGlobale.afficher("Choix du loup (index) : ");
+				loupVolontaire =  (Lycanthrope) controlUser.selectionCreatureDansMeute(m);
+			}
+			// GESTION AUTOMATIQUE
+			else {
+				// Choix meute
+				m = controllerGestionAuto.choixMeuteAleatoire();
+				// Choix loup volontaire
+				loupVolontaire = m.choixPremierLoupPasCoupleAlpha();
+			}
+			vueGlobale.afficher( m.defierMaleAlpha(loupVolontaire) );
+			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
 		}
 		catch (Exception e) {
 			vueGlobale.afficher(e.getMessage());

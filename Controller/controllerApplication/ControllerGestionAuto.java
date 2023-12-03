@@ -6,7 +6,12 @@ import java.util.Random;
 
 import base.Enclos;
 import controllerTemps.GestionnaireTemps;
+import creaturesImplemente.Lycanthrope;
+import meuteLycanthrope.ColonieLycanthrope;
+import meuteLycanthrope.Meute;
 import references.CONSTANTES;
+import references.Enum_RangDomination;
+import references.Enum_Sexe;
 import viewApplication.*;
 
 /**
@@ -20,6 +25,8 @@ public class ControllerGestionAuto {
 	private static VueGlobale VueGlobale;
 	// Instance unique du zoo fantastique
 	private static ZooFantastique zoo = ZooFantastique.getInstance();
+	// Instance de la colonie de lycanthrope
+	private static ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
 	// Instance unique de la classe permettant la gestion du temp
 	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
@@ -163,6 +170,52 @@ public class ControllerGestionAuto {
 				return e;
 		}
 		return recuperationEnclosAleatoire();
+	}
+	
+	
+	/**
+	 * Methode permettant de choisir une meute de maniere aleatoire
+	 * @return La meute selectionnée
+	 */
+	public Meute choixMeuteAleatoire() {
+		// Vérifier s'il y a des meutes 
+        if (colonie.getListeMeutes().isEmpty()) {
+            return null;
+        }
+        Meute meute=null;
+        while (meute == null) {
+        	 // Obtenez une meute aléatoire
+            int indiceAleatoire = new Random().nextInt(colonie.getListeMeutes().size());
+            meute = (Meute) colonie.getListeMeutes().toArray()[indiceAleatoire];
+        }
+        // Retournez l'enclos correspondant à l'indice aléatoire
+        return meute;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer le loup le plus fort dans la meute
+	 * en dehors du couple alpha
+	 * @param m
+	 * @return le loup le plus fort en dehors du couple alpha
+	 * @throws Exception
+	 */
+	public Lycanthrope choixPlusFortLoupDansMeute(Meute m) throws Exception {
+		Lycanthrope loupPlusFort = m.choixPremierLoupPasCoupleAlpha();
+		if (loupPlusFort==null)
+			throw new Exception ("Il n'y a que le couple alpha dans la meute "+m.getNomMeute());
+		for (Lycanthrope l : m.getListeLoup()) {
+			if (l!=m.getCoupleAlpha().getFemelleAlpha() && l!=m.getCoupleAlpha().getMaleAlpha() && l.getSexe()==Enum_Sexe.Male && l.getRangDomination().getValeur()>loupPlusFort.getRangDomination().getValeur()) {
+				if (l.getRangDomination()!=Enum_RangDomination.ALPHA) {
+						loupPlusFort=l;
+				}
+				else {
+					if (l.getNiveau()>loupPlusFort.getNiveau())
+						loupPlusFort=l;;
+				}
+			}
+		}
+		return loupPlusFort;
 	}
 	
 }

@@ -12,6 +12,8 @@ import references.*;
  */
 public class Meute {
 	
+	private String nomMeute;
+	
 	private CoupleAlpha coupleAlpha;
 	
 	private int capaciteMeute; 
@@ -30,9 +32,13 @@ public class Meute {
 	 * @param rangPossible Les rangs de domination possibles au sein de la meute
 	 * @throws Exception 
 	 */
-	public Meute(Lycanthrope femelleAlpha, Lycanthrope maleAlpha, int CapaciteMeute, 
+	public Meute(String nomMeute, Lycanthrope femelleAlpha, Lycanthrope maleAlpha, int CapaciteMeute, 
 			Set<Enum_RangDomination> rangPossible) throws Exception {
+		this.nomMeute = nomMeute;
 		this.rangPossible=rangPossible; 
+		if (rangPossible.contains(Enum_RangDomination.OMEGA)) {
+			rangPossible.add(Enum_RangDomination.OMEGA);
+		}
 		femelleAlpha.setRangDomination(Enum_RangDomination.ALPHA);
 		femelleAlpha.calculerForce();
 		maleAlpha.setRangDomination(Enum_RangDomination.ALPHA);
@@ -63,6 +69,9 @@ public class Meute {
 	}
 	public Enclos getEnclosReference() {
 		return enclosReference;
+	}
+	public String getNomMeute() {
+		return nomMeute;
 	}
 	
 	
@@ -248,7 +257,7 @@ public class Meute {
 	 * @return Une chaîne de caractères représentant la meute
 	 */
 	public String toString() {
-		return "Meute se trouvant dans "+enclosReference
+		return "Meute "+nomMeute+" se trouvant dans "+enclosReference.getNom()
 				+" avec "+listeLoup.size()+"/"+capaciteMeute+"\n";
 	}
 	
@@ -265,5 +274,19 @@ public class Meute {
 			chaine+=l.toString()+"\n";
 		}
 		return chaine;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer le premier loup de la meute
+	 * qui ne fait pas partie du couple alpha
+	 * @return Le loup en question, sinon null
+	 */
+	public Lycanthrope choixPremierLoupPasCoupleAlpha() {
+		for (Lycanthrope l : listeLoup) {
+			if (l!=coupleAlpha.getFemelleAlpha() && l!=coupleAlpha.getMaleAlpha())
+				return l;
+		}
+		return null;
 	}
 }

@@ -48,7 +48,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		this.setBruit(bruit);
 		this.calculerForce();
 		facteurDomination = 0;
-		rangDomination=null;
+		rangDomination=Enum_RangDomination.OMEGA;
 		niveau = 0;
 		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
 		meute = null;
@@ -70,7 +70,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		this.setBruit( bruit);
 		this.calculerForce();
 		facteurDomination = 0;
-		rangDomination=null;
+		rangDomination=Enum_RangDomination.OMEGA;;
 		niveau = 0;
 		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
 		meute = null;
@@ -397,7 +397,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @throws Exception
      */
     public void seSeparerDeSaMeute() throws Exception {
-    		rangDomination = null;
+    		rangDomination = Enum_RangDomination.OMEGA;;
     		meute = null;
     }
     

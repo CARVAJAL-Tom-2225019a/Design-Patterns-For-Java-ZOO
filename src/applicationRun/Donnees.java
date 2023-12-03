@@ -45,7 +45,7 @@ public class Donnees {
      * Methode pour creer les meutes
      * @throws Exception 
      */
-    public static void creerMeute(EnclosLycanthrope enclos) throws Exception {
+    public static void creerMeute(String nomMeute, EnclosLycanthrope enclos) throws Exception {
     	// rangs possibles
     	Set<Enum_RangDomination> rangPossible = new HashSet<Enum_RangDomination>();
     	rangPossible.add(Enum_RangDomination.ALPHA);
@@ -57,7 +57,7 @@ public class Donnees {
     	Lycanthrope femelle = (Lycanthrope) enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
     	//recuperation d'un male
     	Lycanthrope male = (Lycanthrope) enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Male);
-    	Meute m = new Meute (femelle, male, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, rangPossible);
+    	Meute m = new Meute (nomMeute ,femelle, male, CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX, rangPossible);
     	// ajout creatures dans meute
     	for (Creature l : enclos.getListeCreatures().values()) {
     		m.addLoup((Lycanthrope)l);
@@ -92,9 +92,9 @@ public class Donnees {
 			remplirEnclos(enclosLycanthrope, Enum_Especes.Lycanthrope);
 			zoo.addEnclos(enclosLycanthrope);
 			colonie.addEnclos(enclosLycanthrope);
-			creerMeute(enclosLycanthrope);
+			creerMeute("Les Fourrures", enclosLycanthrope);
 			
-			EnclosLycanthrope enclosLycanthrope2 = new EnclosLycanthrope("LycanthropeLandBis", CONSTANTES.TAILLE_ENCLOS);
+			EnclosLycanthrope enclosLycanthrope2 = new EnclosLycanthrope("LycanthropeLand2", CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosLycanthrope2, Enum_Especes.Lycanthrope);
 			zoo.addEnclos(enclosLycanthrope2);
 			colonie.addEnclos(enclosLycanthrope2);
@@ -103,7 +103,7 @@ public class Donnees {
 			Aquarium enclosMegalodon = new Aquarium("MegalodonLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
 			remplirEnclos(enclosMegalodon, Enum_Especes.Megalodon);
 			zoo.addEnclos(enclosMegalodon);
-			creerMeute(enclosLycanthrope2);
+			creerMeute("Les Griffes", enclosLycanthrope2);
 			
 			// Phenix
 			Voliere enclosPhenix = new Voliere("PhenixLand", CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);

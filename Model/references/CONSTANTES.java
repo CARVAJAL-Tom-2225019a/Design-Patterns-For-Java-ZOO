@@ -6,7 +6,7 @@ public class CONSTANTES {
 	
 	public static int DUREE_VIE_ZOO = 15;
 	
-	public static int NUM_CHOIX_MAX = 20;
+	public static int NUM_CHOIX_MAX = 21;
 	
 	public static int NB_MAX_ENCLOS = 30;
 	public static int NB_CREATURE_PAR_ENCLOS = 6;

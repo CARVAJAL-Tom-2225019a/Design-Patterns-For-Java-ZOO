@@ -40,14 +40,14 @@ class TestLycanthrope {
 		rangPossible.add(Enum_RangDomination.GAMMA);
 		rangPossible.add(Enum_RangDomination.OMEGA);
 		
-		meute = new Meute(femelleA, maleA, 10, rangPossible);
+		meute = new Meute("Pepito", femelleA, maleA, 10, rangPossible);
 	}
 	
 	@Test
 	void testHurlerAppartenance() throws Exception {
-		String chaineAttendue = "Je suis "+loup1.getPrenom()+", un "
+		String chaineAttendue = loup1.getPrenom()+" : Je suis un "
 				+ "loup solitaire, et je n'ai peur peur de rien\n"
-				+"Je suis "+loup2.getPrenom()+", et je ne te crois pas superieur a moi !\n";
+				+loup2.getPrenom()+" :  Je ne te crois pas superieur a moi "+loup1.getPrenom()+" !\n";
 		String result = loup1.hurler(Enum_ActionHurlement.Appartenance, loup2);
 		assertEquals(chaineAttendue, result);
 	}
