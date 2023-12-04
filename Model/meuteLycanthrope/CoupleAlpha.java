@@ -68,7 +68,7 @@ public class CoupleAlpha {
 	
 	/**
 	 * Methode pour se reproduire
-	 * @throws Exception 
+	 * @throws Exception  si un problème survient lors de la reproduction
 	 */
 	public void seReproduire() throws Exception {
 		femelleAlpha.concevoirUnEnfant(maleAlpha, femelleAlpha.getDureeGestation());

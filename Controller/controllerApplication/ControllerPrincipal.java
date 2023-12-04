@@ -174,7 +174,8 @@ public class ControllerPrincipal {
     					+ "\n - Une creature qui va trop mal risque de mourrir "
     					+ "\n - Pour nettoyer un enclos, ce dernier doit etre vide"
     					+ "\n"
-						+ "\n Pour profiter d'une expérience immersive, veuillez ACTIVER VOTRE SON"		
+						+ "\n Pour profiter d'une expérience immersive, veuillez ACTIVER VOTRE SON"
+						+ "\n et AGGRANDIR LE TERMINAL"		
 						+ "\n"
     					+ "\n Bon courage :)\n\n";
     	

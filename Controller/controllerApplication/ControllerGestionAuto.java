@@ -102,6 +102,11 @@ public class ControllerGestionAuto {
 	}
 	
 	
+	/**
+	 * Méthode permettant de récupérer un enclos de lycannthrope aléatoire qui
+	 * n'est pas vide
+	 * @return l'enclos sélectionné aléatoirement
+	 */
 	public Enclos recuperationEnclosAleatoireNonVideLycanthrope() {
 		// Vérifier s'il y a des enclos disponibles
         if (colonie.getListeMeutes().isEmpty()) {

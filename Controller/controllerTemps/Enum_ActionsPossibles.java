@@ -34,6 +34,12 @@ public enum Enum_ActionsPossibles {
     private final int dureeEnJours;
 
    
+    /**
+     * Constructeur
+     * @param dureeEnAnnees de l'action
+     * @param dureeEnMois de l'action
+     * @param dureeEnJours de l'action
+     */
     Enum_ActionsPossibles(int dureeEnAnnees, int dureeEnMois, int dureeEnJours) {
         this.dureeEnAnnees = dureeEnAnnees;
         this.dureeEnMois = dureeEnMois;

@@ -36,7 +36,8 @@ public class EnclosLycanthrope extends Enclos {
 	
 	
 	/**
-	 * Getters
+	 * Methode permettant de récupéer la meute présente dans l'enclos
+	 * @return la meute qui est dans l'enclos
 	 */
 	public Meute getMeutePresente () {
 		return meutePresente;
@@ -44,7 +45,8 @@ public class EnclosLycanthrope extends Enclos {
 	
 	
 	/**
-	 * Setters
+	 * Méthode permettant de mettre à jour la meute présente dans l'enclos
+	 * @param m la nouvelle meute présente
 	 */
 	public void setMeutePresente (Meute m) {
 		this.meutePresente = m;
