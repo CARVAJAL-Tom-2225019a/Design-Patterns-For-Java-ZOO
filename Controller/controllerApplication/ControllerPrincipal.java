@@ -33,10 +33,8 @@ public class ControllerPrincipal {
     /**
      * Méthode pour passer à la nouvelle année dans le zoo
      *
-     * @return Une chaîne contenant des informations sur les créatures mortes
      */
-    public String nouvelleAnnee() {
-    	String chaine = "";
+    public void nouvelleAnnee() {
     	try {
             // Pour chaque enclos
             for (Enclos enclos : zoo.getListeEnclos()) {
@@ -50,15 +48,14 @@ public class ControllerPrincipal {
                     if (enclos instanceof EnclosLycanthrope) 
                     	((EnclosLycanthrope) enclos).passageAnneLycanthrope();
                     // Ajoute les informations sur les créatures mortes à la chaîne
-                    chaine+=enclos.creaturesMortes();
+                    for (Creature creatMorte : enclos.creaturesMortes())
+                    	vueGlobale.afficherCreature(creatMorte, -1);;
             	}
             }
-            return chaine;
     	}
     	catch (Exception e) {
     		vueGlobale.afficher(e.getMessage());
     	}
-    	return "erreur";
     }
     
     
@@ -85,7 +82,8 @@ public class ControllerPrincipal {
     		for (Oeuf o : zoo.getlLsteOeufs()) {
         		if (o.getDureeIncubationRestante() == 0) {
         			Creature enfant = o.eclore();
-        			vueGlobale.afficher("Naissance "+enfant.getNomEspece());
+        			vueGlobale.afficher("NAISSANCE OVIPARE");
+        			vueGlobale.afficherCreature(enfant, -1);
         			rangerCreature(enfant);
         			zoo.removeOeuf(o);
         		}
@@ -110,7 +108,8 @@ public class ControllerPrincipal {
         		nbJour = ((Vivipare)c).decrementerNombreJourRestantAvantNaissance();
         		if (nbJour == 0) {
         			Creature enfant = ((Vivipare)c).mettreBas();
-        			vueGlobale.afficher("Naissance "+enfant.getNomEspece());
+        			vueGlobale.afficher("NAISSANCE VIVIPARE");
+        			vueGlobale.afficherCreature(enfant, -1);
         			rangerCreature(enfant);
         			zoo.addFemelleEnceinte(c);
         		}

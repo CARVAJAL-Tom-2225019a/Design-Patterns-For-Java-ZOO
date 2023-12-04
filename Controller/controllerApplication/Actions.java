@@ -126,7 +126,7 @@ public class Actions {
         	else {
         		enclos = controllerGestionAuto.getFirstEnclosCreatureFaim();
         		if (enclos == null)
-        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         	}
             maitreZoo.nourrirCreaturesEnclos(enclos);
             vueGlobale.afficher("Les creatures ont ete nourries dans "+enclos.getNom());
@@ -153,7 +153,7 @@ public class Actions {
         	else {
         		enclos = controllerGestionAuto.getFirstEnclosCreatureMauvaiseSante();
         		if (enclos == null)
-        			enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        			enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         	}
             maitreZoo.soignerCreaturesEnclos(enclos);
             vueGlobale.afficher("Les creatures ont ete soignees dans "+enclos.getNom());
@@ -184,7 +184,7 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         		enclosDest = controllerGestionAuto.recuperationEnclosAleatoire();
         		creature = enclos.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
         	}
@@ -272,7 +272,7 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         		int i = zoo.getListeEnclos().size() + 1;
         		nomEnclos="Enclos"+i;
         		Enclos e = new EnclosClassique (nomEnclos, CONSTANTES.TAILLE_ENCLOS);
@@ -316,7 +316,7 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         		femelle = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Femelle);
         		male = enclos.selectionnerCreatureAleatoireParSexe(Enum_Sexe.Male);
         		if (femelle == null || male == null)
@@ -366,7 +366,7 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         	}
         	
     		// Proposition des actions selon type creature
@@ -460,7 +460,7 @@ public class Actions {
         	}
         	// GESTION AUTOMATIQUE
         	else {
-        		enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
         	}
         	vueGlobale.afficher("\nAllez les "+enclos.getNomEspece()+"s.\n"
         			+ "On chante l'un apres l'autre !\n");
@@ -549,7 +549,7 @@ public class Actions {
 	    	for (Enclos e : zoo.getListeEnclos()) {
 	    		if (e instanceof EnclosLycanthrope) {
 	    			for (Creature l : e.getListeCreatures().values()) {
-	    				vueGlobale.afficherCreature(l);
+	    				vueGlobale.afficherCreature(l, -1);
 	    			}
 	    		}
 	    	}
@@ -595,7 +595,7 @@ public class Actions {
 	    	for (Meute m : colonie.getListeMeutes()) {
 	    		vueGlobale.afficher("MEUTE "+m.getNomMeute()+" ; \n");
 	    		for (Lycanthrope l : m.getListeLoup()) {
-	    			vueGlobale.afficherCreature(l);
+	    			vueGlobale.afficherCreature(l, -1);
 	    		}
 	    	}
 	    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
@@ -635,15 +635,15 @@ public class Actions {
 			}
 			// GESTION AUTOMATIQUE
 			else {
-				enclos1 = controllerGestionAuto.recuperationEnclosAleatoire();
+				enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
 				c1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 
-				enclos2 = controllerGestionAuto.recuperationEnclosAleatoire();
+				enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
 				c2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 			}
 			vueGlobale.afficher("\n #============= Voici les candidats =================# ");
-			vueGlobale.afficherCreature(c1);
-			vueGlobale.afficherCreature(c2);
+			vueGlobale.afficherCreature(c1, -1);
+			vueGlobale.afficherCreature(c2, -1);
 			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
 			vueGlobale.afficher("\n");
 			vueGlobale.afficher("\n#============= Que le combat commence ! =================# ");
@@ -654,7 +654,7 @@ public class Actions {
 
 			vueGlobale.afficher("\n#============= Le Combat est terminé... =================# ");
 			vueGlobale.afficher("\nLe vainqueur du combat est : ");
-			vueGlobale.afficherCreature(vainqueur);
+			vueGlobale.afficherCreature(vainqueur, -1);
 
 			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
 		}
@@ -677,7 +677,7 @@ public class Actions {
 		Enclos enclos2;
 		Creature loup2;
 		try {
-			vueGlobale.afficher("\n ---- Faire huerler un loup ("+Enum_ActionsPossibles.FAIRE_HURLER_LOUP.getDureeTotale()+") ---- ");
+			vueGlobale.afficher("\n ---- Faire hurler un loup ("+Enum_ActionsPossibles.FAIRE_HURLER_LOUP.getDureeTotale()+") ---- ");
 			// GESTION MANUEL
 			if (Run.utilisateurControle) {
 				// choix action
@@ -737,10 +737,10 @@ public class Actions {
 				Enum_ActionHurlement[] listeActions = {Enum_ActionHurlement.Appartenance, Enum_ActionHurlement.Domination, Enum_ActionHurlement.Soumission, Enum_ActionHurlement.Agressivite};
 				action = listeActions[random.nextInt(listeActions.length)];
 				// choix loup source
-				enclos1 = controllerGestionAuto.recuperationEnclosAleatoire();
+				enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
         		loup1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 				// choix loup destination
-        		enclos2 = controllerGestionAuto.recuperationEnclosAleatoire();
+        		enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
         		loup2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
 			}
 			vueGlobale.afficher( ((Lycanthrope) loup1).hurler( action, (Lycanthrope)loup2) );
@@ -784,5 +784,21 @@ public class Actions {
 		catch (Exception e) {
 			vueGlobale.afficher(e.getMessage());
 		}
+	}
+
+
+	/**
+	 * Methode gérant le cas où l'action est de voir les enfants qui sont en construction
+	 */
+	public void casVoirEnfantsEnConstruction() {
+		vueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre "+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+" ---- ");
+		// Affichage des femelles enceinte
+		vueGlobale.afficher("LES FEMELLES ENCEINTES : ");
+		for (Creature c : zoo.getListeFemelleEnceinte())
+			vueGlobale.afficherCreature(c, -1);
+		// Affichage des oeufs
+		vueGlobale.afficher("LES OEUFS : ");
+		for (Oeuf o : zoo.getlLsteOeufs())
+			vueGlobale.afficherOeuf(o);
 	}
 }

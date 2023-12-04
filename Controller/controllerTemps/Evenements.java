@@ -1,5 +1,7 @@
 package controllerTemps;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -56,44 +58,69 @@ public class Evenements {
      *
      * @throws Exception En cas d'erreur lors de la modification de l'état des créatures
      */
-    public static void modifAleatoireStatutCreature() throws Exception {
-    	Random random = new Random(System.currentTimeMillis());
-        // Nombre aléatoire d'enclos à modifier
-        int nombreEnclosAModifier = random.nextInt(zoo.getListeEnclos().size()-4) + 1;
-        // Parcourir un nombre aléatoire d'enclos
-        for (int i = 0; i < nombreEnclosAModifier; i++) {
-            // Sélectionner un enclos au hasard
-            Enclos enclos = null;
-            while (enclos==null || enclos.getNbCreatures()==0) {
-            	int randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size())+1;
-            	enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
-            }
-            // Nombre aléatoire de créatures à modifier dans cet enclos
-            int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
-            int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;;
-            // Obtenir la liste des créatures dans cet enclos
-            Map<Integer, Creature> creatures = enclos.getListeCreatures();
-            // Modifier aléatoirement l'état du nombre aléatoire de créatures
-            for (int j = 0; j < nombreCreaturesAModifier; j++) {
-                // Sélectionner une clé au hasard dans la Map
-                int randomKeyCreature = (int) creatures.keySet().toArray()[random.nextInt(creatures.size())];
-                Creature creature = creatures.get(randomKeyCreature);
-                // Choisir aléatoirement le critère (sommeil, sante ou faim)
-                int critereAleatoire = random.nextInt(3);
-                switch (critereAleatoire) {
-                    case 0:
-                        creature.perdreSommeil();
-                        break;
-                    case 1:
-                        creature.perdreSante();
-                        break;
-                    case 2:
-                        creature.perdreNourriture();
-                        break;
-                }
-            }
-        }
-    }
+	public static void modifAleatoireStatutCreature() throws Exception {
+	    Random random = new Random(System.currentTimeMillis());
+
+	    // Nombre aléatoire d'enclos à modifier
+	    int nombreEnclosAModifier = random.nextInt(zoo.getListeEnclos().size() - 4) + 1;
+
+	    // Parcourir un nombre aléatoire d'enclos
+	    for (int i = 0; i < nombreEnclosAModifier; i++) {
+	        // Sélectionner un enclos au hasard
+	        Enclos enclos = getRandomEnclosWithCreatures();
+	        if (enclos != null) {
+	            // Nombre aléatoire de créatures à modifier dans cet enclos
+	            int maxCreaturesAModifier = Math.max(0, enclos.getNbCreatures() - 2);
+	            int nombreCreaturesAModifier = (maxCreaturesAModifier >= 2) ? random.nextInt(maxCreaturesAModifier) + 2 : 0;
+	            // Modifier aléatoirement l'état du nombre aléatoire de créatures
+	            modifyRandomCreaturesState(enclos.getListeCreatures(), nombreCreaturesAModifier, random);
+	        }
+	    }
+	}
+
+	
+	/**
+	 * Methode permettant de recuperer un enclos aleatoire contenant des creatures
+	 * @return l'enclos sélectionné
+	 */
+	private static Enclos getRandomEnclosWithCreatures() {
+		Random random = new Random(System.currentTimeMillis());
+	    Enclos enclos = null;
+	    List<Enclos> enclosList = new ArrayList<>(zoo.getListeEnclos());
+
+	    while (enclos == null || enclos.getNbCreatures() == 0) {
+	        int randomIndexEnclos = random.nextInt(enclosList.size());
+	        enclos = enclosList.get(randomIndexEnclos);
+	    }
+	    return enclos;
+	}
+
+	
+	/**
+	 * Methode permettant de modifier aleatoirement l'etat d'une liste de créature
+	 * @param creatures est un dictionnaire contenant les creatures et leur index
+	 * @param numCreatures le nombre de creatures qu'il faut modifier
+	 * @param random l'instance aléatoire
+	 * @throws Exception si une des creatures est morte
+	 */
+	private static void modifyRandomCreaturesState(Map<Integer, Creature> creatures, int numCreatures, Random random) throws Exception {
+	    for (int j = 0; j < numCreatures; j++) {
+	        int randomKeyCreature = new ArrayList<>(creatures.keySet()).get(random.nextInt(creatures.size()));
+	        Creature creature = creatures.get(randomKeyCreature);
+	        int critereAleatoire = random.nextInt(3);
+	        switch (critereAleatoire) {
+	            case 0:
+	                creature.perdreSommeil();
+	                break;
+	            case 1:
+	                creature.perdreSante();
+	                break;
+	            case 2:
+	                creature.perdreNourriture();
+	                break;
+	        }
+	    }
+	}
 
     
     /**

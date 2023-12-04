@@ -169,9 +169,7 @@ public class ControllerActions {
             	break;
             // Voir liste bebes en cosntruction
             case 13 :
-            	VueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre "+Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale()+" ---- ");
-            	VueGlobale.afficher(zoo.afficherFemellesEnceinte());
-            	VueGlobale.afficher(zoo.afficherOeufs());
+            	action.casVoirEnfantsEnConstruction();
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION))
             		passageAnnee();
             	retour= true;
@@ -270,9 +268,8 @@ public class ControllerActions {
     		}
     		// Actions relatives au passage d'annee
     		Evenements.evenementAnnuel();
-			String chaine = controlPrincipal.nouvelleAnnee();
-			if (chaine != null)
-				VueGlobale.afficher(chaine);
+    		VueGlobale.afficher("LES CREATURES MORTES : ");
+			controlPrincipal.nouvelleAnnee();
             controlPrincipal.verificationEnfants();
             // Tri des clés
             for (Enclos e : zoo.getListeEnclos())
@@ -288,7 +285,7 @@ public class ControllerActions {
             	temp = e.getCreaturesAyantUnBesoin();
             if (temp!=null && temp.size()>0)
             	for (Creature c : temp)
-            		VueGlobale.afficherCreature(c);
+            		VueGlobale.afficherCreature(c, -1);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
             int resteAnnee = CONSTANTES.DUREE_VIE_ZOO-(temps.getAnnee()-CONSTANTES.ANNEE_DEPART);
             VueGlobale.afficher("\n   -- Il reste encore "+resteAnnee+" ans --   \n");

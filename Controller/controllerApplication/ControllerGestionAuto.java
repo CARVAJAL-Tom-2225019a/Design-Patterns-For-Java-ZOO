@@ -102,6 +102,45 @@ public class ControllerGestionAuto {
 	}
 	
 	
+	public Enclos recuperationEnclosAleatoireNonVideLycanthrope() {
+		// Vérifier s'il y a des enclos disponibles
+        if (colonie.getListeMeutes().isEmpty()) {
+            return null;
+        }
+        Enclos enclos=null;
+        Meute meute = null;
+        while (enclos == null) {
+        	 // Obtenez un enclos aléatoire
+            int indiceAleatoire = new Random().nextInt(colonie.getListeMeutes().size());
+            meute = (Meute) colonie.getListeMeutes().toArray()[indiceAleatoire];
+            enclos = meute.getEnclosReference();
+        }
+        // Retournez l'enclos correspondant à l'indice aléatoire
+        return enclos;
+	}
+	
+	
+	/**
+     * Méthode pour récupérer un enclos aléatoire dans le zoo qui n'est pas vide
+     *
+     * @return Un enclos choisi au hasard dans la liste des enclos du zoo
+     */
+	public Enclos recuperationEnclosAleatoireNonVide() {
+        // Vérifier s'il y a des enclos disponibles
+        if (zoo.getListeEnclos().isEmpty()) {
+            return null;
+        }
+        Enclos enclos=null;
+        while (enclos == null || enclos.getNbCreatures()==0) {
+        	 // Obtenez un enclos aléatoire
+            int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
+            enclos = (Enclos) zoo.getListeEnclos().toArray()[indiceAleatoire];
+        }
+        // Retournez l'enclos correspondant à l'indice aléatoire
+        return enclos;
+	}
+	
+	
 	/**
      * Méthode permettant de récupérer le premier enclos en mauvais état
      *

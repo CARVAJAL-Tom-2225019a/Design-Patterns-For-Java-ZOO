@@ -138,35 +138,7 @@ public class ZooFantastique {
         }
         return somme;
     }
-    
-    
-    /**
-     * Méthode pour afficher la liste des femelles qui attendent un bébé
-     *
-     * @return Chaîne de caractères représentant les femelles enceintes
-     */
-    public String afficherFemellesEnceinte() {
-    	String chaine = "LES FEMELLES ENCEINTES :\n";
-    	for (Creature c : listeFemelleEnceinte) {
-    		chaine += c.toString() + "temps restant : "+((Vivipare) c).getNbJourConceptionRestantAvantMiseABas();
-    	}
-    	return chaine;
-    }
-    
-    
-    /**
-     * Méthode pour afficher la liste des œufs
-     *
-     * @return Chaîne de caractères représentant les œufs
-     */
-    public String afficherOeufs() {
-    	String chaine = "LES OEUFS :\n";
-    	for (Oeuf o : listeOeufs) {
-    		chaine += o.toString();
-    	}
-    	return chaine;
-    }
-    
+
     
     /**
      * Méthode pour récupérer la liste des enclos en mauvais état

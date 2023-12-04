@@ -206,24 +206,24 @@ public abstract class Enclos {
 	
 	
 	/**
-	 * Methode permettant d'afficher les creatures qui ne sont plus en vie
+	 * Methode permettant de recuperer les creatures qui ne sont plus en vie
 	 * et de les supprimer de l'enclos
 	 * 
-	 * @return la chaine de caractère contenant la liste des créatures mortes dans l'enclos
+	 * @return l'ensemble des creatures qui sont mortes
 	 * @throws Exception si problème lors de la recherche des créatures mortes
 	 */
-	public String creaturesMortes() throws Exception {
-	    String chaine = "Les créatures mortes dans " + nom + " :\n";
+	public Set<Creature> creaturesMortes() throws Exception {
+		Set<Creature> liste = new HashSet<Creature>();
 	    // Utilisation d'un itérateur pour éviter les modifications concurrentes
 	    Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
 	    while (iterator.hasNext()) {
 	        Map.Entry<Integer, Creature> entry = iterator.next();
 	        if (!entry.getValue().isVivant()) {
-	            chaine+= entry.getValue().toString();
+	        	liste.add(entry.getValue());
 	            iterator.remove(); // Suppression après la boucle
 	        }
 	    }
-	    return chaine.toString();
+	    return liste;
 	}
 	
 	
@@ -244,7 +244,7 @@ public abstract class Enclos {
 			listeCreatures.put(nbCreatures, creature);
 		}
 		else 
-			throw new Exception ("Ajout impossible si enclos plein ou si une autre espece est presente");
+			throw new Exception ("Ajout impossible dans "+nom+" : enclos plein ou si une autre espece est presente");
 	}
 	
 	
@@ -267,7 +267,7 @@ public abstract class Enclos {
         		reorganiserCles();
 		}
 		else 
-			throw new Exception ("Creature introuvable");
+			throw new Exception ("Creature introuvable dans "+nom);
 	}
 	
 	
@@ -394,7 +394,7 @@ public abstract class Enclos {
         	return creat;
         } 
         else 
-            throw new Exception ("Pas de creature de ce type dans l'enclos");
+            throw new Exception ("Pas de creature  "+sexe+" dans l'enclos "+nom);
     }
     
     
@@ -438,7 +438,7 @@ public abstract class Enclos {
 	    }
 	    if (!creaturesMortes.isEmpty()) {
 	        String message = "Les créatures suivantes ne se réveilleront jamais, car elles sont mortes : " 
-	        		+ String.join("\n- ", creaturesMortes);
+	        		+ String.join("\n - ", creaturesMortes);
 	        throw new Exception(message+"\n");
 	    }
 	}
@@ -465,12 +465,12 @@ public abstract class Enclos {
 	        }
 	    }
 	    if (!creaturesInsomniaques.isEmpty() || !creaturesMortes.isEmpty()) {
-	        StringBuilder message = new StringBuilder("Problèmes avec les créatures :");
+	        StringBuilder message = new StringBuilder("");
 	        if (!creaturesInsomniaques.isEmpty()) {
-	            message.append("\nInsomniaques : ").append(String.join("\n", creaturesInsomniaques));
+	            message.append("\nInsomniaques : \n").append(String.join("\n", creaturesInsomniaques));
 	        }
 	        if (!creaturesMortes.isEmpty()) {
-	            message.append("\nMortes : ").append(String.join("\n", creaturesMortes));
+	            message.append("\nMortes : \n").append(String.join("\n", creaturesMortes));
 	        }
 	        throw new Exception(message.toString());
 	    }

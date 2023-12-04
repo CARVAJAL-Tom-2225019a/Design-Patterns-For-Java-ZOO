@@ -54,13 +54,6 @@ class TestEnclos {
 	}
 	
 	@Test
-	void TestMethodeVoirCreaturesMortes() throws Exception {
-		enclos.getListeCreatures().get(1).mourir();
-		String result = "\nLes creatures mortes dans " +enclos.getNom()+ " :\n";
-		assertTrue(result != enclos.creaturesMortes());
-	}
-	
-	@Test
 	void TestMethodeSupprimerCreature() throws Exception {
 		int sizeListe = enclos.getListeCreatures().size();
 		Creature d = enclos.getListeCreatures().get(2);
