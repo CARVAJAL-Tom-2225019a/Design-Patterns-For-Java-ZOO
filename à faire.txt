@@ -1,21 +1,16 @@
 Dossier Spécification
-	UML
-	Cloture du travail
+	ajout UML
+	vérifier + mettre en pdf
 
 
 Dossier Manuel d'utilisation
-	Actions supplémentaires (compléter les à faire)
-	Scénarios
-	Erreurs
+	vérifier + mettre en pdf
 
 
 Documentation complète générée par Javadoc (à mettre à jour, dossier Les Documents/JavaDoc)
 
 
-Fichier Read-Me
-
-
-Mettres les documents en pdf
+Fichier Read-Me (préciser où sont les documents)
 
 
 Les problèmes dans le code
