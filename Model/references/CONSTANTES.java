@@ -7,7 +7,7 @@ package references;
  */
 public class CONSTANTES {
 
-	public static int TEMPS_APPLICATION_SLEEP = 5000;
+	public static int TEMPS_APPLICATION_SLEEP = 6000;
 	
 	public static int ANNEE_DEPART=2024;
 	public static int MOIS_DEPART=1;
