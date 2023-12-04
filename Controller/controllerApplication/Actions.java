@@ -493,8 +493,8 @@ public class Actions {
                         file = "phenix/phenix" + (n + 1) + ".wav";
                     }
 
-                    System.out.println(file);
                     (new Son()).play(file);
+
 
                 }
                 Thread.sleep(1000);
