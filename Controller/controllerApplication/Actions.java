@@ -121,12 +121,10 @@ public class Actions {
             }
             // GESTION AUTOMATIQUE
             else {
-                enclos = controllerGestionAuto.getFirstEnclosCreatureFaim();
-                if (enclos == null)
-                    enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
+                enclos = ControllerGestionAuto.getCreaturePlusGrandBesoin("faim");
+                maitreZoo.nourrirCreaturesEnclos(enclos);
+                vueGlobale.afficher("Les creatures ont ete nourries dans "+enclos.getNom());
             }
-            maitreZoo.nourrirCreaturesEnclos(enclos);
-            vueGlobale.afficher("Les creatures ont ete nourries dans " + enclos.getNom());
         } catch (Exception e) {
             vueGlobale.afficher(e.getMessage());
         }
@@ -147,12 +145,10 @@ public class Actions {
             }
             // GESTION AUTOMATIQUE
             else {
-                enclos = controllerGestionAuto.getFirstEnclosCreatureMauvaiseSante();
-                if (enclos == null)
-                    enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
+                enclos = ControllerGestionAuto.getCreaturePlusGrandBesoin("sante");
+                maitreZoo.soignerCreaturesEnclos(enclos);
+                vueGlobale.afficher("Les creatures ont ete soignees dans "+enclos.getNom());
             }
-            maitreZoo.soignerCreaturesEnclos(enclos);
-            vueGlobale.afficher("Les creatures ont ete soignees dans " + enclos.getNom());
         } catch (Exception e) {
             vueGlobale.afficher(e.getMessage());
         }

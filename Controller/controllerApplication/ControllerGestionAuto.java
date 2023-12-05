@@ -43,14 +43,81 @@ public class ControllerGestionAuto {
 
     /**
      * Méthode permettant d'effectuer un choix aléatoire
-     */
+     *
 	public static void choixActionAleatoire ()  {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		ControllerActions.effectuerAction(choix);
 	}
-	
-	
+	*/
+
+	public static void choixActionAleatoire() throws Exception {
+		String[] listeChoix = {"sante", "faim", "sommeil","hygene"};
+		String enclosChoisi = "";
+		int choixCase = 0;
+		for (int i = 0; i < listeChoix.length; ++i) {
+			enclosChoisi = getCreaturePlusGrandBesoin(listeChoix[i]);
+			if (!enclosChoisi.equals("Enclos")) {
+				if (i == 0) {
+					choixCase = 7;
+					break;
+				} else if (i == 1) {
+					choixCase = 6;
+					break;
+				} else if (i == 2) {
+					choixCase = 8;
+					break;
+				} else if(i == 3) {
+					choixCase = 5;
+					break;
+				}
+			}
+		}
+		if (enclosChoisi.equals("Enclos")) {
+			Random random = new Random();
+			choixCase = random.nextInt(9, 21);
+		}
+		ControllerActions.effectuerAction(choixCase);
+	}
+
+	/**
+	 * Méthode pour récupérer l'enclos avec la créature ayant le besoin passé en parametre le plus faible
+	 *
+	 * @param besoin prend le besoin a étudier dans les enclos. Prend la valeur de String "sante", "faim", "sommeil" ou "hygene"
+	 * @throws Exception En cas d'erreur lors de l'exécution de l'action aléatoire
+	 * @return Un enclos
+	 */
+	public static Enclos getCreaturePlusGrandBesoin(String besoin) {
+		Enclos enclos = null;
+		int valeurMoinsEleve = 100;
+		int indicateurParam = 0;
+		for (Enclos e : zoo.getListeEnclos()) {
+			for (Creature c: e.getListeCreatures().values()){
+				if(besoin == "sante") {
+					indicateurParam = c.getIndicateurSante();
+					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*20/100) {
+						valeurMoinsEleve = indicateurParam;
+						enclos.getNom();
+					}
+				}else if (besoin == "faim"){
+					indicateurParam = c.getIndicateurFaim();
+					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*60/100) {
+						valeurMoinsEleve = indicateurParam;
+						enclos = e;
+					}
+				}else if(besoin == "sommeil") {
+					indicateurParam = c.getIndicateurSommeil();
+					if (indicateurParam < valeurMoinsEleve&& indicateurParam < CONSTANTES.MAX_INDICATEUR*40/100) {
+						valeurMoinsEleve = indicateurParam;
+						enclos = e;
+					}
+				}
+			}
+		}
+		return enclos;
+	}
+
+
 	/**
      * Point d'entrée de la gestion automatique
      *
