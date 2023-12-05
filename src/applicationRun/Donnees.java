@@ -25,8 +25,8 @@ import zoo.ZooFantastique;
  */
 public class Donnees {
 	static VueGlobale vueGlobale = new VueGlobale();
-	static private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
-	static private ZooFantastique zoo = ZooFantastique.getInstance();
+	static private final ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+	static private final ZooFantastique zoo = ZooFantastique.getInstance();
 	
 	/**
 	 * Constructeur

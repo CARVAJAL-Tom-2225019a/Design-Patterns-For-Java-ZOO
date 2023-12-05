@@ -9,7 +9,7 @@ import java.util.Date;
  * des dates
  */
 public class GestionnaireTemps {
-    private Calendar calendrier;
+    private final Calendar calendrier;
 
     private static GestionnaireTemps instance;
 
@@ -48,17 +48,17 @@ public class GestionnaireTemps {
 
     /**
      * Ajoute la quantité spécifiée d'années, de mois et de jours à la date actuelle
+     *
      * @param annees Le nombre d'années à ajouter
-     * @param mois Le nombre de mois à ajouter
-     * @param jours Le nombre de jours à ajouter
-     * @return Vrai si l'année a changé après l'ajout du temps, sinon faux
+     * @param mois   Le nombre de mois à ajouter
+     * @param jours  Le nombre de jours à ajouter
      */
-    public boolean ajouterTemps(int annees, int mois, int jours) {
+    public void ajouterTemps(int annees, int mois, int jours) {
         int oldAnnee = getAnnee();
         calendrier.add(Calendar.YEAR, annees);
         calendrier.add(Calendar.MONTH, mois);
         calendrier.add(Calendar.DAY_OF_MONTH, jours);
-        return verifierChangementAnnee(oldAnnee);
+        verifierChangementAnnee(oldAnnee);
     }
     
     /**

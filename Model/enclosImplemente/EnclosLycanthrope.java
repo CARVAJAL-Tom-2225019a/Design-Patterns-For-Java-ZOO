@@ -98,11 +98,11 @@ public class EnclosLycanthrope extends Enclos {
 	 * @throws Exception Si une erreur survient lors de l'hurlement
 	 */
 	public String expressionAppartenanceCollective () throws Exception {
-		String chaine = "";
+		StringBuilder chaine = new StringBuilder();
 		for (Creature l : super.getListeCreatures().values()) {
-			chaine += ((Lycanthrope)l).hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l);
+			chaine.append(((Lycanthrope) l).hurler(Enum_ActionHurlement.Appartenance, (Lycanthrope) l));
 		}
-		return chaine;
+		return chaine.toString();
 	}
 	
 	
@@ -116,7 +116,7 @@ public class EnclosLycanthrope extends Enclos {
      */
     public int concevoirEnfant(Creature femelle, Creature male) throws Exception {
     	if (meutePresente!=null && femelle == meutePresente.getCoupleAlpha().getFemelleAlpha() && male != meutePresente.getCoupleAlpha().getMaleAlpha()) {
-    		if (femelle.isVivant() && femelle instanceof Vivipare) {
+    		if (femelle.isVivant()) {
         		((Vivipare)femelle).concevoirUnEnfant((Vivipare)male, femelle.getDureeGestation());
         		return 1;
         	}

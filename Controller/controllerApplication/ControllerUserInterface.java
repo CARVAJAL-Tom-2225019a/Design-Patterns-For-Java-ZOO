@@ -13,8 +13,8 @@ import zoo.ZooFantastique;
  * Classe representant le controleur de la gestion manuel du zoo
  */
 public class ControllerUserInterface {
-	private ZooFantastique zoo = ZooFantastique.getInstance();
-	private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+	private final ZooFantastique zoo = ZooFantastique.getInstance();
+	private final ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     private final VueGlobale vueGlobale;
     private final VueUtilisateur vueUtilisateur;
     private final ControllerActions zooController;

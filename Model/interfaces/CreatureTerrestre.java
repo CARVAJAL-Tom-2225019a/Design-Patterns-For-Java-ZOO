@@ -10,6 +10,6 @@ public interface CreatureTerrestre {
 	 * @return Une chaine de caractère indiquant que la créature est en mouvement
 	 * @throws Exception Si la créature n'est pas en état de courrir
 	 */
-	public String courrir () throws Exception ;
+    String courrir() throws Exception ;
 
 }

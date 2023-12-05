@@ -33,7 +33,7 @@ class TestConceptionVivipare {
 	}
 	
 	@Test
-	void TestMethodeConcevoirUnEnfantAvecException() throws Exception {
+	void TestMethodeConcevoirUnEnfantAvecException() {
 		Exception thrown = assertThrows(
                 Exception.class,
                 () -> sireneMale.concevoirUnEnfant(sireneMale, 2),

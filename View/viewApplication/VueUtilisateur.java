@@ -13,9 +13,9 @@ import java.util.Scanner;
  */
 public class VueUtilisateur {
 	// Scanner pour la saisie utilisateur
-	private Scanner scanner = new Scanner(System.in);
+	private final Scanner scanner = new Scanner(System.in);
 	// Instance unique du gestionnaire de temps
-	private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+	private final GestionnaireTemps temps = GestionnaireTemps.getInstance();
 
 	/**
 	 * Constructeur
@@ -24,12 +24,10 @@ public class VueUtilisateur {
 	
 	
 	/**
-     * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
-     * du zoo lorsque l'utilisateur a le contrôle
-     *
-     * @return Instance de MaitreZoo initialisée avec les informations de l'utilisateur
-     */
-	public MaitreZoo bienvenue() {
+	 * Méthode pour afficher le message de bienvenue et initialiser le gestionnaire
+	 * du zoo lorsque l'utilisateur a le contrôle
+	 */
+	public void bienvenue() {
 		System.out.println("======  BIENVENUE DANS VOTRE ZOO FANTASTIQUE  ======");
 
 		// Saisie des informations du joueur
@@ -42,7 +40,7 @@ public class VueUtilisateur {
 		System.out.println("\nVous etes desormais maitre de votre zoo. \nJe suis sur que"
 				+ " vous serez un tres bon gestionnaire ! \nBonne chance " + nom);
 		// Initialisation du gestionnaire du zoo
-		return MaitreZoo.getInstance(nom, sexe, age);
+		MaitreZoo.getInstance(nom, sexe, age);
 	}
 	
 	

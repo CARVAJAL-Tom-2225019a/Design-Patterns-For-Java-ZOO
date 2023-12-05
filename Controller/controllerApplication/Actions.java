@@ -36,18 +36,18 @@ import java.util.Set;
  * dans le zoo fantastique
  */
 public class Actions {
-    private static ControllerUserInterface controlUser = new ControllerUserInterface();
-    private static ControllerGestionAuto controllerGestionAuto = new ControllerGestionAuto();
+    private static final ControllerUserInterface controlUser = new ControllerUserInterface();
+    private static final ControllerGestionAuto controllerGestionAuto = new ControllerGestionAuto();
     // Instance de Vues
     private static VueGlobale vueGlobale;
     private static VueUtilisateur vueUtilisateur;
     // Instance du gestionnaire du zoo (Singleton)
-    private MaitreZoo maitreZoo = MaitreZoo.getInstance();
-    private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+    private final MaitreZoo maitreZoo = MaitreZoo.getInstance();
+    private final ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     // Instance du zoo fantastique (Singleton)
-    private ZooFantastique zoo = ZooFantastique.getInstance();
+    private final ZooFantastique zoo = ZooFantastique.getInstance();
     // Instance du temps
-    private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+    private final GestionnaireTemps temps = GestionnaireTemps.getInstance();
 
 
     /**
@@ -221,20 +221,24 @@ public class Actions {
             }
 
             // creation enclos
-            if ("Classique".equals(typeEnclos)) {
-                Enclos e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } else if ("Voliere".equals(typeEnclos)) {
-                Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } else if ("Aquatique".equals(typeEnclos)) {
-                Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } else if ("Lycanthrope".equals(typeEnclos)) {
-                EnclosLycanthrope e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
-                zoo.addEnclos(e);
-            } else {
-                throw new Exception("Erreur type enclos lors de la creation");
+            switch (typeEnclos) {
+                case "Classique" -> {
+                    Enclos e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+                    zoo.addEnclos(e);
+                }
+                case "Voliere" -> {
+                    Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+                    zoo.addEnclos(e);
+                }
+                case "Aquatique" -> {
+                    Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+                    zoo.addEnclos(e);
+                }
+                case "Lycanthrope" -> {
+                    EnclosLycanthrope e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+                    zoo.addEnclos(e);
+                }
+                default -> throw new Exception("Erreur type enclos lors de la creation");
             }
         } catch (Exception e) {
             vueGlobale.afficher(e.getMessage());
@@ -391,7 +395,7 @@ public class Actions {
                     throw new Exception("Impossible de faire du sport pour eux... en esperant qu'ils ne grossisent pas trop du coup\n");
             }
             // Mouvement de l'enclos
-            if ("nager".equals(choix) && peutNager == true) {
+            if ("nager".equals(choix) && peutNager) {
                 vueGlobale.afficher("ALLEZ ! On nage les " + enclos.getNomEspece() + "s. ALLEZ ! \n");
                 for (Creature c : enclos.getListeCreatures().values()) {
                     Thread.sleep(1000);
@@ -399,7 +403,7 @@ public class Actions {
                         chaine = ((CreatureMarine) c).nager();
                     vueGlobale.afficher(chaine);
                 }
-            } else if ("courir".equals(choix) && peutCourrir == true) {
+            } else if ("courir".equals(choix) && peutCourrir) {
                 vueGlobale.afficher("ALLEZ ! On court les " + enclos.getNomEspece() + "s. ALLEZ !\n");
                 for (Creature c : enclos.getListeCreatures().values()) {
                     Thread.sleep(1000);
@@ -407,7 +411,7 @@ public class Actions {
                         chaine = ((CreatureTerrestre) c).courrir();
                     vueGlobale.afficher(chaine);
                 }
-            } else if ("voler".equals(choix) && peutVoler == true) {
+            } else if ("voler".equals(choix) && peutVoler) {
                 vueGlobale.afficher("ALLEZ ! On vole les " + enclos.getNomEspece() + "s. ALLEZ ! \n");
                 for (Creature c : enclos.getListeCreatures().values()) {
                     Thread.sleep(1000);
@@ -700,26 +704,32 @@ public class Actions {
             // GESTION MANUEL
             if (Run.utilisateurControle) {
                 // choix action
-                String choixAction = "";
+                String choixAction;
                 while (!choixActionOk) {
                     vueGlobale.afficher("LES TYPES DE HURLEMENT : appartenance, domination, soumission, agressivite");
                     choixAction = vueUtilisateur.demandeUtilisateur("Quelle action souhaitez vous transmettre : ");
                     // Vérifier si l'action est valide
-                    if (choixAction.equals("appartenance")) {
-                        action = Enum_ActionHurlement.Appartenance;
-                        choixActionOk = true;
-                    } else if (choixAction.equals("domination")) {
-                        action = Enum_ActionHurlement.Domination;
-                        choixActionOk = true;
-                    } else if (choixAction.equals("soumission")) {
-                        action = Enum_ActionHurlement.Soumission;
-                        choixActionOk = true;
-                    } else if (choixAction.equals("agressivite")) {
-                        action = Enum_ActionHurlement.Agressivite;
-                        choixActionOk = true;
-                    } else
-                        System.out.println("Action invalide. "
+                    switch (choixAction) {
+                        case "appartenance" -> {
+                            action = Enum_ActionHurlement.Appartenance;
+                            choixActionOk = true;
+                        }
+                        case "domination" -> {
+                            action = Enum_ActionHurlement.Domination;
+                            choixActionOk = true;
+                        }
+                        case "soumission" -> {
+                            action = Enum_ActionHurlement.Soumission;
+                            choixActionOk = true;
+                        }
+                        case "agressivite" -> {
+                            action = Enum_ActionHurlement.Agressivite;
+                            choixActionOk = true;
+                        }
+                        default -> System.out.println("Action invalide. "
                                 + "Veuillez choisir parmi les options : appartenance, domination, soumission, agressivite");
+                    }
+
                 }
                 // choix loup 1
                 vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
@@ -738,7 +748,7 @@ public class Actions {
                 while (!(enclos2 instanceof EnclosLycanthrope)) {
                     vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
                     vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
-                    enclos1 = controlUser.recupererEnclosParNom();
+                    enclos2 = controlUser.recupererEnclosParNom();
                 }
                 vueGlobale.afficherCreatureEnclos(enclos2);
                 vueGlobale.afficher("\n\nVeuillez selectionner un lycanthrope qui entend (index) : \n");
@@ -759,6 +769,17 @@ public class Actions {
                 loup2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
             }
             vueGlobale.afficher(((Lycanthrope) loup1).hurler(action, (Lycanthrope) loup2));
+
+            Random r = new Random();
+            int n = r.nextInt(8); // 8 = nombre fichier
+            String file = "lycanthrope/loup" + (n + 1) + ".wav";
+            (new Son()).play(file);
+
+            // cri du deuxieme loup garou
+            r = new Random();
+            file = "lycanthrope/loup" + (n + 1) + ".wav";
+            (new Son()).play(file);
+
         } catch (Exception e) {
             vueGlobale.afficher(e.getMessage());
         }
@@ -769,8 +790,8 @@ public class Actions {
      * Methode appellé lorsque l'action à effectuer est de defier un male alpha dans une meute
      */
     public void casDefierAlpha() {
-        Meute m = null;
-        Lycanthrope loupVolontaire = null;
+        Meute m;
+        Lycanthrope loupVolontaire;
         try {
             vueGlobale.afficher("\n ---- Defier un male alpha (" + Enum_ActionsPossibles.DEFIER_MALE_ALPHA.getDureeTotale() + ") ---- ");
             // GESTION MANUEL

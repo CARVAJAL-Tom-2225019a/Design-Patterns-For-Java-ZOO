@@ -13,9 +13,9 @@ import java.util.Random;
  */
 public abstract class Ovipare extends Creature {
 
-    private ArrayList<Oeuf> ventre; // dans le ventre il y a n oeufs avec potentiellement aucun oeuf
+    private final ArrayList<Oeuf> ventre; // dans le ventre il y a n oeufs avec potentiellement aucun oeuf
     //TODO add gestion oeuf dans le ventre
-    private int dureeAvantEclosion = 1; // un an avant de pondre un oeuf
+    private final int dureeAvantEclosion = 1; // un an avant de pondre un oeuf
 
     
     /**
@@ -26,7 +26,7 @@ public abstract class Ovipare extends Creature {
      */
     public Ovipare(Ovipare parent1, Ovipare parent2) {
         super(parent1, parent2);
-        this.ventre = new ArrayList<Oeuf>();
+        this.ventre = new ArrayList<>();
         this.setDureeGestation(dureeAvantEclosion);
     }
 
@@ -35,7 +35,7 @@ public abstract class Ovipare extends Creature {
      */
     public Ovipare(){
         super();
-        this.ventre = new ArrayList<Oeuf>();
+        this.ventre = new ArrayList<>();
         this.setDureeGestation(dureeAvantEclosion);
     }
     

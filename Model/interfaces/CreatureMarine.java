@@ -10,6 +10,6 @@ public interface CreatureMarine {
 	 * @return une chaine de caractère indiquant que la créature nage
 	 * @throws Exception si la créature n'est pas en état de nager
 	 */
-	public String nager() throws Exception;
+    String nager() throws Exception;
 	
 }

@@ -33,7 +33,7 @@ public abstract class Creature {
     private Enum_Aggressivite agressivite;
     private ArrayList<Creature> listeEnfants;
     private ArrayList<Creature> listeParents; // doit en avoir max 2.
-    private String prenom;
+    private final String prenom;
     private double force;//calculé sur status (grand age + grand poid + grande taille + grande santé +
     // grande faim + male (plus agressif) + bien dormis +
     // status chef d'enclos (alpha) + nb comats vaincu
@@ -58,8 +58,8 @@ public abstract class Creature {
         this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
         this.enTrainDeDormir = false;
         this.vivant = true;
-        this.listeEnfants = new ArrayList<Creature>();
-        this.listeParents = new ArrayList<Creature>();
+        this.listeEnfants = new ArrayList<>();
+        this.listeParents = new ArrayList<>();
         this.valeurNutrionelle = poids * taille;
         this.combatVaincu = 0;
         if (sexe == Enum_Sexe.Male) {
@@ -102,7 +102,6 @@ public abstract class Creature {
 
     /**
      * Modifier la duree de gestation de la creature
-     * @param dureeGestation
      */
     protected void setDureeGestation(int dureeGestation) {
         this.dureeGestation = dureeGestation;

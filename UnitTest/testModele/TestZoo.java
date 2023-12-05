@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 class TestZoo {
 	
-	ZooFantastique zoo = ZooFantastique.getInstance();;
+	ZooFantastique zoo = ZooFantastique.getInstance();
 	Aquarium aquariumVide;
 	Aquarium enclosKraken;
 	Aquarium enclosMegalodon;
@@ -68,7 +68,7 @@ class TestZoo {
 	}
 	
 	@Test
-	void TestMethodeModifAleatoireEtatEnclos() throws Exception {
+	void TestMethodeModifAleatoireEtatEnclos() {
 		boolean fait = false;
 		Evenements.modifAleatoireEtatEnclos();
 		for (Enclos e : zoo.getListeEnclos()) {

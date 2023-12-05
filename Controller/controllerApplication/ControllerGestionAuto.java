@@ -20,15 +20,15 @@ import java.util.Random;
  */
 public class ControllerGestionAuto {
 	// Instance du contrôleur du zoo (où les différentes actions possibles sont stockées)
-	private static ControllerActions zooController = new ControllerActions();
+	private static final ControllerActions zooController = new ControllerActions();
 	// Instance de la vue globale
 	private static VueGlobale VueGlobale;
 	// Instance unique du zoo fantastique
-	private static ZooFantastique zoo = ZooFantastique.getInstance();
+	private static final ZooFantastique zoo = ZooFantastique.getInstance();
 	// Instance de la colonie de lycanthrope
-	private static ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+	private static final ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
 	// Instance unique de la classe permettant la gestion du temp
-	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
+	private static final GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
 	
 	/**
@@ -43,10 +43,8 @@ public class ControllerGestionAuto {
 
     /**
      * Méthode permettant d'effectuer un choix aléatoire
-     *
-     * @throws Exception En cas d'erreur lors de l'exécution de l'action aléatoire
      */
-	public static void choixActionAleatoire () throws Exception {
+	public static void choixActionAleatoire ()  {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		ControllerActions.effectuerAction(choix);
@@ -90,7 +88,7 @@ public class ControllerGestionAuto {
         if (zoo.getListeEnclos().isEmpty()) {
             return null;
         }
-        Enclos enclos=null;
+        Enclos enclos = null;
         while (enclos == null) {
         	 // Obtenez un enclos aléatoire
             int indiceAleatoire = new Random().nextInt(zoo.getListeEnclos().size());
@@ -112,7 +110,7 @@ public class ControllerGestionAuto {
             return null;
         }
         Enclos enclos=null;
-        Meute meute = null;
+        Meute meute;
         while (enclos == null) {
         	 // Obtenez un enclos aléatoire
             int indiceAleatoire = new Random().nextInt(colonie.getListeMeutes().size());
@@ -149,9 +147,8 @@ public class ControllerGestionAuto {
      * Méthode permettant de récupérer le premier enclos en mauvais état
      *
      * @return Le premier enclos en mauvais état, ou null s'il n'y en a aucun
-     * @throws Exception En cas d'erreur lors de la récupération de l'enclos
-     */
-	public Enclos getFirstEnclosMauvaisEtat() throws Exception {
+	 */
+	public Enclos getFirstEnclosMauvaisEtat() {
 		for (Enclos e : zoo.getListeEnclos()) {
 			if (e.isEnclosMauvaisEtat())
 				return e;
@@ -167,7 +164,7 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureFaim() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.getListeCreatures().size()>0 && e.isCreatureOntFaim())
+			if (!e.getListeCreatures().isEmpty() && e.isCreatureOntFaim())
 				return e;
 		}
 		return recuperationEnclosAleatoire();
@@ -181,7 +178,7 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureSommeil() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.getListeCreatures().size()>0 && e.isCreatureOntSommeil())
+			if (!e.getListeCreatures().isEmpty() && e.isCreatureOntSommeil())
 				return e;
 		}
 		return recuperationEnclosAleatoire();
@@ -195,7 +192,7 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureMauvaiseSante() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.getListeCreatures().size()>0 && e.isCreatureSontMalade())
+			if (!e.getListeCreatures().isEmpty() && e.isCreatureSontMalade())
 				return e;
 		}
 		return recuperationEnclosAleatoire();
@@ -209,7 +206,7 @@ public class ControllerGestionAuto {
      */
 	public Enclos getFirstEnclosCreatureDort() {
 		for (Enclos e : zoo.getListeEnclos()) {
-			if (e.getListeCreatures().size()>0 && e.isCreaturesDorment())
+			if (!e.getListeCreatures().isEmpty() && e.isCreaturesDorment())
 				return e;
 		}
 		return recuperationEnclosAleatoire();
@@ -254,7 +251,7 @@ public class ControllerGestionAuto {
 				}
 				else {
 					if (l.getNiveau()>loupPlusFort.getNiveau())
-						loupPlusFort=l;;
+						loupPlusFort=l;
 				}
 			}
 		}

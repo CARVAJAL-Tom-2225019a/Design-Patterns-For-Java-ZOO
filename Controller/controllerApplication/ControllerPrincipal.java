@@ -21,8 +21,8 @@ public class ControllerPrincipal {
 	VueGlobale vueGlobale;
 	VueUtilisateur vueUtilisateur;
     // Instance du zoo fantastique (Singleton)
-    private static ZooFantastique zoo = ZooFantastique.getInstance();
-    private GestionnaireTemps temps = GestionnaireTemps.getInstance();
+    private static final ZooFantastique zoo = ZooFantastique.getInstance();
+    private final GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
     /**
@@ -53,7 +53,7 @@ public class ControllerPrincipal {
                     	((EnclosLycanthrope) enclos).passageAnneLycanthrope();
                     // Ajoute les informations sur les créatures mortes à la chaîne
                     for (Creature creatMorte : enclos.creaturesMortes())
-                    	vueGlobale.afficherCreature(creatMorte, -1);;
+                    	vueGlobale.afficherCreature(creatMorte, -1);
             	}
             }
     	}
@@ -103,9 +103,8 @@ public class ControllerPrincipal {
     /**
      * Méthode pour vérifier les femelles enceintes et faire naître les enfants
      *
-     * @throws Exception En cas d'erreur lors de la vérification des enfants
-     */
-    public void verificationEnfants() throws Exception {
+	 */
+    public void verificationEnfants() {
     	int nbJour;
     	try {
     		for (Creature c : zoo.getListeFemelleEnceinte()) {
@@ -130,9 +129,8 @@ public class ControllerPrincipal {
      * Méthode permettant de mettre la nouvelle créature dans un enclos
      *
      * @param c La créature à ranger dans un enclos
-     * @throws Exception En cas d'erreur lors du rangement de la créature
-     */
-    public void rangerCreature (Creature c) throws Exception {
+	 */
+    public void rangerCreature (Creature c) {
     	String nom;
     	try {
     		//S'il y a de la place dans un enclos

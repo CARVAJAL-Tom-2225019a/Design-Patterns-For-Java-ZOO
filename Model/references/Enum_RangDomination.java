@@ -30,9 +30,9 @@ public enum Enum_RangDomination {
     PSI("Psi",1,'ψ'),
     OMEGA("Omega",0,'ω');
 	
-	private String description;
-    private int valeur;
-    private char charRang;
+	private final String description;
+    private final int valeur;
+    private final char charRang;
 
     // Constructeur de l'énumération avec des paramètres
     Enum_RangDomination(String description, int valeur, char charRang) {

@@ -20,9 +20,9 @@ public class ZooFantastique {
     // Instance singleton du zoo fantastique
     private static ZooFantastique instance;
     // Instance singleton de la colonie de Lycanthrope
-    private ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
+    private final ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     // Nom du zoo
-    private String nom;
+    private final String nom;
     // Liste des enclos dans le zoo
     private Set<Enclos> listeEnclos;
     //Liste Oeuf et Enfant à naitre
@@ -164,9 +164,7 @@ public class ZooFantastique {
      * @throws Exception Si le nom de l'enclos est incorrect
      */
     public Enclos trouverEnclosParNom(String nomRecherche) throws Exception {
-        Iterator<Enclos> iterator = listeEnclos.iterator();
-        while (iterator.hasNext()) {
-            Enclos enclos = iterator.next();
+        for (Enclos enclos : listeEnclos) {
             if (enclos.getNom().equals(nomRecherche)) {
                 return enclos; // On a trouvé l'enclos
             }
@@ -205,12 +203,12 @@ public class ZooFantastique {
      * @return La chaine contenant les informations
      */
     public String voirNomsEnclosPasVide() {
-    	String chaine = "LES ENCLOS QUI NE SONT PAS VIDE : \n";
+    	StringBuilder chaine = new StringBuilder("LES ENCLOS QUI NE SONT PAS VIDE : \n");
     	for (Enclos e : listeEnclos) {
-    		if (e.getListeCreatures().size() > 0)
-    			chaine+="  - "+e.getNom()+"\n";
+    		if (!e.getListeCreatures().isEmpty())
+    			chaine.append("  - ").append(e.getNom()).append("\n");
     	}
-    	return chaine;
+    	return chaine.toString();
     }
     
     
@@ -220,11 +218,11 @@ public class ZooFantastique {
      * @return La chaine contenant les informations
      */
     public String voirNomsEnclos() {
-    	String chaine = "LES ENCLOS : \n";
+    	StringBuilder chaine = new StringBuilder("LES ENCLOS : \n");
     	for (Enclos e : listeEnclos) {
-    		chaine+="  - "+e.getNom()+"\n";
+    		chaine.append("  - ").append(e.getNom()).append("\n");
     	}
-    	return chaine;
+    	return chaine.toString();
     }
     
     
@@ -235,12 +233,12 @@ public class ZooFantastique {
      * @return La chaine contenant les informations
      */
     public String voirNomEnclosLycanthropes() {
-    	String chaine = "LES ENCLOS DE LYCANTHROPE : \n";
+    	StringBuilder chaine = new StringBuilder("LES ENCLOS DE LYCANTHROPE : \n");
     	for (Enclos e : listeEnclos) {
     		if (e instanceof EnclosLycanthrope)
-    			chaine+="  - "+e.getNom()+"\n";
+    			chaine.append("  - ").append(e.getNom()).append("\n");
     	}
-    	return chaine;
+    	return chaine.toString();
     }
 
 }

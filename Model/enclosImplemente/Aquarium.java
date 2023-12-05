@@ -113,18 +113,8 @@ public class Aquarium extends Enclos {
 		}
 		return chaine;
 	}
-	
-	
-	/**
-	 * Methode pour avoir le nom de l'enclos et son etat
-	 */
-	public String voirInfoEnclos() {
-		return " -Aquarium "+getNom()+" avec "+getNbCreatures()
-        +" creatures.\n          Niveau eau : "+niveauEau+"/"+profondeurBassin
-        +"\n          Salinite eau : "+saliniteEau+"/"+CONSTANTES.SALINITE_CORRECT+"\n";
-	}
-	
-	
+
+
 	/**
 	 * Methode permettant la degradation du niveau d'eau
 	 */

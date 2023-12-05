@@ -27,7 +27,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 	
 	public Enum_RangDomination rangDomination;
 	private int niveau;
-	private int facteurImpetuosite;
+	private final int facteurImpetuosite;
 	
 	private Meute meute;
 	
@@ -71,8 +71,8 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
 		this.setBruit( bruit);
 		this.calculerForce();
 		facteurDomination = 0;
-		rangDomination=Enum_RangDomination.OMEGA;;
-		niveau = 0;
+		rangDomination=Enum_RangDomination.OMEGA;
+        niveau = 0;
 		facteurImpetuosite=ZooFantastique.getIntAleatoire(CONSTANTES.MAX_FACTEUR_IMPETUOSITE);
 		meute = null;
 	}
@@ -88,7 +88,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	return rangDomination;
     }
     public void setRangDomination(Enum_RangDomination rang) {
-    	rangDomination=rang;;
+    	rangDomination=rang;
     }
     public int getNiveau() {
     	return niveau;
@@ -122,7 +122,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	else if (super.getCategorieAge() == Enum_CategorieAge.VIEUX) {
     		niveau += 5;
     	}
-    	niveau+=super.getForce();
+    	niveau+= (int) super.getForce();
     	niveau+=facteurDomination;
     	niveau+=rangDomination.getValeur();
     }
@@ -133,11 +133,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @return true s'il est atteint, sinon false
      */
     public boolean seuilFacteurDominationAtteint () {
-    	if (facteurDomination < CONSTANTES.SEUIL_FACTEUR_DOMINATION) {
-    		return true;
-    	}
-    	else
-    		return false;
+        return facteurDomination < CONSTANTES.SEUIL_FACTEUR_DOMINATION;
     }
 
     
@@ -344,10 +340,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     		return false;
     	}
     	else {
-    		if (niveau > loup2.getNiveau())
-    			return true;
-    		else
-    			return false;
+            return niveau > loup2.getNiveau();
     	}
     }
     
@@ -395,11 +388,10 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     /**
      * Methode permeyttant a un lycanthrope de quitter sa meute et
      * devenir solitaire
-     * @throws Exception
-     */
-    public void seSeparerDeSaMeute() throws Exception {
-    		rangDomination = Enum_RangDomination.OMEGA;;
-    		meute = null;
+	 */
+    public void seSeparerDeSaMeute() {
+    		rangDomination = Enum_RangDomination.OMEGA;
+        meute = null;
     }
     
     
@@ -435,8 +427,6 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
         	return false;
         if (getPoids() != other.getPoids())
         	return false;
-        if (getTaille()!=other.getTaille())
-        	return false;
-        return true;
+        return getTaille() == other.getTaille();
     }
 }

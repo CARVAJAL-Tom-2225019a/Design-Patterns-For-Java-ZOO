@@ -18,7 +18,6 @@ import java.util.Random;
  * Classe représentant les événements liés au temps dans le zoo
  */
 public class Evenements {
-	GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	static ZooFantastique zoo = ZooFantastique.getInstance();
 	
 	/**
@@ -144,15 +143,13 @@ public class Evenements {
             	randomIndexEnclos = random.nextInt(zoo.getListeEnclos().size());
             }
             Enclos enclos = (Enclos) zoo.getListeEnclos().toArray()[randomIndexEnclos];
-            if (enclos instanceof Aquarium) {
+            if (enclos instanceof Aquarium aquarium) {
                 // Si c'est un Aquarium, modifier NiveauEau et SaliniteEau
-                Aquarium aquarium = (Aquarium) enclos;
-                aquarium.degradationNiveauEau();
+				aquarium.degradationNiveauEau();
                 aquarium.degradationSaliniteEau();
-            } else if (enclos instanceof Voliere) {
+            } else if (enclos instanceof Voliere voliere) {
                 // Si c'est une Voliere, modifier degreProprete et etatToit
-                Voliere voliere = (Voliere) enclos;
-                voliere.degradationDegreProprete();
+				voliere.degradationDegreProprete();
                 voliere.degradationEtatToit();
             } else {
                 // Sinon (enclos classique ou lycanthrope), modifier degreProprete
@@ -193,7 +190,7 @@ public class Evenements {
      * Méthode pour vérifier l'état des créatures et provoquer la mort d'une créature si elle ne va pas bien
      */
     private static void verificationEtatCreature () {
-    	int compteurIndicateurMauvais = 0;
+    	int compteurIndicateurMauvais ;
     	for (Enclos e : zoo.getListeEnclos()) {
     		for (Creature c : e.getListeCreatures().values()) {
     			compteurIndicateurMauvais=0;

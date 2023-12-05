@@ -17,8 +17,8 @@ public class Embryon {
     private final Vivipare parent1;
     private final Vivipare parent2;
 
-    private Enum_Especes espece;
-    private int dureeGestation;
+    private final Enum_Especes espece;
+    private final int dureeGestation;
     private int dureeAvantNaissance;
 
     

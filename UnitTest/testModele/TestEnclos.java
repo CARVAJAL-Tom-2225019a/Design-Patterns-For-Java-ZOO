@@ -35,7 +35,7 @@ class TestEnclos {
 
 	@Test
 	void TestMethodeAjouterCreature() {
-		assertTrue(enclos.getListeCreatures().size()==10);
+        assertEquals(10, enclos.getListeCreatures().size());
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ class TestEnclos {
 	void TestMethodeVoirCreaturesAyantUnBesoin() throws Exception {
 		for (int i=0; i<10; i++)
 			enclos.getListeCreatures().get(1).perdreNourriture();
-		assertTrue(enclos.getCreaturesAyantUnBesoin() == null);
+        assertNull(enclos.getCreaturesAyantUnBesoin());
 	}
 	
 	@Test
@@ -94,7 +94,7 @@ class TestEnclos {
 	}
 	
 	@Test
-	void TestMethodeTrouverCleParCreature() throws Exception {
+	void TestMethodeTrouverCleParCreature() {
 		int key = 3;
 		Creature d = enclos.getListeCreatures().get(key);
 		assertEquals(3, enclos.trouverCleParCreature(d));

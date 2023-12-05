@@ -12,8 +12,8 @@ public abstract class Enclos {
 	
 	private Enum_Especes nomEspece;
 	
-	private String nom;
-	private double superficie;
+	private final String nom;
+	private final double superficie;
 	private int nbCreatures;
 	private TreeMap<Integer, Creature> listeCreatures;
 	private Enum_DegrePropreteEnclos degreProprete;
@@ -93,35 +93,27 @@ public abstract class Enclos {
 	 * @return la chaine de caractère contenant les informations
 	 */
 	public String toString() {
-		String chaine = "Enclos "+nom+" de superficie "+superficie+" m^2 pouvant contenir au "
-				+ "plus "+CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX+" creatures.\n Il y a actuellement "+nbCreatures+" creatures.\n"
-				+ "Degre de proprete : "+degreProprete+"\n";
+		StringBuilder chaine = new StringBuilder("Enclos " + nom + " de superficie " + superficie + " m^2 pouvant contenir au "
+                + "plus " + CONSTANTES.NB_CREATURE_PAR_ENCLOS_MAX + " creatures.\n Il y a actuellement " + nbCreatures + " creatures.\n"
+                + "Degre de proprete : " + degreProprete + "\n");
 		for (Creature creature : listeCreatures.values()) {
 			// si la creature est vivante
-			if (creature.isVivant())
-				chaine+="Index : "+ trouverCleParCreature(creature)+"\n";
-				chaine+= creature.toString();
+			if (creature.isVivant()) {
+				chaine.append("Index : ").append(trouverCleParCreature(creature)).append("\n");
+				chaine.append(creature);
+			}
+
 		}
-		return chaine;
+		return chaine.toString();
 	}
-	
-	
-	/**
-	 * Methode pour avoir le nom de l'enclos et son etat
-	 * @return la chaine de caractère contenant les informations de l'enclos
-	 */
-	public String voirInfoEnclos() {
-		return " -Enclos "+getNom()+" avec "+getNbCreatures()
-        +" creatures.\n          Degre proprete : "+getDegreProprete()+"\n";
-	}
-	
-	
+
+
 	/**
 	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
 	 * @return L'ensemble des creatures qui ont un besoin dans l'enclos
 	 */
 	public HashSet<Creature> getCreaturesAyantUnBesoin() {
-		HashSet<Creature> listeCreatureAvecBesoin = new HashSet<Creature>();
+		HashSet<Creature> listeCreatureAvecBesoin = new HashSet<>();
 		boolean isValue = false;
 		HashSet<Creature> temp = voirCreaturesMauvaiseSante();
 		if (temp != null) {
@@ -151,7 +143,7 @@ public abstract class Enclos {
 	 */
 	private HashSet<Creature> voirCreaturesFaim() {
 		boolean isValue = false;
-		HashSet<Creature> liste = new HashSet<Creature>();
+		HashSet<Creature> liste = new HashSet<>();
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurFaim() < 5) {
 				liste.add(entry.getValue());
@@ -171,7 +163,7 @@ public abstract class Enclos {
 	 */
 	private HashSet<Creature> voirCreaturesSommeil() {
 		boolean isValue = false;
-		HashSet<Creature> liste = new HashSet<Creature>();
+		HashSet<Creature> liste = new HashSet<>();
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurSommeil() < 5) {
 				liste.add(entry.getValue());
@@ -190,7 +182,7 @@ public abstract class Enclos {
 	 * @return L'ensemble des creatures qui sont en mauvaise sante dans l'enclos
 	 */
 	private HashSet<Creature> voirCreaturesMauvaiseSante() {
-		HashSet<Creature> liste = new HashSet<Creature>();
+		HashSet<Creature> liste = new HashSet<>();
 		boolean isValue = false;
 		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
 			if (entry.getValue().getIndicateurSante() < 5) {
@@ -213,7 +205,7 @@ public abstract class Enclos {
 	 * @throws Exception si problème lors de la recherche des créatures mortes
 	 */
 	public Set<Creature> creaturesMortes() throws Exception {
-		Set<Creature> liste = new HashSet<Creature>();
+		Set<Creature> liste = new HashSet<>();
 	    // Utilisation d'un itérateur pour éviter les modifications concurrentes
 	    Iterator<Map.Entry<Integer, Creature>> iterator = listeCreatures.entrySet().iterator();
 	    while (iterator.hasNext()) {
@@ -341,7 +333,7 @@ public abstract class Enclos {
 		// Copier les créatures dans une liste
         List<Creature> creaturesList = new ArrayList<>(listeCreatures.values());
         // Trier la liste par âge
-        Collections.sort(creaturesList, Comparator.comparingInt(Creature::getAge));
+        creaturesList.sort(Comparator.comparingInt(Creature::getAge));
         // Remettre les créatures triées dans la TreeMap
         TreeMap<Integer, Creature> nouvelleMap = new TreeMap<>();
         int nouvelleCle = 1;
@@ -465,7 +457,7 @@ public abstract class Enclos {
 	        }
 	    }
 	    if (!creaturesInsomniaques.isEmpty() || !creaturesMortes.isEmpty()) {
-	        StringBuilder message = new StringBuilder("");
+	        StringBuilder message = new StringBuilder();
 	        if (!creaturesInsomniaques.isEmpty()) {
 	            message.append("\nInsomniaques : \n").append(String.join("\n", creaturesInsomniaques));
 	        }
@@ -650,10 +642,7 @@ public abstract class Enclos {
 				compteur++;
 			}
 		}
-		if (compteur >= listeCreatures.size()/2)
-			return true;
-		else
-			return false;
+        return compteur >= listeCreatures.size() / 2;
 	}
 
 	
@@ -670,10 +659,7 @@ public abstract class Enclos {
 				compteur++;
 			}
 		}
-		if (compteur >= listeCreatures.size()/2)
-			return true;
-		else
-			return false;
+        return compteur >= listeCreatures.size() / 2;
 	}
 
 	
@@ -690,10 +676,7 @@ public abstract class Enclos {
 				compteur++;
 			}
 		}
-		if (compteur >= listeCreatures.size()/2)
-			return true;
-		else
-			return false;
+        return compteur >= listeCreatures.size() / 2;
 	}
 
 	
@@ -703,10 +686,7 @@ public abstract class Enclos {
 	 * @return true si l'enclos est en mauvais état de propreté, sinon false
 	 */
 	public boolean isEnclosMauvaisEtat () {
-		if (degreProprete == Enum_DegrePropreteEnclos.mauvais)
-			return true;
-		else
-			return false;
+        return degreProprete == Enum_DegrePropreteEnclos.mauvais;
 	}
 
 	
@@ -723,10 +703,7 @@ public abstract class Enclos {
 				compteur++;
 			}
 		}
-		if (compteur >= listeCreatures.size()/2)
-			return true;
-		else
-			return false;
+        return compteur >= listeCreatures.size() / 2;
 	}
 
 

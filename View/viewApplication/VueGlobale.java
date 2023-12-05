@@ -10,6 +10,7 @@ import references.CONSTANTES;
 import references.Enum_CategorieAge;
 import references.Enum_Sexe;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -50,29 +51,9 @@ public class VueGlobale {
      * @param creature La créature à afficher
      */
     public void afficherCreature(Creature creature, int index) {
-        VueCreature vueCreature;
         VueCreature parchemin = VueCreature.PARCHEMIN;
         ArrayList<String> strResultat = new ArrayList<>();
-
-        if (creature instanceof Dragon) {
-            vueCreature = VueCreature.DRAGON;
-        } else if (creature instanceof Kraken) {
-            vueCreature = VueCreature.KRAKEN;
-        } else if (creature instanceof Licorne) {
-            vueCreature = VueCreature.LICORNE;
-        } else if (creature instanceof Lycanthrope) {
-            vueCreature = VueCreature.LYCANTHROPE;
-        } else if (creature instanceof Megalodon) {
-            vueCreature = VueCreature.MEGALODON;
-        } else if (creature instanceof Nymphe) {
-            vueCreature = VueCreature.NYMPHE;
-        } else if (creature instanceof Phenix) {
-            vueCreature = VueCreature.PHENIX;
-        } else if (creature instanceof Sirene) {
-            vueCreature = VueCreature.SIRENE;
-        } else {
-            vueCreature = VueCreature.HUMAIN;
-        }
+        VueCreature vueCreature = getVueCreature(creature);
 
         for (int i = 0; i < (parchemin.getHauteur()); i++) { // temporairement  + vueCreature.getHauteur() -1) ; i++){
 
@@ -133,7 +114,8 @@ public class VueGlobale {
             /**
 			 * 
 			 */
-			private static final long serialVersionUID = 1L;
+			@Serial
+            private static final long serialVersionUID = 1L;
 
 			{
                 add("  # Sexe  : \033[32m" + creature.getSexe() + "\033[0m         Age : \033[32m" + creature.getAge() + "ans \033[0m ");
@@ -198,45 +180,42 @@ public class VueGlobale {
      * @param besoinCreature  Indique s'il est nécessaire d'afficher les créatures dans l'enclos
      * @throws Exception      si problème lors de la récupération d'une valeur
      */
-    @SuppressWarnings("serial")
-	public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
+    public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
         VueEnclos vueEnclos;
         ArrayList<String> complementLignes;
         if (enclos instanceof Voliere) {
             vueEnclos = VueEnclos.VOLIERE;
-            complementLignes = new ArrayList<String>() {
-                /**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
+            complementLignes = new ArrayList<>() {
 
-				{
+                @Serial
+                private static final long serialVersionUID = 1L;
+
+                {
                     add("  #============= \033[32m" + enclos.getNom() + "\033[0m =============#  ");
                     add("  #");
-                    add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() +"\033[0m");
+                    add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() + "\033[0m");
                     add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) + "\033[0m/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m créature(s) ");
                     add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²\033[0m");
                     add("  # La hauteur de l'enclos est de : \033[32m" + ((Voliere) enclos).getHauteur() + "m\033[0m");
                     if (!enclos.getListeCreatures().values().isEmpty()) {
-                    	add("  # La créature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
-                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+ "\033[0m");
+                        add("  # La créature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
+                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name() + "\033[0m");
                         add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + "ans\033[0m");
                         add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%\033[0m"); //TODO envisager changement maxindicateur
                         add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%\033[0m");
                         add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%\033[0m");
                         add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%\033[0m");
+                    } else {
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
                     }
-                    else {
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    }
-                    add("  # Proprete enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete()+ "\033[0m");
-                    add("  # Etat toit       : \033[32m" + afficherStatBar(((Voliere) enclos).getEtatToitNumber(), 3) + " " + ((Voliere) enclos).getEtatToit()+ "\033[0m");
+                    add("  # Proprete enclos : \033[32m" + afficherStatBar(enclos.getDegrePropreteNumber(), 3) + " " + enclos.getDegreProprete() + "\033[0m");
+                    add("  # Etat toit       : \033[32m" + afficherStatBar(((Voliere) enclos).getEtatToitNumber(), 3) + " " + ((Voliere) enclos).getEtatToit() + "\033[0m");
                     add("  # ");
                     add("  # Nombre individu par classe d'ages :");
                     add("  # " + afficherClassesAgesEnclos(enclos)); // # Oeuf(s) 1 | nouveau né 2 | enfant 3 | Jeune 4 | Adulte 5 | Vieux 9
@@ -246,38 +225,39 @@ public class VueGlobale {
         } else if (enclos instanceof Aquarium) {
             vueEnclos = VueEnclos.AQUARIUM;
 
-            complementLignes = new ArrayList<String>() {
+            complementLignes = new ArrayList<>() {
                 /**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
+                 *
+                 */
+                @Serial
+                private static final long serialVersionUID = 1L;
 
-				{
+                {
                     add("  #========== \033[32m" + enclos.getNom() + "\033[0m ==========  ");
                     add("  #");
-                    add("  # \033[32m" + vueEnclos + "\033[0m"+" contient : \033[32m" + enclos.getNbCreatures()  +" "+ enclos.getNomEspece()+"\033[0m");
-                    add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) +"\033[0m"+ "/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m creature(s) ");
+                    add("  # \033[32m" + vueEnclos + "\033[0m" + " contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() + "\033[0m");
+                    add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) + "\033[0m" + "/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m creature(s) ");
                     add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²\033[0m");
                     add("  # La Salinite est de : \033[32m" + ((Aquarium) enclos).getSaliniteEau() + "\033[0m & La profondeur est de : \033[32m" + ((Aquarium) enclos).getProfondeurBassin() + " m\033[0m");
                     if (!enclos.getListeCreatures().values().isEmpty()) {
-                    	add("  # La creature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom() +"\033[0m" );
-                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name()+"\033[0m");
+                        add("  # La creature dominante de l'enclos est : \033[32m" + enclos.getCreatureDominante().getPrenom() + "\033[0m");
+                        add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name() + "\033[0m");
                         add("  #");
-                        add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans"+"\033[0m");;
-                        add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%"+"\033[0m"); //TODO envisager changement maxindicateur
-                        add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%"+"\033[0m");
-                        add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%"+"\033[0m");
-                        add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%"+"\033[0m");
-                    }
-                    else {
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
-                    	add("  #");
+                        add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + " ans" + "\033[0m");
+                        ;
+                        add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%" + "\033[0m"); //TODO envisager changement maxindicateur
+                        add("  # Faim moyenne    : \033[32m" + afficherStatBar(enclos.getFaimMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getFaimMoyen() + "%" + "\033[0m");
+                        add("  # Sommeil moyen   : \033[32m" + afficherStatBar(enclos.getSommeilMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSommeilMoyen() + "%" + "\033[0m");
+                        add("  # Sante moyenne   : \033[32m" + afficherStatBar(enclos.getSanteMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getSanteMoyen() + "%" + "\033[0m");
+                    } else {
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
+                        add("  #");
                     }
                     add("  #");
                     add("  #");
@@ -288,11 +268,8 @@ public class VueGlobale {
         } else {
             vueEnclos = VueEnclos.TERRAIN;
             complementLignes = new ArrayList<String>() {
-                /**
-				 * 
-				 */
 
-				{
+                {
                     add("  #========== \033[32m" + enclos.getNom()+"\033[0m" + " ==========  ");
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() +"\033[0m");
@@ -443,50 +420,10 @@ public class VueGlobale {
      */
     public void afficherCombat(Creature c1, Creature c2) {
         ArrayList<String> strResultat = new ArrayList<>();
-        VueCreature vueCreature1;
-        VueCreature vueCreature2;
+        VueCreature vueCreature1 = getVueCreature(c1);
+        VueCreature vueCreature2 = getVueCreature(c2);
 
-        if (c1 instanceof Dragon) {
-            vueCreature1 = VueCreature.DRAGON;
-        } else if (c1 instanceof Kraken) {
-            vueCreature1 = VueCreature.KRAKEN;
-        } else if (c1 instanceof Licorne) {
-            vueCreature1 = VueCreature.LICORNE;
-        } else if (c1 instanceof Lycanthrope) {
-            vueCreature1 = VueCreature.LYCANTHROPE;
-        } else if (c1 instanceof Megalodon) {
-            vueCreature1 = VueCreature.MEGALODON;
-        } else if (c1 instanceof Nymphe) {
-            vueCreature1 = VueCreature.NYMPHE;
-        } else if (c1 instanceof Phenix) {
-            vueCreature1 = VueCreature.PHENIX;
-        } else if (c1 instanceof Sirene) {
-            vueCreature1 = VueCreature.SIRENE;
-        } else {
-            vueCreature1 = VueCreature.HUMAIN;
-        }
-
-        if (c2 instanceof Dragon){
-            vueCreature2 = VueCreature.DRAGON;
-        } else if (c2 instanceof Kraken){
-            vueCreature2 = VueCreature.KRAKEN;
-        } else if (c2 instanceof Licorne){
-            vueCreature2 = VueCreature.LICORNE;
-        } else if (c2 instanceof Lycanthrope){
-            vueCreature2 = VueCreature.LYCANTHROPE;
-        } else if (c2 instanceof Megalodon){
-            vueCreature2 = VueCreature.MEGALODON;
-        } else if (c2 instanceof Nymphe){
-            vueCreature2 = VueCreature.NYMPHE;
-        } else if (c2 instanceof Phenix){
-            vueCreature2 = VueCreature.PHENIX;
-        } else if (c2 instanceof Sirene){
-            vueCreature2 = VueCreature.SIRENE;
-        } else {
-            vueCreature2 = VueCreature.HUMAIN;
-        }
-
-            // on remplace les C avec l'ascii art de la créature.
+        // on remplace les C avec l'ascii art de la créature.
             // a ajouter n hauteur de creature la ligne courante.
         int j = 0 ;
         for (int i = VueEnclos.ARENE.getLignes().size() ; i >= 1 ; i--) {
@@ -537,6 +474,30 @@ public class VueGlobale {
             System.out.println(strResultat.get(i));
         }
 
+    }
+
+    private VueCreature getVueCreature(Creature c2) {
+        VueCreature vueCreature2;
+        if (c2 instanceof Dragon){
+            vueCreature2 = VueCreature.DRAGON;
+        } else if (c2 instanceof Kraken){
+            vueCreature2 = VueCreature.KRAKEN;
+        } else if (c2 instanceof Licorne){
+            vueCreature2 = VueCreature.LICORNE;
+        } else if (c2 instanceof Lycanthrope){
+            vueCreature2 = VueCreature.LYCANTHROPE;
+        } else if (c2 instanceof Megalodon){
+            vueCreature2 = VueCreature.MEGALODON;
+        } else if (c2 instanceof Nymphe){
+            vueCreature2 = VueCreature.NYMPHE;
+        } else if (c2 instanceof Phenix){
+            vueCreature2 = VueCreature.PHENIX;
+        } else if (c2 instanceof Sirene){
+            vueCreature2 = VueCreature.SIRENE;
+        } else {
+            vueCreature2 = VueCreature.HUMAIN;
+        }
+        return vueCreature2;
     }
 
     /**

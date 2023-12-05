@@ -14,8 +14,7 @@ import references.Enum_Sexe;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Classe de test pour les méthodes d'un lycanthrope
@@ -36,7 +35,7 @@ class TestLycanthrope {
 		loup1 = FactoryCreature.newCreature(Enum_Especes.Lycanthrope);
 		loup2 = FactoryCreature.newCreature(Enum_Especes.Lycanthrope);
 		
-		Set<Enum_RangDomination> rangPossible = new HashSet<Enum_RangDomination>();
+		Set<Enum_RangDomination> rangPossible = new HashSet<>();
 		rangPossible.add(Enum_RangDomination.ALPHA);
 		rangPossible.add(Enum_RangDomination.BETA);
 		rangPossible.add(Enum_RangDomination.GAMMA);
@@ -57,7 +56,7 @@ class TestLycanthrope {
 	@Test
 	void testRejoindreMeute() throws Exception {
 		loup1.rejoindreMeute(meute);
-		assertTrue(loup1.getMeute() == meute);
+        assertSame(loup1.getMeute(), meute);
 	}
 
 	

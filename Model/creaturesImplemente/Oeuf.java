@@ -12,10 +12,10 @@ public class Oeuf {
 	
 	//TODO : gestion genealogie
 	
-	private Ovipare parent1;
-    private Ovipare parent2;
-    private Enum_Especes espece;
-    private int dureeIncubation;
+	private final Ovipare parent1;
+    private final Ovipare parent2;
+    private final Enum_Especes espece;
+    private final int dureeIncubation;
     private int dureeIncubationRestante;
     private boolean isOpen;
 

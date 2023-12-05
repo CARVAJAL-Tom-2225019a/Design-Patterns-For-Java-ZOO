@@ -12,7 +12,7 @@ import references.Enum_DegrePropreteEnclos;
  */
 public class Voliere extends Enclos {
 
-    private double hauteur;
+    private final double hauteur;
     private Enum_DegrePropreteEnclos etatToit;
 
     
@@ -89,28 +89,18 @@ public class Voliere extends Enclos {
 	 * @return la chaine de caractère contenant les informations
 	 */
 	public String toString() {
-		String chaine = "Voliere "+super.getNom()+" de superficie "+super.getSuperficie()+" m^2 pouvant contenir au "
-				+ "plus "+super.getNbCreatures()+" creatures.\n Il y a actuellement "+super.getNbCreatures()+" creatures\n"
-				+ "Degre de proprete : "+super.getDegreProprete()+"\n"
-				+ "Etat toit : "+etatToit+"\n";
+		StringBuilder chaine = new StringBuilder("Voliere " + super.getNom() + " de superficie " + super.getSuperficie() + " m^2 pouvant contenir au "
+                + "plus " + super.getNbCreatures() + " creatures.\n Il y a actuellement " + super.getNbCreatures() + " creatures\n"
+                + "Degre de proprete : " + super.getDegreProprete() + "\n"
+                + "Etat toit : " + etatToit + "\n");
 		for (Creature creature : super.getListeCreatures().values()) {
-			chaine+="Index : "+ trouverCleParCreature(creature)+"\n";
-			chaine+= creature.toString();
+			chaine.append("Index : ").append(trouverCleParCreature(creature)).append("\n");
+			chaine.append(creature.toString());
 		}
-		return chaine;
+		return chaine.toString();
 	}
-	
-	
-	/**
-	 * Methode pour avoir le nom de l'enclos et son etat
-	 */
-	public String voirInfoEnclos() {
-		return " -Voliere "+getNom()+" avec "+getNbCreatures()
-        +" creatures.\n          Degre proprete : "+getDegreProprete()
-        +"\n          Etat toit : "+etatToit+"\n";
-	}
-	
-	
+
+
 	/**
 	 * Methode permettant de degrader l'etat du toit de la voliere
 	 */
@@ -128,15 +118,9 @@ public class Voliere extends Enclos {
 		if (etatToit==Enum_DegrePropreteEnclos.correct){
 			return 1;
 		}
-		if (etatToit==Enum_DegrePropreteEnclos.mauvais){
-			return 0;
-		}
-		return 0;
+        return 0;
 	}
 	public boolean isEnclosMauvaisEtat () {
-		if (super.getDegreProprete() == Enum_DegrePropreteEnclos.mauvais || etatToit == Enum_DegrePropreteEnclos.mauvais)
-			return true;
-		else
-			return false;
+        return super.getDegreProprete() == Enum_DegrePropreteEnclos.mauvais || etatToit == Enum_DegrePropreteEnclos.mauvais;
 	}
 }

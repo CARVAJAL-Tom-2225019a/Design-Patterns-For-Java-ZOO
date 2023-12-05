@@ -9,5 +9,5 @@ public interface CreatureVolante {
 	 * @return une chaine de caractère indiquant que la creature vole
 	 * @throws Exception si elle n'est pas en capacité de voler
 	 */
-	public String voler () throws Exception;
+    String voler() throws Exception;
 }

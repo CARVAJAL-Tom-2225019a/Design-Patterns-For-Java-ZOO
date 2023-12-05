@@ -5,10 +5,9 @@ import java.util.ArrayList;
 /**
  * Classe représentant la vue d'un enclos
  */
-@SuppressWarnings("serial")
 public enum VueEnclos {
   
-	TERRAIN("Terrain", new ArrayList<String>() {
+	TERRAIN(new ArrayList<>() {
         {
             add("+---------------------------------------+");
             add("|\033[30;42m     *                   *             \033[39;49m|");
@@ -32,7 +31,7 @@ public enum VueEnclos {
     }),
 
 
-    AQUARIUM("Aquarium", new ArrayList<String>(){
+    AQUARIUM(new ArrayList<>() {
         {
             add("+---------------------------------------+");
             add("|\033[30;44m'~=-.,__,.-=~'`^`'~=-.,__,.-=~'`^`'~=-.\033[39;49m|");
@@ -55,7 +54,7 @@ public enum VueEnclos {
         }
     }),
 
-    VOLIERE("Voliere", new ArrayList<String>(){
+    VOLIERE(new ArrayList<>() {
         {
             add("+---------------------------------------+");
             add("|\033[37;104m                        (   (   ))     \033[39;49m|");
@@ -79,7 +78,7 @@ public enum VueEnclos {
     }),
 
 
-    ARENE("Arene",new ArrayList<String>(){{
+    ARENE(new ArrayList<>() {{
         add("+-----------------------------------------------------------------------------------------+");
         add("|          <|  *         *    *              *                     *      ---.   *        |");
         add("|  *        A                    *      *           *                      \\   \\      *   |");
@@ -110,33 +109,20 @@ public enum VueEnclos {
         add("+-----------------------------------------------------------------------------------------+");
 
 
-
-
-
     }})
     ;
 
-    private final String libelle;
     private final ArrayList<String> lignes;
 
 
     /**
      * Constructeur
-     * @param libelle de l'enclos
      * @param lignes liste des lignes pour l'affichage de l'enclos
      */
-    VueEnclos(String libelle, ArrayList<String> lignes) {
-        this.libelle = libelle;
+    VueEnclos(ArrayList<String> lignes) {
         this.lignes = lignes;
     }
 
-    /**
-     * Methode permettant de recuperer le libelle pour l'affichage de l'enclos
-     * @return une chaine de caractère contenant le libelle
-     */
-    public String getLibelle() {
-        return libelle;
-    }
     /**
      * Methode permettant de recuperer l'ensemble des lignes pour l'affichage de l'enclos
      * @return uune liste contenant les lignes

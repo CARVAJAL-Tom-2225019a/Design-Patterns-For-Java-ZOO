@@ -19,14 +19,14 @@ import java.util.HashSet;
  * Permet d'effectuer toutes les actions relatives à la vie du zoo
  */
 public class ControllerActions {
-	private static ControllerPrincipal controlPrincipal = new ControllerPrincipal();
+	private static final ControllerPrincipal controlPrincipal = new ControllerPrincipal();
 	private static VueGlobale VueGlobale;
     private static VueUtilisateur VueUtilisateur;
     private static VueAutomatique VueAutomatique;
     // Instance du zoo fantastique (Singleton)
-    private static ZooFantastique zoo = ZooFantastique.getInstance();
-    private static Actions action = new Actions();
-    private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
+    private static final ZooFantastique zoo = ZooFantastique.getInstance();
+    private static final Actions action = new Actions();
+    private static final GestionnaireTemps temps = GestionnaireTemps.getInstance();
     
     
     /**
@@ -241,7 +241,7 @@ public class ControllerActions {
             	break;
             // Exit
             case 99:
-                retour= false;
+                retour = false;
                 break;
             default:
             	VueGlobale.afficher("Choix invalide");
@@ -285,7 +285,7 @@ public class ControllerActions {
             VueGlobale.afficher("\nLES CREATURES QUI ONT UN BESOIN :");
             for (Enclos e : zoo.getListeEnclos())
             	temp = e.getCreaturesAyantUnBesoin();
-            if (temp!=null && temp.size()>0)
+            if (temp!=null && !temp.isEmpty())
             	for (Creature c : temp)
             		VueGlobale.afficherCreature(c, -1);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);

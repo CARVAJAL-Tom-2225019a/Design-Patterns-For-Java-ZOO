@@ -33,12 +33,12 @@ class TestConceptionOvipare {
 	@Test
 	void TestMethodeCreerBebe() throws Exception {
 		MegalodonFemelle.creerBebe(MegalodonMale);
-		boolean result = MegalodonFemelle.getVentre().size() > 0;
+		boolean result = !MegalodonFemelle.getVentre().isEmpty();
 		assertTrue(result);
 	}
 	
 	@Test
-	void TestMethodeCreerBebeAvecException() throws Exception {
+	void TestMethodeCreerBebeAvecException() {
 		Exception thrown = assertThrows(
                 Exception.class,
                 () -> MegalodonMale.creerBebe(MegalodonMale),
@@ -57,7 +57,7 @@ class TestConceptionOvipare {
 	void TestMethodeEclore() throws Exception {
 	    MegalodonFemelle.creerBebe(MegalodonMale);
 	    ArrayList<Oeuf> oeufs = MegalodonFemelle.pondreOeuf();
-	    ArrayList<Creature> creatures = new ArrayList<Creature>();
+	    ArrayList<Creature> creatures = new ArrayList<>();
 	    //log pour voir combien d'œufs sont présents initialement
 	    for (Oeuf o : oeufs) {
 	        for (int i = 0; i < o.getDureeIncubation(); i++) {

@@ -5,5 +5,8 @@ package references;
  * lorsuq'un lycanthrope hurle
  */
 public enum Enum_ActionHurlement {
-	Appartenance, Domination, Soumission, Agressivite
+	Appartenance,
+	Domination,
+	Soumission,
+	Agressivite
 }

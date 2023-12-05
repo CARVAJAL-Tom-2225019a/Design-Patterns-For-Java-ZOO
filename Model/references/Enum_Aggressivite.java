@@ -5,5 +5,10 @@ package references;
  * que peut avoir une creature
  */
 public enum Enum_Aggressivite {
-    pacifique, agressif, defensif, farouche, curieux, cannibale
+    pacifique,
+    agressif,
+    defensif,
+    farouche,
+    curieux,
+    cannibale
 }

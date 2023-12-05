@@ -12,14 +12,8 @@ import zoo.ZooFantastique;
 public class Run {
     // Le contrôleur principal de l'application
 	static VueUtilisateur vueUtilisateur = new VueUtilisateur();
-	static VueGlobale vueGlobale = new VueGlobale();
-    static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
-    ControllerActions zooController = new ControllerActions();
-    ControllerUserInterface userInterfaceController = new ControllerUserInterface();
-
+	static ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
     // L'instance unique du zoo fantastique (utilisation du pattern Singleton)
-    static ZooFantastique zoo = ZooFantastique.getInstance();
-    
     public static boolean utilisateurControle;
     
     /**
@@ -64,6 +58,5 @@ public class Run {
         	controllerPrincipal.passerLaMainUtilisateur();
         else
         	controllerPrincipal.gestionAuto();
-        	return;
     }
 }

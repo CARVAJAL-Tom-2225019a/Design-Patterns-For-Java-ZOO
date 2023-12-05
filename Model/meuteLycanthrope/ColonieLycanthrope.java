@@ -29,8 +29,8 @@ public class ColonieLycanthrope {
      * Constructor privé pour le singleton
      */
     private ColonieLycanthrope() {
-        listeMeutes = new HashSet<Meute>();
-        listeEnclos = new HashSet<EnclosLycanthrope>();
+        listeMeutes = new HashSet<>();
+        listeEnclos = new HashSet<>();
     }
 
     /**
@@ -106,11 +106,11 @@ public class ColonieLycanthrope {
      * @return la liste des meutes
      */
     public String voirMeutes() {
-        String chaine = "VOICI LES MEUTES :\n";
+        StringBuilder chaine = new StringBuilder("VOICI LES MEUTES :\n");
         for (Meute m : listeMeutes) {
-            chaine += "   - "+m.getNomMeute()+"\n";
+            chaine.append("   - ").append(m.getNomMeute()).append("\n");
         }
-        return chaine;
+        return chaine.toString();
     }
 
     
@@ -120,15 +120,15 @@ public class ColonieLycanthrope {
      * @throws Exception  si problème lors de la recherche
      */
     public String verificationBesoinNouvelleMeute() throws Exception {
-        String chaine = "";
+        StringBuilder chaine = new StringBuilder();
         for (EnclosLycanthrope e : listeEnclos) {
         	Meute m = e.isNecessiteNouvelleMeute();
             if (m!=null) {
             	addMeute(m);
-                chaine += "Nouvelle meute dans " + e.getNom() + "\n";
+                chaine.append("Nouvelle meute dans ").append(e.getNom()).append("\n");
             }
         }
-        return chaine;
+        return chaine.toString();
     }
     
 
@@ -140,7 +140,7 @@ public class ColonieLycanthrope {
      * @throws Exception si problème lors de la vérification
      */
     public Set<Lycanthrope> verificationSaisonAmour(String dateActuelle) throws Exception {
-        Set<Lycanthrope> listeFemelleEnceinte = new HashSet<Lycanthrope>();
+        Set<Lycanthrope> listeFemelleEnceinte = new HashSet<>();
         int moisActuel = Integer.parseInt(dateActuelle.split("-")[1]);
         // Saison des amours de de mai à juillet
         if (moisActuel >= 5 && moisActuel <= 7) {
@@ -171,9 +171,7 @@ public class ColonieLycanthrope {
 	 * @throws Exception	Si la meute n'existe pas sous ce nom
 	 */
 	public Meute trouverMeuteParNom(String nomRecherche) throws Exception {
-		Iterator<Meute> iterator = listeMeutes.iterator();
-        while (iterator.hasNext()) {
-            Meute meute = iterator.next();
+        for (Meute meute : listeMeutes) {
             if (meute.getNomMeute().equals(nomRecherche)) {
                 return meute; // On a trouvé l'enclos
             }

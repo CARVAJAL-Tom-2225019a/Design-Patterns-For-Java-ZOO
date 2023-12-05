@@ -29,7 +29,7 @@ public abstract class Vivipare extends Creature {
     public Vivipare(Vivipare parent1, Vivipare parent2, int dureeGestation) {
         super(parent1, parent2);
         super.setDureeGestation(dureeGestation);
-		this.ventre = new ArrayList<Embryon>();
+		this.ventre = new ArrayList<>();
 
         nbJourConceptionRestantAvantMiseABas = 0;
     }
@@ -39,7 +39,7 @@ public abstract class Vivipare extends Creature {
      */
 	public Vivipare() {
 		super();
-		this.ventre = new ArrayList<Embryon>();
+		this.ventre = new ArrayList<>();
 		nbJourConceptionRestantAvantMiseABas = 0;
 	}
     
@@ -107,7 +107,7 @@ public abstract class Vivipare extends Creature {
      * Methode permettant de decrementer le nombre de jour avant la naissance
      * du bebe et d'apeller la methode pour mettre bas dans ce cas
      * @return La creature mise au monde ou null
-     * @throws Exception
+     * @throws Exception en cas d'erreur avec la verification du status enceinte.
      */
     public Creature verificationEnfantEnConception() throws Exception {
     	if (decrementerNombreJourRestantAvantNaissance() == 0)

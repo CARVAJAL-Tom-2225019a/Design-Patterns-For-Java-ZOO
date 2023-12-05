@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class Meute {
 	
-	private String nomMeute;
+	private final String nomMeute;
 	
 	private CoupleAlpha coupleAlpha;
 	
@@ -108,19 +108,17 @@ public class Meute {
 	
 	/**
 	 * Méthode permettant d'ajouter un lycanthrope à la meute
-	 * 
+	 *
 	 * @param loup Le lycanthrope à ajouter
-	 * @return true si l'ajout est réussi, false sinon
 	 * @throws Exception Si le lycanthrope a déjà une meute ou s'il n'y a plus de place dans la meute
 	 */
-	public boolean addLoup(Lycanthrope loup) throws Exception {
+	public void addLoup(Lycanthrope loup) throws Exception {
 	    if (listeLoup.size() < capaciteMeute) {
 	    		loup.calculerForce();
 	        	loup.rejoindreMeute(this);
 	            listeLoup.add(loup);
 	            affecterRang(loup);
-	            return true;  
-	    } else
+		} else
 	        throw new Exception("La meute est pleine, impossible de rajouter loup " + loup.getPrenom());
 	}
 	
@@ -174,17 +172,15 @@ public class Meute {
 
 	/**
 	 * Méthode permettant de supprimer un lycanthrope de la meute
-	 * 
+	 *
 	 * @param loup Le lycanthrope à supprimer
-	 * @return true si la suppression est réussie, false sinon
 	 * @throws Exception Si le lycanthrope fait partie du couple alpha ou n'est pas dans la meute
 	 */
-	public boolean removeLoup(Lycanthrope loup) throws Exception {
+	public void removeLoup(Lycanthrope loup) throws Exception {
 		if (listeLoup.contains(loup)) {	
 			if (loup != coupleAlpha.getFemelleAlpha() && loup !=coupleAlpha.getMaleAlpha()) {
 				listeLoup.remove(loup);
 				loup.seSeparerDeSaMeute();
-				return true;
 			}
 			else
 				throw new Exception ("Un membre du couple alpha ne peut pas quitter la meute");
@@ -202,10 +198,8 @@ public class Meute {
 	 * @throws Exception Si le loup1 est plus fort que le mâle alpha
 	 */
 	public String defierMaleAlpha (Lycanthrope loup1) throws Exception {
-		boolean reussite = false;
-		if (loup1.isPlusFort(coupleAlpha.getMaleAlpha()))
-			reussite=true;
-		String chaine = loup1.hurler(Enum_ActionHurlement.Agressivite, coupleAlpha.getMaleAlpha());
+		boolean reussite = loup1.isPlusFort(coupleAlpha.getMaleAlpha());
+        String chaine = loup1.hurler(Enum_ActionHurlement.Agressivite, coupleAlpha.getMaleAlpha());
 		// reussite
 		if (reussite) {
 			Lycanthrope ancienAlpha = coupleAlpha.getMaleAlpha();
@@ -292,11 +286,11 @@ public class Meute {
 	 * @return Une chaîne de caractères représentant les lycanthropes de la meute
 	 */
 	public String voirLycanthropesMeute() {
-		String chaine = "LES LYCANTHROPES DE LA MEUTE : \n";
+		StringBuilder chaine = new StringBuilder("LES LYCANTHROPES DE LA MEUTE : \n");
 		for (Lycanthrope l : listeLoup) {
-			chaine+=l.toString()+"\n";
+			chaine.append(l.toString()).append("\n");
 		}
-		return chaine;
+		return chaine.toString();
 	}
 	
 	

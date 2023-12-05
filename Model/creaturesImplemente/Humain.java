@@ -10,9 +10,9 @@ import references.Enum_Sexe;
  */
 public class Humain {
 	
-	private String nom;
-    private Enum_Sexe sexe;
-    private int age;
+	private final String nom;
+    private final Enum_Sexe sexe;
+    private final int age;
     
     /**
      * Constructeur
