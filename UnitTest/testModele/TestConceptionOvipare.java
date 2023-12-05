@@ -9,16 +9,13 @@ import org.junit.jupiter.api.Test;
 import references.Enum_Especes;
 import references.Enum_Sexe;
 
-<<<<<<< HEAD
-/**
- * Classe de test pour la onception d'enfants chez les ovipares
- */
-=======
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
->>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
+/**
+ * Classe de test pour la onception d'enfants chez les ovipares
+ */
 class TestConceptionOvipare {
 
 	Megalodon MegalodonFemelle;

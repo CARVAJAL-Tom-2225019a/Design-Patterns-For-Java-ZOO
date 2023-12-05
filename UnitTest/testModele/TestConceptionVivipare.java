@@ -6,15 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import references.Enum_Especes;
 import references.Enum_Sexe;
+import static org.junit.jupiter.api.Assertions.*;
 
-<<<<<<< HEAD
 /**
  * Classe de test pour la onception d'enfants chez les vivipare
  */
-=======
-import static org.junit.jupiter.api.Assertions.*;
 
->>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 class TestConceptionVivipare {
 
 	Sirene sireneFemelle;
@@ -48,7 +45,7 @@ class TestConceptionVivipare {
 	void TestMethodeVerificationEnfantEnConception() throws Exception {
 		sireneFemelle.concevoirUnEnfant(sireneMale, 2);
 		sireneFemelle.decrementerNombreJourRestantAvantNaissance();
-		assertEquals(null, sireneFemelle.verificationEnfantEnConception());
+        assertNull(sireneFemelle.verificationEnfantEnConception());
 		
 	}
 	

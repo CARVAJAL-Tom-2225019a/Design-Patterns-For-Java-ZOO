@@ -14,15 +14,11 @@ import references.Enum_DegrePropreteEnclos;
 import references.Enum_Especes;
 import zoo.ZooFantastique;
 
-<<<<<<< HEAD
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Classe de test pour les méthodes du zoo fantastique
  */
-=======
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
->>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 class TestZoo {
 	
 	ZooFantastique zoo = ZooFantastique.getInstance();;

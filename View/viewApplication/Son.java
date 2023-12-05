@@ -1,10 +1,7 @@
 package viewApplication;
 
-<<<<<<< HEAD
-=======
 import javax.sound.sampled.*;
 import javax.sound.sampled.DataLine.Info;
->>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 import java.io.File;
 import java.io.IOException;
 
