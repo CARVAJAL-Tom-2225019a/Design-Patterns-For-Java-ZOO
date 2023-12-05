@@ -86,7 +86,7 @@ public class Evenements {
 	 * Methode permettant de recuperer un enclos aleatoire contenant des creatures
 	 * @return l'enclos sélectionné
 	 */
-	private static Enclos getRandomEnclosWithCreatures() {
+	public static Enclos getRandomEnclosWithCreatures() {
 		Random random = new Random(System.currentTimeMillis());
 	    Enclos enclos = null;
 	    List<Enclos> enclosList = new ArrayList<>(zoo.getListeEnclos());
@@ -164,7 +164,7 @@ public class Evenements {
      *
      * @throws Exception En cas d'erreur lors de la dégradation de la santé des créatures
      */
-    private static void degradationSanteCreatureSelonEtatEnclos () throws Exception {
+    public static void degradationSanteCreatureSelonEtatEnclos () throws Exception {
     	for (Enclos e : zoo.getListeEnclos()) {
     		if (e instanceof EnclosClassique || e instanceof EnclosLycanthrope) {
     			if (e.getDegreProprete() == Enum_DegrePropreteEnclos.mauvais) {
@@ -189,7 +189,7 @@ public class Evenements {
     /**
      * Méthode pour vérifier l'état des créatures et provoquer la mort d'une créature si elle ne va pas bien
      */
-    private static void verificationEtatCreature () {
+    public static void verificationEtatCreature () {
     	int compteurIndicateurMauvais ;
     	for (Enclos e : zoo.getListeEnclos()) {
     		for (Creature c : e.getListeCreatures().values()) {

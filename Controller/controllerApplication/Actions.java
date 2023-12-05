@@ -97,7 +97,7 @@ public class Actions {
             else {
                 enclos = controllerGestionAuto.getFirstEnclosMauvaisEtat();
                 if (enclos == null)
-                    enclos = controllerGestionAuto.recuperationEnclosAleatoire();
+                    enclos = controllerGestionAuto.recuperationEnclosAleatoireVide();
             }
             maitreZoo.nettoyerEnclos(enclos);
             vueGlobale.afficher("Nettoyage fait dans " + enclos.getNom() + "\n");
@@ -181,7 +181,7 @@ public class Actions {
             else {
                 enclos = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
                 enclosDest = controllerGestionAuto.recuperationEnclosAleatoire();
-                creature = enclos.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+                creature = enclos.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
             }
             maitreZoo.transfererCreature(creature, enclos, enclosDest);
             vueGlobale.afficher("Transfert de " + enclos.getNom() + " a " + enclosDest.getNom() +
@@ -320,6 +320,7 @@ public class Actions {
                 zoo.addFemelleEnceinte(femelle);
                 vueGlobale.afficher("Enfant en cours de type " + femelle.getNomEspece());
             } else if (naitre == 2) {
+            	((Ovipare)femelle).creerBebe((Ovipare) male);
                 ArrayList<Oeuf> oeufs = ((Ovipare) femelle).pondreOeuf();
                 for (Oeuf o : oeufs) {
                     zoo.addOeuf(o);
@@ -643,15 +644,16 @@ public class Actions {
             // Choix enclos
             // GESTION MANUEL
             if (Run.utilisateurControle) {
+            	
                 vueGlobale.afficher("\nChoisir l'enclos de la premiere créature pour la bagarre : ");
-
+                vueGlobale.afficher(zoo.voirNomsEnclos());
                 enclos1 = controlUser.recupererEnclosParNom();
                 vueGlobale.afficherCreatureEnclos(enclos1);
                 vueGlobale.afficher("\nChoisir la créature 1 pour la bagarre (index) : ");
 
                 c1 = controlUser.selectionCreatureDansEnclos(enclos1);
                 vueGlobale.afficher("\nChoisir l'enclos de la seconde créature pour la bagarre : ");
-
+                vueGlobale.afficher(zoo.voirNomsEnclos());
                 enclos2 = controlUser.recupererEnclosParNom();
                 vueGlobale.afficher("\nChoisir la créature 2 pour la bagarre (index) : ");
 
@@ -660,10 +662,10 @@ public class Actions {
             // GESTION AUTOMATIQUE
             else {
                 enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
-                c1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+                c1 = enclos1.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
 
                 enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVide();
-                c2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+                c2 = enclos2.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
             }
             vueGlobale.afficher("\n #============= Voici les candidats =================# ");
             vueGlobale.afficherCreature(c1, -1);
@@ -732,6 +734,7 @@ public class Actions {
 
                 }
                 // choix loup 1
+                vueGlobale.afficher(zoo.voirNomsEnclos());
                 vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
                 enclos1 = controlUser.recupererEnclosParNom();
                 while (!(enclos1 instanceof EnclosLycanthrope)) {
@@ -763,10 +766,10 @@ public class Actions {
                 action = listeActions[random.nextInt(listeActions.length)];
                 // choix loup source
                 enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
-                loup1 = enclos1.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+                loup1 = enclos1.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
                 // choix loup destination
                 enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
-                loup2 = enclos2.selectionnerCreatureAleatoireParSexe(Creature.sexeAleatoire());
+                loup2 = enclos2.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
             }
             vueGlobale.afficher(((Lycanthrope) loup1).hurler(action, (Lycanthrope) loup2));
 

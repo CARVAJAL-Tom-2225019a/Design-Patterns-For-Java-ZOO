@@ -5,28 +5,28 @@ package controllerTemps;
  * Avec leur durée (années, mois, jours)
  */
 public enum Enum_ActionsPossibles {
-	PAS_D_ACTION(0, 1, 0),
-    VOIR_ENCLOS_EXISTANTS(0, 0, 7),
-    VOIR_NOMBRE_CREATURES_TOTALES(0, 0, 14),
-    CREER_ENCLOS(0, 1, 14),
-    EXAMINER_ENCLOS(0, 1, 0),
+	PAS_D_ACTION(0, 2, 0),
+    VOIR_ENCLOS_EXISTANTS(0, 0, 15),
+    VOIR_NOMBRE_CREATURES_TOTALES(0, 0, 15),
+    CREER_ENCLOS(0, 3, 0),
+    EXAMINER_ENCLOS(0, 2, 0),
     NETTOYER_ENCLOS(0, 4, 0),
     NOURRIR_CREATURES(0, 1, 0),
-    SOIGNER_ENCLOS(0,1,0),
-    TRANSFERER_CREATURE(0, 0, 14),
-    TRANSFERER_ENCLOS(0, 2, 7),
-    CONCEVOIR_ENFANT(0, 0, 20),
-    VOIR_BEBES_EN_CONSTRUCTION(0, 0, 14),
+    SOIGNER_ENCLOS(0,2,0),
+    TRANSFERER_CREATURE(0, 1, 15),
+    TRANSFERER_ENCLOS(0, 3, 0),
+    CONCEVOIR_ENFANT(0, 1, 15),
+    VOIR_BEBES_EN_CONSTRUCTION(0, 0, 15),
     METTRE_ENCLOS_EN_MOUVEMENT(0, 1, 0),
     FAIRE_CHANTER_ENCLOS(0, 1, 0),
     COMBAT(0, 1, 0),
-	DORMIR_ENCLOS(0,0,7),
-	REVEILLER_ENCLOS(0,0,7),
-	VOIR_LOUPS(0,0,14),
+	DORMIR_ENCLOS(0,0,15),
+	REVEILLER_ENCLOS(0,0,15),
+	VOIR_LOUPS(0,0,15),
 	SAISON_AMOUR_LOUPS(0,1,0),
 	VOIR_MEUTES(0,1,0),
-	FAIRE_HURLER_LOUP(0,0,20),
-	DEFIER_MALE_ALPHA(0,0,15);
+	FAIRE_HURLER_LOUP(0,1,20),
+	DEFIER_MALE_ALPHA(0,1,15);
     
 
     private final int dureeEnAnnees;
@@ -80,11 +80,11 @@ public enum Enum_ActionsPossibles {
     public String getDureeTotale() {
     	String chaine = "";
     	if (dureeEnAnnees>0)
-    		chaine+="Y:"+dureeEnAnnees;
+    		chaine+=" Y:"+dureeEnAnnees+" ";
     	if (dureeEnMois>0)
-    		chaine+= "MOIS:"+dureeEnMois;
+    		chaine+= " MOIS:"+dureeEnMois+" ";
     	if (dureeEnJours>0)
-    		chaine+=" JOUR:"+dureeEnJours;
+    		chaine+=" JOUR:"+dureeEnJours+" ";
     	return chaine;
     }
 }

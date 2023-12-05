@@ -3,7 +3,7 @@ package base;
 import references.*;
 
 import java.util.ArrayList;
-import java.util.Random;
+import controllerApplication.ControllerPrincipal;
 
 
 /**
@@ -47,12 +47,12 @@ public abstract class Creature {
      * créature completement aléatoire.
      */
     public Creature() {
-        this.sexe = sexeAleatoire();
-        this.age = intAleatoire(1, CONSTANTES.MAX_AGE);
+        this.sexe = ControllerPrincipal.sexeAleatoire();
+        this.age = ControllerPrincipal.intAleatoire(1, CONSTANTES.MAX_AGE);
         this.categorieAge = Enum_CategorieAge.getCategorieByAge(age);
-        this.bonheur = intAleatoire(1, 100);
-        this.poids = intAleatoire(1, CONSTANTES.MAX_POIDS);
-        this.taille = intAleatoire(1, CONSTANTES.MAX_TAILLE);
+        this.bonheur = ControllerPrincipal.intAleatoire(1, 100);
+        this.poids = ControllerPrincipal.intAleatoire(1, CONSTANTES.MAX_POIDS);
+        this.taille = ControllerPrincipal.intAleatoire(1, CONSTANTES.MAX_TAILLE);
         this.indicateurFaim = CONSTANTES.MAX_INDICATEUR;
         this.indicateurSommeil = CONSTANTES.MAX_INDICATEUR;
         this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
@@ -437,7 +437,7 @@ public abstract class Creature {
      */
     public void perdreSommeil() throws Exception {
         // Vérification de l'état de la créature
-        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+        if (vivant)
             indicateurSommeil -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurSommeil < 0)
@@ -452,7 +452,7 @@ public abstract class Creature {
      */
     public void perdreNourriture() throws Exception {
         // Vérification de l'état de la créature
-        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+        if (vivant)
             indicateurFaim -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurFaim < 0)
@@ -467,7 +467,7 @@ public abstract class Creature {
      */
     public void perdreSante() throws Exception {
         // Vérification de l'état de la créature
-        if (vivant && indicateurSante > 0 && indicateurFaim > 0 && indicateurSommeil > 0)
+        if (vivant)
             indicateurSante -= CONSTANTES.VALEUR_PERTE_INDICATEUR;
         // Vérification que la valeur reste positive
         if (indicateurSante < 0)
@@ -498,33 +498,6 @@ public abstract class Creature {
         this.indicateurSante = CONSTANTES.MAX_INDICATEUR;
         this.enTrainDeDormir = false;
         this.vivant = true;
-    }
-
-
-    /**
-     * Méthode pour générer un sexe aléatoire
-     *
-     * @return Le sexe choisi aleatoirement
-     */
-    public static Enum_Sexe sexeAleatoire() {
-        Random random = new Random();
-        int r = 1 + random.nextInt(2);
-        if (r == 1)
-            return Enum_Sexe.Male;
-        else
-            return Enum_Sexe.Femelle;
-    }
-
-    /**
-     * Méthode pour générer un nombre aléatoire dans une fourchette
-     *
-     * @param min la valeur minimale désirée
-     * @param max la valeur maximale désirée
-     * @return int aleatoirement choisi
-     */
-    public int intAleatoire(int min, int max) {
-        Random random = new Random();
-        return min + random.nextInt(max - min);
     }
 
 

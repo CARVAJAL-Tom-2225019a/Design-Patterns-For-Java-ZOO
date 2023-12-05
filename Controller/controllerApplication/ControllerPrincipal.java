@@ -1,5 +1,7 @@
 package controllerApplication;
 
+import java.util.Random;
+
 import applicationRun.Run;
 import base.Creature;
 import base.Enclos;
@@ -9,6 +11,7 @@ import creaturesImplemente.Oeuf;
 import enclosImplemente.EnclosClassique;
 import enclosImplemente.EnclosLycanthrope;
 import references.CONSTANTES;
+import references.Enum_Sexe;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
@@ -17,6 +20,7 @@ import zoo.ZooFantastique;
  * Classe représentant le contrôleur principal de l'application
  */
 public class ControllerPrincipal {
+	private static Random random = new Random(System.currentTimeMillis());
 	private int numPourNom;
 	VueGlobale vueGlobale;
 	VueUtilisateur vueUtilisateur;
@@ -181,6 +185,31 @@ public class ControllerPrincipal {
 						+ "\n"
     					+ "\n Bon courage :)\n\n";
     	
+    }
+    
+    
+    /**
+     * Méthode pour générer un sexe aléatoire
+     *
+     * @return Le sexe choisi aleatoirement
+     */
+    public static Enum_Sexe sexeAleatoire() {    
+        int r = 1 + random.nextInt(2);
+        if (r == 1)
+            return Enum_Sexe.Male;
+        else
+            return Enum_Sexe.Femelle;
+    }
+
+    /**
+     * Méthode pour générer un nombre aléatoire dans une fourchette
+     *
+     * @param min la valeur minimale désirée
+     * @param max la valeur maximale désirée
+     * @return int aleatoirement choisi
+     */
+    public static int intAleatoire(int min, int max) {
+        return min + random.nextInt(max - min);
     }
 
     

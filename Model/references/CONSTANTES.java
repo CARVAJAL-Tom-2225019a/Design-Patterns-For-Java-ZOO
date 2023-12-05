@@ -23,7 +23,7 @@ public class CONSTANTES {
 
 	
 	public static int MAX_INDICATEUR = 100;
-	public static int VALEUR_PERTE_INDICATEUR = 8;
+	public static int VALEUR_PERTE_INDICATEUR = 15;
 	public static int VALEUR_INDICATEUR_MAUVAIS = 5;
 	
 	public static int MAX_AGE = 100;

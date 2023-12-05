@@ -60,7 +60,7 @@ public abstract class Ovipare extends Creature {
         if ( (this.isVivant() && this.getSexe() == Enum_Sexe.Femelle) && (partenaire.isVivant() && partenaire.getSexe() == Enum_Sexe.Male) && this.getNomEspece().equals(partenaire.getNomEspece())) {
             // Création de n œufs dans le ventre
             Random random = new Random(System.currentTimeMillis());
-            int nbOeuf = 1+ random.nextInt(3);
+            int nbOeuf = 1 + random.nextInt(3);
             for (int i = 0; i < nbOeuf; i++) {
                 this.ventre.add(new Oeuf(this, Objects.requireNonNull(partenaire, "Le partenaire ne peut pas etre null")));
             }

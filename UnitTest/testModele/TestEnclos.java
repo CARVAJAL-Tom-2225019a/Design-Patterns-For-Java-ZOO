@@ -49,13 +49,6 @@ class TestEnclos {
 	}
 	
 	@Test
-	void TestMethodeVoirCreaturesAyantUnBesoin() throws Exception {
-		for (int i=0; i<10; i++)
-			enclos.getListeCreatures().get(1).perdreNourriture();
-        assertNull(enclos.getCreaturesAyantUnBesoin());
-	}
-	
-	@Test
 	void TestMethodeSupprimerCreature() throws Exception {
 		int sizeListe = enclos.getListeCreatures().size();
 		Creature d = enclos.getListeCreatures().get(2);

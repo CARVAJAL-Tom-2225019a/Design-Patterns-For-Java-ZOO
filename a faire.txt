@@ -12,9 +12,5 @@ Documentation complète générée par Javadoc (à mettre à jour, dossier Les D
 
 Fichier Read-Me (préciser où sont les documents)
 
-
-Les problèmes dans le code
-	Conception ovipare --> "ventre vide"
-	Selection aleatoire d'une creature dans un enclos
 	
 	

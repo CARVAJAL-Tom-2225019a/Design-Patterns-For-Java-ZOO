@@ -3,6 +3,7 @@ package base;
 import references.*;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * Cette classe abstraite correspond a un enclos
@@ -84,6 +85,14 @@ public abstract class Enclos {
 	public Enum_DegrePropreteEnclos getDegreProprete() {
 		return degreProprete;
 	}
+	/**
+	 * Modification de l'etat de l'enclos
+	 * Methode seravnt pour les tests unitaires
+	 * @param etat de l'enclos
+	 */
+	public void setEtatEnclos(Enum_DegrePropreteEnclos etat) {
+		degreProprete = etat;
+	}
 	
 	
 	/**
@@ -109,91 +118,33 @@ public abstract class Enclos {
 
 
 	/**
-	 * Methode permettant de recuperer les creatures qui ont besoin de quelquechose
-	 * @return L'ensemble des creatures qui ont un besoin dans l'enclos
+	 * Methode permettant de récupérer l'ensemble des créatures qui ont un besoin
+	 * @return un ensemble contenant les créatures qui ont un besoib
 	 */
 	public HashSet<Creature> getCreaturesAyantUnBesoin() {
-		HashSet<Creature> listeCreatureAvecBesoin = new HashSet<>();
-		boolean isValue = false;
-		HashSet<Creature> temp = voirCreaturesMauvaiseSante();
-		if (temp != null) {
-			listeCreatureAvecBesoin.addAll(temp);
-			isValue = true;
-		}
-		temp = voirCreaturesSommeil();
-		if (temp != null) {
-			listeCreatureAvecBesoin.addAll(temp);
-			isValue = true;
-		}
-		temp = voirCreaturesFaim();
-		if (temp != null) {
-			listeCreatureAvecBesoin.addAll(temp);
-			isValue = true;
-		}
-		if (isValue)
-			return listeCreatureAvecBesoin;
-		else
-			return null;
-	}	
-	
-	
-	/**
-	 * Methode permettant de recuperer les creatures qui ont faim
-	 * @return L'ensemble des creatures qui ont faim dans l'enclos
-	 */
-	private HashSet<Creature> voirCreaturesFaim() {
-		boolean isValue = false;
-		HashSet<Creature> liste = new HashSet<>();
-		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-			if (entry.getValue().getIndicateurFaim() < 5) {
-				liste.add(entry.getValue());
-				isValue = true;
-			}
-		}
-		if (isValue)
-			return liste;
-		else
-			return null;
+	    HashSet<Creature> listeCreatureAvecBesoin = new HashSet<>();
+	    int seuil = 5;
+
+	    ajouterCreaturesAvecBesoin(listeCreatureAvecBesoin, "faim", Creature::getIndicateurFaim, seuil);
+	    ajouterCreaturesAvecBesoin(listeCreatureAvecBesoin, "sommeil", Creature::getIndicateurSommeil, seuil);
+	    ajouterCreaturesAvecBesoin(listeCreatureAvecBesoin, "sante", Creature::getIndicateurSante, seuil);
+
+	    return listeCreatureAvecBesoin;
 	}
-	
-	
+
 	/**
-	 * Methode permettant de recuperer les creatures qui ont sommeil
-	 * @return L'ensemble des creatures qui ont sommeil dans l'enclos
+	 * Méthode permettant de rechercher les créatures qui ont un besoin selon l'indicateur
+	 * @param liste contenant l'ensemble des creatures qui ont un besoin
+	 * @param besoin que l'on souhaite vérifier (faim, sommeil ou sante)
+	 * @param indicateurFunction La fonction permettant de recuperer la valeur de l'indicateur sélectionné
+	 * @param seuil pour savoir si une creature est en mauvais etat
 	 */
-	private HashSet<Creature> voirCreaturesSommeil() {
-		boolean isValue = false;
-		HashSet<Creature> liste = new HashSet<>();
-		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-			if (entry.getValue().getIndicateurSommeil() < 5) {
-				liste.add(entry.getValue());
-				isValue = true;
-			}
-		}
-		if (isValue)
-			return liste;
-		else
-			return null;
-	}
-	
-	
-	/**
-	 * Methode permettant de recuperer les creatures qui sont en mauvaise sanyte
-	 * @return L'ensemble des creatures qui sont en mauvaise sante dans l'enclos
-	 */
-	private HashSet<Creature> voirCreaturesMauvaiseSante() {
-		HashSet<Creature> liste = new HashSet<>();
-		boolean isValue = false;
-		for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
-			if (entry.getValue().getIndicateurSante() < 5) {
-				liste.add(entry.getValue());
-				isValue = true;
-			}
-		}
-		if (isValue)
-			return liste;
-		else
-			return null;
+	private void ajouterCreaturesAvecBesoin(HashSet<Creature> liste, String besoin, Function<Creature, Integer> indicateurFunction, int seuil) {
+	    for (Map.Entry<Integer, Creature> entry : listeCreatures.entrySet()) {
+	        if (indicateurFunction.apply(entry.getValue()) <= seuil) {
+	            liste.add(entry.getValue());
+	        }
+	    }
 	}
 	
 	
@@ -404,8 +355,6 @@ public abstract class Enclos {
     		return 1;
     	}
     	else if (femelle.isVivant() && femelle instanceof Ovipare) {
-    		
-    		// TODO : eclore
     		return 2;
     	}
     	return -1;
@@ -705,6 +654,5 @@ public abstract class Enclos {
 		}
         return compteur >= listeCreatures.size() / 2;
 	}
-
 
 }

@@ -260,7 +260,7 @@ public class ControllerActions {
      * lorsqu'on change d'année
      */
     public static void passageAnnee() {
-    	HashSet<Creature> temp = null;
+    	HashSet<Creature> temp = new HashSet<>();
     	try {
     		VueGlobale.afficher("\n ====== FIN ANNEE ====== \n");
     		// Verification si fin de vie du zoo
@@ -283,9 +283,10 @@ public class ControllerActions {
             	VueGlobale.afficherEnclos(e, false);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
             VueGlobale.afficher("\nLES CREATURES QUI ONT UN BESOIN :");
-            for (Enclos e : zoo.getListeEnclos())
-            	temp = e.getCreaturesAyantUnBesoin();
-            if (temp!=null && !temp.isEmpty())
+            for (Enclos e : zoo.getListeEnclos()) {
+    		    temp.addAll(e.getCreaturesAyantUnBesoin());
+    		}
+            if (!temp.isEmpty())
             	for (Creature c : temp)
             		VueGlobale.afficherCreature(c, -1);
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
