@@ -5,7 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Cette classe implémente un gestionnaire de temps permettant de manipuler des dates
+ * Cette classe implémente un gestionnaire de temps permettant de manipuler 
+ * des dates
  */
 public class GestionnaireTemps {
     private Calendar calendrier;

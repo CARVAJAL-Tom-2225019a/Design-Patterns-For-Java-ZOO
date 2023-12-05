@@ -12,6 +12,9 @@ import references.Enum_Especes;
 import references.Enum_Sexe;
 import references.Enum_DegrePropreteEnclos;
 
+/**
+ * Classe de test pour les méthodes d'un enclos
+ */
 class TestEnclos {
 	
 	EnclosClassique enclos;

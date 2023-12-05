@@ -35,20 +35,54 @@ public class Oeuf {
     }
 
     /**
-     * Getters
+     * Methode permettant de récupérer l'espèce de la créature qui est dans l'oeuf
+     * @return l'espèce selon l'énumération
      */
     public Enum_Especes getEspece() {
 		return espece;
 	}
+    
+    /**
+     * Méthode permettant de récupérer la durée d'incubation totale
+     * @return la durée d'incubation totale (en jours)
+     */
 	public int getDureeIncubation() {
 		return dureeIncubation;
 	}
+	
+	/**
+	 * Méthode permettant de récupérer la durée d'incubation restante
+	 * avant que l'enfant naisse
+	 * @return la durée d'incubation restante (en jours)
+	 */
 	public int getDureeIncubationRestante() {
 		return dureeIncubationRestante;
 	}
+	
+	/**
+	 * Méthode permettant de savoir si un oeuf est ouvert
+	 * ou s'il y a encore la créature à l'intérieur
+	 * @return true si l'oeuf est ouvert et vide, sinon false
+	 */
 	public boolean isOpen() {
 		return isOpen;
 	}
+	
+	/**
+     * Méthode permettant de récupérer le premier parent de l'embryon
+     * @return la créature correspondant au premier parent
+     */
+    public Creature getParent1() {
+    	return parent1;
+    }
+    
+    /**
+     * Méthode permettant de récupérer le deuxième parent de l'embryon
+     * @return la créature correspondant au deuxième parent
+     */
+    public Creature getParent2() {
+    	return parent2;
+    }
 
 	
 	/**

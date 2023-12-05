@@ -10,6 +10,9 @@ import references.Enum_Especes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Classe de test pour les méthodes d'une créature
+ */
 class TestCreature {
 	
 	Dragon dragon1;

@@ -1,6 +1,5 @@
 package viewApplication;
 
-import javax.sound.sampled.*;
 import java.io.File;
 
 import java.io.IOException;
@@ -16,7 +15,15 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
 
+/**
+ * Classe permettant de gérer le son que font ques les créatures
+ */
 public class Son {
+	
+	/**
+	 * Méthode permettant de lancer une piste audio
+	 * @param url de la piste audio
+	 */
     public void play(String url) {
         final File file = new File("assets/" + url);
 
@@ -43,12 +50,23 @@ public class Son {
         }
     }
 
+    /**
+     * Méthode permettant de récupérer le format audio
+     * @param inFormat le format
+     * @return un format
+     */
     private AudioFormat getOutFormat(AudioFormat inFormat) {
         final int ch = inFormat.getChannels();
         final float rate = inFormat.getSampleRate();
         return new AudioFormat(PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
     }
 
+    /**
+     * Méthode stream
+     * @param in format audio
+     * @param line source date
+     * @throws IOException en cas d'erreur lors du stream
+     */
     private void stream(AudioInputStream in, SourceDataLine line)
             throws IOException {
         final byte[] buffer = new byte[65536];

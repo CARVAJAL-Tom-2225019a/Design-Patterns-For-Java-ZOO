@@ -18,6 +18,9 @@ import references.Enum_Especes;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
 
+/**
+ * Classe de test pour les méthodes d'un lycanthrope
+ */
 class TestLycanthrope {
 	Lycanthrope femelleA;
 	Lycanthrope maleA;

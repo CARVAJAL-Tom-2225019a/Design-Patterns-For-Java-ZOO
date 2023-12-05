@@ -4,7 +4,7 @@ package references;
  * Enumeration comprenant les différentes catégories d'age d'une créature
  */
 public enum Enum_CategorieAge {
-	BEBE("Bébé", 0, CONSTANTES.MAX_AGE_BEBE), // De 1 an à l'infini
+	BEBE("Bebe", 0, CONSTANTES.MAX_AGE_BEBE), // De 1 an à l'infini
 	ENFANT("Enfant", BEBE.getAgeMax() + 1, BEBE.getAgeMax() + 5),
 	JEUNE("Jeune", ENFANT.getAgeMax() + 1, ENFANT.getAgeMax() + 10),
 	ADULTE("Adulte", JEUNE.getAgeMax() + 1, JEUNE.getAgeMax() + 20),

@@ -113,7 +113,7 @@ public class Actions {
     protected void casNourrirEnclos() {
         Enclos enclos;
         try {
-            vueGlobale.afficher("\n ---- Nourrir les creatures d'un enclos (" + Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale() + ") ---- ");
+            vueGlobale.afficher("\n ---- Nourrir les creatures d'un enclos ("+Enum_ActionsPossibles.NOURRIR_CREATURES.getDureeTotale()+") ---- ");
             // GESTION MANUEL
             if (Run.utilisateurControle) {
                 vueGlobale.afficher(zoo.voirNomsEnclosPasVide());
@@ -804,7 +804,7 @@ public class Actions {
      * Methode gérant le cas où l'action est de voir les enfants qui sont en construction
      */
     public void casVoirEnfantsEnConstruction() {
-        vueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre " + Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale() + " ---- ");
+        vueGlobale.afficher("\n ---- Voir les enfants qui vont bientot naitre (" + Enum_ActionsPossibles.VOIR_BEBES_EN_CONSTRUCTION.getDureeTotale() + ") ---- ");
         // Affichage des femelles enceinte
         vueGlobale.afficher("LES FEMELLES ENCEINTES : ");
         for (Creature c : zoo.getListeFemelleEnceinte())

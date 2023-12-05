@@ -13,6 +13,9 @@ import creaturesImplemente.FactoryCreature;
 import references.Enum_Especes;
 import references.Enum_Sexe;
 
+/**
+ * Classe de test pour la onception d'enfants chez les vivipare
+ */
 class TestConceptionVivipare {
 
 	Sirene sireneFemelle;

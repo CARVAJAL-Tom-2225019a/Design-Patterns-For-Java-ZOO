@@ -2,6 +2,9 @@ package viewApplication;
 
 import java.util.ArrayList;
 
+/**
+ * Classe représentant la vue d'un enclos
+ */
 @SuppressWarnings("serial")
 public enum VueEnclos {
   

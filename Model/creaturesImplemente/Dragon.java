@@ -107,7 +107,7 @@ public class Dragon extends Ovipare implements CreatureTerrestre, CreatureMarine
      */
     @Override
     public void mourrir() {
-        reinitialiserCreature(); //TODO changer ca en un oeuf
+        reinitialiserCreature();
     }
 
     

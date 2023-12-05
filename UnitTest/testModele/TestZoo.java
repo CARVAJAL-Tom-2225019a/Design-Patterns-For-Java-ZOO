@@ -18,6 +18,9 @@ import references.Enum_DegrePropreteEnclos;
 import references.Enum_Especes;
 import zoo.ZooFantastique;
 
+/**
+ * Classe de test pour les méthodes du zoo fantastique
+ */
 class TestZoo {
 	
 	ZooFantastique zoo = ZooFantastique.getInstance();;

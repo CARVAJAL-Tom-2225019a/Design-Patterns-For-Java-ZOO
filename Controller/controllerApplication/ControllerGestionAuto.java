@@ -30,7 +30,6 @@ public class ControllerGestionAuto {
 	// Instance unique de la classe permettant la gestion du temp
 	private static GestionnaireTemps temps = GestionnaireTemps.getInstance();
 	
-	//TODO : actions appropriés selon etat du zoo
 	
 	/**
      * Constructeur de la classe ControllerGestionAuto

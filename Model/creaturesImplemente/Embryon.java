@@ -1,5 +1,6 @@
 package creaturesImplemente;
 
+import base.Creature;
 import base.Vivipare;
 import references.Enum_Especes;
 
@@ -34,6 +35,39 @@ public class Embryon {
         this.dureeGestation = parent1.getDureeGestation();
         this.dureeAvantNaissance = parent1.getDureeGestation();
 
+    }
+    
+    
+    /**
+     * Méthode permettant de récupérer le premier parent de l'embryon
+     * @return la créature correspondant au premier parent
+     */
+    public Creature getParent1() {
+    	return parent1;
+    }
+    
+    /**
+     * Méthode permettant de récupérer le deuxième parent de l'embryon
+     * @return la créature correspondant au deuxième parent
+     */
+    public Creature getParent2() {
+    	return parent2;
+    }
+    
+    /**
+     * Méthode permettant de récupérer l'espèce de l'embryon
+     * @return l'espèce selon l'enumération
+     */
+    public Enum_Especes getEspece() {
+    	return espece;
+    }
+    
+    /**
+     * Méthode permettant de récupérer la durée de gestation de l'embryon
+     * @return la durée de gestation
+     */
+    public int getDureeGestation() {
+    	return dureeGestation;
     }
     
     

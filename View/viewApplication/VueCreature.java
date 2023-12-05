@@ -34,6 +34,9 @@ import java.util.ArrayList;
 +--------+
 */
 
+/**
+ * Classe représentant la vue des créatures
+ */
 @SuppressWarnings("serial")
 public enum VueCreature {
     PARCHEMIN(10,32,new ArrayList<String>(){

@@ -77,7 +77,7 @@ public class ControllerActions {
             	break;
             // Voir les enclos
             case 1:
-            	VueGlobale.afficher("\n ---- Voir les enclos existants "+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher("\n ---- Voir les enclos existants ("+Enum_ActionsPossibles.VOIR_ENCLOS_EXISTANTS.getDureeTotale()+") ---- ");
             	VueGlobale.afficher("\nIl y a "+zoo.getListeEnclos().size()+" enclos dans le zoo\n");
             	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
             	for (Enclos e : zoo.getListeEnclos()) {
@@ -90,7 +90,7 @@ public class ControllerActions {
             	break;
             // Voir nombre total de créatures
             case 2:
-            	VueGlobale.afficher("\n ---- Voir le nombre de creatures totales "+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher("\n ---- Voir le nombre de creatures totales ("+Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES.getDureeTotale()+") ---- ");
             	VueGlobale.afficher("Il y a " + zoo.getNbCreaturesTotales() + " creatures.");
             	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_NOMBRE_CREATURES_TOTALES))
             		passageAnnee();

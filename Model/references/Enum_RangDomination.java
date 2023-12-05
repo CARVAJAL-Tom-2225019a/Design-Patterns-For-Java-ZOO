@@ -1,5 +1,8 @@
 package references;
 
+/**
+ * Enumération correspondant aux différents rangs de domination existant
+ */
 public enum Enum_RangDomination {
 	// Liste des rangs de domination avec leur valeur associe
 	ALPHA("Alpha",23,'α'),

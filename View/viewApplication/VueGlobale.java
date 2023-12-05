@@ -545,6 +545,6 @@ public class VueGlobale {
      */
 	public void afficherOeuf(Oeuf o) {
 		//TODO : à implémenter
-		System.out.println("Afficher oeuf");
+		System.out.println(o);
 	}
 }
