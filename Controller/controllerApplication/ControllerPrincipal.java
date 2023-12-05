@@ -10,6 +10,8 @@ import controllerTemps.GestionnaireTemps;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.EnclosClassique;
 import enclosImplemente.EnclosLycanthrope;
+import meuteLycanthrope.ColonieLycanthrope;
+import meuteLycanthrope.Meute;
 import references.CONSTANTES;
 import references.Enum_Sexe;
 import viewApplication.VueGlobale;
@@ -43,6 +45,8 @@ public class ControllerPrincipal {
      *
      */
     public void nouvelleAnnee() {
+    	Meute m = null;
+    	ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
     	try {
             // Pour chaque enclos
             for (Enclos enclos : zoo.getListeEnclos()) {
@@ -53,8 +57,13 @@ public class ControllerPrincipal {
                         creature.vieillir();
                     }
                     //Passage annee pour lycanthrope
-                    if (enclos instanceof EnclosLycanthrope) 
-                    	((EnclosLycanthrope) enclos).passageAnneLycanthrope();
+                    if (enclos instanceof EnclosLycanthrope) {
+                    	m =((EnclosLycanthrope) enclos).passageAnneLycanthrope();
+                    	if (m!=null) {
+                    		colonie.addMeute(m);
+                        	m.setEnclosReference(enclos);
+                    	}	
+                    }
                     // Ajoute les informations sur les créatures mortes à la chaîne
                     for (Creature creatMorte : enclos.creaturesMortes())
                     	vueGlobale.afficherCreature(creatMorte, -1);
