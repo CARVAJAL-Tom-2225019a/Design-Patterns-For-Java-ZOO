@@ -1,12 +1,13 @@
 package creaturesImplemente;
 
-import java.util.Objects;
-
-import base.*;
-import interfaces.*;
+import base.Creature;
+import base.Vivipare;
+import interfaces.CreatureTerrestre;
 import meuteLycanthrope.Meute;
 import references.*;
 import zoo.ZooFantastique;
+
+import java.util.Objects;
 
 /**
  * Cette classe correspond à la créature lycanthrope (loup-garou), qui est un vivipare et terrestre

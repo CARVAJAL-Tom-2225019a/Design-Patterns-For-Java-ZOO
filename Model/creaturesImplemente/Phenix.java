@@ -1,8 +1,10 @@
 package creaturesImplemente;
 
-import base.*;
-import interfaces.*;
-import references.*;
+import base.Ovipare;
+import interfaces.CreatureImmortel;
+import interfaces.CreatureVolante;
+import references.Enum_Aggressivite;
+import references.Enum_Especes;
 
 /**
  * Cette classe correspond à la crature phenix

@@ -1,8 +1,9 @@
 package maitreZoo;
 
-import base.*;
+import base.Creature;
+import base.Enclos;
 import creaturesImplemente.Humain;
-import references.*;
+import references.Enum_Sexe;
 
 /**
  * Classe représentant l'unique maître du zoo (singleton)

@@ -1,10 +1,5 @@
 package controllerApplication;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
 import applicationRun.Run;
 import base.Creature;
 import base.Enclos;
@@ -29,6 +24,11 @@ import viewApplication.Son;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 
 /**

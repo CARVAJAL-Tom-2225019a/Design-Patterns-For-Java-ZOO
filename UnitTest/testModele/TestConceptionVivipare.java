@@ -1,17 +1,13 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import creaturesImplemente.FactoryCreature;
+import creaturesImplemente.Sirene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import creaturesImplemente.Sirene;
-import creaturesImplemente.FactoryCreature;
 import references.Enum_Especes;
 import references.Enum_Sexe;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestConceptionVivipare {
 

@@ -1,10 +1,10 @@
 package testController;
 
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 import controllerTemps.GestionnaireTemps;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.Assert.*;
 
 /**

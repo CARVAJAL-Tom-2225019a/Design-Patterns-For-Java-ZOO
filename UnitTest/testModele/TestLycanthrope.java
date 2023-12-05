@@ -1,22 +1,21 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import creaturesImplemente.FactoryCreature;
 import creaturesImplemente.Humain;
 import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import references.Enum_ActionHurlement;
 import references.Enum_Especes;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestLycanthrope {
 	Lycanthrope femelleA;

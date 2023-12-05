@@ -1,14 +1,18 @@
 package controllerTemps;
 
+import base.Creature;
+import base.Enclos;
+import enclosImplemente.Aquarium;
+import enclosImplemente.EnclosClassique;
+import enclosImplemente.EnclosLycanthrope;
+import enclosImplemente.Voliere;
+import references.Enum_DegrePropreteEnclos;
+import zoo.ZooFantastique;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import base.*;
-import enclosImplemente.*;
-import references.Enum_DegrePropreteEnclos;
-import zoo.ZooFantastique;
 
 /**
  * Classe représentant les événements liés au temps dans le zoo

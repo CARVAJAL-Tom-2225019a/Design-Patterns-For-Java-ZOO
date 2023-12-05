@@ -1,11 +1,12 @@
 package meuteLycanthrope;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import base.Enclos;
 import creaturesImplemente.Lycanthrope;
-import references.*;
+import references.Enum_ActionHurlement;
+import references.Enum_RangDomination;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe d'une meute de lycanthrope (loup-garou)

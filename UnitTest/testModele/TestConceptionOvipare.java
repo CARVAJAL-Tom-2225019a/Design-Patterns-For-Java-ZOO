@@ -1,18 +1,17 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import base.Creature;
 import creaturesImplemente.FactoryCreature;
 import creaturesImplemente.Megalodon;
 import creaturesImplemente.Oeuf;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import references.Enum_Especes;
 import references.Enum_Sexe;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestConceptionOvipare {
 

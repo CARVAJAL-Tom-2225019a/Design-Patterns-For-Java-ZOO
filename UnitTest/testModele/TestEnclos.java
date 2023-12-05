@@ -1,16 +1,15 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import base.Creature;
 import creaturesImplemente.FactoryCreature;
 import enclosImplemente.EnclosClassique;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import references.Enum_DegrePropreteEnclos;
 import references.Enum_Especes;
 import references.Enum_Sexe;
-import references.Enum_DegrePropreteEnclos;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestEnclos {
 	

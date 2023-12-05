@@ -1,9 +1,9 @@
 package base;
 
+import references.*;
+
 import java.util.ArrayList;
 import java.util.Random;
-
-import references.*;
 
 
 /**

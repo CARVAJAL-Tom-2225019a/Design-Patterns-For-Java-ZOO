@@ -1,8 +1,10 @@
 package creaturesImplemente;
 
-import base.*;
-import interfaces.*;
-import references.*;
+import base.Creature;
+import base.Vivipare;
+import interfaces.CreatureTerrestre;
+import references.Enum_Aggressivite;
+import references.Enum_Especes;
 
 /**
  * Cette classe correspond à la créature Licorne, qui est un vivipare et terrestre.

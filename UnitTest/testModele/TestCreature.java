@@ -1,10 +1,9 @@
 package testModele;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import creaturesImplemente.Dragon;
 import creaturesImplemente.FactoryCreature;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import references.CONSTANTES;
 import references.Enum_Especes;
 

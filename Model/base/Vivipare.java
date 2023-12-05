@@ -1,11 +1,11 @@
 package base;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import creaturesImplemente.Embryon;
 import creaturesImplemente.FactoryCreature;
-import references.*;
+import references.Enum_Sexe;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Cette classe abstraite représente une créature vivipare

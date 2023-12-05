@@ -1,8 +1,8 @@
 package base;
 
-import java.util.*;
-
 import references.*;
+
+import java.util.*;
 
 /**
  * Cette classe abstraite correspond a un enclos

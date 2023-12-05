@@ -1,7 +1,8 @@
 package creaturesImplemente;
 
-import base.*;
-import references.*;
+import base.Creature;
+import base.Ovipare;
+import references.Enum_Especes;
 
 /**
  * Cette classe correspond a un oeuf qui sera pondu par un ovipare

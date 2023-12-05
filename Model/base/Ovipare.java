@@ -1,7 +1,7 @@
 package base;
 
-import creaturesImplemente.*;
-import references.*;
+import creaturesImplemente.Oeuf;
+import references.Enum_Sexe;
 
 import java.util.ArrayList;
 import java.util.Iterator;
