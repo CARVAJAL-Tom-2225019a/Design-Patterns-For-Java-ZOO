@@ -1,21 +1,20 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import creaturesImplemente.FactoryCreature;
+import creaturesImplemente.Sirene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import creaturesImplemente.Sirene;
-import creaturesImplemente.FactoryCreature;
 import references.Enum_Especes;
 import references.Enum_Sexe;
 
+<<<<<<< HEAD
 /**
  * Classe de test pour la onception d'enfants chez les vivipare
  */
+=======
+import static org.junit.jupiter.api.Assertions.*;
+
+>>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 class TestConceptionVivipare {
 
 	Sirene sireneFemelle;

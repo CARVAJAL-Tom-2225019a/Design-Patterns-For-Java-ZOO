@@ -1,11 +1,11 @@
 package viewApplication;
 
-import java.util.Scanner;
-
 import controllerTemps.Enum_ActionsPossibles;
 import controllerTemps.GestionnaireTemps;
 import maitreZoo.MaitreZoo;
-import references.*;
+import references.Enum_Sexe;
+
+import java.util.Scanner;
 
 /**
  * Classe permettant l'affichage et la recuperation d'infomration

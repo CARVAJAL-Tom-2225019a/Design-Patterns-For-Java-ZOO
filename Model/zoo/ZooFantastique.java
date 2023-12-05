@@ -1,15 +1,16 @@
 package zoo;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Set;
-
-import base.*;
+import base.Creature;
+import base.Enclos;
 import creaturesImplemente.Oeuf;
 import enclosImplemente.EnclosLycanthrope;
 import meuteLycanthrope.ColonieLycanthrope;
 import references.CONSTANTES;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Classe représentant l'instance unique du zoo fantastique (Singleton)

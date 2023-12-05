@@ -1,12 +1,16 @@
 package controllerApplication;
 
 import applicationRun.Run;
-import base.*;
+import base.Creature;
+import base.Enclos;
+import base.Vivipare;
 import controllerTemps.GestionnaireTemps;
-import creaturesImplemente.*;
-import enclosImplemente.*;
-import references.*;
-import viewApplication.*;
+import creaturesImplemente.Oeuf;
+import enclosImplemente.EnclosClassique;
+import enclosImplemente.EnclosLycanthrope;
+import references.CONSTANTES;
+import viewApplication.VueGlobale;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
 
 /**

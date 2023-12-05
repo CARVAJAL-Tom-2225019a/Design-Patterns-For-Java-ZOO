@@ -1,16 +1,18 @@
 package controllerApplication;
 
-import java.util.HashSet;
-
 import applicationRun.Run;
+import base.Creature;
+import base.Enclos;
 import controllerTemps.Enum_ActionsPossibles;
 import controllerTemps.Evenements;
 import controllerTemps.GestionnaireTemps;
 import references.CONSTANTES;
-import base.Creature;
-import base.Enclos;
-import viewApplication.*;
+import viewApplication.VueAutomatique;
+import viewApplication.VueGlobale;
+import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
+
+import java.util.HashSet;
 
 /**
  * Classe représentant le contrôleur du zoo avec les différentes actions disponibles

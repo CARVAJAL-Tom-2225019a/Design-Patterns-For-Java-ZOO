@@ -1,19 +1,15 @@
 package viewApplication;
 
+<<<<<<< HEAD
+=======
+import javax.sound.sampled.*;
+import javax.sound.sampled.DataLine.Info;
+>>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 import java.io.File;
-
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine.Info;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
+import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 
 /**
  * Classe permettant de gérer le son que font ques les créatures

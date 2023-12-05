@@ -1,8 +1,9 @@
 package enclosImplemente;
 
-import base.*;
+import base.Creature;
+import base.Enclos;
 import interfaces.CreatureVolante;
-import references.*;
+import references.Enum_DegrePropreteEnclos;
 
 /**
  * La classe Voliere représente une volière, 

@@ -1,8 +1,9 @@
 package creaturesImplemente;
 
-import base.*;
-import interfaces.*;
-import references.*;
+import base.Ovipare;
+import interfaces.CreatureMarine;
+import references.Enum_Aggressivite;
+import references.Enum_Especes;
 
 /**
  * Cette classe correspond à la créature megalodon,

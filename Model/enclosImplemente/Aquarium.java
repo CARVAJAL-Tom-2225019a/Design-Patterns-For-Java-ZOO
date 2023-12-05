@@ -2,8 +2,8 @@ package enclosImplemente;
 
 import base.Creature;
 import base.Enclos;
-import interfaces.*;
-import references.*;
+import interfaces.CreatureMarine;
+import references.CONSTANTES;
 
 /**
  * La classe Aquarium représente un aquarium, 

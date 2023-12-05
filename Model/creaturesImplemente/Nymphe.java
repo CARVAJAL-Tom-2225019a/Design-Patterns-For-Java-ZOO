@@ -1,8 +1,12 @@
 package creaturesImplemente;
 
-import base.*;
-import interfaces.*;
-import references.*;
+import base.Creature;
+import base.Vivipare;
+import interfaces.CreatureImmortel;
+import interfaces.CreatureTerrestre;
+import references.Enum_Aggressivite;
+import references.Enum_Especes;
+import references.Enum_Sexe;
 
 /**
  * Cette classe correspond à la créature nymphe,

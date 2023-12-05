@@ -1,11 +1,11 @@
 package meuteLycanthrope;
 
+import creaturesImplemente.Lycanthrope;
+import enclosImplemente.EnclosLycanthrope;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-
-import creaturesImplemente.Lycanthrope;
-import enclosImplemente.EnclosLycanthrope;
 
 /**
  * Classe représentatant l'unique colonie de lycanthrope du zoo

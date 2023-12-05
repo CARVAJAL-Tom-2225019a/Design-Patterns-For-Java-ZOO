@@ -1,7 +1,7 @@
 package creaturesImplemente;
 
 import base.Creature;
-import references.*;
+import references.Enum_Especes;
 
 /**
  * Cette classe implémente une fabrique de créatures, permettant de créer des instances

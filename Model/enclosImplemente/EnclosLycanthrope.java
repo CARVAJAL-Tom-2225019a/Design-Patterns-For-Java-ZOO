@@ -1,18 +1,14 @@
 package enclosImplemente;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import base.Creature;
 import base.Enclos;
 import base.Vivipare;
 import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
-import references.CONSTANTES;
-import references.Enum_ActionHurlement;
-import references.Enum_PrenomFeminin;
-import references.Enum_RangDomination;
-import references.Enum_Sexe;
+import references.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**

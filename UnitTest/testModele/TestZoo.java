@@ -1,11 +1,5 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import base.Creature;
 import base.Enclos;
 import controllerTemps.Evenements;
@@ -13,14 +7,22 @@ import creaturesImplemente.FactoryCreature;
 import enclosImplemente.Aquarium;
 import enclosImplemente.Voliere;
 import maitreZoo.MaitreZoo;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import references.CONSTANTES;
 import references.Enum_DegrePropreteEnclos;
 import references.Enum_Especes;
 import zoo.ZooFantastique;
 
+<<<<<<< HEAD
 /**
  * Classe de test pour les méthodes du zoo fantastique
  */
+=======
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+>>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 class TestZoo {
 	
 	ZooFantastique zoo = ZooFantastique.getInstance();;

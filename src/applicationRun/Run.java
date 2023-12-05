@@ -6,7 +6,6 @@ import controllerApplication.ControllerActions;
 import viewApplication.VueGlobale;
 import viewApplication.VueUtilisateur;
 import zoo.ZooFantastique;
-
 /**
  * Point d'entree de l'application
  */

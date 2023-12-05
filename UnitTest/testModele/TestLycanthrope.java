@@ -1,26 +1,28 @@
 package testModele;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import creaturesImplemente.FactoryCreature;
 import creaturesImplemente.Humain;
 import creaturesImplemente.Lycanthrope;
 import meuteLycanthrope.Meute;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import references.Enum_ActionHurlement;
 import references.Enum_Especes;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
 
+<<<<<<< HEAD
 /**
  * Classe de test pour les méthodes d'un lycanthrope
  */
+=======
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+>>>>>>> 3bcb77ffe5977d3efa396f31039a8686830caf85
 class TestLycanthrope {
 	Lycanthrope femelleA;
 	Lycanthrope maleA;

@@ -1,9 +1,5 @@
 package controllerApplication;
 
-import zoo.ZooFantastique;
-
-import java.util.Random;
-
 import base.Enclos;
 import controllerTemps.GestionnaireTemps;
 import creaturesImplemente.Lycanthrope;
@@ -12,7 +8,11 @@ import meuteLycanthrope.Meute;
 import references.CONSTANTES;
 import references.Enum_RangDomination;
 import references.Enum_Sexe;
-import viewApplication.*;
+import viewApplication.VueAutomatique;
+import viewApplication.VueGlobale;
+import zoo.ZooFantastique;
+
+import java.util.Random;
 
 /**
  * Classe représentant le contrôleur de la partie
