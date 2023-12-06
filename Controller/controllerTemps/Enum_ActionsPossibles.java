@@ -26,7 +26,9 @@ public enum Enum_ActionsPossibles {
 	SAISON_AMOUR_LOUPS(0,1,0),
 	VOIR_MEUTES(0,1,0),
 	FAIRE_HURLER_LOUP(0,1,20),
-	DEFIER_MALE_ALPHA(0,1,15);
+	DEFIER_MALE_ALPHA(0,1,15), 
+	DEPLACER_LOUP_SOLITAIRE(0,0,15),
+	VOIR_LOUPS_OMEGA(0,0,15);
     
 
     private final int dureeEnAnnees;

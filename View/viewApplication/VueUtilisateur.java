@@ -126,6 +126,8 @@ public class VueUtilisateur {
 						+ "\n  19 : Verifier si il est temps pour les lycanthropes de se reproduire ("+Enum_ActionsPossibles.SAISON_AMOUR_LOUPS.getDureeTotale()+")"
 						+ "\n  20 : Faire hurler un lycanthrope ("+Enum_ActionsPossibles.FAIRE_HURLER_LOUP.getDureeTotale()+")"
 						+ "\n  21 : Tenter de defier le male Alpha dans une meute ("+Enum_ActionsPossibles.DEFIER_MALE_ALPHA.getDureeTotale()+")"
+						+ "\n  22 : Déplacer un loup solitaire ("+Enum_ActionsPossibles.DEPLACER_LOUP_SOLITAIRE.getDureeTotale()+")"
+						+ "\n  23 : Voir les loups OMEGA d'une meute ("+Enum_ActionsPossibles.VOIR_LOUPS_OMEGA.getDureeTotale()+")"
 						+ "\n"
 						+ "\n  98 : Passer en mode automatique"
 						+ "\n  99 : Exit" 

@@ -2,6 +2,7 @@ package base;
 
 import creaturesImplemente.Embryon;
 import creaturesImplemente.FactoryCreature;
+import creaturesImplemente.Lycanthrope;
 import references.Enum_Sexe;
 
 import java.util.ArrayList;
@@ -85,7 +86,10 @@ public abstract class Vivipare extends Creature {
                 if (getNbJourConceptionRestantAvantMiseABas() == 0) {
                     // Ajout de n embryons dans le ventre avec n entre 0 et EMBRYON_MAX
                     Random random = new Random(System.currentTimeMillis());
-                    int nbEmbryon = 1+ random.nextInt(2);
+                    int nbEmbryon = 1+ random.nextInt(4);
+                    // Si lycanthrope, entre 1 et 7 enfants
+                    if (this instanceof Lycanthrope)
+                    	nbEmbryon = 1+ random.nextInt(6);
                     for (int i = 0; i < nbEmbryon; i++) {
                         ventre.add(new Embryon(this, papa));
                     }

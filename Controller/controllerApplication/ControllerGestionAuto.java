@@ -278,5 +278,17 @@ public class ControllerGestionAuto {
 		}
 		return loupPlusFort;
 	}
+
+
+	public Lycanthrope recuperationLoupSolitaire(Enclos enclos1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Enclos recuperationEnclosAleatoireLycanthrope() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

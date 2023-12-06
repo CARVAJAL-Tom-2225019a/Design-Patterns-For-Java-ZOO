@@ -232,6 +232,20 @@ public class ControllerActions {
             		passageAnnee();
             	retour= true;
             	break;
+            // Déplacer un loup solitaire
+            case 22 : 	
+            	action.casDeplacerLoupSolitaire();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.DEPLACER_LOUP_SOLITAIRE))
+            		passageAnnee();
+            	retour= true;
+            	break;
+            // Voir les OMEGA d'une meute
+            case 23 : 	
+            	action.casVoirLoupsOmega();
+            	if (temps.incrementerTemps(Enum_ActionsPossibles.VOIR_LOUPS_OMEGA))
+            		passageAnnee();
+            	retour= true;
+            	break;
             // Passer en mode automatique
             case 98 :
             	VueGlobale.afficher("=== PASSAGE EN MODE AUTOMATIQUE ===");

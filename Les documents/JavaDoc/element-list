@@ -1,12 +1,13 @@
 applicationRun
 base
 controllerApplication
-controllerTemps
 creaturesImplemente
 enclosImplemente
 interfaces
 maitreZoo
 meuteLycanthrope
 references
+testController
+testModele
 viewApplication
 zoo

@@ -150,6 +150,12 @@ public class VueGlobale {
                         add("  # Enceinte           : \033[32m" + ((Vivipare) creature).isEnceinte()+ " \033[0m ");
                     }
                 }
+                if (creature instanceof Lycanthrope) {
+                	if ( ((Lycanthrope)creature).getMeute() == null ) 
+						add("  # Meute : \033[32m solitaire \033[0m ");
+					else
+						add("  # Meute : \033[32m" + ((Lycanthrope)creature).getMeute().getNomMeute() +" \033[0m ");
+                }
                 if (index>=0) {
                 	add("  # Index : \033[32m" + index +" \033[0m ");
                 }

@@ -400,9 +400,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
      * @return l'instance de l'humain créé
      */
     public Humain seTransformerEnHumain() {
-    	//TODO : changer pour le nom de l'humain
-    	//TODO : selon niveau
-    	//TODO : boulverse organisation meute
+    	this.mourir();
     	return new Humain("Humain", super.getSexe(), super.getAge());
     }
 

@@ -19,6 +19,7 @@ import meuteLycanthrope.ColonieLycanthrope;
 import meuteLycanthrope.Meute;
 import references.CONSTANTES;
 import references.Enum_ActionHurlement;
+import references.Enum_RangDomination;
 import references.Enum_Sexe;
 import viewApplication.Son;
 import viewApplication.VueGlobale;
@@ -27,6 +28,7 @@ import zoo.ZooFantastique;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -771,6 +773,16 @@ public class Actions {
                 enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
                 loup2 = enclos2.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
             }
+            
+            // Affichae loup source
+            vueGlobale.afficher("LOUP QUI HURLE : ");
+            vueGlobale.afficherCreature(loup1, -1);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            // Affichage loup destination
+            vueGlobale.afficher("LOUP QUI ENTEND : ");
+            vueGlobale.afficherCreature(loup2, -1);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            // Hurlement
             vueGlobale.afficher(((Lycanthrope) loup1).hurler(action, (Lycanthrope) loup2));
 
             Random r = new Random();
@@ -838,4 +850,109 @@ public class Actions {
         for (Oeuf o : zoo.getlLsteOeufs())
             vueGlobale.afficherOeuf(o);
     }
+
+
+    /**
+     * Methode permettant de gérer l'action de transffert d'un loup solitaire
+     */
+	public void casDeplacerLoupSolitaire() {
+		Enclos enclos1;
+		Enclos enclos2;
+		Lycanthrope loup1;
+		try {
+            vueGlobale.afficher("\n ---- Deplacer un loup solitaire (" + Enum_ActionsPossibles.DEPLACER_LOUP_SOLITAIRE.getDureeTotale() + ") ---- ");
+            // GESTION MANUEL
+            if (Run.utilisateurControle) {
+                // choix enclos
+            	vueGlobale.afficher(zoo.voirNomsEnclos());
+                vueGlobale.afficher("Choix de l'enclos ou le loup solitaire se trouve (nom) : ");
+                enclos1 = controlUser.recupererEnclosParNom();
+                while (!(enclos1 instanceof EnclosLycanthrope)) {
+                    vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
+                    vueGlobale.afficher("Choix de l'enclos ou le loup solitaire se trouve (nom) : ");
+                    enclos1 = controlUser.recupererEnclosParNom();
+                }
+            	// choix loup solitaire
+                boolean loupSolitaireExiste = false;
+                for (Map.Entry<Integer, Creature> entry : enclos1.getListeCreatures().entrySet()) {
+                	if ( ((Lycanthrope)entry.getValue()).getMeute()==null ) {
+                		loupSolitaireExiste = true;
+                		vueGlobale.afficherCreature(entry.getValue(), entry.getKey());
+                	}
+                }
+                if (!loupSolitaireExiste) {
+                	vueGlobale.afficher("Pas de loup solitaire dans cet enclos");
+                	return;
+                }
+                vueGlobale.afficher("\n\nVeuillez selectionner le lycanthrope solitaire\n");
+                loup1 = (Lycanthrope) controlUser.selectionCreatureDansEnclos(enclos1);
+                if (loup1.getMeute() != null) {
+                	vueGlobale.afficher("Le loup appartient a une meute");
+                	return;
+                }
+            	// choix enclos destination
+                vueGlobale.afficher(zoo.voirNomsEnclos());
+                vueGlobale.afficher("Choix de l'enclos ou le loup solitaire doit aller (nom) : ");
+                enclos2 = controlUser.recupererEnclosParNom();
+                if (!(enclos2 instanceof EnclosLycanthrope)) {
+                    vueGlobale.afficher("Enclos doit être un eclos de Lycanthrope");
+                    return;
+                }
+            }
+            // GESTION AUTOMATIQUE
+            else {
+            	// choix enclos
+            	enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
+            	// choix loup solitaire
+            	loup1 = controllerGestionAuto.recuperationLoupSolitaire(enclos1);
+            	// choix enclos destination
+            	enclos2 = controllerGestionAuto.recuperationEnclosAleatoireLycanthrope();
+            }
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            vueGlobale.afficher("LE LOUP QUI VA ETRE DEPLACE : ");
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            vueGlobale.afficherCreature(loup1, -1);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            vueGlobale.afficher("TRANSFERT EN COURS");
+            maitreZoo.transfererCreature(loup1, enclos1, enclos2);
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            vueGlobale.afficher("TRANSFERT EFFECTUE DANS : ");
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+            vueGlobale.afficherEnclos(enclos2, false);
+        } catch (Exception e) {
+            vueGlobale.afficher(e.getMessage());
+        }
+	}
+
+
+	/**
+	 * Methode permettant de voir les loups omega (souffre douleur) d'une meute
+	 */
+	public void casVoirLoupsOmega() {
+		Meute meute = null;
+		try {
+            vueGlobale.afficher("\n ---- Voir loups Omega meute (" + Enum_ActionsPossibles.VOIR_LOUPS_OMEGA.getDureeTotale() + ") ---- ");
+            // GESTION MANUEL
+            if (Run.utilisateurControle) {
+                // choix meute
+            	vueGlobale.afficher("Choix de la meute ");
+                vueGlobale.afficher(colonie.voirMeutes());
+                meute = controlUser.recupererMeuteParNom();
+            }
+            // GESTION AUTOMATIQUE
+            else {
+               // choix meute
+            	meute = controllerGestionAuto.choixMeuteAleatoire();
+            }
+            vueGlobale.afficher("Les loups omega dans "+meute.getNomMeute()+" : ");
+            for (Lycanthrope loup : meute.getListeLoup()) {
+            	if (loup.getRangDomination() == Enum_RangDomination.OMEGA)
+            		vueGlobale.afficherCreature(loup, -1);
+            }
+            Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+        } catch (Exception e) {
+            vueGlobale.afficher(e.getMessage());
+        }
+		
+	}
 }

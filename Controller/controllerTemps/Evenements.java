@@ -2,23 +2,38 @@ package controllerTemps;
 
 import base.Creature;
 import base.Enclos;
+import controllerApplication.ControllerGestionAuto;
+import controllerApplication.ControllerPrincipal;
+import creaturesImplemente.Lycanthrope;
 import enclosImplemente.Aquarium;
 import enclosImplemente.EnclosClassique;
 import enclosImplemente.EnclosLycanthrope;
 import enclosImplemente.Voliere;
+import meuteLycanthrope.ColonieLycanthrope;
+import meuteLycanthrope.Meute;
+import references.CONSTANTES;
+import references.Enum_ActionHurlement;
 import references.Enum_DegrePropreteEnclos;
+import viewApplication.Son;
+import viewApplication.VueGlobale;
 import zoo.ZooFantastique;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Classe représentant les événements liés au temps dans le zoo
  */
 public class Evenements {
-	static ZooFantastique zoo = ZooFantastique.getInstance();
+	private static ZooFantastique zoo = ZooFantastique.getInstance();
+	private static ControllerGestionAuto controllerGestionAuto = new ControllerGestionAuto();
+	private static VueGlobale vueGlobale = new VueGlobale();
+	private static ColonieLycanthrope colonie = ColonieLycanthrope.getInstance();
 	
 	/**
 	 * Constructeur
@@ -41,6 +56,10 @@ public class Evenements {
     	verificationEtatCreature();
     	// Recalculer force des creatures
     	recalculerForceCreatures();
+    	// Hurlement lycanthrope aleatoire
+    	 if (Math.random() < 0.5) hurlementAleatoire();
+    	 // Transformation lycanthrope en humain aleatoire
+    	 if (Math.random() < 0.5) transformationLycanthropeHumain();
 	}
     
     /**
@@ -205,6 +224,99 @@ public class Evenements {
     			
     		}
     	}
+    }
+    
+    
+	/**
+	 * Méthode permettant de faire hurler aleatoirement un lycanthrope
+	 * @throws Exception si la créature n'est pas un lycanthrope, ou si l'enclos n'est pas trouvé
+	 */
+    public static void hurlementAleatoire() throws Exception {
+    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+    	Enum_ActionHurlement action;
+    	Enclos enclos1;
+    	Enclos enclos2;
+    	Lycanthrope loup1;
+    	Lycanthrope loup2;
+    	// choix hurlement aleatoire
+        Random random = new Random();
+        Enum_ActionHurlement[] listeActions = {Enum_ActionHurlement.Appartenance, Enum_ActionHurlement.Domination, Enum_ActionHurlement.Soumission, Enum_ActionHurlement.Agressivite};
+        action = listeActions[random.nextInt(listeActions.length)];
+        // choix loup source
+        enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
+        loup1 = (Lycanthrope) enclos1.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
+        // choix loup destination
+        enclos2 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
+        loup2 = (Lycanthrope) enclos2.selectionnerCreatureAleatoireParSexe(ControllerPrincipal.sexeAleatoire());
+        
+        // Hurlement
+        vueGlobale.afficher("HURLEMENT LYCANTHROPE ALEATOIRE");
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        // Affichae loup source
+        vueGlobale.afficher("LOUP QUI HURLE : ");
+        vueGlobale.afficherCreature(loup1, -1);
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        // Affichage loup destination
+        vueGlobale.afficher("LOUP QUI ENTEND : ");
+        vueGlobale.afficherCreature(loup2, -1);
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        // Hurlement
+        vueGlobale.afficher(((Lycanthrope) loup1).hurler(action, (Lycanthrope) loup2));
+
+        Random r = new Random();
+        int n = r.nextInt(8); // 8 = nombre fichier
+        String file = "lycanthrope/loup" + (n + 1) + ".wav";
+        (new Son()).play(file);
+
+        // cri du deuxieme loup garou
+        r = new Random();
+        file = "lycanthrope/loup" + (n + 1) + ".wav";
+        (new Son()).play(file);
+    }
+    
+    
+    /**
+     * Méthode permettant de transformer un loup aléatoire en humain
+     * @throws Exception si problème lors du choix
+     */
+    public static void transformationLycanthropeHumain() throws Exception {
+    	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+    	// Choix aléatoire d'une meute parmi colonie.getListeMeutes()
+        Set<Meute> listeMeutes = colonie.getListeMeutes();
+        Meute meuteChoisie = getRandomElement(listeMeutes);
+        // Choix aléatoire d'un lycanthrope parmi meute.getListeLoup()
+        Set<Lycanthrope> listeLycanthropes = meuteChoisie.getListeLoup();
+        Lycanthrope lycanthropeChoisi = getRandomElement(listeLycanthropes);
+        // Transformation en humain
+        vueGlobale.afficher("TRANSFORMATION ALEATOIRE D'UN LOUP EN HUMAIN");
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        vueGlobale.afficherCreature(lycanthropeChoisi, -1);
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        vueGlobale.afficher("Transformation en cours");
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+        lycanthropeChoisi.seTransformerEnHumain();
+        meuteChoisie.removeLoup(lycanthropeChoisi);
+        vueGlobale.afficher("Le lycanthrope a rejoint les humains... courage à lui");
+        Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
+    }
+    
+    
+ 	/**
+ 	 * Méthode générique permettant de choisir un élément aléatoirement parmis un ensemble
+ 	 * @param <T> générique
+ 	 * @param set l'ensemble des éléments
+ 	 * @return un élément aléatoire parmis l'ensemble
+ 	 */
+    private static <T> T getRandomElement(Set<T> set) {
+        if (set.isEmpty()) {
+            throw new NoSuchElementException("L'ensemble est vide");
+        }
+        int randomIndex = new Random().nextInt(set.size());
+        Iterator<T> iterator = set.iterator();
+        for (int i = 0; i < randomIndex; i++) {
+            iterator.next();
+        }
+        return iterator.next();
     }
     
 }

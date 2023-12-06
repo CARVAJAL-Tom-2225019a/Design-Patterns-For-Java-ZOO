@@ -10,10 +10,3 @@ Dossier Manuel d'utilisation
 Documentation complète générée par Javadoc (à mettre à jour, dossier Les Documents/JavaDoc)
 
 
-Fichier Read-Me (préciser où sont les documents)
-
-
-Les problèmes dans le code :
-	problème gestion auto : boucle sur les créatures qui dorment
-	
-	

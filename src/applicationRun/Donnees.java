@@ -51,6 +51,19 @@ public class Donnees {
 		}
     }
     
+    
+    /**
+     * Methode permettant d'ajouter des loups solitaire à un enclos de lycanthrope
+     * @param enclos dans lequel il faut ajouter les loups
+     * @throws Exception si erreur lors de la création de loups
+     */
+    private static void creationLoupsSolitaire(Enclos enclos) throws Exception {
+    	for (int i=0; i<2; i++) {
+    		Lycanthrope loupSolitaire = FactoryCreature.newCreature(Enum_Especes.Lycanthrope);
+        	enclos.ajouterCreature(loupSolitaire);
+    	}
+    }
+    
     /**
      * Methode pour creer les meutes
      * 
@@ -77,6 +90,8 @@ public class Donnees {
     	}
     	colonie.addMeute(m);
     	m.setEnclosReference(enclos);
+    	// Ajout loups solitaire
+    	creationLoupsSolitaire(enclos);
     }
     
     
