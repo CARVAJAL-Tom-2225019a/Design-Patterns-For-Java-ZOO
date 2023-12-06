@@ -1,5 +1,6 @@
 package controllerApplication;
 
+import base.Creature;
 import base.Enclos;
 import controllerTemps.GestionnaireTemps;
 import creaturesImplemente.Lycanthrope;
@@ -52,12 +53,12 @@ public class ControllerGestionAuto {
 	*/
 
 	public static void choixActionAleatoire() throws Exception {
-		String[] listeChoix = {"sante", "faim", "sommeil","hygene"};
-		String enclosChoisi = "";
+		String[] listeChoix = {"sante", "faim", "sommeil","hygene", "reveiller", "autre"};
+		Enclos enclosChoisi=null;
 		int choixCase = 0;
 		for (int i = 0; i < listeChoix.length; ++i) {
 			enclosChoisi = getCreaturePlusGrandBesoin(listeChoix[i]);
-			if (!enclosChoisi.equals("Enclos")) {
+			if (enclosChoisi != null) {
 				if (i == 0) {
 					choixCase = 7;
 					break;
@@ -73,7 +74,7 @@ public class ControllerGestionAuto {
 				}
 			}
 		}
-		if (enclosChoisi.equals("Enclos")) {
+		if (enclosChoisi == null) {
 			Random random = new Random();
 			choixCase = random.nextInt(9, 21);
 		}
@@ -88,8 +89,9 @@ public class ControllerGestionAuto {
 	 * @return Un enclos
 	 */
 	public static Enclos getCreaturePlusGrandBesoin(String besoin) {
+		int compteurDodo = 0;
 		Enclos enclos = null;
-		int valeurMoinsEleve = 100;
+		int valeurMoinsEleve = 60;
 		int indicateurParam = 0;
 		for (Enclos e : zoo.getListeEnclos()) {
 			for (Creature c: e.getListeCreatures().values()){
@@ -107,11 +109,23 @@ public class ControllerGestionAuto {
 					}
 				}else if(besoin == "sommeil") {
 					indicateurParam = c.getIndicateurSommeil();
-					if (indicateurParam < valeurMoinsEleve&& indicateurParam < CONSTANTES.MAX_INDICATEUR*40/100) {
+					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*40/100 && !c.isEnTrainDeDormir()) {
 						valeurMoinsEleve = indicateurParam;
 						enclos = e;
 					}
+				} else if (besoin == "reveiller") {
+					if (c.isEnTrainDeDormir()) {
+						compteurDodo++;
+					}
+					if (compteurDodo > valeurMoinsEleve) {
+						valeurMoinsEleve = compteurDodo;
+						enclos = e;
+					}
 				}
+				else if (besoin == "autre") {
+					return null;
+				}
+				compteurDodo = 0;
 			}
 		}
 		return enclos;
@@ -134,7 +148,7 @@ public class ControllerGestionAuto {
         while (run) {
         	choixActionAleatoire ();
         	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-        	VueGlobale.afficher("\nNous sommes le "+temps.getDateActuelle()+"\n");
+        	VueGlobale.afficher("\n    ****  Nous sommes le "+temps.getDateActuelle()+"  ****\n");
         	
         	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
