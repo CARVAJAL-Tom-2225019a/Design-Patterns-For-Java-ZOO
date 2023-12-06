@@ -506,6 +506,92 @@ public class VueGlobale {
      * @param o oeuf que l'on veut afficher
      */
 	public void afficherOeuf(Oeuf o) {
-		System.out.println(o);
-	}
+
+        VueCreature parchemin = VueCreature.PARCHEMIN;
+        ArrayList<String> strResultat = new ArrayList<>() ;
+        VueCreature vueCreature = VueCreature.OEUF;
+
+        for (int i = 0; i < (parchemin.getHauteur()); i++) { // temporairement  + vueCreature.getHauteur() -1) ; i++){
+
+            strResultat.add(parchemin.getLignes().get(i));
+
+            if (i == 2) {
+                int nbOfX = (int) parchemin.getLignes().get(i).chars().filter(c -> c == 'X').count();
+                // une fois qu'on connais le nombre D'X (le place holder)
+                // on va mettre au millieu des X le prenom de l'animal et fill avec des espaces.
+                String prenom = "Oeuf";
+                StringBuilder xString = new StringBuilder();
+                xString.append(" ".repeat(Math.max(0, nbOfX)));
+                int startIndex = (nbOfX - prenom.length()) / 2;
+                xString.replace(startIndex, startIndex + prenom.length(), prenom);
+                strResultat.set(i, strResultat.get(i).replace("X".repeat(nbOfX), xString.toString()));
+            }
+            if (i == 3) {
+                int nbOfZ = (int) parchemin.getLignes().get(i).chars().filter(c -> c == 'Z').count();
+                // une fois qu'on connais le nombre D'Z (le place holder)
+                // on va mettre au millieu des Z l'espece de l'animal et fill avec des espaces.
+                String espece = o.getEspece().name();
+                StringBuilder zString = new StringBuilder();
+                zString.append(" ".repeat(Math.max(0, nbOfZ)));
+                int startIndex = (nbOfZ - espece.length()) / 2;
+                zString.replace(startIndex, startIndex + espece.length(), espece);
+                strResultat.set(i, strResultat.get(i).replace("Z".repeat(nbOfZ), zString.toString()));
+            }
+
+            if (i == 5) {
+                // on remplace les C avec l'ascii art de la créature.
+                // a ajouter n hauteur de creature la ligne courante.
+
+                for (int j = 1; j < vueCreature.getHauteur() + 1; j++) {
+                    int nbOfC = (int) parchemin.getLignes().get(i).chars().filter(c -> c == 'C').count();
+                    StringBuilder cString = new StringBuilder();
+
+                    if (j == vueCreature.getHauteur()) {
+                        String ligneAsci = vueCreature.getLignes().get(0);
+                        cString.append(" ".repeat(Math.max(0, nbOfC)));
+                        int startIndex = (nbOfC - (ligneAsci.length())) / 2;
+                        cString.replace(startIndex, startIndex + ligneAsci.length(), ligneAsci);
+                        strResultat.set(i, strResultat.get(i).replace("C".repeat(nbOfC), cString.toString()));
+                    } else {
+                        String ligneAsci = vueCreature.getLignes().get(j);
+                        cString.append(" ".repeat(Math.max(0, nbOfC)));
+                        int startIndex = (nbOfC - (ligneAsci.length())) / 2;
+                        cString.replace(startIndex, startIndex + ligneAsci.length(), ligneAsci);
+                        strResultat.add(i + j, strResultat.get(i).replace("C".repeat(nbOfC), cString.toString()));
+                    }
+                }
+            }
+        }
+        ArrayList<String> complementLigne = new ArrayList<>() {
+            /**
+             *
+             */
+            @Serial
+            private static final long serialVersionUID = 1L;
+
+            {
+                add(" # Espece                    : \033[32m"+ o.getEspece()+ " \033[0m ");
+                add(" # Durée incubation restante : \033[32m"+ o.getDureeIncubationRestante()+ " \033[0m ");
+                add(" # Durée incubation          : \033[32m"+ o.getDureeIncubation()+ " \033[0m ");
+                add(" # Mere                      : \033[32m"+ o.getParent1().getPrenom()+ " \033[0m ");
+                add(" # Pere                      : \033[32m"+ o.getParent2().getPrenom()+ " \033[0m ");
+                add(" # Statut d'eclosion         : \033[23m"+ afficherStatBar(o.getDureeIncubation()-o.getDureeIncubationRestante(), o.getDureeIncubation()) + (((o.getDureeIncubation()-o.getDureeIncubationRestante()) * 100 )/ (o.getDureeIncubation()*100)) + " % \033[0m ");
+            }
+        };
+        int ligneFinal = 0;
+        System.out.println("\n#=============================< \033[32m" + "Oeuf" + "\033[0m - \033[32m" + o.getEspece().name() + "\033[0m >==============================#\n");
+        for (int i = 0 ; i < min(strResultat.size(),complementLigne.size()) ; i++) {
+            System.out.println(strResultat.get(i) + complementLigne.get(i));
+            ligneFinal = i;
+        }
+        if (ligneFinal+1 < complementLigne.size()) {
+            for (String complement : complementLigne.subList(ligneFinal + 1, complementLigne.size())) {
+                System.out.println(" ".repeat(parchemin.getLargeur()) + complement);
+            }
+        } else if (ligneFinal+1 < strResultat.size()) {
+            for (String ligne : strResultat.subList(ligneFinal + 1, strResultat.size())) {
+                System.out.println(ligne);
+            }
+        }
+    }
 }
