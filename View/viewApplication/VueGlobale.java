@@ -180,7 +180,8 @@ public class VueGlobale {
      * @param besoinCreature  Indique s'il est nécessaire d'afficher les créatures dans l'enclos
      * @throws Exception      si problème lors de la récupération d'une valeur
      */
-    public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
+    @SuppressWarnings("serial")
+	public void afficherEnclos(Enclos enclos, boolean besoinCreature) throws Exception {
         VueEnclos vueEnclos;
         ArrayList<String> complementLignes;
         if (enclos instanceof Voliere) {
@@ -505,7 +506,6 @@ public class VueGlobale {
      * @param o oeuf que l'on veut afficher
      */
 	public void afficherOeuf(Oeuf o) {
-		//TODO : à implémenter
 		System.out.println(o);
 	}
 }

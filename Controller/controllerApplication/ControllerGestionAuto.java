@@ -1,6 +1,5 @@
 package controllerApplication;
 
-import base.Creature;
 import base.Enclos;
 import controllerTemps.GestionnaireTemps;
 import creaturesImplemente.Lycanthrope;
@@ -44,94 +43,14 @@ public class ControllerGestionAuto {
 
     /**
      * Méthode permettant d'effectuer un choix aléatoire
-     *
+     */
 	public static void choixActionAleatoire ()  {
 		Random random = new Random();
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		ControllerActions.effectuerAction(choix);
 	}
-	*/
-
-	public static void choixActionAleatoire() throws Exception {
-		String[] listeChoix = {"sante", "faim", "sommeil","hygene", "reveiller", "autre"};
-		Enclos enclosChoisi=null;
-		int choixCase = 0;
-		for (int i = 0; i < listeChoix.length; ++i) {
-			enclosChoisi = getCreaturePlusGrandBesoin(listeChoix[i]);
-			if (enclosChoisi != null) {
-				if (i == 0) {
-					choixCase = 7;
-					break;
-				} else if (i == 1) {
-					choixCase = 6;
-					break;
-				} else if (i == 2) {
-					choixCase = 8;
-					break;
-				} else if(i == 3) {
-					choixCase = 5;
-					break;
-				}
-			}
-		}
-		if (enclosChoisi == null) {
-			Random random = new Random();
-			choixCase = random.nextInt(9, 21);
-		}
-		ControllerActions.effectuerAction(choixCase);
-	}
-
-	/**
-	 * Méthode pour récupérer l'enclos avec la créature ayant le besoin passé en parametre le plus faible
-	 *
-	 * @param besoin prend le besoin a étudier dans les enclos. Prend la valeur de String "sante", "faim", "sommeil" ou "hygene"
-	 * @throws Exception En cas d'erreur lors de l'exécution de l'action aléatoire
-	 * @return Un enclos
-	 */
-	public static Enclos getCreaturePlusGrandBesoin(String besoin) {
-		int compteurDodo = 0;
-		Enclos enclos = null;
-		int valeurMoinsEleve = 60;
-		int indicateurParam = 0;
-		for (Enclos e : zoo.getListeEnclos()) {
-			for (Creature c: e.getListeCreatures().values()){
-				if(besoin == "sante") {
-					indicateurParam = c.getIndicateurSante();
-					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*20/100) {
-						valeurMoinsEleve = indicateurParam;
-						enclos.getNom();
-					}
-				}else if (besoin == "faim"){
-					indicateurParam = c.getIndicateurFaim();
-					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*60/100) {
-						valeurMoinsEleve = indicateurParam;
-						enclos = e;
-					}
-				}else if(besoin == "sommeil") {
-					indicateurParam = c.getIndicateurSommeil();
-					if (indicateurParam < valeurMoinsEleve && indicateurParam < CONSTANTES.MAX_INDICATEUR*40/100 && !c.isEnTrainDeDormir()) {
-						valeurMoinsEleve = indicateurParam;
-						enclos = e;
-					}
-				} else if (besoin == "reveiller") {
-					if (c.isEnTrainDeDormir()) {
-						compteurDodo++;
-					}
-					if (compteurDodo > valeurMoinsEleve) {
-						valeurMoinsEleve = compteurDodo;
-						enclos = e;
-					}
-				}
-				else if (besoin == "autre") {
-					return null;
-				}
-				compteurDodo = 0;
-			}
-		}
-		return enclos;
-	}
-
-
+	
+	
 	/**
      * Point d'entrée de la gestion automatique
      *
@@ -148,7 +67,7 @@ public class ControllerGestionAuto {
         while (run) {
         	choixActionAleatoire ();
         	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-        	VueGlobale.afficher("\n    ****  Nous sommes le "+temps.getDateActuelle()+"  ****\n");
+        	VueGlobale.afficher("\nNous sommes le "+temps.getDateActuelle()+"\n");
         	
         	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
