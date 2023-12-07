@@ -60,6 +60,7 @@ public class ControllerPrincipal {
                     if (enclos instanceof EnclosLycanthrope) {
                     	m =((EnclosLycanthrope) enclos).passageAnneLycanthrope();
                     	if (m!=null) {
+                    		vueGlobale.afficher("\nUNE NOUVELLE MEUTE VIENT DE SE FORMER DANS "+m.getEnclosReference().getNom()+"\n");
                     		colonie.addMeute(m);
                         	m.setEnclosReference(enclos);
                     	}	

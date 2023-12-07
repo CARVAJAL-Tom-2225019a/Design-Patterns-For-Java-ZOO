@@ -223,25 +223,29 @@ public class Actions {
             }
 
             // creation enclos
+            Enclos e;
             switch (typeEnclos) {
                 case "Classique" -> {
-                    Enclos e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+                    e = new EnclosClassique(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
                     zoo.addEnclos(e);
                 }
                 case "Voliere" -> {
-                    Voliere e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+                    e = new Voliere(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
                     zoo.addEnclos(e);
                 }
                 case "Aquatique" -> {
-                    Aquarium e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
+                    e = new Aquarium(nomEnclos, CONSTANTES.TAILLE_ENCLOS, CONSTANTES.TAILLE_ENCLOS);
                     zoo.addEnclos(e);
                 }
                 case "Lycanthrope" -> {
-                    EnclosLycanthrope e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
+                    e = new EnclosLycanthrope(nomEnclos, CONSTANTES.TAILLE_ENCLOS);
                     zoo.addEnclos(e);
                 }
-                default -> throw new Exception("Erreur type enclos lors de la creation");
+                default -> {
+                	throw new Exception("Erreur type enclos lors de la creation");
+            	}
             }
+            vueGlobale.afficher("Enclos "+e.getNom()+" a ete construit.");
         } catch (Exception e) {
             vueGlobale.afficher(e.getMessage());
         }
@@ -741,18 +745,18 @@ public class Actions {
                 enclos1 = controlUser.recupererEnclosParNom();
                 while (!(enclos1 instanceof EnclosLycanthrope)) {
                     vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
-                    vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
+                    vueGlobale.afficher("Choix de l'enclos ou le loup doit hurler (nom) : ");
                     enclos1 = controlUser.recupererEnclosParNom();
                 }
                 vueGlobale.afficherCreatureEnclos(enclos1);
-                vueGlobale.afficher("\n\nVeuillez selectionner le lycanthrope qui hurlee\n");
+                vueGlobale.afficher("\n\nVeuillez selectionner le lycanthrope qui hurle\n");
                 loup1 = controlUser.selectionCreatureDansEnclos(enclos1);
                 // choix loup 2
-                vueGlobale.afficher("Choix de l'enclos où le loup doit entendre le hurlement (index) : ");
+                vueGlobale.afficher("Choix de l'enclos uù le loup doit entendre le hurlement (index) : ");
                 enclos2 = controlUser.recupererEnclosParNom();
                 while (!(enclos2 instanceof EnclosLycanthrope)) {
                     vueGlobale.afficher("Il faut choisir un enclos de Lycanthrope");
-                    vueGlobale.afficher("Choix de l'enclos où le loup doit hurler (nom) : ");
+                    vueGlobale.afficher("Choix de l'enclos ou le loup doit hurler (nom) : ");
                     enclos2 = controlUser.recupererEnclosParNom();
                 }
                 vueGlobale.afficherCreatureEnclos(enclos2);
@@ -812,7 +816,7 @@ public class Actions {
             // GESTION MANUEL
             if (Run.utilisateurControle) {
                 // Choix meute
-                vueGlobale.afficher("Choix de la meute où cela doit se passer");
+                vueGlobale.afficher("Choix de la meute ou cela doit se passer");
                 vueGlobale.afficher(colonie.voirMeutes());
                 m = controlUser.recupererMeuteParNom();
                 // Choix loup volontaire
@@ -826,7 +830,7 @@ public class Actions {
                 // Choix meute
                 m = controllerGestionAuto.choixMeuteAleatoire();
                 // Choix loup volontaire
-                loupVolontaire = m.choixPremierLoupPasCoupleAlpha();
+                loupVolontaire = m.choixPremierLoupPasCoupleAlphaMale();
             }
             vueGlobale.afficher(m.defierMaleAlpha(loupVolontaire));
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
@@ -903,10 +907,16 @@ public class Actions {
             else {
             	// choix enclos
             	enclos1 = controllerGestionAuto.recuperationEnclosAleatoireNonVideLycanthrope();
+            	if (enclos1==null)
+            		throw new Exception("Pas d'enclos lycanthrope dans le zoo");
             	// choix loup solitaire
             	loup1 = controllerGestionAuto.recuperationLoupSolitaire(enclos1);
+            	if (loup1==null)
+            		throw new Exception("Pas de loup solitaire dans l'enclos "+enclos1.getNom());
             	// choix enclos destination
             	enclos2 = controllerGestionAuto.recuperationEnclosAleatoireLycanthrope();
+            	if (enclos2==null)
+            		throw new Exception("Pas d'enclos lycanthrope dans le zoo");
             }
             Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP/2);
             vueGlobale.afficher("LE LOUP QUI VA ETRE DEPLACE : ");

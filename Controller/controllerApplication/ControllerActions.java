@@ -72,7 +72,7 @@ public class ControllerActions {
         	switch (choix) {
             // Ne pas effectuer d'action
             case 0:
-            	VueGlobale.afficher("\n ---- Pas d'action effectue "+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+" ---- ");
+            	VueGlobale.afficher("\n ---- Pas d'action effectue ("+Enum_ActionsPossibles.PAS_D_ACTION.getDureeTotale()+") ---- ");
             	if (temps.incrementerTemps(Enum_ActionsPossibles.PAS_D_ACTION))
             		passageAnnee();
             	retour= true;

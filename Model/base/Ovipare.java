@@ -15,7 +15,7 @@ public abstract class Ovipare extends Creature {
 
     private final ArrayList<Oeuf> ventre; // dans le ventre il y a n oeufs avec potentiellement aucun oeuf
     //TODO add gestion oeuf dans le ventre
-    private final int dureeAvantEclosion = 1; // un an avant de pondre un oeuf
+    private final int dureeAvantEclosion = 3; // un an avant de pondre un oeuf
 
     
     /**

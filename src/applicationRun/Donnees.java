@@ -39,9 +39,19 @@ public class Donnees {
 	 * @param espece à mettre dans l'enclos
 	 */
     public static void remplirEnclos(Enclos enclos, Enum_Especes espece) {
+    	int compteurMale=0;
+    	int compteurFemelle=0;
 		try {
 			for (int i=0; i<CONSTANTES.NB_CREATURE_PAR_ENCLOS; i++) {
 				Creature d = FactoryCreature.newCreature(espece);
+				if (d.getSexe()==Enum_Sexe.Femelle)
+					compteurFemelle++;
+				else
+					compteurMale++;
+				if (compteurFemelle > compteurMale+1)
+					d.setSexe(Enum_Sexe.Male);
+				if ( compteurMale > compteurFemelle+1)
+					d.setSexe(Enum_Sexe.Femelle);
 				enclos.ajouterCreature(d);
 			}
 			enclos.reorganiserCles();

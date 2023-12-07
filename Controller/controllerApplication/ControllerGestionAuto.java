@@ -1,8 +1,10 @@
 package controllerApplication;
 
+import base.Creature;
 import base.Enclos;
 import controllerTemps.GestionnaireTemps;
 import creaturesImplemente.Lycanthrope;
+import enclosImplemente.EnclosLycanthrope;
 import meuteLycanthrope.ColonieLycanthrope;
 import meuteLycanthrope.Meute;
 import references.CONSTANTES;
@@ -43,11 +45,58 @@ public class ControllerGestionAuto {
 
     /**
      * Méthode permettant d'effectuer un choix aléatoire
+     * @throws InterruptedException en cas de problème de temps
      */
-	public static void choixActionAleatoire ()  {
+	public static void choixActionAleatoire () throws InterruptedException  {
 		Random random = new Random();
+		// degrade, faim, sommeil, dodo, malade
+		int[] tableau = besoinEnclos();
+		int valeurMaximale = 0;
+		int position = -1;
+		for (int i = 0; i < tableau.length; i++) {
+            if (tableau[i] > valeurMaximale) {
+                valeurMaximale = tableau[i];
+                position = i;
+            }
+        }
+		// répondre au besoin tout en gardant de l'aléatoire
+		if (valeurMaximale > 1) {
+			if (position==0)
+				ControllerActions.effectuerAction(5);
+			else if (position==1)
+				ControllerActions.effectuerAction(6);
+			else if (position==2)
+				ControllerActions.effectuerAction(8);
+			else if (position==3)
+				ControllerActions.effectuerAction(9);
+			else if (position==4)
+				ControllerActions.effectuerAction(7);
+			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
+		}
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		ControllerActions.effectuerAction(choix);
+	}
+	
+	
+	/**
+	 * Methode permettant de voir combien d'enclos ont faim
+	 */
+	private static int[] besoinEnclos() {
+		// degrade, faim, sommeil, dodo, malade
+		int[] tableau = {0, 0, 0, 0, 0};
+		for (Enclos enclos : zoo.getListeEnclos()) {
+			if (enclos.isEnclosMauvaisEtat())
+				tableau[0]++;
+			if (enclos.isCreatureOntFaim())
+				tableau[1]++;
+			if (enclos.isCreatureOntSommeil())
+				tableau[2]++;
+			if (enclos.isCreaturesDorment())
+				tableau[3]++;
+			if (enclos.isCreatureSontMalade())
+				tableau[4]++;
+		}
+		return tableau;
 	}
 	
 	
@@ -67,7 +116,7 @@ public class ControllerGestionAuto {
         while (run) {
         	choixActionAleatoire ();
         	Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-        	VueGlobale.afficher("\nNous sommes le "+temps.getDateActuelle()+"\n");
+        	VueGlobale.afficher("\n     ***  Nous sommes le "+temps.getDateActuelle()+"  *** \n");
         	
         	// Si plus de creature
             if (zoo.getNbCreaturesTotales() == 0)
@@ -279,15 +328,30 @@ public class ControllerGestionAuto {
 		return loupPlusFort;
 	}
 
-
+	
+	/**
+	 * Méthode permettant de recuperer un loup solitaire dans un enclos
+	 * @param enclos1 l'enclos où l'on doit chercher le loup solitaire
+	 * @return un loup solitaire s'il y en a un, sinon null
+	 */
 	public Lycanthrope recuperationLoupSolitaire(Enclos enclos1) {
-		// TODO Auto-generated method stub
+		for (Creature c : enclos1.getListeCreatures().values()) {
+			if (((Lycanthrope)c).getMeute() ==null) 
+				return (Lycanthrope) c;
+		}
 		return null;
 	}
 
-
+	
+	/**
+	 * Méthode permettant de récupérer un enclos de lycanthrope aléatoirement
+	 * @return l'enclos si il a été trouvé, sinon null
+	 */
 	public Enclos recuperationEnclosAleatoireLycanthrope() {
-		// TODO Auto-generated method stub
+		for (Enclos enclos : zoo.getListeEnclos()) {
+			if (enclos instanceof EnclosLycanthrope)
+				return enclos;
+		}
 		return null;
 	}
 	

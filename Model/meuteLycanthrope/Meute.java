@@ -4,6 +4,7 @@ import base.Enclos;
 import creaturesImplemente.Lycanthrope;
 import references.Enum_ActionHurlement;
 import references.Enum_RangDomination;
+import references.Enum_Sexe;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -198,6 +199,9 @@ public class Meute {
 	 * @throws Exception Si le loup1 est plus fort que le mâle alpha
 	 */
 	public String defierMaleAlpha (Lycanthrope loup1) throws Exception {
+		if (loup1.getSexe() == Enum_Sexe.Femelle) {
+			throw new Exception("Une femelle de peux pas devenir male alpha");
+		}
 		boolean reussite = loup1.isPlusFort(coupleAlpha.getMaleAlpha());
         String chaine = loup1.hurler(Enum_ActionHurlement.Agressivite, coupleAlpha.getMaleAlpha());
 		// reussite
@@ -302,6 +306,20 @@ public class Meute {
 	public Lycanthrope choixPremierLoupPasCoupleAlpha() {
 		for (Lycanthrope l : listeLoup) {
 			if (l!=coupleAlpha.getFemelleAlpha() && l!=coupleAlpha.getMaleAlpha())
+				return l;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Methode permettant de recuperer le premier loup de la meute qui est un male
+	 * qui ne fait pas partie du couple alpha
+	 * @return Le loup en question, sinon null
+	 */
+	public Lycanthrope choixPremierLoupPasCoupleAlphaMale() {
+		for (Lycanthrope l : listeLoup) {
+			if (l.getSexe()==Enum_Sexe.Male && l!=coupleAlpha.getMaleAlpha() )
 				return l;
 		}
 		return null;
