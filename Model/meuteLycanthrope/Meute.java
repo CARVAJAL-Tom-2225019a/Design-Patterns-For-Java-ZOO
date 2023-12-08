@@ -133,8 +133,16 @@ public class Meute {
 	public void affecterRang(Lycanthrope loup) {
 		double forceLoup = loup.getForce();
         double forceAlpha = coupleAlpha.getMaleAlpha().getForce();
-        // Si la liste de loups est vide, le loup devient OMEGA
-        if (listeLoup.isEmpty()) {
+        // Vérifier s'il n'existe pas encore de loup avec le rang "OMEGA"
+        boolean aucunOmega = true;
+        for (Lycanthrope l : listeLoup) {
+            if (l.getRangDomination() == Enum_RangDomination.OMEGA) {
+                aucunOmega = false;
+                break;
+            }
+        }
+        // Si la liste de loups est vide ou s'il n'existe pas encore de loup avec le rang "OMEGA", le loup devient "OMEGA"
+        if (listeLoup.isEmpty() || aucunOmega) {
             loup.setRangDomination(Enum_RangDomination.OMEGA);
             listeLoup.add(loup);
             return;

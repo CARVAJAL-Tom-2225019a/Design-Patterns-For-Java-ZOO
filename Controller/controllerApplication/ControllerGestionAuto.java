@@ -49,55 +49,11 @@ public class ControllerGestionAuto {
      */
 	public static void choixActionAleatoire () throws InterruptedException  {
 		Random random = new Random();
-		// degrade, faim, sommeil, dodo, malade
-		int[] tableau = besoinEnclos();
-		int valeurMaximale = 0;
-		int position = -1;
-		for (int i = 0; i < tableau.length; i++) {
-            if (tableau[i] > valeurMaximale) {
-                valeurMaximale = tableau[i];
-                position = i;
-            }
-        }
-		// répondre au besoin tout en gardant de l'aléatoire
-		if (valeurMaximale > 1) {
-			if (position==0)
-				ControllerActions.effectuerAction(5);
-			else if (position==1)
-				ControllerActions.effectuerAction(6);
-			else if (position==2)
-				ControllerActions.effectuerAction(8);
-			else if (position==3)
-				ControllerActions.effectuerAction(9);
-			else if (position==4)
-				ControllerActions.effectuerAction(7);
-			Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
-		}
 		int choix = random.nextInt(CONSTANTES.NUM_CHOIX_MAX); 
 		ControllerActions.effectuerAction(choix);
+		Thread.sleep(CONSTANTES.TEMPS_APPLICATION_SLEEP);
 	}
-	
-	
-	/**
-	 * Methode permettant de voir combien d'enclos ont faim
-	 */
-	private static int[] besoinEnclos() {
-		// degrade, faim, sommeil, dodo, malade
-		int[] tableau = {0, 0, 0, 0, 0};
-		for (Enclos enclos : zoo.getListeEnclos()) {
-			if (enclos.isEnclosMauvaisEtat())
-				tableau[0]++;
-			if (enclos.isCreatureOntFaim())
-				tableau[1]++;
-			if (enclos.isCreatureOntSommeil())
-				tableau[2]++;
-			if (enclos.isCreaturesDorment())
-				tableau[3]++;
-			if (enclos.isCreatureSontMalade())
-				tableau[4]++;
-		}
-		return tableau;
-	}
+
 	
 	
 	/**

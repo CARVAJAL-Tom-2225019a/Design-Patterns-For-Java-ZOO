@@ -123,7 +123,7 @@ public class VueGlobale {
                 add("  # Vivant : \033[32m" + creature.isVivant() + "\033[0m       ");
                 add("  # Agressivite        : \033[32m" + creature.getAgressivite() + "\033[0m ");
                 add("  # Force              : \033[32m" + creature.getForce()+ "\033[0m ");
-                add("  # Combat(s) gagné(s) : \033[32m" + creature.getCombatVaincu()+ "\033[0m ");
+                add("  # Combat(s) gagne(s) : \033[32m" + creature.getCombatVaincu()+ "\033[0m ");
                 if (!creature.getListeParents().isEmpty()) {
                     add("  # Pere & Mere        : \033[32m" + creature.getListeParents().get(0).getPrenom() + " & " + creature.getListeParents().get(1).getPrenom() + "\033[0m ");
                 } else {
@@ -136,7 +136,7 @@ public class VueGlobale {
                 }
                 add("  # Bonheur            : \033[32m" + afficherStatBar(creature.getBonheur(), CONSTANTES.MAX_INDICATEUR) + " " + (creature.getBonheur() * 100 / CONSTANTES.MAX_INDICATEUR ) + "% \033[0m ");
                 add("  # Faim               : \033[32m" + afficherStatBar(creature.getIndicateurFaim(), CONSTANTES.MAX_INDICATEUR) + " " + (creature.getIndicateurFaim()* 100 / CONSTANTES.MAX_INDICATEUR ) + "% \033[0m ");
-                add("  # Santé              : \033[32m" + afficherStatBar(creature.getIndicateurSante(), CONSTANTES.MAX_INDICATEUR) + " " + (creature.getIndicateurSante() * 100/ CONSTANTES.MAX_INDICATEUR ) + "% \033[0m ");
+                add("  # Sante              : \033[32m" + afficherStatBar(creature.getIndicateurSante(), CONSTANTES.MAX_INDICATEUR) + " " + (creature.getIndicateurSante() * 100/ CONSTANTES.MAX_INDICATEUR ) + "% \033[0m ");
                 add("  # Sommeil            : \033[32m" + afficherStatBar(creature.getIndicateurSommeil(), CONSTANTES.MAX_INDICATEUR) + " " + (creature.getIndicateurSommeil() * 100/ CONSTANTES.MAX_INDICATEUR ) + "% \033[0m ");
 
                 StringBuilder Str = new StringBuilder();
@@ -202,10 +202,10 @@ public class VueGlobale {
                     add("  #");
                     add("  # \033[32m" + vueEnclos + "\033[0m contient : \033[32m" + enclos.getNbCreatures() + " " + enclos.getNomEspece() + "\033[0m");
                     add("  # Il peut encore accueillir \033[32m" + (enclos.getNbMaxCreatures() - enclos.getNbCreatures()) + "\033[0m/\033[32m" + enclos.getNbMaxCreatures() + "\033[0m créature(s) ");
-                    add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m²\033[0m");
+                    add("  # L'enclos a une superficie de : \033[32m" + enclos.getSuperficie() + " m^2\033[0m");
                     add("  # La hauteur de l'enclos est de : \033[32m" + ((Voliere) enclos).getHauteur() + "m\033[0m");
                     if (!enclos.getListeCreatures().values().isEmpty()) {
-                        add("  # La créature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
+                        add("  # La creature dominante de l'enclos est \033[32m: " + enclos.getCreatureDominante().getPrenom() + "\033[0m");
                         add("  # L'ambiance globale est : \033[32m" + enclos.getAmbiance().name() + "\033[0m");
                         add("  # Age moyen       : \033[32m" + afficherStatBar(enclos.getAgeMoyen(), CONSTANTES.MAX_AGE) + " " + enclos.getAgeMoyen() + "ans\033[0m");
                         add("  # Bonheur moyen   : \033[32m" + afficherStatBar(enclos.getBonheurMoyen(), CONSTANTES.MAX_INDICATEUR) + " " + enclos.getBonheurMoyen() + "%\033[0m"); //TODO envisager changement maxindicateur
@@ -577,8 +577,8 @@ public class VueGlobale {
 
             {
                 add(" # Espece                    : \033[32m"+ o.getEspece()+ " \033[0m ");
-                add(" # Durée incubation restante : \033[32m"+ o.getDureeIncubationRestante()+ " \033[0m ");
-                add(" # Durée incubation          : \033[32m"+ o.getDureeIncubation()+ " \033[0m ");
+                add(" # Duree incubation restante : \033[32m"+ o.getDureeIncubationRestante()+ " \033[0m ");
+                add(" # Duree incubation          : \033[32m"+ o.getDureeIncubation()+ " \033[0m ");
                 add(" # Mere                      : \033[32m"+ o.getParent1().getPrenom()+ " \033[0m ");
                 add(" # Pere                      : \033[32m"+ o.getParent2().getPrenom()+ " \033[0m ");
                 add(" # Statut d'eclosion         : \033[23m"+ afficherStatBar(o.getDureeIncubation()-o.getDureeIncubationRestante(), o.getDureeIncubation()) + (((o.getDureeIncubation()-o.getDureeIncubationRestante()) * 100 )/ (o.getDureeIncubation()*100)) + " % \033[0m ");

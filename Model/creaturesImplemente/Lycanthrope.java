@@ -294,7 +294,7 @@ public class Lycanthrope extends Vivipare implements CreatureTerrestre {
     	if (isPlusFort(loup))
     		chaine+=agresser(loup);
     	else
-    		chaine+=getPrenom()+"Je ne suis pas asses fort pour te defier "+loup.getPrenom()+"\n";
+    		chaine+=getPrenom()+" : Je ne suis pas asses fort pour te defier "+loup.getPrenom()+"\n";
     	return chaine;
     }
     
